@@ -4,19 +4,92 @@
     <meta charset="UTF-8">
     <title>Pocetna stranica</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link href="/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
 </head>
 <body>
 
-<div class="container ">
-    <div class="row justify-content-start">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-10">
-                    <h1>Proba 1 2 3 </h1>
-                </div>
+<div class="container mt-3 p-5 d-flex justify-content-center align-items-center">
+    <div class="row justify-content-center border rounded-2 p-2 bg-white shadow box-area position-relative">
+        <div class="col-md-12">
+            <p style="background-color: darkred; color: #F0F8FF; font-weight: bold; overflow: hidden; text-align: right; font-size:14px">
+                LabInventoryApp
+            </p>
+            <br>
+
+            <div class="col-md-12 text-left">
+                <h2>Opća bolnica Zabok</h2>
             </div>
+            <div class="d-flex align-items-center">
+                <img src="slikicadva.png" alt="Slika" style="width: 200px; height: 200px; position: absolute; top:9%; right: 40%; border-radius: 50%;">
+            </div>
+            <div class="col-md-12 text-left">
+                <h3>Medicinsko biokemijski laboratorij</h3>
+            </div>
+
+            <br>
+
+            <input type="text" name="trazi" placeholder="Pretraži opremu" class="unosno"/>
+            <button name="button" class="btn btn-primary" type="submit">Traži</button>
+            <br>
+            <br>
+            <br>
+            <div class="d-flex justify-content-between mb-3">
+                <button name="button" class="btn btn-primary" type="submit">Prijavi kvar</button>
+                <button name="button" class="btn btn-primary" type="submit">Dodaj uređaj</button>
+                <button name="button" class="btn btn-primary" type="submit">Evidencija održavanja</button>
+            </div>
+            <br>
+            <br>
+            <table>
+                <thead>
+                <td>R.br.</td>
+                <td>Naziv</td>
+                <td>Lokacija</td>
+                <td>Stanje</td>
+                <td>Datum nabavke</td>
+                <td>Evidencija održavanja</td>
+                <td>Uredi</td>
+                <td>Izbriši</td>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>109.</td>
+                    <td>Diesse Ves Matic Cube 30</td>
+                    <td>Laboratorij</td>
+                    <td>Ispravan</td>
+                    <td>11.12.2021.</td>
+                    <td>Pregledaj</td>
+                    <td>
+                        <button class="btn btn-light">
+                            <img src="Uredi.png" class="img-fluid" style="width: 20px;" alt="Uredi">
+                        </button>
+                    </td>
+                    <td>
+                        <button class="btn btn-light">
+                            <img src="delete.png" class="img-fluid" style="width: 20px;" alt="delete">
+                        </button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 </div>
 </body>
+<style>
+.btn-primary
+{
+    background-color: darkred;
+    border-color: darkred;
+}
+table {
+    border-collapse: collapse;
+}
+th,
+td {
+  border: 1px solid #cecfd5;
+  padding: 10px 15px;
+}
+
+</style>
 </html>
