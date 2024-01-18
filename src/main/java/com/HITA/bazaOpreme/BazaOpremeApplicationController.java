@@ -26,12 +26,20 @@ import java.util.List;
     }
 
 
-    @GetMapping("/prijavakvarapocetna")
+@GetMapping("/prijavakvarapocetna")
     public String prijavikvar() {
         return "prijavikvar.html";
     }
-    @GetMapping("/dodajuredaj")
+
+
+@GetMapping("/dodajuredaj")
     public String dodajuredaj() {
         return "dodajuredaj.html";
     }
+
+
+
+
+
+
 }
