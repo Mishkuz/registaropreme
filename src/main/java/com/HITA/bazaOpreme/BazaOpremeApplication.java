@@ -10,4 +10,5 @@ public class BazaOpremeApplication {
 		SpringApplication.run(BazaOpremeApplication.class, args);
 	}
 
+
 }

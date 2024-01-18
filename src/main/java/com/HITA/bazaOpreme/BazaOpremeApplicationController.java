@@ -24,4 +24,14 @@ import java.util.List;
     public String pocetna() {
         return "pocetna.html";
     }
+
+
+    @GetMapping("/prijavakvarapocetna")
+    public String prijavikvar() {
+        return "prijavikvar.html";
+    }
+    @GetMapping("/dodajuredaj")
+    public String dodajuredaj() {
+        return "dodajuredaj.html";
+    }
 }
