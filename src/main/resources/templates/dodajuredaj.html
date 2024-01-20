@@ -14,9 +14,10 @@
 <h1>Dodaj novi uređaj</h1><br>
 
 <form>
+<div class="input-container">
 <div class="input-group input-group-outline my-3">
 <label class="form-label">Oznaka opreme: </label>
-<input type="text" class="form-control"></div>
+<input type="text" class="form-control short-input"></div>
 
 <div class="input-group input-group-outline my-3">
 <label class="form-label">Proizvođač: </label>
@@ -56,7 +57,7 @@
 
 <div class="input-group input-group-outline my-3">
 <label class="form-label">Serviser opreme: </label>
-<input type="text" class="form-control"></div>
+<input type="text" class="form-control"></div></div>
 
 <button name="button" class="btn btn-primary" type="submit">Dodaj uređaj</button>
 </form>
@@ -68,7 +69,9 @@
            width: 200px;
            text-align: right;}
     .form-control {border-color: darkred;
-                   border-radius: 6px !important;}
+                  border-radius: 6px !important;
+                  width: 150px;}
+    .short-input {width: 150px !important;}
     h1 {text-align: center;
         color: darkred;
         font-size: 24px;}
@@ -89,5 +92,6 @@
                        border-color: red;}
     .btn-primary{background-color: darkred;
                  border-color: darkred;}
+    .input-container {width: 50%;}
 </style>
 </html>
