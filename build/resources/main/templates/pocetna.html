@@ -18,74 +18,86 @@
                 <h2>Opća bolnica Zabok</h2>
             </div>
             <div class="d-flex align-items-center">
-                <img src="../static/pocetnanaslovna.png" alt="Slika" style="width: 200px; height: 200px; position: absolute; top:9%; right: 38%; border-radius: 50%;"><img>
+                <img src="../static/pocetnanaslovna.png" alt="Slika" style="width: 140px; height: 140px; position: absolute; top:15%; right: 47%; border-radius: 50%;"><img>
             </div>
             <div class="col-md-12 text-left">
                 <h3>Medicinsko biokemijski laboratorij</h3>
-            </div>
 
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <div class="d-flex justify-content-between mb-3">
-                <form action="/evidencijaodrzavanjapocetna" method="get">
-                <button name="button" class="btn btn-primary" type="submit">Evidencija održavanja</button>
-                </form>
-                <form action="/dodajuredaj" method="get">
-                    <button name="button" class="btn btn-primary" type="submit">Dodaj uređaj</button>
-                </form>
             </div>
-        <div class="container mt-3 p-5 d-flex justify-content-center align-items-center">
+            <br>
+            <br><br><br><br>
+            <form action="/evidencijaodrzavanjapocetna" method="get">
+                <button name="button" class="btn btn-primary" type="submit" style="margin-bottom: 5px;">Pregled servisa</button>
+            </form>
+            <form action="/dodajuredaj" method="get">
+                <button name="button" class="btn btn-primary" type="submit">Dodaj novu opremu</button>
+            </form>
+        <div class="container mt-2 p-4 d-flex justify-content-center align-items-center">
 
             <div class="col-md-8">
             <div class="input-group input-group-dynamic mb-4">
                 <input type="text" class="form-control" placeholder="Unesi naziv opreme" aria-label="nazivopreme" aria-describedby="basic-addon1">
                 <span class="input-group-text" id="basic-addon1">
-                                <button name="button" class="btn btn-primary"  type="submit">Traži</button>
+                <button name="button" class="btn btn-primary" type="submit">
+                    <img src="../static/povecalo.jpg" class="img-fluid" style="width: 20px; height: 25px;" alt="povecalo">
+                </button>
                 </span>
             </div>
             </div>
         </div>
+
+
             <div class="card">
                 <div class="table-responsive">
                     <table class="table align-items-center mb-0">
                     <thead>
-                        <td>Naziv opreme</td>
-                        <td>Serijski broj</td>
-                        <td>Laboratorijski broj</td>
-                        <td>Kategorija</td>
-                        <td>Vlasništvo</td>
+                    <tr>
+                        <td>Šifra</td>
+                        <td>Naziv</td>
+                        <td>Vrsta</td>
+                        <td>Proizvođač</td>
+                        <td>Serijski br.</td>
+                        <td>Inventurni br.</td>
+                        <td>Vlasnik</td>
                         <td>Stanje</td>
-                        <td>Datum idućeg servisa</td>
+                        <td>Datum za servis</td>
+                        <td>Servis</td>
                         <td>Prijavi kvar</td>
-                        <td>Izbriši</td>
+                        <td>Uredi</td>
+                    </tr>
                     </thead>
-                    <tbody>
+                        <tbody>
                         <tr>
-                        <td>Imunokemijski analizator</td>
-                        <td>Ai22686</td>
-                        <td>VA-10</td>
-                        <td>Veliki analizatori</td>
-                        <td>Abbott Laboratories d.o.o.</td>
-                        <td>Ispravan</td>
-                        <td>25.01.2024.</td>
-                        <td class="text-center">
-                            <form action="/prijavakvarapocetna" method="get">
-
-                            <button class="btn btn-outline-primary" type="submit">
-                            <img src="../static/uredi.png" class="img-fluid" style="width: 20px;" alt="prijavakvarapocetn">
-                            </button>
+                            <td>VA-10</td>
+                            <td>Imunokemijski analizator</td>
+                            <td>Veliki analizatori</td>
+                            <td>Abbott Laboratories d.o.o.</td>
+                            <td>Ai22686</td>
+                            <td>133DB</td>
+                            <td>Abbott Laboratories d.o.o.</td>
+                            <td>Ispravan</td>
+                            <td>25.01.2024.</td>
+                            <td class="text-center">
+                            <form action="/servisi?" method="get">
+                                <button class="btn btn-outline-primary" type="submit">
+                                    <img src="../static/servispocetna.png" class="img-fluid" style="width: 30px; height:25px;" alt="servispocetna">
+                                </button>
                             </form>
-                        </td>
-                        <td>
-                            <button class="btn btn-outline-primary" type="submit">
-                                <img src="../static/delete.png" class="img-fluid" style="width: 20px;" alt="delete">
-                            </button>
-                        </td>
+                            </td>
+                            <td class="text-center">
+                                <form action="/prijavakvarapocetna" method="get">
+                                    <button class="btn btn-outline-primary" type="submit">
+                                        <img src="../static/prijavikvar.png" class="img-fluid" style="width: 20px;height:25px;" alt="prijavakvarapocetn">
+                                    </button>
+                                </form>
+                            </td>
+                            <td>
+                                <button class="btn btn-outline-primary" type="submit">
+                                    <img src="../static/uredipocetna.png" class="img-fluid" style="width: 20px; height:25px;" alt="uredipocetna">
+                                </button>
+                            </td>
                         </tr>
-                </tbody>
+                        </tbody>
             </table>
                 </div>
             </div>
@@ -123,9 +135,15 @@ table
     {
     border-collapse: collapse;
     }
-th,td {
+th {
+  border: 1px solid #cecfd5;
+  padding: 14px 15px;
+  white-space: nowrap;
+   }
+td {
   border: 1px solid #cecfd5;
   padding: 10px 15px;
+  white-space: nowrap;
        }
 h2
     {
