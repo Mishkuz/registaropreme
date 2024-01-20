@@ -37,8 +37,10 @@ import java.util.List;
         return "dodajuredaj.html";
     }
 
-
-
+@GetMapping("/evidencijaodrzavanjapocetna")
+public String evidencijaodrzavanja() {
+        return "evidencijaodrzavanja.html";
+    }
 
 
 

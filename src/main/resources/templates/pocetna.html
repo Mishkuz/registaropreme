@@ -29,7 +29,16 @@
             <br>
             <br>
             <br>
+            <div class="d-flex justify-content-between mb-3">
+                <form action="/evidencijaodrzavanjapocetna" method="get">
+                <button name="button" class="btn btn-primary" type="submit">Evidencija održavanja</button>
+                </form>
+                <form action="/dodajuredaj" method="get">
+                    <button name="button" class="btn btn-primary" type="submit">Dodaj uređaj</button>
+                </form>
+            </div>
         <div class="container mt-3 p-5 d-flex justify-content-center align-items-center">
+
             <div class="col-md-8">
             <div class="input-group input-group-dynamic mb-4">
                 <input type="text" class="form-control" placeholder="Unesi naziv opreme" aria-label="nazivopreme" aria-describedby="basic-addon1">
@@ -39,44 +48,36 @@
             </div>
             </div>
         </div>
-            <div class="d-flex justify-content-between mb-3">
-                <form action="/prijavakvarapocetna" method="get">
-                    <button name="button" class="btn btn-primary" type="submit">Prijavi kvar</button>
-                </form>
-                <button name="button" class="btn btn-primary" type="submit">Evidencija održavanja</button>
-                <form action="/dodajuredaj" method="get">
-                <button name="button" class="btn btn-primary" type="submit">Dodaj uređaj</button>
-                </form>
-            </div>
-            <br>
-            <br>
             <div class="card">
                 <div class="table-responsive">
                     <table class="table align-items-center mb-0">
                     <thead>
+                        <td>Naziv opreme</td>
                         <td>Serijski broj</td>
                         <td>Laboratorijski broj</td>
-                        <td>Oznaka opreme</td>
-                        <td>Inventarski broj</td>
-                        <td>Datum nabavke</td>
+                        <td>Kategorija</td>
                         <td>Vlasništvo</td>
                         <td>Stanje</td>
-                        <td>Uredi</td>
+                        <td>Datum idućeg servisa</td>
+                        <td>Prijavi kvar</td>
                         <td>Izbriši</td>
                     </thead>
                     <tbody>
                         <tr>
+                        <td>Imunokemijski analizator</td>
                         <td>Ai22686</td>
                         <td>VA-10</td>
-                        <td>Imunokemijski analizator</td>
-                        <td>AN02</td>
-                        <td>11.12.2021.</td>
+                        <td>Veliki analizatori</td>
                         <td>Abbott Laboratories d.o.o.</td>
                         <td>Ispravan</td>
-                        <td>
+                        <td>25.01.2024.</td>
+                        <td class="text-center">
+                            <form action="/prijavakvarapocetna" method="get">
+
                             <button class="btn btn-outline-primary" type="submit">
-                                <img src="../static/uredi.png" class="img-fluid" style="width: 20px;" alt="Uredi">
+                            <img src="../static/uredi.png" class="img-fluid" style="width: 20px;" alt="prijavakvarapocetn">
                             </button>
+                            </form>
                         </td>
                         <td>
                             <button class="btn btn-outline-primary" type="submit">
