@@ -6,7 +6,7 @@
 </head>
 <body>
 
-<div class="container mt-3 p-5 d-flex justify-content-center align-items-center">
+<div class="container main-container">
     <div class="row justify-content-center border rounded-2 p-2 bg-white shadow box-area position-relative">
         <div class="col-md-12">
             <header>
@@ -18,14 +18,14 @@
                 <h2>Opća bolnica Zabok</h2>
             </div>
             <div class="d-flex align-items-center">
-                <img src="../static/pocetnanaslovna.png" alt="Slika" style="width: 140px; height: 140px; position: absolute; top:15%; right: 47%; border-radius: 50%;"><img>
+                <img src="../static/pocetnanaslovna.png" alt="Slika" style="width: 140px; height: 140px; position: absolute; top:7%; right: 47%; border-radius: 50%;"><img>
             </div>
             <div class="col-md-12 text-left">
                 <h3>Medicinsko biokemijski laboratorij</h3>
 
             </div>
             <br>
-            <br><br><br><br>
+            <br>
             <form action="/evidencijaodrzavanjapocetna" method="get">
                 <button name="button" class="btn btn-primary" type="submit" style="margin-bottom: 5px;">Pregled servisa</button>
             </form>
@@ -36,10 +36,10 @@
 
             <div class="col-md-8">
             <div class="input-group input-group-dynamic mb-4">
-                <input type="text" class="form-control" placeholder="Unesi naziv opreme" aria-label="nazivopreme" aria-describedby="basic-addon1">
+                <input type="text" id="searchInput" class="form-control" placeholder="Unesi naziv opreme" aria-label="nazivopreme" aria-describedby="basic-addon1">
                 <span class="input-group-text" id="basic-addon1">
-                <button name="button" class="btn btn-primary" type="submit">
-                    <img src="../static/povecalo.jpg" class="img-fluid" style="width: 20px; height: 25px;" alt="povecalo">
+                <button name="button" class="btn btn-link" type="submit">
+                    <img src="../static/povecalo.jpg" class="img-fluid" style="width: 35px; height: 35px; border-radius: 50%; background:transparent;" alt="povecalo">
                 </button>
                 </span>
             </div>
@@ -54,6 +54,7 @@
                     <tr>
                         <td>Šifra</td>
                         <td>Naziv</td>
+                        <td>Kategorija</td>
                         <td>Vrsta</td>
                         <td>Proizvođač</td>
                         <td>Serijski br.</td>
@@ -70,6 +71,7 @@
                         <tr>
                             <td>VA-10</td>
                             <td>Imunokemijski analizator</td>
+                            <td>Analizatori</td>
                             <td>Veliki analizatori</td>
                             <td>Abbott Laboratories d.o.o.</td>
                             <td>Ai22686</td>
@@ -97,6 +99,161 @@
                                 </button>
                             </td>
                         </tr>
+                        <tr>
+                            <td>AO-11</td>
+                            <td>Centrifuga Hettich Rotofix 32A</td>
+                            <td>Analitička oprema</td>
+                            <td>Centrifuga</td>
+                            <td>Abbott Laboratories d.o.o.</td>
+                            <td>0045424-05</td>
+                            <td>7372002</td>
+                            <td>Abbott Laboratories d.o.o.</td>
+                            <td>Ispravan</td>
+                            <td>21.01.2024.</td>
+                            <td class="text-center">
+                                <form action="/servisi?" method="get">
+                                    <button class="btn btn-outline-primary" type="submit">
+                                        <img src="../static/servispocetna.png" class="img-fluid" style="width: 30px; height:25px;" alt="servispocetna">
+                                    </button>
+                                </form>
+                            </td>
+                            <td class="text-center">
+                                <form action="/prijavakvarapocetna" method="get">
+                                    <button class="btn btn-outline-primary" type="submit">
+                                        <img src="../static/prijavikvar.png" class="img-fluid" style="width: 20px;height:25px;" alt="prijavakvarapocetn">
+                                    </button>
+                                </form>
+                            </td>
+                            <td>
+                                <button class="btn btn-outline-primary" type="submit">
+                                    <img src="../static/uredipocetna.png" class="img-fluid" style="width: 20px; height:25px;" alt="uredipocetna">
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>AO-13</td>
+                            <td>Centrifuga Hettich Rotofix 32A</td>
+                            <td>Analitička oprema</td>
+                            <td>Centrifuga</td>
+                            <td>Abbott Laboratories d.o.o.</td>
+                            <td>0045427-0</td>
+                            <td>7372001</td>
+                            <td>Abbott Laboratories d.o.o.</td>
+                            <td>U kvaru</td>
+                            <td>22.02.2024.</td>
+                            <td class="text-center">
+                                <form action="/servisi?" method="get">
+                                    <button class="btn btn-outline-primary" type="submit">
+                                        <img src="../static/servispocetna.png" class="img-fluid" style="width: 30px; height:25px;" alt="servispocetna">
+                                    </button>
+                                </form>
+                            </td>
+                            <td class="text-center">
+                                <form action="/prijavakvarapocetna" method="get">
+                                    <button class="btn btn-outline-primary" type="submit">
+                                        <img src="../static/prijavikvar.png" class="img-fluid" style="width: 20px;height:25px;" alt="prijavakvarapocetn">
+                                    </button>
+                                </form>
+                            </td>
+                            <td>
+                                <button class="btn btn-outline-primary" type="submit">
+                                    <img src="../static/uredipocetna.png" class="img-fluid" style="width: 20px; height:25px;" alt="uredipocetna">
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>AO-12</td>
+                            <td>Centrifuga Hettich Rotofix 32A</td>
+                            <td>Analitička oprema</td>
+                            <td>Centrifuga</td>
+                            <td>Hettich d.o.o.</td>
+                            <td>/</td>
+                            <td>6978001</td>
+                            <td>Hettich d.o.o.</td>
+                            <td>Ispravan</td>
+                            <td>25.01.2024.</td>
+                            <td class="text-center">
+                                <form action="/servisi?" method="get">
+                                    <button class="btn btn-outline-primary" type="submit">
+                                        <img src="../static/servispocetna.png" class="img-fluid" style="width: 30px; height:25px;" alt="servispocetna">
+                                    </button>
+                                </form>
+                            </td>
+                            <td class="text-center">
+                                <form action="/prijavakvarapocetna" method="get">
+                                    <button class="btn btn-outline-primary" type="submit">
+                                        <img src="../static/prijavikvar.png" class="img-fluid" style="width: 20px;height:25px;" alt="prijavakvarapocetn">
+                                    </button>
+                                </form>
+                            </td>
+                            <td>
+                                <button class="btn btn-outline-primary" type="submit">
+                                    <img src="../static/uredipocetna.png" class="img-fluid" style="width: 20px; height:25px;" alt="uredipocetna">
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>AO-16</td>
+                            <td>Diesse Ves Matic Cube 30</td>
+                            <td>Biokemijski analizator</td>
+                            <td>Mali analizator</td>
+                            <td>Diesse d.o.o.</td>
+                            <td>RS232C</td>
+                            <td>2856441</td>
+                            <td>Diesse d.o.o.</td>
+                            <td>Ispravan</td>
+                            <td>25.01.2024.</td>
+                            <td class="text-center">
+                                <form action="/servisi?" method="get">
+                                    <button class="btn btn-outline-primary" type="submit">
+                                        <img src="../static/servispocetna.png" class="img-fluid" style="width: 30px; height:25px;" alt="servispocetna">
+                                    </button>
+                                </form>
+                            </td>
+                            <td class="text-center">
+                                <form action="/prijavakvarapocetna" method="get">
+                                    <button class="btn btn-outline-primary" type="submit">
+                                        <img src="../static/prijavikvar.png" class="img-fluid" style="width: 20px;height:25px;" alt="prijavakvarapocetn">
+                                    </button>
+                                </form>
+                            </td>
+                            <td>
+                                <button class="btn btn-outline-primary" type="submit">
+                                    <img src="../static/uredipocetna.png" class="img-fluid" style="width: 20px; height:25px;" alt="uredipocetna">
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>VA-10</td>
+                            <td>Imunokemijski analizator</td>
+                            <td>Veliki analizatori</td>
+                            <td>Abbott Laboratories d.o.o.</td>
+                            <td>Ai22686</td>
+                            <td>133DB</td>
+                            <td>RS232C</td>
+                            <td>Abbott Laboratories d.o.o.</td>
+                            <td>Ispravan</td>
+                            <td>25.01.2024.</td>
+                            <td class="text-center">
+                                <form action="/servisi?" method="get">
+                                    <button class="btn btn-outline-primary" type="submit">
+                                        <img src="../static/servispocetna.png" class="img-fluid" style="width: 30px; height:25px;" alt="servispocetna">
+                                    </button>
+                                </form>
+                            </td>
+                            <td class="text-center">
+                                <form action="/prijavakvarapocetna" method="get">
+                                    <button class="btn btn-outline-primary" type="submit">
+                                        <img src="../static/prijavikvar.png" class="img-fluid" style="width: 20px;height:25px;" alt="prijavakvarapocetn">
+                                    </button>
+                                </form>
+                            </td>
+                            <td>
+                                <button class="btn btn-outline-primary" type="submit">
+                                    <img src="../static/uredipocetna.png" class="img-fluid" style="width: 20px; height:25px;" alt="uredipocetna">
+                                </button>
+                            </td>
+                        </tr>
                         </tbody>
             </table>
                 </div>
@@ -106,71 +263,113 @@
 </div>
 
 
+
+
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Pronađi polje za pretraživanje
+        var searchInput = document.getElementById('searchInput');
+
+        // Dodaj događaj 'input' kako biste pratili unos korisnika
+        searchInput.addEventListener('input', function () {
+            // Dobavi uneseni tekst
+            var searchText = searchInput.value.toLowerCase();
+
+            // Pronađi sve redove u tablici
+            var tableRows = document.querySelectorAll('.table tbody tr');
+
+            // Iteriraj kroz svaki red
+            tableRows.forEach(function (row) {
+                // Dobavi tekst iz svake ćelije u redu
+                var rowData = row.textContent.toLowerCase();
+
+                // Prikazi ili sakrij red prema podudaranju teksta
+                row.style.display = rowData.includes(searchText) ? 'table-row' : 'none';
+            });
+        });
+    });
+</script>
 </body>
 
 
 
 <style>
+    @media (max-width: 2400px) {
+    .main-container {
+        min-width: 100%;
+        overflow-x: auto;
+    }
+}
+container {
+margin-top: 3rem;
+padding: 5rem;
+display: flex;
+justify-content: center;
+align-items: center;
+min-width: 2400px;
+}
 
 .btn-outline-primary:hover
 {
 transform: scale(1.01);
 transition: transform 0.3s ease;
 background-color: transparent;
-border-color: darkred;
+border-color: DarkOliveGreen;
 }
 .btn-primary:hover
 {
 transform: scale(1.01);
 transition: transform 0.3s ease;
-  background-color: red;
-  border-color: red;
+background-color: DarkOliveGreen;
+border-color: DarkOliveGreen;
 }
 .btn-primary
-    {
-    background-color: darkred;
-    border-color: darkred;
-    }
+{
+background-color: DarkOliveGreen;
+border-color: DarkOliveGreen;
+}
 table
-    {
-    border-collapse: collapse;
-    }
+{
+border-collapse: collapse;
+}
 th {
-  border: 1px solid #cecfd5;
-  padding: 14px 15px;
-  white-space: nowrap;
-   }
+border: 1px solid #cecfd5;
+padding: 14px 15px;
+white-space: nowrap;
+}
 td {
-  border: 1px solid #cecfd5;
-  padding: 10px 15px;
-  white-space: nowrap;
-       }
+border: 1px solid #cecfd5;
+padding: 10px 15px;
+white-space: nowrap;
+}
 h2
-    {
-    font-size:27px;
-    color: darkred;
-    }
+{
+font-size:27px;
+color: DarkOliveGreen;
+}
 h3
-    {
-    font-size:20px;
-    color: darkred;
-    }
+{
+font-size:20px;
+color: DarkOliveGreen;
+}
 header
-       {
-       background-color: darkred;
-       color: #F0F8FF;
-       font-weight: bold;
-       text-align: right;
-       padding: 4px;
-       }
+{
+background-color: DarkOliveGreen;
+color: #F0F8FF;
+font-weight: bold;
+text-align: right;
+padding: 4px;
+}
 p {
-  margin: 0;
-  font-size: 14px;
-  }
+margin: 0;
+font-size: 14px;
+}
 
 .btn-outline-primary
-    {
-    border-color: darkred;
-    }
+{
+border-color: DarkSeaGreen;
+}
 </style>
 </html>
