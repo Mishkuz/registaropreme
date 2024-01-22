@@ -3,166 +3,147 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <title>Dokumentacija opreme</title>
-    <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
 
-        form {
-            background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            padding: 20px;
-            width: 90%; /* Povećao sam širinu forme na 90% */
-            max-width: 1200px; /* Postavio sam maksimalnu širinu na 1200px */
-            display: flex;
-            flex-wrap: wrap; /* Dodao sam flex-wrap kako bi se elementi prelazili u novi red */
-            gap: 20px; /* Dodao sam razmak između elemenata */
-            margin: 0 auto; /* Centrirao formu */
-        }
-
-        h2 {
-            color: #333;
-            text-align: center;
-            width: 100%; /* Postavio sam širinu naslova na 100% */
-        }
-
-        .row {
-            display: flex;
-            flex-direction: row;
-            gap: 10px;
-            align-items: center;
-            width: 48%; /* Postavio širinu reda na 48% kako bi stvorio dvostupčani prikaz */
-        }
-
-        label {
-            font-weight: bold;
-            width: 120px;
-        }
-
-        input, select, textarea {
-            flex: 1;
-            padding: 8px;
-            box-sizing: border-box;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-
-        input[type="checkbox"] {
-            margin-right: 5px;
-        }
-
-        button {
-            background-color: #4caf50;
-            color: white;
-            padding: 10px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 16px;
-            width: 100%; /* Postavio širinu gumba na 100% */
-        }
-
-        button:hover {
-            background-color: #45a049;
-        }
-    </style>
 </head>
 <body>
 
+<div class="container main-container">
+    <div class="row justify-content-center border rounded-2 p-2 bg-white shadow box-area position-relative">
 <form>
-    <h2>Dokumentacija opreme</h2>
-
-    <div class="row">
-        <label for="sifra">Šifra:</label>
-        <input type="text" id="sifra" name="sifra" required>
+    <header>
+        <p>LabInventoryApp</p>
+    </header>
+    <br>
+    <div>
+    <h2>Unos nove opreme</h2>
+    </div>
+    <br><br>
+    <div class="input-group input-group-dynamic mb-4">
+        <span class="input-group-text" id="basic-addon1">Šifra: </span>
+        <input type="text" class="form-control col-md-6" aria-label="Username" aria-describedby="basic-addon1">
+    </div>
+    <div class="input-group input-group-dynamic mb-4">
+        <span class="input-group-text" id="basic-addon1">Naziv: </span>
+        <input type="text" class="form-control col-md-6" aria-label="Username" aria-describedby="basic-addon1">
+    </div>
+    <div class="input-group input-group-dynamic mb-4">
+        <span class="input-group-text" id="basic-addon1">Kategorija: </span>
+        <input type="text" class="form-control col-md-6" aria-label="Username" aria-describedby="basic-addon1">
+    </div>
+    <div class="input-group input-group-dynamic mb-4">
+        <span class="input-group-text" id="basic-addon1">Vrsta: </span>
+        <input type="text" class="form-control col-md-6" aria-label="Username" aria-describedby="basic-addon1">
+    </div>
+    <div class="input-group input-group-dynamic mb-4">
+        <span class="input-group-text" id="basic-addon1">Proizvođač:  </span>
+        <input type="text" class="form-control col-md-6" aria-label="Username" aria-describedby="basic-addon1">
+    </div>
+    <div class="input-group input-group-dynamic mb-4">
+        <span class="input-group-text" id="basic-addon1">Serijski broj: </span>
+        <input type="text" class="form-control col-md-6" aria-label="Username" aria-describedby="basic-addon1">
+    </div>
+    <div class="input-group input-group-dynamic mb-4">
+        <span class="input-group-text" id="basic-addon1">Godina proizvodnje: </span>
+        <input type="text" class="form-control col-md-6" aria-label="Username" aria-describedby="basic-addon1">
+    </div>
+    <div class="input-group input-group-dynamic mb-4">
+        <span class="input-group-text" id="basic-addon1">Datum nabave: </span>
+        <input type="text" class="form-control col-md-6" aria-label="Username" aria-describedby="basic-addon1">
+    </div>
+    <div class="input-group input-group-dynamic mb-4">
+        <span class="input-group-text" id="basic-addon1">Vlasnik: </span>
+        <input type="text" class="form-control col-md-6" aria-label="Username" aria-describedby="basic-addon1">
+    </div>
+    <div class="input-group input-group-dynamic mb-4">
+        <span class="input-group-text" id="basic-addon1">Inventarski broj: </span>
+        <input type="text" class="form-control col-md-6" aria-label="Username" aria-describedby="basic-addon1">
     </div>
 
-    <div class="row">
-        <label for="naziv">Naziv:</label>
-        <input type="text" id="naziv" name="naziv" required>
+    <div class="input-group input-group-dynamic mb-4">
+        <span class="input-group-text" id="basic-addon1">UPS </span>
+        <input type="text" class="form-control col-md-6" aria-label="Username" aria-describedby="basic-addon1">
+    </div>
+    <div class="input-group input-group-dynamic mb-4">
+        <span class="input-group-text" id="basic-addon1">Interval umjeravanja: </span>
+        <input type="text" class="form-control col-md-6" aria-label="Username" aria-describedby="basic-addon1">
+    </div>
+    <div class="input-group input-group-dynamic mb-4">
+        <span class="input-group-text" id="basic-addon1">Sljedeći servis: </span>
+        <input type="text" class="form-control col-md-6" aria-label="Username" aria-describedby="basic-addon1">
+    </div>
+    <div class="input-group input-group-dynamic mb-4">
+        <span class="input-group-text" id="basic-addon1"  style="margin-right: 15px;">Certifikat </span>
+        <input type="checkbox" id="certifikatid" name="certifikat" style="width:50px; height:40px; border-color: DarkOliveGreen;">
+    </div>
+    <div class="text-center">
+        <button name="button" class="btn btn-primary" type="submit" style="margin-bottom: 5px; margin-top: 20px; margin-right: 10px;">Spremi</button>
+        <button name="button" class="btn btn-primary" type="submit" style="margin-bottom: 5px; margin-top: 20px;">Zatvori</button>
     </div>
 
-    <div class="row">
-        <label for="vrsta">Vrsta:</label>
-        <input type="text" id="vrsta" name="vrsta" required>
-    </div>
-
-    <div class="row">
-        <label for="nazivVrste">Naziv vrste:</label>
-        <input type="text" id="nazivVrste" name="nazivVrste" required>
-    </div>
-
-    <div class="row">
-        <label for="kategorija">Kategorija:</label>
-        <input type="text" id="kategorija" name="kategorija" required>
-    </div>
-
-    <div class="row">
-        <label for="proizvodjac">Proizvođač (naziv):</label>
-        <input type="text" id="proizvodjac" name="proizvodjac" required>
-    </div>
-
-    <div class="row">
-        <label for="serijskiBroj">Serijski broj:</label>
-        <input type="text" id="serijskiBroj" name="serijskiBroj" required>
-    </div>
-
-    <div class="row">
-        <label for="godinaProizvodnje">Godina proizvodnje:</label>
-        <input type="text" id="godinaProizvodnje" name="godinaProizvodnje" required>
-    </div>
-
-    <div class="row">
-        <label for="datumNabave">Datum nabave:</label>
-        <input type="text" id="datumNabave" name="datumNabave" required>
-    </div>
-
-    <div class="row">
-        <label for="vlasnik">Vlasnik (naziv):</label>
-        <input type="text" id="vlasnik" name="vlasnik" required>
-    </div>
-
-    <div class="row">
-        <label for="inventurniBroj">Inventurni broj:</label>
-        <input type="text" id="inventurniBroj" name="inventurniBroj" required>
-    </div>
-
-    <div class="row">
-        <label for="certifikat">Certifikat (check box):</label>
-        <input type="checkbox" id="certifikat" name="certifikat">
-    </div>
-
-    <div class="row">
-        <label for="ups">UPS:</label>
-        <select id="ups" name="ups">
-            <option value="spojena">Spojena</option>
-            <option value="nijeSpojena">Nije spojena</option>
-            <option value="vlastitiUPS">Vlastiti UPS</option>
-        </select>
-    </div>
-
-    <div class="row">
-        <label for="intervalServisa">Interval servisa/umjeravanja:</label>
-        <input type="text" id="intervalServisa" name="intervalServisa">
-    </div>
-
-    <div class="row">
-        <label for="sljedeciServis">Sljedeći servis:</label>
-        <input type="text" id="sljedeciServis" name="sljedeciServis">
-    </div>
-
-    <button type="submit">Spremi</button>
-    <button type="button">Zatvori</button>
 </form>
-
+    </div>
+</div>
 </body>
+<style>
+    header
+{
+background-color: Green;
+color: #F0F8FF;
+font-weight: bold;
+text-align: left;
+padding: 5px;
+height: 30px;
+}
+    h2 {
+    text-align: center;
+    Color: DarkOliveGreen;
+    }
+body {
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     height: 100vh;
+     margin: 0;
+ }
+
+ .container.main-container {
+     max-width:35%;
+ }
+
+ .row.justify-content-center {
+     margin-right: auto;
+     margin-left: auto;
+ }
+
+ .border.rounded-2 {
+     margin-right: auto;
+     margin-left: auto;
+ }
+.input-group-text {
+margin-right: 10px;
+display: inline-block;
+width: 165px;
+text-align: left;
+border: 2px solid DarkOliveGreen;
+}
+.form-control {
+width: 100%;
+max-width: 600px;
+border: 2px solid DarkOliveGreen;
+}
+.btn-primary:hover
+{
+transform: scale(1.01);
+transition: transform 0.3s ease;
+background-color: DarkOliveGreen;
+border-color: DarkOliveGreen;
+}
+.btn-primary
+{
+background-color: DarkOliveGreen;
+border-color: DarkOliveGreen;
+}
+</style>
 </html>
