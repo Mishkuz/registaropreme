@@ -21,15 +21,16 @@
         </div>
         <br><br>
         <div class="container mt-2 p-4 d-flex justify-content-center align-items-center">
-
             <div class="col-md-8">
                 <div class="input-group input-group-dynamic mb-4">
-                    <input type="text" id="searchInput" class="form-control" placeholder="Unesi naziv servisera" aria-label="nazivopreme" aria-describedby="basic-addon1">
-                    <span class="input-group-text" id="basic-addon1">
-                <button name="button" class="btn btn-link" type="submit">
-                    <img src="../static/povecalo.jpg" class="img-fluid" style="width: 35px; height: 35px; border-radius: 50%; background:transparent;" alt="povecalo">
-                </button>
-                </span>
+                    <input type="text" id="searchInput" style="border-color: #177245;" class="form-control"
+                           placeholder="Unesi naziv servisera" aria-label="nazivopreme" aria-describedby="basic-addon1">
+                    <span class="input-group-text" style="border-color: #177245; id="basic-addon1">
+                    <button name="button" class="btn btn-link" type="submit">
+                        <img src="../static/povecalo.jpg" class="img-fluid" style="width: 35px; height: 35px;
+                                    border-radius: 50%; background:transparent;" alt="povecalo">
+                    </button>
+                    </span>
                 </div>
             </div>
         </div>
@@ -97,67 +98,73 @@
         </div>
 </body>
 <style>
-    header
-{
-background-color: #124559;
-color: #F0F8FF;
-font-weight: bold;
-text-align: left;
-padding: 5px;
-height: 30px;
-}
-    h2 {
-    text-align: center;
-    Color: #006a4e;
-    }
-body {
-     display: flex;
-     justify-content: center;
-     align-items: center;
-     height: 100vh;
-     margin: 0;
- }
-
- form {
- background-color: #F1FFFA
- }
-
- .container.main-container {
-     max-width:36%;
- }
-
- .row.justify-content-center {
-     margin-right: auto;
-     margin-left: auto;
- }
-
- .border.rounded-2 {
-     margin-right: auto;
-     margin-left: auto;
- }
-.input-group-text {
-margin-right: 10px;
-display: inline-block;
-width: 165px;
-text-align: left;
-border: 2px solid #006a4e;
-}
-.form-control {
-width: 100%;
-max-width: 600px;
-border: 2px solid #006a4e;
-}
-.btn-primary:hover
-{
-transform: scale(1.06);
-transition: transform 0.3s ease;
-background-color: #006a4e;
-border-color: #177245;
-}
-.btn-primary
-{
-background-color: #006a4e;
-border-color: #177245;
-}
+    @media (max-width: 2400px) {
+            .main-container {
+                overflow-x: auto;
+            }
+        }
+        container {
+            margin-top: 3rem;
+            padding: 5rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-width: 2400px;
+        }
+        form {
+            background-color: #F1FFFA
+        }
+        .btn-outline-primary:hover {
+            transform: scale(1.06);
+            transition: transform 0.3s ease;
+            background-color: #a9ba9d;
+            border-color: #177245;
+        }
+        .btn-primary:hover {
+            transform: scale(1.06);
+            transition: transform 0.3s ease;
+            background-color: #006a4e;
+            border-color: #177245;
+        }
+        .btn-primary {
+            background-color: #006a4e;
+            border-color: #177245;
+        }
+        table {
+        border-collapse: collapse;
+        }
+        th {
+            border: 1px solid #006a4e;
+            padding: 14px 15px;
+            white-space: nowrap;
+        }
+        td {
+            border: 1px solid #177245;
+            padding: 10px 15px;
+            white-space: nowrap;
+        }
+        h2 {
+            font-size:33px;
+            color: #006a4e;
+            text-align: center;
+        }
+        h3 {
+            font-size:20px;
+            color: #006a4e;
+        }
+        header {
+            background-color: #124559;
+            color: #F0F8FF;
+            font-weight: bold;
+            text-align: right;
+            padding: 4px;
+        }
+        p {
+            margin: 0;
+            font-size: 14px;
+        }
+        .btn-outline-primary {
+            border-color: #177245;
+        }
 </style>
 </html>
