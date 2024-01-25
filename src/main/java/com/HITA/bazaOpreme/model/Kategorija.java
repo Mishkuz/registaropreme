@@ -12,11 +12,15 @@ public class Kategorija {
     @Column(name = "id_kategorija")
     private Long idKategorija;
 
+    @NotBlank(message = "Šifra ne smije biti prazna")
+    @Size(max = 20, message = "Šifra ne smije biti duža od 20 znakova")
+    private String sifra;
+
     @NotBlank(message = "Naziv kategorije ne smije biti prazan")
     @Size(max = 50, message = "Naziv kategorije ne smije biti duži od 50 znakova")
     private String kategorija;
 
-    public Kategorija(Long idKategorija, String kategorija) {
+    public Kategorija(Long idKategorija, String sifra, String kategorija) {
         this.idKategorija = idKategorija;
         this.kategorija = kategorija;
     }
@@ -38,6 +42,14 @@ public class Kategorija {
 
     public void setKategorija(String kategorija) {
         this.kategorija = kategorija;
+    }
+
+    public String getSifra() {
+        return sifra;
+    }
+
+    public void setSifra(String sifra) {
+        this.sifra = sifra;
     }
 }
 
