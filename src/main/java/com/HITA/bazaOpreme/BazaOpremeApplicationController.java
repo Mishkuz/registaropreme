@@ -28,7 +28,7 @@ import java.util.List;
 
 @GetMapping("/prijavakvarapocetna")
     public String prijavikvar() {
-        return "prijavikvar.html";
+        return "unos_prijave_kvara.html";
     }
 
 

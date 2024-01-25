@@ -27,7 +27,7 @@
     </div>
     <div class="input-group input-group-dynamic mb-4">
         <span class="input-group-text" id="basic-addon1">Naziv: </span>
-        <input type="text" class="form-control col-md-6" aria-label="Username" aria-describedby="basic-addon1">
+        <input type="text" class="form-control col-md-6" aria-label="Username" aria-describedby="basic-addon1" required>
     </div>
     <div class="input-group input-group-dynamic mb-4">
         <span class="input-group-text" id="basic-addon1">Kategorija: </span>
@@ -88,67 +88,61 @@
 </div>
 </body>
 <style>
-    header
-{
-background-color: #124559;
-color: #F0F8FF;
-font-weight: bold;
-text-align: left;
-padding: 5px;
-height: 30px;
-}
-    h2 {
-    text-align: center;
-    Color: #006a4e;
+    header {
+        background-color: #124559;
+        color: #F0F8FF;
+        font-weight: bold;
+        text-align: left;
+        padding: 5px;
+        height: 30px;
     }
-body {
-     display: flex;
-     justify-content: center;
-     align-items: center;
-     height: 100vh;
-     margin: 0;
- }
+    h2 {
+        text-align: center;
+        Color: #006a4e;
+    }
+    body {
+         display: flex;
+         justify-content: center;
+         align-items: center;
+         height: 100vh;
+         margin: 0;
+    }
+    form {
+     background-color: #F1FFFA;
+    }
 
- form {
- background-color: #F1FFFA
- }
-
- .container.main-container {
-     max-width:840px;
- }
-
- .row.justify-content-center {
-     margin-right: auto;
-     margin-left: auto;
- }
-
- .border.rounded-2 {
-     margin-right: auto;
-     margin-left: auto;
- }
-.input-group-text {
-margin-right: 10px;
-display: inline-block;
-width: 165px;
-text-align: left;
-border: 2px solid #006a4e;
-}
-.form-control {
-width: 100%;
-max-width: 600px;
-border: 2px solid #006a4e;
-}
-.btn-primary:hover
-{
-transform: scale(1.06);
-transition: transform 0.3s ease;
-background-color: #006a4e;
-border-color: #177245;
-}
-.btn-primary
-{
-background-color: #006a4e;
-border-color: #177245;
-}
+    .container.main-container {
+        max-width:840px;
+    }
+    .row.justify-content-center {
+        margin-right: auto;
+        margin-left: auto;
+    }
+    .border.rounded-2 {
+        margin-right: auto;
+        margin-left: auto;
+    }
+    .input-group-text {
+        margin-right: 10px;
+        display: inline-block;
+        width: 165px;
+        text-align: left;
+        border: 2px solid #006a4e;
+    }
+    .form-control {
+        width: 100%;
+        max-width: 600px;
+        border: 2px solid #006a4e;
+    }
+    .btn-primary:hover {
+        transform: scale(1.06);
+        transition: transform 0.3s ease;
+        background-color: #006a4e;
+        border-color: #177245;
+    }
+    .btn-primary {
+        background-color: #006a4e;
+        border-color: #177245;
+    }
 </style>
 </html>
