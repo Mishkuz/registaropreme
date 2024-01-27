@@ -29,7 +29,14 @@
                 <span class="input-group-text" id="basic-addon1">Naziv: </span>
                 <textarea name="naziv" id="naziv" rows="3" cols="54" maxlength="100" required></textarea>
             </div>
-
+            <div class="input-group input-group-dynamic mb-4">
+                <span class="input-group-text" id="basic-addon1">Serijski broj: </span>
+                <input type="text" aria-label="Username" aria-describedby="basic-addon1" maxlength="20" size="30">
+            </div>
+            <div class="input-group input-group-dynamic mb-4">
+                <span class="input-group-text" id="basic-addon1">Inventarski broj: </span>
+                <input type="text" aria-label="Username" aria-describedby="basic-addon1" maxlength="20" size="30">
+            </div>
             <div class="input-group input-group-dynamic mb-4">
                 <span class="input-group-text" id="basic-addon1">Kategorija: </span>
                 <button id="dropdownButton" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown"
@@ -66,16 +73,16 @@
                 </ul>
             </div>
             <div class="input-group input-group-dynamic mb-4">
-                <span class="input-group-text" id="basic-addon1">Serijski broj: </span>
-                <input type="text" aria-label="Username" aria-describedby="basic-addon1" maxlength="20" size="30">
-            </div>
-            <div class="input-group input-group-dynamic mb-4">
                 <span class="input-group-text" id="basic-addon1">Godina proizvodnje: </span>
                 <input type="date" aria-label="Username" aria-describedby="basic-addon1">
             </div>
             <div class="input-group input-group-dynamic mb-4">
                 <span class="input-group-text" id="basic-addon1">Datum nabave: </span>
                 <input type="date" aria-label="Username" aria-describedby="basic-addon1">
+            </div>
+            <div class="input-group input-group-dynamic mb-4">
+                <span class="input-group-text" id="basic-addon1" style="margin-right: 15px;">Certifikat </span>
+                <input type="checkbox" id="certifikatid" name="certifikat" style="width:50px; height:40px;">
             </div>
             <div class="input-group input-group-dynamic mb-4">
                 <span class="input-group-text" id="basic-addon1">Vlasnik: </span>
@@ -90,11 +97,6 @@
                 </ul>
             </div>
             <div class="input-group input-group-dynamic mb-4">
-                <span class="input-group-text" id="basic-addon1">Inventarski broj: </span>
-                <input type="text" aria-label="Username" aria-describedby="basic-addon1" maxlength="20" size="30">
-            </div>
-
-            <div class="input-group input-group-dynamic mb-4">
                 <span class="input-group-text" id="basic-addon1">UPS: </span>
                 <button id="dropdownButton2" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown"
                         aria-expanded="false">
@@ -107,15 +109,15 @@
                 </ul>
             </div>
             <div class="input-group input-group-dynamic mb-4">
-                <span class="input-group-text" id="basic-addon1">Interval umjeravanja: </span>
-                <input type="text" aria-label="Username" aria-describedby="basic-addon1">
+                <span class="input-group-text" id="basic-addon1">Interval servisa (u mj.): </span>
+                <input type="number" aria-label="Username" aria-describedby="basic-addon1">
             </div>
             <div class="input-group input-group-dynamic mb-4">
                 <span class="input-group-text" id="basic-addon1">Sljedeći servis: </span>
                 <input type="date" aria-label="Username" aria-describedby="basic-addon1">
             </div>
             <div class="input-group input-group-dynamic mb-4">
-                <span class="input-group-text" id="basic-addon1" style="margin-right: 15px;">Certifikat </span>
+                <span class="input-group-text" id="basic-addon1" style="margin-right: 15px;">Ispravno </span>
                 <input type="checkbox" id="certifikatid" name="certifikat" style="width:50px; height:40px;">
             </div>
             <div class="text-center">
