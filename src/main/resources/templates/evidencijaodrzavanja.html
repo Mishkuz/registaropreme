@@ -41,25 +41,31 @@
                         <table class="table align-items-center mb-0 table-striped table-hover">
                             <thead>
                                 <tr>
-                                    <th>Serijski broj</th>
-                                    <th>Laboratorijski broj</th>
-                                    <th>Oznaka opreme</th>
-                                    <th>Inventarski broj</th>
-                                    <th>Datum nabavke</th>
-                                    <th>Vlasništvo</th>
-                                    <th>Stanje</th>
+                                    <th>Šifra</th>
+                                    <th>Radnik</th>
+                                    <th>Oprema</th>
+                                    <th>Tip servisa</th>
+                                    <th>Serviser</th>
+                                    <th>Opis kvara</th>
+                                    <th>Datum prijave</th>
+                                    <th>Datum otpreme</th>
+                                    <th>Datum povrata</th>
+                                    <th>Datum plan. servisa</th>
                                     <th>Uredi</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
                                     <td>Ai22686</td>
-                                    <td>VA-10</td>
+                                    <td>Ivan Zagorac</td>
                                     <td>Imunokemijski analizator</td>
-                                    <td>AN02</td>
-                                    <td>11.12.2021.</td>
+                                    <td>Redovni</td>
                                     <td>Abbott Laboratories d.o.o.</td>
-                                    <td>Ispravan</td>
+                                    <td>Pogreške u analizi</td>
+                                    <td>11.12.2021.</td>
+                                    <td>22.12.2021.</td>
+                                    <td>07.01.2022.</td>
+                                    <td>21.08.2022.</td>
                                     <td>
                                         <button class="btn btn-outline-primary" type="submit">
                                             <img src="../static/uredipocetna.png" class="img-fluid" style="width: 20px; height:25px;" alt="uredipocetna">
@@ -79,6 +85,7 @@
 <style>
     @media (max-width: 2400px) {
         .main-container {
+            min-width: 100%;
             overflow-x: auto;
         }
     }
