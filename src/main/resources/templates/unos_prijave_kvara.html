@@ -21,15 +21,15 @@
             <br><br>
             <div class="input-group input-group-dynamic mb-4">
                 <span class="input-group-text" id="basic-addon1">Naziv kvara: </span>
-                <input type="text" class="form-control col-md-6" aria-label="Username" aria-describedby="basic-addon1"  required>
+                <input type="text" aria-label="Username" aria-describedby="basic-addon1" maxlength="50" size="60" required>
             </div>
             <div class="input-group input-group-dynamic mb-4">
                 <span class="input-group-text" id="basic-addon1">Datum prijave: </span>
-                <input type="date" class="form-control col-md-6" aria-label="Username" aria-describedby="basic-addon1"  required>
+                <input type="date" aria-label="Username" aria-describedby="basic-addon1" required>
             </div>
             <div class="input-group input-group-dynamic mb-4">
                 <span class="input-group-text" id="basic-addon1">Opis kvara: </span>
-                <textarea class="form-control" name="opis" id="opisKvara" rows="10" cols="42" maxlength="500"></textarea>
+                <textarea name="opis" id="opisKvara" rows="3" cols="69" maxlength="512" required></textarea>
             </div>
             <div class="text-center">
                 <button name="submit" class="btn btn-primary" type="submit" style="margin-bottom: 5px; margin-top: 20px;
@@ -64,6 +64,12 @@
     form {
      background-color: #F1FFFA;
     }
+    textarea {
+        border: 2px solid #006a4e;
+    }
+    input {
+        border: 2px solid #006a4e;
+    }
     .container.main-container {
         max-width:840px;
     }
@@ -82,11 +88,6 @@
         text-align: right;
         border: none;
         background-color: #F1FFFA;
-    }
-    .form-control {
-        width: 100%;
-        max-width: 600px;
-        border: 2px solid #006a4e;
     }
     .btn-primary:hover {
         transform: scale(1.06);

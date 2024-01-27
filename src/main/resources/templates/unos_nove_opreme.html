@@ -23,11 +23,11 @@
             <br><br>
             <div class="input-group input-group-dynamic mb-4">
                 <span class="input-group-text" id="basic-addon1">Šifra: </span>
-                <input type="text" class="form-control col-md-6" aria-label="Username" aria-describedby="basic-addon1">
+                <input type="text" aria-label="Username" aria-describedby="basic-addon1" maxlength="20" size="30" required>
             </div>
             <div class="input-group input-group-dynamic mb-4">
                 <span class="input-group-text" id="basic-addon1">Naziv: </span>
-                <input type="text" class="form-control col-md-6" aria-label="Username" aria-describedby="basic-addon1" required>
+                <textarea name="naziv" id="naziv" rows="3" cols="54" maxlength="100" required></textarea>
             </div>
 
             <div class="input-group input-group-dynamic mb-4">
@@ -67,15 +67,15 @@
             </div>
             <div class="input-group input-group-dynamic mb-4">
                 <span class="input-group-text" id="basic-addon1">Serijski broj: </span>
-                <input type="text" class="form-control col-md-6" aria-label="Username" aria-describedby="basic-addon1">
+                <input type="text" aria-label="Username" aria-describedby="basic-addon1" maxlength="20" size="30">
             </div>
             <div class="input-group input-group-dynamic mb-4">
                 <span class="input-group-text" id="basic-addon1">Godina proizvodnje: </span>
-                <input type="text" class="form-control col-md-6" aria-label="Username" aria-describedby="basic-addon1">
+                <input type="date" aria-label="Username" aria-describedby="basic-addon1">
             </div>
             <div class="input-group input-group-dynamic mb-4">
                 <span class="input-group-text" id="basic-addon1">Datum nabave: </span>
-                <input type="text" class="form-control col-md-6" aria-label="Username" aria-describedby="basic-addon1">
+                <input type="date" aria-label="Username" aria-describedby="basic-addon1">
             </div>
             <div class="input-group input-group-dynamic mb-4">
                 <span class="input-group-text" id="basic-addon1">Vlasnik: </span>
@@ -91,7 +91,7 @@
             </div>
             <div class="input-group input-group-dynamic mb-4">
                 <span class="input-group-text" id="basic-addon1">Inventarski broj: </span>
-                <input type="text" class="form-control col-md-6" aria-label="Username" aria-describedby="basic-addon1">
+                <input type="text" aria-label="Username" aria-describedby="basic-addon1" maxlength="20" size="30">
             </div>
 
             <div class="input-group input-group-dynamic mb-4">
@@ -108,15 +108,15 @@
             </div>
             <div class="input-group input-group-dynamic mb-4">
                 <span class="input-group-text" id="basic-addon1">Interval umjeravanja: </span>
-                <input type="text" class="form-control col-md-6" aria-label="Username" aria-describedby="basic-addon1">
+                <input type="text" aria-label="Username" aria-describedby="basic-addon1">
             </div>
             <div class="input-group input-group-dynamic mb-4">
                 <span class="input-group-text" id="basic-addon1">Sljedeći servis: </span>
-                <input type="text" class="form-control col-md-6" aria-label="Username" aria-describedby="basic-addon1">
+                <input type="date" aria-label="Username" aria-describedby="basic-addon1">
             </div>
             <div class="input-group input-group-dynamic mb-4">
                 <span class="input-group-text" id="basic-addon1" style="margin-right: 15px;">Certifikat </span>
-                <input type="checkbox" id="certifikatid" name="certifikat" style="width:50px; height:40px; border-color: DarkOliveGreen;">
+                <input type="checkbox" id="certifikatid" name="certifikat" style="width:50px; height:40px;">
             </div>
             <div class="text-center">
                 <button name="button" class="btn btn-primary" type="submit" style="margin-bottom: 5px; margin-top: 20px; margin-right: 10px;">Spremi</button>
@@ -157,6 +157,12 @@
         background-color: #F1FFFA;
         height: 100%;
     }
+    textarea {
+        border: 2px solid #006a4e;
+    }
+    input {
+        border: 2px solid #006a4e;
+    }
     .container.main-container {
         max-width: 840px;
     }
@@ -175,11 +181,6 @@
         text-align: right;
         border: none;
         background-color: #F1FFFA;
-    }
-    .form-control {
-        width: 100%;
-        max-width: 600px;
-        border: 2px solid #006a4e;
     }
     .btn-primary:hover {
         transform: scale(1.06);
