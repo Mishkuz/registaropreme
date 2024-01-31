@@ -5,43 +5,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
-    <title>Održavanje</title>
+    <title>Servis</title>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
 <div class="container main-container">
     <div class="row justify-content-center border rounded-2 p-2 bg-white shadow box-area position-relative">
-        <form action="unosZaOdrzavanje">
+        <form action="/unosZaServis">
             <header>
                 <p>LabInventoryApp</p>
             </header>
             <br>
             <div>
-                <h2>Održavanje</h2>
+                <h2>Servis</h2>
             </div>
             <br><br>
             <div class="input-group input-group-dynamic mb-4">
-                <span class="input-group-text" id="basic-addon1">Radnik: </span>
-                <button id="dropdownButton" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown"
+                <span class="input-group-text" id="basic-addon1">Šifra opreme: </span>
+                <button id="dropdownButton4" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown"
                         aria-expanded="false">
-                    Odaberite radnika:
+                    Odaberite šifru opreme:
                 </button>
                 <ul class="dropdown-menu dropdown-menu-dark">
-                    <li><a class="dropdown-item" href="#" onclick="updateSelectedItem('dropdownButton', 'Ivan Ivić')">Ivan Ivić</a></li>
-                    <li><a class="dropdown-item" href="#" onclick="updateSelectedItem('dropdownButton', 'Ivica Zagorac')">Ivica Zagorac</a></li>
-                    <li><a class="dropdown-item" href="#" onclick="updateSelectedItem('dropdownButton', 'Marko Marić')">Marko Marić</a></li>
-                </ul>
-            </div>
-            <div class="input-group input-group-dynamic mb-4">
-                <span class="input-group-text" id="basic-addon1">Oprema: </span>
-                <button id="dropdownButton1" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown"
-                        aria-expanded="false">
-                    Odaberite naziv opreme:
-                </button>
-                <ul class="dropdown-menu dropdown-menu-dark">
-                    <li><a class="dropdown-item" href="#" onclick="updateSelectedItem('dropdownButton1', 'Imunokemijski analizator')">Imunokemijski analizator</a></li>
-                    <li><a class="dropdown-item" href="#" onclick="updateSelectedItem('dropdownButton1', 'Biokemijski analizator')">Biokemijski analizator</a></li>
-                    <li><a class="dropdown-item" href="#" onclick="updateSelectedItem('dropdownButton1', 'Centrifuga Hettich Rotofix 32A')">Centrifuga Hettich Rotofix 32A</a></li>
+                    <li><a class="dropdown-item" href="#" onclick="updateSelectedItem('dropdownButton4', 'AO-13')">AO-13</a></li>
+                    <li><a class="dropdown-item" href="#" onclick="updateSelectedItem('dropdownButton4', 'AO-21')">AO-21</a></li>
+                    <li><a class="dropdown-item" href="#" onclick="updateSelectedItem('dropdownButton4', 'AO-33')">AO-33</a></li>
                 </ul>
             </div>
             <div class="input-group input-group-dynamic mb-4">
@@ -71,6 +59,18 @@
             <div class="input-group input-group-dynamic mb-4">
                 <span class="input-group-text" id="basic-addon1">Opis kvara: </span>
                 <textarea name="opis" id="opisKvara" rows="3" cols="69" maxlength="512"></textarea>
+            </div>
+            <div class="input-group input-group-dynamic mb-4">
+                <span class="input-group-text" id="basic-addon1">Prijavio: </span>
+                <button id="dropdownButton" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                    Odaberite radnika:
+                </button>
+                <ul class="dropdown-menu dropdown-menu-dark">
+                    <li><a class="dropdown-item" href="#" onclick="updateSelectedItem('dropdownButton', 'Ivan Ivić')">Ivan Ivić</a></li>
+                    <li><a class="dropdown-item" href="#" onclick="updateSelectedItem('dropdownButton', 'Ivica Zagorac')">Ivica Zagorac</a></li>
+                    <li><a class="dropdown-item" href="#" onclick="updateSelectedItem('dropdownButton', 'Marko Marić')">Marko Marić</a></li>
+                </ul>
             </div>
             <div class="input-group input-group-dynamic mb-4">
                 <span class="input-group-text" id="basic-addon1">Datum prijave: </span>
