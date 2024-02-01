@@ -25,27 +25,32 @@ import java.util.List;
 
     @Autowired
     OpremaRepository opremaRepository;
+
+
     @GetMapping("/pocetna")
     public String pocetna(Model model) {
         List<Oprema> opremaList = opremaRepository.findAll();
         model.addAttribute("opremaList",opremaList);
         return "pocetna.html";
     }
-@GetMapping("/prijavakvarapocetna")
-    public String prijavikvar() {
-        return "unos_prijave_kvara.html";
-    }
+
+    @GetMapping("/prijavakvarapocetna")
+        public String prijavikvar() {
+            return "unos_prijave_kvara.html";
+        }
 
 
-@GetMapping("/dodajuredaj")
-    public String dodajuredaj() {
-        return "dodajuredaj.html";
-    }
+    @GetMapping("/dodajuredaj")
+        public String dodajuredaj() {
+            return "dodajuredaj.html";
+        }
 
-@GetMapping("/evidencijaodrzavanjapocetna")
-public String evidencijaodrzavanja() {
-        return "evidencijaodrzavanja.html";
-    }
+
+
+    @GetMapping("/evidencijaodrzavanjapocetna")
+    public String evidencijaodrzavanja() {
+            return "evidencijaodrzavanja.html";
+        }
 
 
 

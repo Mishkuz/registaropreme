@@ -1,9 +1,9 @@
-package com.HITA.bazaOpreme.model;
+package com.HITA.bazaOpreme.model.archive;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 
-@Entity
+//@Entity
 @Table(name = "tip_servisa")
 public class TipServisa {
 

@@ -1,16 +1,16 @@
-package com.HITA.bazaOpreme.model;
+package com.HITA.bazaOpreme.model.archive;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 
-@Entity
-@Table(name = "serviser")
-public class Serviser {
+//@Entity
+@Table(name = "proizvodjac")
+public class Proizvodjac {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_serviser")
-    private Long idServiser;
+    @Column(name = "id_proizvodjac")
+    private Long idProizvodjac;
 
     @NotBlank(message = "Šifra ne smije biti prazna")
     @Size(max = 20, message = "Šifra ne smije biti duža od 20 znakova")
@@ -34,8 +34,8 @@ public class Serviser {
     @Column(name = "kontakt_osoba")
     private String kontaktOsoba;
 
-    public Serviser(Long idServiser, String sifra, String naziv, String adresa, String telefon, String email, String kontaktOsoba) {
-        this.idServiser = idServiser;
+    public Proizvodjac(Long idProizvodjac, String sifra, String naziv, String adresa, String telefon, String email, String kontaktOsoba) {
+        this.idProizvodjac = idProizvodjac;
         this.sifra = sifra;
         this.naziv = naziv;
         this.adresa = adresa;
@@ -44,15 +44,15 @@ public class Serviser {
         this.kontaktOsoba = kontaktOsoba;
     }
 
-    public Serviser() {
+    public Proizvodjac() {
     }
 
-    public Long getIdServiser() {
-        return idServiser;
+    public Long getIdProizvodjac() {
+        return idProizvodjac;
     }
 
-    public void setIdServiser(Long idServiser) {
-        this.idServiser = idServiser;
+    public void setIdProizvodjac(Long idProizvodjac) {
+        this.idProizvodjac = idProizvodjac;
     }
 
     public String getSifra() {
