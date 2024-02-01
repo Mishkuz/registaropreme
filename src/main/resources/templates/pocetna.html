@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Pocetna stranica</title>
@@ -69,9 +70,9 @@
                                     <th>Vrsta</th>
                                     <th>Proizvođač</th>
                                     <th>Serijski br.</th>
-                                    <th>Inventurni br.</th>
+                                    <th>Inventarski br.</th>
                                     <th>Vlasnik</th>
-                                    <th>Stanje</th>
+                                    <th>Ispravno</th>
                                     <th>Datum za servis</th>
                                     <th>Servis</th>
                                     <th>Prijavi kvar</th>
@@ -80,180 +81,26 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>VA-10</td>
-                                    <td>Imunokemijski analizator</td>
-                                    <td>Analizatori</td>
-                                    <td>Veliki analizatori</td>
-                                    <td>Abbott Laboratories d.o.o.</td>
-                                    <td>Ai22686</td>
-                                    <td>133DB</td>
-                                    <td>Abbott Laboratories d.o.o.</td>
-                                    <td>Ispravan</td>
-                                    <td>25.01.2024.</td>
+                                <tr th:each="oprema : ${opremaList}">
+                                    <td th:text="${oprema.sifra}"></td>
+                                    <td th:text="${oprema.naziv}"></td>
+                                    <td th:text="${oprema.vrsta.kategorija.kategorija}"></td>
+                                    <td th:text="${oprema.vrsta.vrsta}"></td>
+                                    <td th:text="${oprema.proizvodjac.naziv}"></td>
+                                    <td th:text="${oprema.serijskiBroj}"></td>
+                                    <td th:text="${oprema.InventarskiBroj}"></td>
+                                    <td th:text="${oprema.vlasnik.naziv}"></td>
+                                    <td th:text="${oprema.ispravno ? 'Da' : 'Ne'}"></td>
+                                    <td th:text="${#temporals.format(oprema.datumPlaniranogServisiranja, 'dd-MM-yyyy')}"></td>
                                     <td class="text-center">
-                                    <form action="/servisi?" method="get">
-                                        <button class="btn btn-outline-primary" type="submit">
-                                            <img src="../static/servispocetna.png" class="img-fluid" style="width: 30px; height:25px;" alt="servispocetna">
-                                        </button>
-                                    </form>
-                                    </td>
-                                    <td class="text-center">
-                                        <form action="/prijavakvarapocetna" method="get">
-                                            <button class="btn btn-outline-primary" type="submit">
-                                                <img src="../static/prijavikvar.png" class="img-fluid" style="width: 20px;height:25px;" alt="prijavakvarapocetn">
-                                            </button>
-                                        </form>
-                                    </td>
-                                    <td>
-                                        <button class="btn btn-outline-primary" type="submit">
-                                            <img src="../static/uredipocetna.png" class="img-fluid" style="width: 20px; height:25px;" alt="uredipocetna">
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>AO-11</td>
-                                    <td>Centrifuga Hettich Rotofix 32A</td>
-                                    <td>Analitička oprema</td>
-                                    <td>Centrifuga</td>
-                                    <td>Abbott Laboratories d.o.o.</td>
-                                    <td>0045424-05</td>
-                                    <td>7372002</td>
-                                    <td>Abbott Laboratories d.o.o.</td>
-                                    <td>Ispravan</td>
-                                    <td>21.01.2024.</td>
-                                    <td class="text-center">
-                                        <form action="/servisi?" method="get">
+                                        <form action="/servisi?id=${oprema.idOprema}" method="get">
                                             <button class="btn btn-outline-primary" type="submit">
                                                 <img src="../static/servispocetna.png" class="img-fluid" style="width: 30px; height:25px;" alt="servispocetna">
                                             </button>
                                         </form>
                                     </td>
                                     <td class="text-center">
-                                        <form action="/prijavakvarapocetna" method="get">
-                                            <button class="btn btn-outline-primary" type="submit">
-                                                <img src="../static/prijavikvar.png" class="img-fluid" style="width: 20px;height:25px;" alt="prijavakvarapocetn">
-                                            </button>
-                                        </form>
-                                    </td>
-                                    <td>
-                                        <button class="btn btn-outline-primary" type="submit">
-                                            <img src="../static/uredipocetna.png" class="img-fluid" style="width: 20px; height:25px;" alt="uredipocetna">
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>AO-13</td>
-                                    <td>Centrifuga Hettich Rotofix 32A</td>
-                                    <td>Analitička oprema</td>
-                                    <td>Centrifuga</td>
-                                    <td>Abbott Laboratories d.o.o.</td>
-                                    <td>0045427-0</td>
-                                    <td>7372001</td>
-                                    <td>Abbott Laboratories d.o.o.</td>
-                                    <td>U kvaru</td>
-                                    <td>22.02.2024.</td>
-                                    <td class="text-center">
-                                        <form action="/servisi?" method="get">
-                                            <button class="btn btn-outline-primary" type="submit">
-                                                <img src="../static/servispocetna.png" class="img-fluid" style="width: 30px; height:25px;" alt="servispocetna">
-                                            </button>
-                                        </form>
-                                    </td>
-                                    <td class="text-center">
-                                        <form action="/prijavakvarapocetna" method="get">
-                                            <button class="btn btn-outline-primary" type="submit">
-                                                <img src="../static/prijavikvar.png" class="img-fluid" style="width: 20px;height:25px;" alt="prijavakvarapocetn">
-                                            </button>
-                                        </form>
-                                    </td>
-                                    <td>
-                                        <button class="btn btn-outline-primary" type="submit">
-                                            <img src="../static/uredipocetna.png" class="img-fluid" style="width: 20px; height:25px;" alt="uredipocetna">
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>AO-12</td>
-                                    <td>Centrifuga Hettich Rotofix 32A</td>
-                                    <td>Analitička oprema</td>
-                                    <td>Centrifuga</td>
-                                    <td>Hettich d.o.o.</td>
-                                    <td>/</td>
-                                    <td>6978001</td>
-                                    <td>Hettich d.o.o.</td>
-                                    <td>Ispravan</td>
-                                    <td>25.01.2024.</td>
-                                    <td class="text-center">
-                                        <form action="/servisi?" method="get">
-                                            <button class="btn btn-outline-primary" type="submit">
-                                                <img src="../static/servispocetna.png" class="img-fluid" style="width: 30px; height:25px;" alt="servispocetna">
-                                            </button>
-                                        </form>
-                                    </td>
-                                    <td class="text-center">
-                                        <form action="/prijavakvarapocetna" method="get">
-                                            <button class="btn btn-outline-primary" type="submit">
-                                                <img src="../static/prijavikvar.png" class="img-fluid" style="width: 20px;height:25px;" alt="prijavakvarapocetn">
-                                            </button>
-                                        </form>
-                                    </td>
-                                    <td>
-                                        <button class="btn btn-outline-primary" type="submit">
-                                            <img src="../static/uredipocetna.png" class="img-fluid" style="width: 20px; height:25px;" alt="uredipocetna">
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>AO-16</td>
-                                    <td>Diesse Ves Matic Cube 30</td>
-                                    <td>Biokemijski analizator</td>
-                                    <td>Mali analizator</td>
-                                    <td>Diesse d.o.o.</td>
-                                    <td>RS232C</td>
-                                    <td>2856441</td>
-                                    <td>Diesse d.o.o.</td>
-                                    <td>Ispravan</td>
-                                    <td>25.01.2024.</td>
-                                    <td class="text-center">
-                                        <form action="/servisi?" method="get">
-                                            <button class="btn btn-outline-primary" type="submit">
-                                                <img src="../static/servispocetna.png" class="img-fluid" style="width: 30px; height:25px;" alt="servispocetna">
-                                            </button>
-                                        </form>
-                                    </td>
-                                    <td class="text-center">
-                                        <form action="/prijavakvarapocetna" method="get">
-                                            <button class="btn btn-outline-primary" type="submit">
-                                                <img src="../static/prijavikvar.png" class="img-fluid" style="width: 20px;height:25px;" alt="prijavakvarapocetn">
-                                            </button>
-                                        </form>
-                                    </td>
-                                    <td>
-                                        <button class="btn btn-outline-primary" type="submit">
-                                            <img src="../static/uredipocetna.png" class="img-fluid" style="width: 20px; height:25px;" alt="uredipocetna">
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>VA-10</td>
-                                    <td>Imunokemijski analizator</td>
-                                    <td>Veliki analizatori</td>
-                                    <td>Abbott Laboratories d.o.o.</td>
-                                    <td>Ai22686</td>
-                                    <td>133DB</td>
-                                    <td>RS232C</td>
-                                    <td>Abbott Laboratories d.o.o.</td>
-                                    <td>Ispravan</td>
-                                    <td>25.01.2024.</td>
-                                    <td class="text-center">
-                                        <form action="/servisi?" method="get">
-                                            <button class="btn btn-outline-primary" type="submit">
-                                                <img src="../static/servispocetna.png" class="img-fluid" style="width: 30px; height:25px;" alt="servispocetna">
-                                            </button>
-                                        </form>
-                                    </td>
-                                    <td class="text-center">
-                                        <form action="/prijavakvarapocetna" method="get">
+                                        <form action="/prijavakvarapocetna?id=${oprema.idOprema}" method="get">
                                             <button class="btn btn-outline-primary" type="submit">
                                                 <img src="../static/prijavikvar.png" class="img-fluid" style="width: 20px;height:25px;" alt="prijavakvarapocetn">
                                             </button>
@@ -277,23 +124,12 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-        // Pronađi polje za pretraživanje
         var searchInput = document.getElementById('searchInput');
-
-        // Dodaj događaj 'input' kako biste pratili unos korisnika
         searchInput.addEventListener('input', function () {
-            // Dobavi uneseni tekst
             var searchText = searchInput.value.toLowerCase();
-
-            // Pronađi sve redove u tablici
             var tableRows = document.querySelectorAll('.table tbody tr');
-
-            // Iteriraj kroz svaki red
             tableRows.forEach(function (row) {
-                // Dobavi tekst iz svake ćelije u redu
                 var rowData = row.textContent.toLowerCase();
-
-                // Prikazi ili sakrij red prema podudaranju teksta
                 row.style.display = rowData.includes(searchText) ? 'table-row' : 'none';
             });
         });
