@@ -1,5 +1,7 @@
 package com.HITA.bazaOpreme;
 
+import com.HITA.bazaOpreme.model.Oprema;
+import com.HITA.bazaOpreme.repository.OpremaRepository;
 import jakarta.annotation.PostConstruct;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -20,12 +22,15 @@ import java.util.List;
     public class BazaOpremeApplicationController {
 
 
-@GetMapping("/pocetna")
-    public String pocetna() {
+
+    @Autowired
+    OpremaRepository opremaRepository;
+    @GetMapping("/pocetna")
+    public String pocetna(Model model) {
+        List<Oprema> opremaList = opremaRepository.findAll();
+        model.addAttribute("opremaList",opremaList);
         return "pocetna.html";
     }
-
-
 @GetMapping("/prijavakvarapocetna")
     public String prijavikvar() {
         return "unos_prijave_kvara.html";
