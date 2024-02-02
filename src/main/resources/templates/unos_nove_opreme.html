@@ -12,7 +12,7 @@
 
 <div class="container main-container">
     <div class="row justify-content-center border rounded-2 p-2 bg-white shadow box-area position-relative">
-        <form>
+        <form action="/spremiuredaj" method="post">
             <header>
                 <p>LabInventoryApp</p>
             </header>
@@ -22,23 +22,24 @@
             </div>
             <br><br>
             <div class="input-group input-group-dynamic mb-4">
-                <span class="input-group-text" id="basic-addon1">Šifra: </span>
-                <input type="text" aria-label="Username" aria-describedby="basic-addon1" maxlength="20" size="30" required>
+                <span class="input-group-text" id="basic-addon-sifra">Šifra: </span>
+                <input type="text" name="sifra" id="unos-sifra" aria-label="Šifra" aria-describedby="basic-addon-sifra" maxlength="20" size="30" required>
             </div>
             <div class="input-group input-group-dynamic mb-4">
-                <span class="input-group-text" id="basic-addon1">Naziv: </span>
+                <span class="input-group-text" id="basic-addon-naziv">Naziv: </span>
                 <textarea name="naziv" id="naziv" rows="3" cols="54" maxlength="100" required></textarea>
             </div>
+
             <div class="input-group input-group-dynamic mb-4">
-                <span class="input-group-text" id="basic-addon1">Serijski broj: </span>
-                <input type="text" aria-label="Username" aria-describedby="basic-addon1" maxlength="20" size="30">
+                <span class="input-group-text" id="basic-addon-serijskiBroj">Serijski broj: </span>
+                <input type="text" name="serijskiBroj"aria-label="serijskiBroj" id="unos-serijski" aria-describedby="basic-addon-serijskiBroj" maxlength="20" size="30">
             </div>
             <div class="input-group input-group-dynamic mb-4">
-                <span class="input-group-text" id="basic-addon1">Inventarski broj: </span>
-                <input type="text" aria-label="Username" aria-describedby="basic-addon1" maxlength="20" size="30">
+                <span class="input-group-text" id="basic-addon-inventarskiBroj">Inventarski broj: </span>
+                <input type="text" name="inventarskiBroj" id="inventarskiBroj" aria-label="inverntarskiBroj" aria-describedby="basic-addon1" maxlength="20" size="30">
             </div>
             <div class="input-group input-group-dynamic mb-4">
-                <span class="input-group-text" id="basic-addon1">Kategorija: </span>
+                <span class="input-group-text" id="basic-addon-kategorija">Kategorija: </span>
                 <button id="dropdownButton" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown"
                         aria-expanded="false">
                     Odaberite kategoriju:
@@ -50,7 +51,7 @@
                 </ul>
             </div>
             <div class="input-group input-group-dynamic mb-4">
-                <span class="input-group-text" id="basic-addon1">Vrsta: </span>
+                <span class="input-group-text" id="basic-addon-vrsta">Vrsta: </span>
                 <button id="dropdownButton1" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown"
                         aria-expanded="false">
                     Odaberite vrstu:
@@ -62,7 +63,7 @@
                 </ul>
             </div>
             <div class="input-group input-group-dynamic mb-4">
-                <span class="input-group-text" id="basic-addon1">Proizvođač: </span>
+                <span class="input-group-text" id="basic-addon-proizvodac">Proizvođač: </span>
                 <button id="dropdownButton2" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown"
                         aria-expanded="false">
                     Odaberite proizvođača:
@@ -73,16 +74,17 @@
                 </ul>
             </div>
             <div class="input-group input-group-dynamic mb-4">
-                <span class="input-group-text" id="basic-addon1">Godina proizvodnje: </span>
-                <input type="date" aria-label="Username" aria-describedby="basic-addon1">
+                <span class="input-group-text" id="basic-addon-godinaProizvodnje">Godina proizvodnje: </span>
+                <input type="date" name="godinaProizvodnje" id="godinaProizvodnje" aria-label="godinaProizvodnje" aria-describedby="basic-addon-godinaProizvodnje">
             </div>
             <div class="input-group input-group-dynamic mb-4">
-                <span class="input-group-text" id="basic-addon1">Datum nabave: </span>
-                <input type="date" aria-label="Username" aria-describedby="basic-addon1">
+                <span class="input-group-text" id="basic-addon-datumNabave">Datum nabave: </span>
+                <input type="date" name="datumNabave" id="datumNabave" aria-label="Username" aria-describedby="basic-addon-datumNabave">
             </div>
             <div class="input-group input-group-dynamic mb-4">
-                <span class="input-group-text" id="basic-addon1" style="margin-right: 15px;">Certifikat </span>
+                <span class="input-group-text" id="basic-addon-certifikat" style="margin-right: 15px;">Certifikat </span>
                 <input type="checkbox" id="certifikatid" name="certifikat" style="width:50px; height:40px;">
+                <input type="hidden" name="certifikat" value="false">
             </div>
             <div class="input-group input-group-dynamic mb-4">
                 <span class="input-group-text" id="basic-addon1">Vlasnik: </span>
@@ -97,24 +99,12 @@
                 </ul>
             </div>
             <div class="input-group input-group-dynamic mb-4">
-                <span class="input-group-text" id="basic-addon1">UPS: </span>
-                <button id="dropdownButton4" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown"
-                        aria-expanded="false">
-                    Odaberite:
-                </button>
-                <ul class="dropdown-menu dropdown-menu-dark">
-                    <li><a class="dropdown-item" href="#" onclick="updateSelectedItem('dropdownButton4', 'Ima')">Ima</a></li>
-                    <li><a class="dropdown-item" href="#" onclick="updateSelectedItem('dropdownButton4', 'Nema')">Nema</a></li>
-                    <li><a class="dropdown-item" href="#" onclick="updateSelectedItem('dropdownButton4', 'Ima vlastiti')">Ima vlastiti</a></li>
-                </ul>
+                <span class="input-group-text" id="basic-addon-intervalServisiranjaUMjesecima">Interval servisa (u mj.): </span>
+                <input type="number" name="intervalServisiranjaUMjesecima" id="intervalServisiranjaUMjesecima" aria-label="intervalServisiranjaUMjesecima" aria-describedby="basic-addon-intervalServisiranjaUMjesecima">
             </div>
             <div class="input-group input-group-dynamic mb-4">
-                <span class="input-group-text" id="basic-addon1">Interval servisa (u mj.): </span>
-                <input type="number" aria-label="Username" aria-describedby="basic-addon1">
-            </div>
-            <div class="input-group input-group-dynamic mb-4">
-                <span class="input-group-text" id="basic-addon1">Sljedeći servis: </span>
-                <input type="date" aria-label="Username" aria-describedby="basic-addon1">
+                <span class="input-group-text" id="basic-addon-datumPlaniranogServisiranja">Sljedeći servis: </span>
+                <input type="date" name="datumPlaniranogServisiranja" id="datumPlaniranogServisiranja" aria-label="Username" aria-describedby="basic-addon-datumPlaniranogServisiranja">
             </div>
             <div class="text-center">
                 <button name="button" class="btn btn-primary" type="submit" style="margin-bottom: 5px; margin-top: 20px; margin-right: 10px;">Spremi</button>

@@ -7,5 +7,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface KategorijaRepository extends JpaRepository<Kategorija, Long> {
     // Additional query methods can be defined here
+
+    Kategorija save(Kategorija kategorija);
 }
 
