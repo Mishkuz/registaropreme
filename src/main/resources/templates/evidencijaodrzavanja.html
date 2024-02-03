@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Evidencija održavanja</title>
@@ -42,11 +42,11 @@
                             <thead>
                                 <tr>
                                     <th>Šifra</th>
-                                    <th>Radnik</th>
-                                    <th>Oprema</th>
-                                    <th>Tip servisa</th>
+                                    <th>Naziv opreme</th>
+                                    <th>Prijavio</th>
+                                    <th>Izvanredan</th>
+                                    <th>Umjeravanje</th>
                                     <th>Serviser</th>
-                                    <th>Opis kvara</th>
                                     <th>Datum prijave</th>
                                     <th>Datum otpreme</th>
                                     <th>Datum povrata</th>
@@ -54,6 +54,34 @@
                                     <th>Uredi</th>
                                 </tr>
                             </thead>
+                            <tbody>
+                            <tr th:each="odrzavanje : ${odrzavanjeList}">
+                                <td th:text="${odrzavanje.oprema.sifra}"></td>
+                                <td th:text="${odrzavanje.oprema.naziv}"></td>
+                                <td th:text="${odrzavanje.prijavioRadnik}"></td>
+                                <td th:text="${odrzavanje.izvanredan}"></td>
+                                <td th:text="${odrzavanje.umjeravanje}"></td>
+                                <td th:text="${#temporals.format(odrzavanje.datumPrijave, 'yyyy-MM-dd HH:mm')}"></td>
+                                <td th:text="${odrzavanje.datumPrijave}"></td>
+                                <td th:text="${odrzavanje.datumOtpreme}"></td>
+                                <td th:text="${odrzavanje.datumPovrata}"></td>
+                                <td th:text="${odrzavanje.datumPlaniranogServisiranja}"></td>
+                                <td><a th:href="@{'/editOdrzavanje?id=' + ${odrzavanje.id}}"></a>
+                                    <button class="btn btn-outline-primary" type="submit">
+                                        <img src="../static/uredipocetna.png" class="img-fluid" style="width: 20px; height:25px;" alt="uredipocetna">
+                                    </button>
+                                </td>
+                            </tr>
+                            </tbody>
+
+
+
+
+
+
+
+
+
                             <tbody>
                                 <tr>
                                     <td>Ai22686</td>

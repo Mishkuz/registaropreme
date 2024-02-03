@@ -1,6 +1,8 @@
 package com.HITA.bazaOpreme;
 
+import com.HITA.bazaOpreme.model.Odrzavanje;
 import com.HITA.bazaOpreme.model.Oprema;
+import com.HITA.bazaOpreme.repository.OdrzavanjeRepository;
 import com.HITA.bazaOpreme.repository.OpremaRepository;
 import jakarta.annotation.PostConstruct;
 import jakarta.servlet.http.HttpServletRequest;
@@ -26,6 +28,10 @@ import java.util.List;
     @Autowired
     OpremaRepository opremaRepository;
 
+    @Autowired
+    OdrzavanjeRepository odrzavanjeRepository;
+
+
 
     @GetMapping("/pocetna")
     public String pocetna(Model model) {
@@ -47,10 +53,14 @@ import java.util.List;
 
 
 
-    @GetMapping("/evidencijaodrzavanjapocetna")
-    public String evidencijaodrzavanja() {
-            return "evidencijaodrzavanja.html";
+    @GetMapping("/evidencijaodrzavanja")
+    public String evidencijaodrzavanja(Model model) {
+        /*Oprema servisi = opremaRepository.findById(id).get();*/
+        List<Odrzavanje> odrzavanjeList = odrzavanjeRepository.findAll();
+        model.addAttribute("odrzavanjeList", odrzavanjeList);
+        return "evidencijaodrzavanja.html";
         }
+
 
 
 
