@@ -4,6 +4,7 @@ import com.HITA.bazaOpreme.model.Kategorija;
 import com.HITA.bazaOpreme.model.Oprema;
 import com.HITA.bazaOpreme.model.Tvrtka;
 import com.HITA.bazaOpreme.model.Vrsta;
+import com.HITA.bazaOpreme.model.archive.Proizvodjac;
 import com.HITA.bazaOpreme.repository.KategorijaRepository;
 import com.HITA.bazaOpreme.repository.OpremaRepository;
 import com.HITA.bazaOpreme.repository.TvrtkaRepository;
@@ -55,11 +56,13 @@ import java.util.List;
                                @RequestParam("naziv") String naziv,
                                @RequestParam("serijskiBroj") String serijskiBroj,
                                @RequestParam("inventarskiBroj") String inventarskiBroj,
-                               @RequestParam("kategorija") Long kategorijaId,
-                               @RequestParam("vrsta") Long vrstaId,
+                               @RequestParam("kategorijaId") Long kategorijaId,
+                               @RequestParam("vrstaId") Long vrstaId,
+                               @RequestParam("proizvodjacId") Long proizvodjacId,
                                @RequestParam("godinaProizvodnje") LocalDate godinaProizvodnje,
                                @RequestParam("datumNabave") LocalDate datumNabave,
                                @RequestParam("certifikat") boolean certifikat,
+                               @RequestParam("vlasnikId") Long vlasnikId,
                                @RequestParam("intervalServisiranjaUMjesecima") Integer intervalServisiranjaUMjesecima,
                                @RequestParam("datumPlaniranogServisiranja") LocalDate datumPlaniranogServisiranja,
                                Model model) {
@@ -71,13 +74,14 @@ import java.util.List;
         oprema.setNaziv(naziv);
         oprema.setSerijskiBroj(serijskiBroj);
         oprema.setInventarskiBroj(inventarskiBroj);
-        Kategorija kategorija = kategorijaRepository.findById(kategorijaId).orElse(null);
-        oprema.setKategorija(kategorija);
-        Vrsta vrsta = vrstaRepository.findById(vrstaId).orElse(null);
-        oprema.setVrsta(vrsta);
+        oprema.setKategorija(kategorijaRepository.findById(kategorijaId).orElse(null));
+        oprema.setVrsta(vrstaRepository.findById(vrstaId).orElse(null));
+        oprema.setTvrtkaProizvodjac(tvrtkaRepository.findById(proizvodjacId).orElse(null));
+        oprema.setKategorija(kategorijaRepository.findById(kategorijaId).orElse(null));
         oprema.setGodinaProizvodnje(godinaProizvodnje);
         oprema.setDatumNabave(datumNabave);
         oprema.setCertifikat(certifikat);
+        oprema.setTvrtkaVlasnik(tvrtkaRepository.findById(vlasnikId).orElse(null));
         oprema.setIntervalServisiranjaUMjesecima(intervalServisiranjaUMjesecima);
         oprema.setDatumPlaniranogServisiranja(datumPlaniranogServisiranja);
 

@@ -39,22 +39,22 @@
                 <input type="text" name="inventarskiBroj" id="inventarskiBroj" aria-label="inverntarskiBroj" aria-describedby="basic-addon1" maxlength="20" size="30">
             </div>
             <div class="input-group input-group-dynamic mb-4">
-                <label class="input-group-text" for="kategorija">Kategorija:</label>
-                <select class="form-select" id="kategorija" name="kategorija">
+                <label class="input-group-text" for="kategorijaId">Kategorija:</label>
+                <select class="form-select" id="kategorijaId" name="kategorijaId">
                     <option th:each="kategorija : ${kategorije}" th:value="${kategorija.idKategorija}" th:text="${kategorija.kategorija}"></option>
                 </select>
             </div>
 
             <div class="input-group input-group-dynamic mb-4">
-                <label class="input-group-text" for="vrsta">Vrsta:</label>
-                <select class="form-select" id="vrsta" name="vrsta">
+                <label class="input-group-text" for="vrstaId">Vrsta:</label>
+                <select class="form-select" id="vrstaId" name="vrstaId">
                     <option th:each="vrsta : ${vrste}" th:value="${vrsta.idVrsta}" th:text="${vrsta.vrsta}"></option>
                 </select>
             </div>
             <div class="input-group input-group-dynamic mb-4">
-                <label class="input-group-text" for="proizvodjac">Proizvođač:</label>
-                <select class="form-select" id="proizvodjac" name="proizvodjac">
-                    <option th:each="proizvodjac : ${proizvodjaci}" th:value="${proizvodjac.idProizvodjac}" th:text="${proizvodjac.naziv}"></option>
+                <label class="input-group-text" for="proizvodjacId">Proizvođač:</label>
+                <select class="form-select" id="proizvodjacId" name="proizvodjacId">
+                    <option th:each="proizvodjac : ${proizvodjaci}" th:value="${proizvodjac.id}" th:text="${proizvodjac.naziv}"></option>
                 </select>
             </div>
             <div class="input-group input-group-dynamic mb-4">
@@ -71,9 +71,9 @@
                 <input type="hidden" name="certifikat" value="false">
             </div>
             <div class="input-group input-group-dynamic mb-4">
-                <label class="input-group-text" for="vlasnik">Vlasnik:</label>
-                <select class="form-select" id="vlasnik" name="vlasnik">
-                    <option th:each="vlasnik : ${vlasnici}" th:value="${vlasnik.idProizvodjac}" th:text="${vlasnik.naziv}"></option>
+                <label class="input-group-text" for="vlasnikId">Vlasnik:</label>
+                <select class="form-select" id="vlasnikId" name="vlasnikId">
+                    <option th:each="vlasnik : ${vlasnici}" th:value="${vlasnik.id}" th:text="${vlasnik.naziv}"></option>
                 </select>
             </div>
             <div class="input-group input-group-dynamic mb-4">
@@ -92,13 +92,6 @@
         </form>
     </div>
 </div>
-
-<script>
-    function updateSelectedItem(dropdownId, selectedItem) {
-        var dropdownButton = document.getElementById(dropdownId);
-        dropdownButton.innerHTML = selectedItem + ' <span class="caret"></span>';
-    }
-</script>
 
 <style>
     header {

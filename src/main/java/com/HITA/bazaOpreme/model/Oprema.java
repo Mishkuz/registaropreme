@@ -36,6 +36,7 @@ public class Oprema {
     @ManyToOne
     @JoinColumn(name = "kategorija_id", referencedColumnName = "id_kategorija")
     private Kategorija kategorija;
+
     @ManyToOne
     @JoinColumn(name = "vrsta_id", referencedColumnName = "id_vrsta")
     private Vrsta vrsta;

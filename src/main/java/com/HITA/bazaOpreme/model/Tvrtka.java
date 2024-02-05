@@ -13,7 +13,7 @@ public class Tvrtka {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private Long idProizvodjac;
+    private Long id;
 
     @NotBlank(message = "Šifra ne smije biti prazna")
     @Size(max = 20, message = "Šifra ne smije biti duža od 20 znakova")
@@ -38,12 +38,12 @@ public class Tvrtka {
     private String kontaktOsoba;
 
 
-    public Long getIdProizvodjac() {
-        return idProizvodjac;
+    public Long getId() {
+        return id;
     }
 
-    public void setIdProizvodjac(Long idProizvodjac) {
-        this.idProizvodjac = idProizvodjac;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getSifra() {
