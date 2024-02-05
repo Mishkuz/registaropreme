@@ -44,6 +44,7 @@ import java.util.List;
     @Autowired
     private TvrtkaRepository tvrtkaRepository;
 
+
     @GetMapping("/pocetna")
     public String pocetna(Model model) {
         List<Oprema> opremaList = opremaRepository.findAll();
