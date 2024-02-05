@@ -22,6 +22,7 @@ public class Kategorija {
 
     public Kategorija(Long idKategorija, String sifra, String kategorija) {
         this.idKategorija = idKategorija;
+        this.sifra = sifra;
         this.kategorija = kategorija;
     }
 

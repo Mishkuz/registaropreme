@@ -10,9 +10,6 @@ import lombok.*;
 
 import java.time.LocalDate;
 
-@Data
-@Getter
-@Setter
 @Entity
 @Table(name = "oprema")
 public class Oprema {
@@ -36,6 +33,9 @@ public class Oprema {
     @Size(max = 20, message = "Inventarski broj ne smije biti duži od 20 znakova")
     private String inventarskiBroj;
 
+    @ManyToOne
+    @JoinColumn(name = "kategorija_id", referencedColumnName = "id_kategorija")
+    private Kategorija kategorija;
     @ManyToOne
     @JoinColumn(name = "vrsta_id", referencedColumnName = "id_vrsta")
     private Vrsta vrsta;
@@ -195,6 +195,13 @@ public class Oprema {
 
     public void setDatumOtpisa(LocalDate datumOtpisa) {
         this.datumOtpisa = datumOtpisa;
+    }
+    public Kategorija getKategorija() {
+        return kategorija;
+    }
+
+    public void setKategorija(Kategorija kategorija) {
+        this.kategorija = kategorija;
     }
 }
 

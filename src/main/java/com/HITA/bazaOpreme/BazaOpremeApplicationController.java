@@ -1,7 +1,13 @@
 package com.HITA.bazaOpreme;
 
+import com.HITA.bazaOpreme.model.Kategorija;
 import com.HITA.bazaOpreme.model.Oprema;
+import com.HITA.bazaOpreme.model.Tvrtka;
+import com.HITA.bazaOpreme.model.Vrsta;
+import com.HITA.bazaOpreme.repository.KategorijaRepository;
 import com.HITA.bazaOpreme.repository.OpremaRepository;
+import com.HITA.bazaOpreme.repository.TvrtkaRepository;
+import com.HITA.bazaOpreme.repository.VrstaRepository;
 import jakarta.annotation.PostConstruct;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -29,6 +35,14 @@ import java.util.List;
     @Autowired
     OpremaRepository opremaRepository;
 
+    @Autowired
+    KategorijaRepository kategorijaRepository;
+
+    @Autowired
+    VrstaRepository vrstaRepository;
+    @Autowired
+    private TvrtkaRepository tvrtkaRepository;
+
     @GetMapping("/pocetna")
     public String pocetna(Model model) {
         List<Oprema> opremaList = opremaRepository.findAll();
@@ -41,14 +55,15 @@ import java.util.List;
                                @RequestParam("naziv") String naziv,
                                @RequestParam("serijskiBroj") String serijskiBroj,
                                @RequestParam("inventarskiBroj") String inventarskiBroj,
+                               @RequestParam("kategorija") Long kategorijaId,
+                               @RequestParam("vrsta") Long vrstaId,
                                @RequestParam("godinaProizvodnje") LocalDate godinaProizvodnje,
                                @RequestParam("datumNabave") LocalDate datumNabave,
+                               @RequestParam("certifikat") boolean certifikat,
                                @RequestParam("intervalServisiranjaUMjesecima") Integer intervalServisiranjaUMjesecima,
                                @RequestParam("datumPlaniranogServisiranja") LocalDate datumPlaniranogServisiranja,
-                               @RequestParam("certifikat") boolean certifikat,
-
-
                                Model model) {
+
 
         // Stvaranje instance Oprema objekta
         Oprema oprema = new Oprema();
@@ -56,18 +71,19 @@ import java.util.List;
         oprema.setNaziv(naziv);
         oprema.setSerijskiBroj(serijskiBroj);
         oprema.setInventarskiBroj(inventarskiBroj);
+        Kategorija kategorija = kategorijaRepository.findById(kategorijaId).orElse(null);
+        oprema.setKategorija(kategorija);
+        Vrsta vrsta = vrstaRepository.findById(vrstaId).orElse(null);
+        oprema.setVrsta(vrsta);
         oprema.setGodinaProizvodnje(godinaProizvodnje);
         oprema.setDatumNabave(datumNabave);
+        oprema.setCertifikat(certifikat);
         oprema.setIntervalServisiranjaUMjesecima(intervalServisiranjaUMjesecima);
         oprema.setDatumPlaniranogServisiranja(datumPlaniranogServisiranja);
-        oprema.setCertifikat(certifikat);
 
-        // Postavite ostale atribute prema potrebi
 
-        // Spremanje u bazu podataka
+
         opremaRepository.save(oprema);
-
-        // Redirekcija na početnu stranicu ili drugu stranicu
         return "redirect:/pocetna";
     }
     @GetMapping("/prijavakvarapocetna")
@@ -77,10 +93,20 @@ import java.util.List;
 
 
     @GetMapping("/unosnoveopreme")
-        public String unosnoveopreme() {
-            return "unos_nove_opreme.html";
-        }
+    public String unosnoveopreme(Model model) {
 
+        List<Kategorija> kategorije = kategorijaRepository.findAll();
+        List<Vrsta> vrste = vrstaRepository.findAll();
+        List<Tvrtka> proizvodjaci = tvrtkaRepository.findAll();
+        List<Tvrtka> vlasnici = tvrtkaRepository.findAll();
+
+        model.addAttribute("kategorije", kategorije);
+        model.addAttribute("vrste", vrste);
+        model.addAttribute("proizvodjaci", proizvodjaci);
+        model.addAttribute("vlasnici", vlasnici);
+
+        return "unos_nove_opreme.html";
+    }
 
 
     @GetMapping("/evidencijaodrzavanjapocetna")

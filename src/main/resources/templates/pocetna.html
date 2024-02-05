@@ -84,7 +84,7 @@
                                 <tr th:each="oprema : ${opremaList}">
                                     <td th:text="${oprema.sifra}"></td>
                                     <td th:text="${oprema.naziv}"></td>
-                                    <td th:text="${oprema.vrsta.kategorija.kategorija}"></td>
+                                    <td th:text="${oprema != null ? oprema.kategorija != null ? oprema.kategorija.kategorija : 'N/A' : 'N/A'}"></td>
                                     <td th:text="${oprema.vrsta.vrsta}"></td>
                                     <td th:text="${oprema.proizvodjac.naziv}"></td>
                                     <td th:text="${oprema.serijskiBroj}"></td>

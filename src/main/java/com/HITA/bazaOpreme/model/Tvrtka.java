@@ -6,7 +6,6 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 
-@Data
 @Entity
 @Table(name = "tvrtka")
 public class Tvrtka {
@@ -38,5 +37,61 @@ public class Tvrtka {
     @Column(name = "kontakt_osoba")
     private String kontaktOsoba;
 
+
+    public Long getIdProizvodjac() {
+        return idProizvodjac;
+    }
+
+    public void setIdProizvodjac(Long idProizvodjac) {
+        this.idProizvodjac = idProizvodjac;
+    }
+
+    public String getSifra() {
+        return sifra;
+    }
+
+    public void setSifra(String sifra) {
+        this.sifra = sifra;
+    }
+
+    public String getNaziv() {
+        return naziv;
+    }
+
+    public void setNaziv(String naziv) {
+        this.naziv = naziv;
+    }
+
+    public String getAdresa() {
+        return adresa;
+    }
+
+    public void setAdresa(String adresa) {
+        this.adresa = adresa;
+    }
+
+    public String getTelefon() {
+        return telefon;
+    }
+
+    public void setTelefon(String telefon) {
+        this.telefon = telefon;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getKontaktOsoba() {
+        return kontaktOsoba;
+    }
+
+    public void setKontaktOsoba(String kontaktOsoba) {
+        this.kontaktOsoba = kontaktOsoba;
+    }
 }
 

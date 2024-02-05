@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -39,39 +39,23 @@
                 <input type="text" name="inventarskiBroj" id="inventarskiBroj" aria-label="inverntarskiBroj" aria-describedby="basic-addon1" maxlength="20" size="30">
             </div>
             <div class="input-group input-group-dynamic mb-4">
-                <span class="input-group-text" id="basic-addon-kategorija">Kategorija: </span>
-                <button id="dropdownButton" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown"
-                        aria-expanded="false">
-                    Odaberite kategoriju:
-                </button>
-                <ul class="dropdown-menu dropdown-menu-dark">
-                    <li><a class="dropdown-item" href="#" onclick="updateSelectedItem('dropdownButton', 'Analitička oprema')">Analitička oprema</a></li>
-                    <li><a class="dropdown-item" href="#" onclick="updateSelectedItem('dropdownButton', 'Katalizatori')">Katalizatori</a></li>
-                    <li><a class="dropdown-item" href="#" onclick="updateSelectedItem('dropdownButton', 'Analizatori')">Analizatori</a></li>
-                </ul>
+                <label class="input-group-text" for="kategorija">Kategorija:</label>
+                <select class="form-select" id="kategorija" name="kategorija">
+                    <option th:each="kategorija : ${kategorije}" th:value="${kategorija.idKategorija}" th:text="${kategorija.kategorija}"></option>
+                </select>
+            </div>
+
+            <div class="input-group input-group-dynamic mb-4">
+                <label class="input-group-text" for="vrsta">Vrsta:</label>
+                <select class="form-select" id="vrsta" name="vrsta">
+                    <option th:each="vrsta : ${vrste}" th:value="${vrsta.idVrsta}" th:text="${vrsta.vrsta}"></option>
+                </select>
             </div>
             <div class="input-group input-group-dynamic mb-4">
-                <span class="input-group-text" id="basic-addon-vrsta">Vrsta: </span>
-                <button id="dropdownButton1" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown"
-                        aria-expanded="false">
-                    Odaberite vrstu:
-                </button>
-                <ul class="dropdown-menu dropdown-menu-dark">
-                    <li><a class="dropdown-item" href="#" onclick="updateSelectedItem('dropdownButton1', 'Pipeta')">Pipeta</a></li>
-                    <li><a class="dropdown-item" href="#" onclick="updateSelectedItem('dropdownButton1', 'Toplomjer')">Toplomjer</a></li>
-                    <li><a class="dropdown-item" href="#" onclick="updateSelectedItem('dropdownButton1', 'Mjerka')">Mjerka</a></li>
-                </ul>
-            </div>
-            <div class="input-group input-group-dynamic mb-4">
-                <span class="input-group-text" id="basic-addon-proizvodac">Proizvođač: </span>
-                <button id="dropdownButton2" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown"
-                        aria-expanded="false">
-                    Odaberite proizvođača:
-                </button>
-                <ul class="dropdown-menu dropdown-menu-dark">
-                    <li><a class="dropdown-item" href="#" onclick="updateSelectedItem('dropdownButton2', 'Abbott Laboratories d.o.o.')">Abbott Laboratories d.o.o.</a></li>
-                    <li><a class="dropdown-item" href="#" onclick="updateSelectedItem('dropdownButton2', 'Hettich d.o.o.')">Hettich d.o.o.</a></li>
-                </ul>
+                <label class="input-group-text" for="proizvodjac">Proizvođač:</label>
+                <select class="form-select" id="proizvodjac" name="proizvodjac">
+                    <option th:each="proizvodjac : ${proizvodjaci}" th:value="${proizvodjac.idProizvodjac}" th:text="${proizvodjac.naziv}"></option>
+                </select>
             </div>
             <div class="input-group input-group-dynamic mb-4">
                 <span class="input-group-text" id="basic-addon-godinaProizvodnje">Godina proizvodnje: </span>
@@ -87,16 +71,10 @@
                 <input type="hidden" name="certifikat" value="false">
             </div>
             <div class="input-group input-group-dynamic mb-4">
-                <span class="input-group-text" id="basic-addon1">Vlasnik: </span>
-                <button id="dropdownButton3" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown"
-                        aria-expanded="false">
-                    Odaberite vlasnika:
-                </button>
-                <ul class="dropdown-menu dropdown-menu-dark">
-                    <li><a class="dropdown-item" href="#" onclick="updateSelectedItem('dropdownButton3', 'Abbott Laboratories d.o.o.')">Abbott Laboratories d.o.o.</a></li>
-                    <li><a class="dropdown-item" href="#" onclick="updateSelectedItem('dropdownButton3', 'Hettich d.o.o.')">Hettich d.o.o.</a></li>
-                    <li><a class="dropdown-item" href="#" onclick="updateSelectedItem('dropdownButton3', 'Bolnica')">Bolnica</a></li>
-                </ul>
+                <label class="input-group-text" for="vlasnik">Vlasnik:</label>
+                <select class="form-select" id="vlasnik" name="vlasnik">
+                    <option th:each="vlasnik : ${vlasnici}" th:value="${vlasnik.idProizvodjac}" th:text="${vlasnik.naziv}"></option>
+                </select>
             </div>
             <div class="input-group input-group-dynamic mb-4">
                 <span class="input-group-text" id="basic-addon-intervalServisiranjaUMjesecima">Interval servisa (u mj.): </span>
