@@ -84,13 +84,13 @@
                                 <tr th:each="oprema : ${opremaList}">
                                     <td th:text="${oprema.sifra}"></td>
                                     <td th:text="${oprema.naziv}"></td>
-                                    <td th:text="${oprema.vrsta.kategorija.kategorija}"></td>
-                                    <td th:text="${oprema.vrsta.vrsta}"></td>
-                                    <td th:text="${oprema.proizvodjac.naziv}"></td>
+                                    <td th:text="${oprema.kategorija?.kategorija}"></td>
+                                    <td th:text="${oprema.vrsta?.vrsta}"></td>
+                                    <td th:text="${oprema.tvrtkaProizvodjac?.naziv}"></td>
                                     <td th:text="${oprema.serijskiBroj}"></td>
                                     <td th:text="${oprema.InventarskiBroj}"></td>
-                                    <td th:text="${oprema.vlasnik.naziv}"></td>
-                                    <td th:text="${oprema.ispravno ? 'Da' : 'Ne'}"></td>
+                                    <td th:text="${oprema.tvrtkaVlasnik?.naziv}"></td>
+                                    <td th:text="${oprema.ispravno}"></td>
                                     <td th:text="${#temporals.format(oprema.datumPlaniranogServisiranja, 'dd-MM-yyyy')}"></td>
                                     <td class="text-center">
                                         <form action="/servisi?id=${oprema.idOprema}" method="get">
@@ -140,19 +140,11 @@
 
 
 <style>
-    @media (max-width: 2400px) {
-        .main-container {
-            min-width: 100%;
-            overflow-x: auto;
-        }
-    }
     container {
         margin-top: 3rem;
         padding: 5rem;
-        display: flex;
         justify-content: center;
         align-items: center;
-        min-width: 2400px;
     }
     form {
         background-color: #F1FFFA
