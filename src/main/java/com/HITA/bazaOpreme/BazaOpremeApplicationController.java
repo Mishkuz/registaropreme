@@ -68,7 +68,6 @@ import java.util.List;
                                @RequestParam("datumPlaniranogServisiranja") LocalDate datumPlaniranogServisiranja,
                                Model model) {
 
-
         // Stvaranje instance Oprema objekta
         Oprema oprema = new Oprema();
         oprema.setSifra(sifra);
@@ -96,12 +95,9 @@ import java.util.List;
             return "unos_prijave_kvara.html";
         }
 
+
     @GetMapping("/dodavanjenovoguredaja")
-    public String dodavanjenovoguredaja() {return "unos_nove_opreme.html" ;}
-
-
-    @GetMapping("/unosnoveopreme")
-    public String unosnoveopreme(Model model) {
+    public String dodavanjenovoguredaja(Model model) {
 
         List<Kategorija> kategorije = kategorijaRepository.findAll();
         List<Vrsta> vrste = vrstaRepository.findAll();
@@ -115,7 +111,6 @@ import java.util.List;
 
         return "unos_nove_opreme.html";
     }
-
 
     @GetMapping("/evidencijaodrzavanjapocetna")
     public String evidencijaodrzavanja() {
