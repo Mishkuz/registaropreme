@@ -96,6 +96,9 @@ import java.util.List;
             return "unos_prijave_kvara.html";
         }
 
+    @GetMapping("/dodavanjenovoguredaja")
+    public String dodavanjenovoguredaja() {return "unos_nove_opreme.html" ;}
+
 
     @GetMapping("/unosnoveopreme")
     public String unosnoveopreme(Model model) {

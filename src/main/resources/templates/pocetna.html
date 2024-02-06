@@ -11,13 +11,13 @@
 <div class="container main-container">
     <div class="row justify-content-center border rounded-2 p-2 bg-white shadow box-area position-relative">
         <form>
-            <div class="col-md-12">
+            <div>
                 <header>
                     <p>LabInventoryApp</p>
                 </header>
                 <br>
 
-                <div class="col-md-12 text-left">
+                <div class="text-left">
                     <h3>Opća bolnica Zabok</h3>
                 </div>
 
@@ -26,26 +26,26 @@
                     position: absolute; top:7%; right: 47%; border-radius: 50%;"><img>
                 </div>
 
-                <div class="col-md-12 text-left">
+                <div class="text-left">
                     <h3>Medicinsko biokemijski laboratorij</h3>
                 </div>
                 <br>
                 <br>
                 <br>
                 <br>
-                <div class="col-md-12 text-center">
+                <div class="text-center">
                     <h2>Oprema</h2>
                 </div>
 
                 <form action="/evidencijaodrzavanjapocetna" method="get">
                     <button name="button" class="btn btn-primary" type="submit" style="margin-bottom: 5px;">Pregled servisa</button>
                 </form>
-                <form action="/dodajuredaj" method="get">
+                <form action="/dodavanjenovoguredaja" method="get">
                     <button name="button" class="btn btn-primary" type="submit">Dodaj novu opremu</button>
                 </form>
 
-                <div class="container mt-2 p-4 d-flex justify-content-center align-items-center">
-                    <div class="col-md-8">
+                <div class="container d-flex justify-content-center align-items-center">
+                    <div>
                         <div class="input-group input-group-dynamic mb-4">
                             <input type="text" id="searchInput" style="border-color: #177245;" class="form-control"
                                    placeholder="Unesi naziv opreme" aria-label="nazivopreme" aria-describedby="basic-addon1">
@@ -59,7 +59,6 @@
                     </div>
                 </div>
 
-                <div class="card">
                     <div class="table-responsive">
                         <table class="table align-items-center mb-0 table-striped table-hover">
                             <thead>
@@ -116,8 +115,7 @@
                         </table>
                     </div>
                 </div>
-                <br><br>
-            </div>
+            <br><br>
         </form>
     </div>
 </div>
@@ -145,6 +143,12 @@
         padding: 5rem;
         justify-content: center;
         align-items: center;
+    }
+
+    .main-container {
+        width: 100%; /* Proširuje se na cijelu širinu ekrana */
+        max-width: 1600px; /* Maksimalna širina */
+        margin: 0 auto; /* Centrira main-container */
     }
     form {
         background-color: #F1FFFA
