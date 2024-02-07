@@ -27,36 +27,36 @@ public class BazaOpremeApplicationController {
     VrstaRepository vrstaRepository;
     @Autowired
     private TvrtkaRepository tvrtkaRepository;
-    @GetMapping(“/pocetna”)
+    @GetMapping("/pocetna")
     public String pocetna(Model model) {
         List<Oprema> opremaList = opremaRepository.findAll();
-        model.addAttribute(“opremaList”, opremaList);
+        model.addAttribute("opremaList", opremaList);
         model.addAttribute(opremaRepository.findAll());
-        return “pocetna.html”;
+        return "pocetna.html";
     }
-    @GetMapping(“/unos_novog_kvara”)
+    @GetMapping("/unos_novog_kvara")
     public String unos_novog_kvara(Model model, Long opremaId) {
         List<Oprema> opremaList = opremaRepository.findAll();
         List<Kvar> kvarList = kvarRepository.findAll();
         model.addAttribute(kvarList);
         model.addAttribute(opremaList);
         model.addAttribute(opremaRepository.findById(opremaId).get());
-        return “unos_novog_kvara.html”;
+        return "unos_novog_kvara.html";
     }
-    @PostMapping(“/spremiuredaj”)
-    public String spremiUredaj(@RequestParam(“sifra”) String sifra,
-                               @RequestParam(“naziv”) String naziv,
-                               @RequestParam(“serijskiBroj”) String serijskiBroj,
-                               @RequestParam(“inventarskiBroj”) String inventarskiBroj,
-                               @RequestParam(“kategorijaId”) Long kategorijaId,
-                               @RequestParam(“vrstaId”) Long vrstaId,
-                               @RequestParam(“proizvodjacId”) Long proizvodjacId,
-                               @RequestParam(“godinaProizvodnje”) LocalDate godinaProizvodnje,
-                               @RequestParam(“datumNabave”) LocalDate datumNabave,
-                               @RequestParam(“certifikat”) boolean certifikat,
-                               @RequestParam(“vlasnikId”) Long vlasnikId,
-                               @RequestParam(“intervalServisiranjaUMjesecima”) Integer intervalServisiranjaUMjesecima,
-                               @RequestParam(“datumPlaniranogServisiranja”) LocalDate datumPlaniranogServisiranja,
+    @PostMapping("/spremiuredaj")
+    public String spremiUredaj(@RequestParam("sifra") String sifra,
+                               @RequestParam("naziv") String naziv,
+                               @RequestParam("serijskiBroj") String serijskiBroj,
+                               @RequestParam("inventarskiBroj") String inventarskiBroj,
+                               @RequestParam("kategorijaId") Long kategorijaId,
+                               @RequestParam("vrstaId") Long vrstaId,
+                               @RequestParam("proizvodjacId") Long proizvodjacId,
+                               @RequestParam("godinaProizvodnje") LocalDate godinaProizvodnje,
+                               @RequestParam("datumNabave") LocalDate datumNabave,
+                               @RequestParam("certifikat") boolean certifikat,
+                               @RequestParam("vlasnikId") Long vlasnikId,
+                               @RequestParam("intervalServisiranjaUMjesecima") Integer intervalServisiranjaUMjesecima,
+                               @RequestParam("datumPlaniranogServisiranja") LocalDate datumPlaniranogServisiranja,
                                Model model) {
         // Stvaranje instance Oprema objekta
         Oprema oprema = new Oprema();
@@ -75,37 +75,37 @@ public class BazaOpremeApplicationController {
         oprema.setIntervalServisiranjaUMjesecima(intervalServisiranjaUMjesecima);
         oprema.setDatumPlaniranogServisiranja(datumPlaniranogServisiranja);
         opremaRepository.save(oprema);
-        return “redirect:/pocetna”;
+        return "redirect:/pocetna";
     }
-    @GetMapping(“/dodavanjenovoguredaja”)
+    @GetMapping("/dodavanjenovoguredaja")
     public String dodavanjenovoguredaja() {
-        return “unos_nove_opreme.html”;
+        return "unos_nove_opreme.html";
     }
-    @GetMapping(“/unosnoveopreme”)
+    @GetMapping("/unosnoveopreme")
     public String unosnoveopreme(Model model) {
         List<Kategorija> kategorije = kategorijaRepository.findAll();
         List<Vrsta> vrste = vrstaRepository.findAll();
         List<Tvrtka> proizvodjaci = tvrtkaRepository.findAll();
         List<Tvrtka> vlasnici = tvrtkaRepository.findAll();
-        model.addAttribute(“kategorije”, kategorije);
-        model.addAttribute(“vrste”, vrste);
-        model.addAttribute(“proizvodjaci”, proizvodjaci);
-        model.addAttribute(“vlasnici”, vlasnici);
-        return “unos_nove_opreme.html”;
+        model.addAttribute("kategorije", kategorije);
+        model.addAttribute("vrste", vrste);
+        model.addAttribute("proizvodjaci", proizvodjaci);
+        model.addAttribute("vlasnici", vlasnici);
+        return "unos_nove_opreme.html";
     }
-    @GetMapping(“/oprema_kvarovi”)
+    @GetMapping("/oprema_kvarovi")
     public String kvarovi(Model model) {
         model.addAttribute(kvarRepository.findAll());
         model.addAttribute(opremaRepository.findAll());
-        return “oprema_kvarovi.html”;
+        return "oprema_kvarovi.html";
     }
-    @GetMapping(“/evidencijaodrzavanja”)
+    @GetMapping("/evidencijaodrzavanja")
     public String evidencijaodrzavanja(Model model) {
         List<Odrzavanje> odrzavanjeList = odrzavanjeRepository.findAll();
-        model.addAttribute(“odrzavanjeList”, odrzavanjeList);
-        return “evidencijaodrzavanja.html”;
+        model.addAttribute("odrzavanjeList", odrzavanjeList);
+        return "evidencijaodrzavanja.html";
     }
-    @GetMapping(“/spremiKvar”)
+    @GetMapping("/spremiKvar")
     public String spremiKvar(//@RequestParam(“sifra”) String sifra,
                              //@RequestParam(“naziv”) String naziv,
                              //@RequestParam(“serijskiBroj”) String serijskiBroj,
@@ -113,9 +113,9 @@ public class BazaOpremeApplicationController {
                              //@RequestParam(“kategorija”) Long kategorijaId,
                              //@RequestParam(“vrsta”) Long vrstaId,
                              //@RequestParam(“oprema”) Long id,
-                             @RequestParam(“prijavioRadnik”) String prijavioRadnik,
-                             @RequestParam(“opisKvara”) String opisKvara,
-                             @RequestParam(“datumPrijave”) String datumPrijave,
+                             @RequestParam("prijavioRadnik") String prijavioRadnik,
+                             @RequestParam("opisKvara") String opisKvara,
+                             @RequestParam("datumPrijave") String datumPrijave,
                              //@RequestParam(“godinaProizvodnje”) LocalDate godinaProizvodnje,
                              // @RequestParam(“datumNabave”) LocalDate datumNabave,
                              //@RequestParam(“certifikat”) boolean certifikat,
@@ -146,11 +146,11 @@ public class BazaOpremeApplicationController {
         //oprema.setIntervalServisiranjaUMjesecima(intervalServisiranjaUMjesecima);
         //oprema.setDatumPlaniranogServisiranja(datumPlaniranogServisiranja);
         kvarRepository.save(kvar);
-        return “redirect:/oprema_kvarovi”;
+        return "redirect:/oprema_kvarovi";
     }
-    @GetMapping(“/pokaziKvarove”)
+    @GetMapping("/pokaziKvarove")
     public String showFailures(Model model) {
         model.addAttribute(kvarRepository.findAll());
-        return “oprema_kvarovi.html”;
+        return "oprema_kvarovi.html";
     }
 }

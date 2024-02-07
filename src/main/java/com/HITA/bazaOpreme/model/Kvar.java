@@ -7,11 +7,11 @@ import java.time.LocalDate;
 import java.util.Date;
 @Data
 @Entity
-@Table(name = “kvar”)
+@Table(name = "kvar")
 public class Kvar {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = “id”)
+    @Column(name = "id")
     private Long id;
     /*  // Assuming the other entities are already annotated with @Entity
       @ManyToOne
@@ -19,16 +19,16 @@ public class Kvar {
       private Radnik radnik;
      */
     @ManyToOne
-    @JoinColumn(name = “oprema_id”, referencedColumnName = “id”)
+    @JoinColumn(name = "oprema_id", referencedColumnName = "id")
     private Oprema oprema;
-    @NotBlank(message = “Ime i prezime radnika”)
-    @Size(max = 100, message = “Ime i prezime trebaju biti 512 znakova”)
+    @NotBlank(message = "Ime i prezime radnika")
+    @Size(max = 100, message = "Ime i prezime trebaju biti 512 znakova")
     private String prijavioRadnik;
-    @NotBlank(message = “Opis kvara ne smije biti prazan”)
-    @Size(max = 512, message = “Opis kvara ne smije biti duži od 512 znakova”)
+    @NotBlank(message = "Opis kvara ne smije biti prazan")
+    @Size(max = 512, message = "Opis kvara ne smije biti duži od 512 znakova")
     private String opisKvara;
     //@NotNull(message = “Datum prijave je obavezan”)
-    @Column(name = “datum_prijave”)
+    @Column(name = "datum_prijave")
     private Date datumPrijave;
     public Kvar(String prijavioRadnik, String opisKvara, Date datumPrijave) {
         this.oprema = oprema;
