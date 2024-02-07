@@ -37,7 +37,7 @@
                                 <td th:text="${kvar.oprema != null ? kvar.oprema.naziv : 'N/A'}"></td>
                                 <td th:text="${kvar.prijavioRadnik}"></td>
                                 <td th:text="${kvar.opisKvara}"></td>
-                                <td th:text="${#dates.format(kvar.datumPrijave, 'yyyy-MM-dd HH:mm')}"></td>
+                                <td th:text="${#dates.format(kvar.datumPrijave, 'dd-MM-yyyy HH:mm')}"></td>
                                 <td><a th:href="@{'/showEditKvar?id='+ ${kvar.id}}"><button class="btn btn-outline-primary" type="submit">
                                     <img src="../static/uredipocetna.png" class="img-fluid" style="width: 20px; height:25px;" alt="uredipocetna">
                                 </button></a>
