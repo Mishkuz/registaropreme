@@ -33,16 +33,16 @@
                             </thead>
                             <tbody>
                             <tr th:each="kvar : ${kvarList}">
-                                <td th:text=""${oprema.sifra}"></td>
-                                <td th:text="${oprema.naziv}"></td>
+                                <td th:text="${oprema != null ? (oprema.id != null ? oprema.sifra : 'N/A') : 'N/A'}"></td>
+                                <td th:text="${oprema != null ? (oprema.id != null ? oprema.naziv : 'N/A') : 'N/A'}"></td>
                                 <td th:text="${kvar.prijavioRadnik}"></td>
                                 <td th:text="${kvar.opisKvara}"></td>
-                                <td th:text="${#temporals.format(kvar.datumPrijave, 'yyyy-MM-dd HH:mm')}"></td>
-                                <td><a th:href="@{'/showEditKvar?id='+ ${kvar.id}}"></a>
+                                <td th:text="${#dates.format(kvar.datumPrijave, 'yyyy-MM-dd HH:mm')}"></td>
+                                <td><a th:href="@{'/showEditKvar?id='+ ${kvar.id}}"><button class="btn btn-outline-primary" type="submit">
+                                    <img src="../static/uredipocetna.png" class="img-fluid" style="width: 20px; height:25px;" alt="uredipocetna">
+                                </button></a>
                                     <!--<td><a th:href="@{'/editKvar?id=' + ${kvar.id}}"></a>-->
-                                    <button class="btn btn-outline-primary" type="submit">
-                                        <img src="../static/uredipocetna.png" class="img-fluid" style="width: 20px; height:25px;" alt="uredipocetna">
-                                    </button>
+
                                 </td>
                             </tr>
                             </tbody>
