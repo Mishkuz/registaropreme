@@ -33,8 +33,8 @@
                             </thead>
                             <tbody>
                             <tr th:each="kvar : ${kvarList}">
-                                <td th:text="${oprema != null ? (oprema.id != null ? oprema.sifra : 'N/A') : 'N/A'}"></td>
-                                <td th:text="${oprema != null ? (oprema.id != null ? oprema.naziv : 'N/A') : 'N/A'}"></td>
+                                <td th:text="${kvar.oprema != null ? kvar.oprema.sifra : 'N/A'}"></td>
+                                <td th:text="${kvar.oprema != null ? kvar.oprema.naziv : 'N/A'}"></td>
                                 <td th:text="${kvar.prijavioRadnik}"></td>
                                 <td th:text="${kvar.opisKvara}"></td>
                                 <td th:text="${#dates.format(kvar.datumPrijave, 'yyyy-MM-dd HH:mm')}"></td>
