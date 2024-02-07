@@ -83,7 +83,7 @@
                             <td th:text="${oprema.InventarskiBroj}"></td>
                             <td th:text="${oprema.tvrtkaVlasnik?.naziv}"></td>
                             <td th:text="${oprema.ispravno}"></td>
-                            <td th:text="${#temporals.format(oprema.datumPlaniranogServisiranja, ‘dd-MM-yyyy’)}"></td>
+                            <td th:text="${#temporals.format(oprema.datumPlaniranogServisiranja, 'dd-MM-yyyy')}"></td>
                             <td class="text-center">
                                 <form action="/formaZaUnosOdrzavanje?id=${oprema.id}" method="get">
                                     <button class="btn btn-outline-primary" type="submit">
