@@ -43,6 +43,15 @@ public class BazaOpremeApplicationController {
         model.addAttribute(opremaRepository.findById(opremaId).get());
         return "unos_novog_kvara.html";
     }
+    @GetMapping("/unos_za_odrzavanje")
+    public String unos_za_odrzavanje(Model model, Long opremaId) {
+        List<Oprema> opremaList = opremaRepository.findAll();
+        List<Odrzavanje> odrzavanjeList = odrzavanjeRepository.findAll();
+        model.addAttribute(odrzavanjeList);
+        model.addAttribute(opremaList);
+        model.addAttribute(opremaRepository.findById(opremaId).get());
+        return "unos_za_odrzavanje.html";
+    }
     @PostMapping("/spremiuredaj")
     public String spremiUredaj(@RequestParam("sifra") String sifra,
                                @RequestParam("naziv") String naziv,
@@ -99,10 +108,17 @@ public class BazaOpremeApplicationController {
         model.addAttribute(opremaRepository.findAll());
         return "oprema_kvarovi.html";
     }
-    @GetMapping("/evidencijaodrzavanja")
+    /*@GetMapping("/evidencijaodrzavanja")
     public String evidencijaodrzavanja(Model model) {
         List<Odrzavanje> odrzavanjeList = odrzavanjeRepository.findAll();
         model.addAttribute("odrzavanjeList", odrzavanjeList);
+        return "evidencijaodrzavanja.html";
+    }*/
+    @GetMapping("/evidencijaodrzavanja")
+    public String evidencijaodrzavanja(Model model, Long opremaId) {
+        model.addAttribute(opremaRepository.findById(opremaId));
+        model.addAttribute(odrzavanjeRepository.findAll());
+
         return "evidencijaodrzavanja.html";
     }
     @GetMapping("/spremiKvar")
@@ -148,9 +164,40 @@ public class BazaOpremeApplicationController {
         kvarRepository.save(kvar);
         return "redirect:/oprema_kvarovi";
     }
+
+    @GetMapping("/spremiOdrzavanje")
+    public String spremiOdrzavanje(
+                    //@RequestParam("serviserId") Long serviserId,
+                    @RequestParam("opremaId") Long opremaId,
+                    @RequestParam("opisOdrzavanja") String opisOdrzavanja,
+                    @RequestParam("prijavioRadnik") String prijavioRadnik,
+                    @RequestParam("izvanredan") boolean izvanredan,
+                    @RequestParam("umjeravanje") boolean umjeravanje,
+                    @RequestParam("datumPrijave") String datumPrijave,
+                    @RequestParam("datumOtpreme") String datumOtpreme,
+                    @RequestParam("datumPovrata") String datumPovrata,
+                             Model model,
+                             HttpServletRequest request
+    ) {
+        HttpSession session = request.getSession();
+        // Stvaranje instance Kvara objekta
+        Odrzavanje odrzavanje = new Odrzavanje(prijavioRadnik, opisOdrzavanja, izvanredan, umjeravanje,
+                null, null, null);
+        odrzavanje.setPrijavioRadnik(prijavioRadnik);
+        odrzavanje.setOpisOdrzavanja(opisOdrzavanja);
+        //odrzavanje.setTvrtkaServiser(tvrtkaRepository.findById(serviserId).orElse(null));
+        odrzavanje.setIzvanredan(izvanredan);
+        odrzavanje.setUmjeravanje(umjeravanje);
+        odrzavanje.setDatumPrijave(new Date());
+        odrzavanje.setDatumOtpreme(new Date());
+        odrzavanje.setDatumPovrata(new Date());
+        odrzavanjeRepository.save(odrzavanje);
+        return "redirect:/evidencijaodrzavanja";
+    }
     @GetMapping("/pokaziKvarove")
     public String showFailures(Model model) {
         model.addAttribute(kvarRepository.findAll());
         return "oprema_kvarovi.html";
     }
+
 }

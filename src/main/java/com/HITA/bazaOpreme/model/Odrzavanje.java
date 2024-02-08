@@ -9,6 +9,7 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 import java.time.LocalDate;
+import java.util.Date;
 
 @Entity
 @Table(name = "odrzavanje")
@@ -49,16 +50,28 @@ public class Odrzavanje {
 
     @NotNull(message = "Datum prijave je obavezan")
     @Column(name = "datum_prijave")
-    private LocalDate datumPrijave;
+    private Date datumPrijave;
 
     @Column(name = "datum_otpreme")
-    private LocalDate datumOtpreme;
+    private Date datumOtpreme;
 
     @Column(name = "datum_povrata")
-    private LocalDate datumPovrata;
+    private Date datumPovrata;
 
-    @Column(name = "datum_planiranog_servisiranja")
-    private LocalDate datumPlaniranogServisiranja;
+
+    public Odrzavanje(String prijavioRadnik, String opisOdrzavanja, boolean izvanredan, boolean umjeravanje,
+                      Date datumPrijave, Date datumOtpreme, Date datumPovrata) {
+        this.prijavioRadnik = prijavioRadnik;
+        this.opisOdrzavanja = opisOdrzavanja;
+        this.izvanredan = izvanredan;
+        this.umjeravanje = umjeravanje;
+        this.datumPrijave = datumPrijave;
+        this.datumOtpreme = datumOtpreme;
+        this.datumPovrata = datumPovrata;
+    }
+
+    public Odrzavanje() {
+    }
 
     public Long getId() {
         return id;
@@ -116,36 +129,29 @@ public class Odrzavanje {
         this.umjeravanje = umjeravanje;
     }
 
-    public LocalDate getDatumPrijave() {
+    public Date getDatumPrijave() {
         return datumPrijave;
     }
 
-    public void setDatumPrijave(LocalDate datumPrijave) {
+    public void setDatumPrijave(Date datumPrijave) {
         this.datumPrijave = datumPrijave;
     }
 
-    public LocalDate getDatumOtpreme() {
+    public Date getDatumOtpreme() {
         return datumOtpreme;
     }
 
-    public void setDatumOtpreme(LocalDate datumOtpreme) {
+    public void setDatumOtpreme(Date datumOtpreme) {
         this.datumOtpreme = datumOtpreme;
     }
 
-    public LocalDate getDatumPovrata() {
+    public Date getDatumPovrata() {
         return datumPovrata;
     }
 
-    public void setDatumPovrata(LocalDate datumPovrata) {
+    public void setDatumPovrata(Date datumPovrata) {
         this.datumPovrata = datumPovrata;
     }
 
-    public LocalDate getDatumPlaniranogServisiranja() {
-        return datumPlaniranogServisiranja;
-    }
-
-    public void setDatumPlaniranogServisiranja(LocalDate datumPlaniranogServisiranja) {
-        this.datumPlaniranogServisiranja = datumPlaniranogServisiranja;
-    }
 }
 

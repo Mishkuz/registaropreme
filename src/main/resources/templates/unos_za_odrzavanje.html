@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
+    <title>Održavanje</title>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+<body>
+<div class="container main-container">
+    <div class="row justify-content-center border rounded-2 p-2 bg-white shadow box-area position-relative">
+        <form action="/spremiOdrzavanje" method="get">
+            <header>
+                <p>LabInventoryApp</p>
+            </header>
+            <br>
+            <div>
+                <h2>Održavanje</h2>
+            </div>
+            <br><br>
+            <div class="input-group input-group-dynamic mb-4">
+                <span class="input-group-text" id="basic-addon-sifra">Šifra opreme: </span>
+                <input type="text" name="sifra" disabled="true" id="sifra" th:value="${oprema.sifra}" aria-label="Šifra" aria-describedby="basic-addon-sifra" maxlength="20" size="30" >
+            </div>
+            <div class="input-group input-group-dynamic mb-4">
+                <span class="input-group-text" id="basic-addon-naziv">Naziv opreme: </span>
+                <input name="naziv" id="naziv"  disabled="true" th:value="${oprema.naziv}" rows="3" cols="54" maxlength="100" required></input>
+            </div>
+            <!--<div class="input-group input-group-dynamic mb-4">
+                <label class="input-group-text" for="serviserId">Serviser:</label>
+                <select class="form-select" id="serviserId" name="serviserId">
+                    <option th:each="serviser : ${serviseri}" th:value="${serviser.id}" th:text="${serviser.naziv}"></option>
+                </select>
+            </div>-->
+            <div class="input-group input-group-dynamic mb-4">
+                <span class="input-group-text" id="basic-addon-opis">Opis održavanja: </span>
+                <textarea name="opisOdrzavanja" id="opisOdrzavanja" rows="3" cols="69" maxlength="512"></textarea>
+            </div>
+            <div class="input-group input-group-dynamic mb-4">
+                <span class="input-group-text" id="basic-addon-radnik">Prijavio: </span>
+                <textarea name="prijavioRadnik" id="prijavioRadnik" rows="3" cols="54" maxlength="100"></textarea>
+            </div>
+            <div class="input-group input-group-dynamic mb-4">
+                <span class="input-group-text" id="basic-addon-izvanredan" style="margin-right: 15px;">Izvanredan servis</span>
+                <input type="checkbox" id="izvanredanid" name="izvanredan" style="width:50px; height:40px;">
+                <input type="hidden" name="izvanredan" value="false">
+            </div>
+            <div class="input-group input-group-dynamic mb-4">
+                <span class="input-group-text" id="basic-addon-umjeravanje" style="margin-right: 15px;">Umjeravanje </span>
+                <input type="checkbox" id="umjeravanjeid" name="umjeravanje" style="width:50px; height:40px;">
+                <input type="hidden" name="umjeravanje" value="false">
+            </div>
+            <div class="input-group input-group-dynamic mb-4">
+                <span class="input-group-text" id="basic-addon-datumPrijave">Datum prijave: </span>
+                <input type="date" name="datumPrijave" id="datumPrijave" aria-label="Username" aria-describedby="basic-addon-datumPrijave">
+            </div>
+            <div class="input-group input-group-dynamic mb-4">
+                <span class="input-group-text" id="basic-addon-datumOtpreme">Datum otpreme: </span>
+                <input type="date" name="datumOtpreme" id="datumOtpreme" aria-label="Username" aria-describedby="basic-addon-datumOtpreme">
+            </div>
+            <div class="input-group input-group-dynamic mb-4">
+                <span class="input-group-text" id="basic-addon-datumPovrata">Datum povrata: </span>
+                <input type="date" name="datumPovrata" id="datumPovrata" aria-label="Username" aria-describedby="basic-addon-datumPovrata">
+            </div>
+            <div class="text-center">
+                <button name="button" class="btn btn-primary" type="submit" style="margin-bottom: 5px; margin-top: 20px; margin-right: 10px;">Spremi</button>
+                <button name="button" class="btn btn-primary" type="submit" style="margin-bottom: 5px; margin-top: 20px;">Zatvori</button>
+            </div>
+            <br>
+        </form>
+    </div>
+</div>
+</body>
+<style>
+    header {
+        background-color: #124559;
+        color: #F0F8FF;
+        font-weight: bold;
+        text-align: left;
+        padding: 5px;
+        height: 30px;
+    }
+    h2 {
+        text-align: center;
+        Color: #006a4e;
+    }
+    body {
+         justify-content: center;
+         align-items: center;
+         height: 100vh;
+         margin: 0;
+    }
+    form {
+     background-color: #F1FFFA;
+    }
+    textarea {
+        border: 2px solid #006a4e;
+    }
+    input {
+        border: 2px solid #006a4e;
+    }
+    .container.main-container {
+        max-width:840px;
+    }
+    .row.justify-content-center {
+        margin-right: auto;
+        margin-left: auto;
+    }
+    .border.rounded-2 {
+        margin-right: auto;
+        margin-left: auto;
+    }
+    .input-group-text {
+        margin-right: 10px;
+        display: inline-block;
+        width: 165px;
+        text-align: right;
+        border: none;
+        background-color: #F1FFFA;
+    }
+    .btn-primary:hover {
+        transform: scale(1.06);
+        transition: transform 0.3s ease;
+        background-color: #006a4e;
+        border-color: #177245;
+    }
+    .btn-primary {
+        background-color: #006a4e;
+        border-color: #177245;
+    }
+    .btn-secondary {
+        background-color: white;
+        border: 2px solid #006a4e;
+        color: #006a4e;
+    }
+</style>
+</html>

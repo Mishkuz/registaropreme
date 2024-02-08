@@ -19,8 +19,8 @@
                 <div class="col-md-12 text-center">
                     <h2>Evidencija održavanja</h2>
                 </div>
-                <form action="/dodajuredajzaodrzavanje" method="get">
-                    <button name="button" class="btn btn-primary" type="submit">Dodaj novi uređaj za održavanje</button>
+                <form action="/pocetna" method="get">
+                    <button name="button" class="btn btn-primary" type="submit">Oprema</button>
                 </form>
                 <div class="container mt-2 p-4 d-flex justify-content-center align-items-center">
                     <div class="col-md-8">
@@ -41,7 +41,7 @@
                         <table class="table align-items-center mb-0 table-striped table-hover">
                             <thead>
                                 <tr>
-                                    <th>Šifra</th>
+                                    <th>Šifra opreme</th>
                                     <th>Naziv opreme</th>
                                     <th>Prijavio</th>
                                     <th>Izvanredan</th>
@@ -56,50 +56,22 @@
                             </thead>
                             <tbody>
                             <tr th:each="odrzavanje : ${odrzavanjeList}">
-                                <td th:text="${odrzavanje.oprema.sifra}"></td>
-                                <td th:text="${odrzavanje.oprema.naziv}"></td>
+                                <td th:text="${oprema.sifra}"></td>
+                                <td th:text="${oprema.naziv}"></td>
                                 <td th:text="${odrzavanje.prijavioRadnik}"></td>
                                 <td th:text="${odrzavanje.izvanredan}"></td>
                                 <td th:text="${odrzavanje.umjeravanje}"></td>
-                                <td th:text="${#temporals.format(odrzavanje.datumPrijave, 'yyyy-MM-dd HH:mm')}"></td>
-                                <td th:text="${odrzavanje.datumPrijave}"></td>
-                                <td th:text="${odrzavanje.datumOtpreme}"></td>
-                                <td th:text="${odrzavanje.datumPovrata}"></td>
-                                <td th:text="${odrzavanje.datumPlaniranogServisiranja}"></td>
+                                <!--<td th:text="${odrzavanje.tvrtkaServiser?.naziv}"></td>-->
+                                <td th:text="${#dates.format(odrzavanje.datumPrijave, 'yyyy-MM-dd')}"></td>
+                                <td th:text="${#dates.format(odrzavanje.datumOtpreme, 'yyyy-MM-dd')}"></td>
+                                <td th:text="${#dates.format(odrzavanje.datumPovrata, 'yyyy-MM-dd')}"></td>
+                                <!--<td th:text="${#temporals.format(oprema.datumPlaniranogServisiranja, ‘dd-MM-yyyy’)}"></td>-->
                                 <td><a th:href="@{'/editOdrzavanje?id=' + ${odrzavanje.id}}"></a>
                                     <button class="btn btn-outline-primary" type="submit">
                                         <img src="../static/uredipocetna.png" class="img-fluid" style="width: 20px; height:25px;" alt="uredipocetna">
                                     </button>
                                 </td>
                             </tr>
-                            </tbody>
-
-
-
-
-
-
-
-
-
-                            <tbody>
-                                <tr>
-                                    <td>Ai22686</td>
-                                    <td>Ivan Zagorac</td>
-                                    <td>Imunokemijski analizator</td>
-                                    <td>Redovni</td>
-                                    <td>Abbott Laboratories d.o.o.</td>
-                                    <td>Pogreške u analizi</td>
-                                    <td>11.12.2021.</td>
-                                    <td>22.12.2021.</td>
-                                    <td>07.01.2022.</td>
-                                    <td>21.08.2022.</td>
-                                    <td>
-                                        <button class="btn btn-outline-primary" type="submit">
-                                            <img src="../static/uredipocetna.png" class="img-fluid" style="width: 20px; height:25px;" alt="uredipocetna">
-                                        </button>
-                                    </td>
-                                </tr>
                             </tbody>
                         </table>
                     </div>
@@ -109,6 +81,19 @@
         </form>
     </div>
 </div>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var searchInput = document.getElementById('searchInput');
+        searchInput.addEventListener('input', function () {
+            var searchText = searchInput.value.toLowerCase();
+            var tableRows = document.querySelectorAll('.table tbody tr');
+            tableRows.forEach(function (row) {
+                var rowData = row.textContent.toLowerCase();
+                row.style.display = rowData.includes(searchText) ? 'table-row' : 'none';
+            });
+        });
+    });
+</script>
 </body>
 <style>
     @media (max-width: 2400px) {

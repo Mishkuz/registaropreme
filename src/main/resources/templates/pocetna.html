@@ -33,7 +33,7 @@
                     <h2>Oprema</h2>
                 </div>
                 <form action="/evidencijaodrzavanja" method="get">
-                    <button name="button" class="btn btn-primary" type="submit" style="margin-bottom: 5px;">Pregled servisa</button>
+                    <button name="button" class="btn btn-primary" type="submit" style="margin-bottom: 5px;">Pregled održavanja</button>
                 </form>
                 <form action="/dodavanjenovoguredaja" method="get">
                     <button name="button" class="btn btn-primary" type="submit">Dodaj novu opremu</button>
@@ -85,19 +85,27 @@
                             <td th:text="${oprema.ispravno}"></td>
                             <td th:text="${#temporals.format(oprema.datumPlaniranogServisiranja, 'dd-MM-yyyy')}"></td>
                             <td class="text-center">
-                                <form action="/formaZaUnosOdrzavanje?id=${oprema.id}" method="get">
+                                <!--<form th:action="@{'/unos_novog_kvara?opremaId=' + ${oprema.id}}" action2= "/unos_novog_kvara?opremaId=${oprema.id}" method="get"> ?id=${oprema.id}"-->
+                                <a th:href="@{'/unos_za_odrzavanje?opremaId=' + ${oprema.id}}">
+                                    <img src="../static/servispocetna.png" class="img-fluid" style="width: 30px; height:25px;" alt="servispocetna">
+                                </a>
+                                <!--</form>-->
+                            </td>
+                            <!-- <td class="text-center">
+                                <form th:href="@{'/formaZaUnosOdrzavanja?opremaId=' + ${oprema.id}}" method="get">
                                     <button class="btn btn-outline-primary" type="submit">
                                         <img src="../static/servispocetna.png" class="img-fluid" style="width: 30px; height:25px;" alt="servispocetna">
                                     </button>
                                 </form>
                             </td>
-                            <td class="text-center">
+                            <td class="text-center">-->
                                 <!--<form th:action="@{'/unos_novog_kvara?opremaId=' + ${oprema.id}}" action2= "/unos_novog_kvara?opremaId=${oprema.id}" method="get"> -->
                                 <!--?id=${oprema.id}"-->
 
                                 <!--<a th:href="@{'/unos_novog_kvara?opremaId=' + ${oprema.id}}">
                                     <img src="../static/prijavikvar.png" class="img-fluid" style="width: 20px;height:25px;" alt="unos_novog_kvara">
                                 </a>-->
+                            <td>
                                 <button class="btn btn-outline-primary" type="submit">
                                     <img src="../static/prijavikvar.png" class="img-fluid" style="width: 20px;height:25px;" alt="unos_novog_kvara">
                                 </button>
