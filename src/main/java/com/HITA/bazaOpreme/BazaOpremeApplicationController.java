@@ -59,6 +59,7 @@ public class BazaOpremeApplicationController {
                                @RequestParam("vlasnikId") Long vlasnikId,
                                @RequestParam("intervalServisiranjaUMjesecima") Integer intervalServisiranjaUMjesecima,
                                @RequestParam("datumPlaniranogServisiranja") LocalDate datumPlaniranogServisiranja,
+                               @RequestParam("ispravno") boolean ispravno,
                                Model model) {
         // Stvaranje instance Oprema objekta
         Oprema oprema = new Oprema();
@@ -73,6 +74,7 @@ public class BazaOpremeApplicationController {
         oprema.setGodinaProizvodnje(godinaProizvodnje);
         oprema.setDatumNabave(datumNabave);
         oprema.setCertifikat(certifikat);
+        oprema.setIspravno(ispravno);
         oprema.setTvrtkaVlasnik(tvrtkaRepository.findById(vlasnikId).orElse(null));
         oprema.setIntervalServisiranjaUMjesecima(intervalServisiranjaUMjesecima);
         oprema.setDatumPlaniranogServisiranja(datumPlaniranogServisiranja);
