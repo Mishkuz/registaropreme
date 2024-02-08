@@ -29,8 +29,8 @@ public class Kvar {
     private String opisKvara;
     //@NotNull(message = “Datum prijave je obavezan”)
     @Column(name = "datum_prijave")
-    private Date datumPrijave;
-    public Kvar(String prijavioRadnik, String opisKvara, Date datumPrijave) {
+    private LocalDate datumPrijave;
+    public Kvar(String prijavioRadnik, String opisKvara, LocalDate datumPrijave) {
         this.oprema = oprema;
         this.prijavioRadnik = prijavioRadnik;
         this.opisKvara = opisKvara;
@@ -62,10 +62,10 @@ public class Kvar {
     public void setOpisKvara(String opisKvara) {
         this.opisKvara = opisKvara;
     }
-    public Date getDatumPrijave() {
+    public LocalDate getDatumPrijave() {
         return datumPrijave;
     }
-    public void setDatumPrijave(Date datumPrijave) {
+    public void setDatumPrijave(LocalDate datumPrijave) {
         this.datumPrijave = datumPrijave;
     }
 }

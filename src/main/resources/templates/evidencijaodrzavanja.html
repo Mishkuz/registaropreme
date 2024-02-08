@@ -12,14 +12,14 @@
     <div class="row justify-content-center border rounded-2 p-2 bg-white shadow box-area position-relative" style="background-color:#F1FFFA;">
             <div class="col-md-12">
                 <header>
-                    LabInventoryApp
+                    Registar opreme
                 </header>
                 <br>
                 <div class="col-md-12 text-center">
                     <h2>Evidencija održavanja</h2>
                 </div>
                 <form action="/pocetna" method="get">
-                    <button name="button" class="btn btn-primary" type="submit">Oprema</button>
+                    <button name="button" class="btn btn-primary" type="submit">Registar opreme</button>
                 </form>
                 <div class="container mt-2 p-4 d-flex justify-content-center align-items-center">
                     <div class="col-md-8">
@@ -56,8 +56,8 @@
                                 <td th:text="${odrzavanje.oprema?.sifra}"></td>
                                 <td th:text="${odrzavanje.oprema?.naziv}"></td>
                                 <td th:text="${odrzavanje.prijavioRadnik}"></td>
-                                <td th:text="${odrzavanje.izvanredan}"></td>
-                                <td th:text="${odrzavanje.umjeravanje}"></td>
+                                <td th:text="${odrzavanje.izvanredan ? 'da' : 'ne'}"></td>
+                                <td th:text="${odrzavanje.umjeravanje ? 'da' : 'ne'}"></td>
                                 <td th:text="${odrzavanje.tvrtkaServiser?.naziv}"></td>
                                 <td th:text="${#dates.format(odrzavanje.datumPrijave, 'dd-MM-yyyy')}"></td>
                                 <td th:text="${#dates.format(odrzavanje.datumOtpreme, 'dd-MM-yyyy')}"></td>

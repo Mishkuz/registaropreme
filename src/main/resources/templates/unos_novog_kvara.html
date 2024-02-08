@@ -11,15 +11,16 @@
 <body>
 <div class="container main-container">
     <div class="row justify-content-center border rounded-2 p-2 bg-white shadow box-area position-relative">
-        <form action="/spremiKvar" method="get">
+        <form action="/spremiKvar" method="post">
             <header>
-                <p>LabInventoryApp</p>
+                <p>Registar opreme</p>
             </header>
             <br>
             <div>
-                <h2>Unos novog kvara</h2>
+                <h2>Prijava kvara</h2>
             </div>
             <br><br>
+            <input type="hidden" name="opremaId" th:value="${oprema.id}" />
             <div class="input-group input-group-dynamic mb-4">
                 <span class="input-group-text" id="basic-addon-sifra">Šifra opreme: </span>
                 <input type="text" name="sifra" disabled="true" id="sifra" th:value="${oprema.sifra}" aria-label="Šifra" aria-describedby="basic-addon-sifra" maxlength="20" size="30" >
@@ -44,7 +45,7 @@
 <div class="text-center">
 
     <form action="/pokaziKvarove" method="get"><button name="button" class="btn btn-primary" type="submit"  style="margin-bottom: 5px; margin-top: 20px; margin-right: 10px;">Spremi</button></form>
-    <button name="button" class="btn btn-primary" type="submit" style="margin-bottom: 5px; margin-top: 20px;">Odustani</button>
+    <a href="/pocetna" class="btn btn-primary" style="margin-bottom: 5px; margin-top: 20px;">Zatvori</a>
 </div>
 <br>
 </form>

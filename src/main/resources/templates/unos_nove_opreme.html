@@ -12,9 +12,9 @@
 
 <div class="container main-container">
     <div class="row justify-content-center border rounded-2 p-2 bg-white shadow box-area position-relative">
-        <form action="/spremiuredaj" method="post">
+        <form id="myForm" action="/spremiuredaj" method="post">
             <header>
-                <p>LabInventoryApp</p>
+                <p>Registar opreme</p>
             </header>
             <br>
             <div>
@@ -84,79 +84,92 @@
                 <input type="date" name="datumPlaniranogServisiranja" id="datumPlaniranogServisiranja" aria-label="Username" aria-describedby="basic-addon-datumPlaniranogServisiranja">
             </div>
             <div class="text-center">
-                <button name="button" class="btn btn-primary" type="submit" style="margin-bottom: 5px; margin-top: 20px; margin-right: 10px;">Spremi</button>
-                <button name="button" class="btn btn-primary" type="submit" style="margin-bottom: 5px; margin-top: 20px;">Zatvori</button>
+                <div class="text-center">
+                    <button name="button" class="btn btn-primary" type="submit" style="margin-bottom: 5px; margin-top: 20px; margin-right: 10px;">Spremi</button>
+                    <a href="/pocetna" class="btn btn-primary" style="margin-bottom: 5px; margin-top: 20px;">Zatvori</a>
+                </div>
             </div>
             <br>
         </form>
     </div>
 </div>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        var closeButton = document.querySelector('button[name="button"][type="submit"][value="Zatvori"]');
+        if (closeButton) {
+            closeButton.addEventListener("click", function (event) {
+                event.preventDefault(); // spriječava slanje obrasca
+                window.location.href = "/pocetna"; // preusmjerava na /pocetna
+            });
+        }
+    });
+</script>
+</body>
 
 <style>
 
 
-      header {
-          background-color: #124559;
-          color: #F0F8FF;
-          font-weight: bold;
-          text-align: left;
-          padding: 5px;
-          height: 30px;
-      }
-      h2 {
-          text-align: center;
-          Color: #006a4e;
-      }
-      body {
-          justify-content: center;
-          align-items: center;
-          height: 100vh;
-          margin: 0;
-      }
-      form {
-          background-color: #F1FFFA;
-          height: 100%;
-      }
-      textarea {
-          border: 2px solid #006a4e;
-      }
-      input {
-          border: 2px solid #006a4e;
-      }
-      .container.main-container {
-          max-width: 840px;
-      }
-      .row.justify-content-center {
-          margin-right: auto;
-          margin-left: auto;
-      }
-      .border.rounded-2 {
-          margin-right: auto;
-          margin-left: auto;
-      }
-      .input-group-text {
-          margin-right: 10px;
-          display: inline-block;
-          width: 165px;
-          text-align: right;
-          border: none;
-          background-color: #F1FFFA;
-      }
-      .btn-primary:hover {
-          transform: scale(1.06);
-          transition: transform 0.3s ease;
-          background-color: #006a4e;
-          border-color: #177245;
-      }
-      .btn-primary {
-          background-color: #006a4e;
-          border-color: #177245;
-      }
-      .btn-secondary {
-          background-color: white;
-          border: 2px solid #006a4e;
-          color: #006a4e;
-      }
+    header {
+        background-color: #124559;
+        color: #F0F8FF;
+        font-weight: bold;
+        text-align: left;
+        padding: 5px;
+        height: 30px;
+    }
+    h2 {
+        text-align: center;
+        Color: #006a4e;
+    }
+    body {
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+    }
+    form {
+        background-color: #F1FFFA;
+        height: 100%;
+    }
+    textarea {
+        border: 2px solid #006a4e;
+    }
+    input {
+        border: 2px solid #006a4e;
+    }
+    .container.main-container {
+        max-width: 840px;
+    }
+    .row.justify-content-center {
+        margin-right: auto;
+        margin-left: auto;
+    }
+    .border.rounded-2 {
+        margin-right: auto;
+        margin-left: auto;
+    }
+    .input-group-text {
+        margin-right: 10px;
+        display: inline-block;
+        width: 165px;
+        text-align: right;
+        border: none;
+        background-color: #F1FFFA;
+    }
+    .btn-primary:hover {
+        transform: scale(1.06);
+        transition: transform 0.3s ease;
+        background-color: #006a4e;
+        border-color: #177245;
+    }
+    .btn-primary {
+        background-color: #006a4e;
+        border-color: #177245;
+    }
+    .btn-secondary {
+        background-color: white;
+        border: 2px solid #006a4e;
+        color: #006a4e;
+    }
 </style>
-</body>
 </html>

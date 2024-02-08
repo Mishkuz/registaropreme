@@ -4,6 +4,7 @@ import com.HITA.bazaOpreme.repository.*;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -98,46 +99,19 @@ public class BazaOpremeApplicationController {
         model.addAttribute(odrzavanjeList);
         return "evidencijaodrzavanja.html";
     }
-    @GetMapping("/spremiKvar")
-    public String spremiKvar(//@RequestParam(“sifra”) String sifra,
-                             //@RequestParam(“naziv”) String naziv,
-                             //@RequestParam(“serijskiBroj”) String serijskiBroj,
-                             //@RequestParam(“inventarskiBroj”) String inventarskiBroj,
-                             //@RequestParam(“kategorija”) Long kategorijaId,
-                             //@RequestParam(“vrsta”) Long vrstaId,
-                             @RequestParam("opremaId") Long opremaId,
+    @PostMapping("/spremiKvar")
+    public String spremiKvar(@RequestParam("opremaId") Long opremaId,
                              @RequestParam("prijavioRadnik") String prijavioRadnik,
                              @RequestParam("opisKvara") String opisKvara,
-                             @RequestParam("datumPrijave") String datumPrijave,
-                             //@RequestParam(“godinaProizvodnje”) LocalDate godinaProizvodnje,
-                             // @RequestParam(“datumNabave”) LocalDate datumNabave,
-                             //@RequestParam(“certifikat”) boolean certifikat,
-                             // @RequestParam(“intervalServisiranjaUMjesecima”) Integer intervalServisiranjaUMjesecima,
-                             // @RequestParam(“datumPlaniranogServisiranja”) LocalDate datumPlaniranogServisiranja,
+                             @RequestParam("datumPrijave") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate datumPrijave,
                              Model model,
                              HttpServletRequest request
     ) {
         HttpSession session = request.getSession();
-        // Stvaranje instance Kvara objekta
         Kvar kvar = new Kvar(prijavioRadnik, opisKvara, null);
         kvar.setPrijavioRadnik(prijavioRadnik);
         kvar.setOpisKvara(opisKvara);
-        //kvar.setDatumPrijave(datumPrijave);
-        kvar.setDatumPrijave(new Date());
-        //Oprema oprema = opremaRepository.findById(id).orElse(null);
-        // oprema.setSifra(sifra);
-        //oprema.setNaziv(naziv);
-        //oprema.setSerijskiBroj(serijskiBroj);
-        // oprema.setInventarskiBroj(inventarskiBroj);
-        // Kategorija kategorija = kategorijaRepository.findById(kategorijaId).orElse(null);
-        // oprema.setKategorija(kategorija);
-        //Vrsta vrsta = vrstaRepository.findById(vrstaId).orElse(null);
-        //oprema.setVrsta(vrsta);
-        // oprema.setGodinaProizvodnje(godinaProizvodnje);
-        //oprema.setDatumNabave(datumNabave);
-        //oprema.setCertifikat(certifikat);
-        //oprema.setIntervalServisiranjaUMjesecima(intervalServisiranjaUMjesecima);
-        //oprema.setDatumPlaniranogServisiranja(datumPlaniranogServisiranja);
+        kvar.setDatumPrijave(datumPrijave);
         kvar.setOprema(opremaRepository.findById(opremaId).get());
         kvarRepository.save(kvar);
         return "redirect:/pokaziKvarove";
