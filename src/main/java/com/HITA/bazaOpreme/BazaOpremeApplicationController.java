@@ -126,7 +126,6 @@ public class BazaOpremeApplicationController {
         model.addAttribute(opremaList);
         model.addAttribute("serviseri", serviseri);
         model.addAttribute(opremaRepository.findById(opremaId).get());
-        //model.addAttribute("tvrtkaId", tvrtkaId);
         return "unos_za_odrzavanje.html";
     }
     @GetMapping("/spremiOdrzavanje")
@@ -138,8 +137,6 @@ public class BazaOpremeApplicationController {
                     @RequestParam("izvanredan") boolean izvanredan,
                     @RequestParam("umjeravanje") boolean umjeravanje,
                     @RequestParam("datumPrijave") String datumPrijave,
-                    @RequestParam("datumOtpreme") String datumOtpreme,
-                    @RequestParam("datumPovrata") String datumPovrata,
                              Model model,
                              HttpServletRequest request
     ) {
@@ -153,8 +150,6 @@ public class BazaOpremeApplicationController {
         odrzavanje.setIzvanredan(izvanredan);
         odrzavanje.setUmjeravanje(umjeravanje);
         odrzavanje.setDatumPrijave(new Date());
-        odrzavanje.setDatumOtpreme(new Date());
-        odrzavanje.setDatumPovrata(new Date());
         odrzavanje.setOprema(opremaRepository.findById(opremaId).get());
         odrzavanjeRepository.save(odrzavanje);
         return "redirect:/evidencijaodrzavanja";

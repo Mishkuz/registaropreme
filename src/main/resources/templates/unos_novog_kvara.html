@@ -30,15 +30,15 @@
                 <input name="naziv" id="naziv"  disabled="true" th:value="${oprema.naziv}" rows="3" cols="54" maxlength="100" required></input>
             </div>
             <div class="input-group input-group-dynamic mb-4">
-                <span class="input-group-text"   >Prijavio radnik: </span>
+                <span class="input-group-text"   >Prijavio: </span>
                 <input type="text" id="prijavioRadnik"  name="prijavioRadnik" aria-label="serijskiBroj" aria-describedby="basic-addon-serijskiBroj" maxlength="20" size="30">
             </div>
             <div class="input-group input-group-dynamic mb-4">
-            <span class="input-group-text" id="basic-addon-opisKvara">Opis kvara: </span>
+            <span class="input-group-text" id="basic-addon-opisKvara">Opis: </span>
             <textarea name="opisKvara"  id="opisKvara" rows="3" cols="54" maxlength="100" required></textarea>
     </div>
     <div class="input-group input-group-dynamic mb-4">
-    <span class="input-group-text" id="basic-addon-datumPrijave">Datum prijave kvara: </span>
+    <span class="input-group-text" id="basic-addon-datumPrijave">Datum: </span>
     <input type="date" name="datumPrijave" id="datumPrijave" aria-label="Datumprijavekvara" aria-describedby="basic-addon-datumPrijave">
 </div>
             <input type="hidden" name="opremaId" th:value="${oprema.id}" />

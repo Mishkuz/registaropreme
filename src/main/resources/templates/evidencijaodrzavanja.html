@@ -47,8 +47,6 @@
                                     <th>Umjeravanje</th>
                                     <th>Serviser</th>
                                     <th>Datum prijave</th>
-                                    <th>Datum otpreme</th>
-                                    <th>Datum povrata</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -56,12 +54,10 @@
                                 <td th:text="${odrzavanje.oprema?.sifra}"></td>
                                 <td th:text="${odrzavanje.oprema?.naziv}"></td>
                                 <td th:text="${odrzavanje.prijavioRadnik}"></td>
-                                <td th:text="${odrzavanje.izvanredan ? 'da' : 'ne'}"></td>
-                                <td th:text="${odrzavanje.umjeravanje ? 'da' : 'ne'}"></td>
+                                <td th:text="${odrzavanje.izvanredan ? 'Da' : 'Ne'}"></td>
+                                <td th:text="${odrzavanje.umjeravanje ? 'Da' : 'Ne'}"></td>
                                 <td th:text="${odrzavanje.tvrtkaServiser?.naziv}"></td>
                                 <td th:text="${#dates.format(odrzavanje.datumPrijave, 'dd-MM-yyyy')}"></td>
-                                <td th:text="${#dates.format(odrzavanje.datumOtpreme, 'dd-MM-yyyy')}"></td>
-                                <td th:text="${#dates.format(odrzavanje.datumPovrata, 'dd-MM-yyyy')}"></td>
                             </tr>
                             </tbody>
                         </table>

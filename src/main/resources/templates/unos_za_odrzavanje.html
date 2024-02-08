@@ -36,41 +36,32 @@
                 </select>
             </div>
             <div class="input-group input-group-dynamic mb-4">
-                <span class="input-group-text" id="basic-addon-opis">Opis održavanja: </span>
+                <span class="input-group-text" id="basic-addon-opis">Opis: </span>
                 <textarea name="opisOdrzavanja" id="opisOdrzavanja" rows="3" cols="69" maxlength="512"></textarea>
             </div>
             <div class="input-group input-group-dynamic mb-4">
                 <span class="input-group-text" id="basic-addon-radnik">Prijavio: </span>
-                <textarea name="prijavioRadnik" id="prijavioRadnik" rows="3" cols="54" maxlength="100"></textarea>
+                <textarea name="prijavioRadnik" id="prijavioRadnik" rows="1" cols="54" maxlength="50" style="width: 280px;"></textarea>
             </div>
             <div class="input-group input-group-dynamic mb-4">
-                <span class="input-group-text" id="basic-addon-izvanredan" style="margin-right: 15px;">Izvanredan servis</span>
+                <span class="input-group-text" id="basic-addon-izvanredan" style="margin-right: 15px;">Izvanredan servis: </span>
                 <input type="checkbox" id="izvanredanid" name="izvanredan" style="width:50px; height:40px;">
                 <input type="hidden" name="izvanredan" value="false">
             </div>
             <div class="input-group input-group-dynamic mb-4">
-                <span class="input-group-text" id="basic-addon-umjeravanje" style="margin-right: 15px;">Umjeravanje </span>
+                <span class="input-group-text" id="basic-addon-umjeravanje" style="margin-right: 15px;">Umjeravanje: </span>
                 <input type="checkbox" id="umjeravanjeid" name="umjeravanje" style="width:50px; height:40px;">
                 <input type="hidden" name="umjeravanje" value="false">
             </div>
             <div class="input-group input-group-dynamic mb-4">
-                <span class="input-group-text" id="basic-addon-datumPrijave">Datum prijave: </span>
+                <span class="input-group-text" id="basic-addon-datumPrijave">Datum: </span>
                 <input type="date" name="datumPrijave" id="datumPrijave" aria-label="Username" aria-describedby="basic-addon-datumPrijave">
-            </div>
-            <div class="input-group input-group-dynamic mb-4">
-                <span class="input-group-text" id="basic-addon-datumOtpreme">Datum otpreme: </span>
-                <input type="date" name="datumOtpreme" id="datumOtpreme" aria-label="Username" aria-describedby="basic-addon-datumOtpreme">
-            </div>
-            <div class="input-group input-group-dynamic mb-4">
-                <span class="input-group-text" id="basic-addon-datumPovrata">Datum povrata: </span>
-                <input type="date" name="datumPovrata" id="datumPovrata" aria-label="Username" aria-describedby="basic-addon-datumPovrata">
             </div>
             <div class="text-center">
                 <form action="/evidencijaodrzavanja" method="get"><button name="button" class="btn btn-primary" type="submit" style="margin-bottom: 5px; margin-top: 20px; margin-right: 10px;">Spremi</button></form>
                 <a href="/pocetna" class="btn btn-primary" style="margin-bottom: 5px; margin-top: 20px;">Zatvori</a>
             </div>
             <br>
-            <!--<input type="hidden" name="tvrtkaId" th:value="${tvrtka != null ? tvrtka.id : ''}" />-->
         </form>
     </div>
 </div>
