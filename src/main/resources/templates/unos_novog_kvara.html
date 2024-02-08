@@ -40,6 +40,7 @@
     <span class="input-group-text" id="basic-addon-datumPrijave">Datum prijave kvara: </span>
     <input type="date" name="datumPrijave" id="datumPrijave" aria-label="Datumprijavekvara" aria-describedby="basic-addon-datumPrijave">
 </div>
+            <input type="hidden" name="opremaId" th:value="${oprema.id}" />
 <div class="text-center">
     <button name="button" class="btn btn-primary" type="submit"  style="margin-bottom: 5px; margin-top: 20px; margin-right: 10px;">Spremi</button>
     <button name="button" class="btn btn-primary" type="submit" style="margin-bottom: 5px; margin-top: 20px;">Odustani</button>

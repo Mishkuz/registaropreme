@@ -105,7 +105,7 @@ public class BazaOpremeApplicationController {
                              //@RequestParam(“inventarskiBroj”) String inventarskiBroj,
                              //@RequestParam(“kategorija”) Long kategorijaId,
                              //@RequestParam(“vrsta”) Long vrstaId,
-                             //@RequestParam(“oprema”) Long id,
+                             @RequestParam("opremaId") Long opremaId,
                              @RequestParam("prijavioRadnik") String prijavioRadnik,
                              @RequestParam("opisKvara") String opisKvara,
                              @RequestParam("datumPrijave") String datumPrijave,
@@ -138,8 +138,9 @@ public class BazaOpremeApplicationController {
         //oprema.setCertifikat(certifikat);
         //oprema.setIntervalServisiranjaUMjesecima(intervalServisiranjaUMjesecima);
         //oprema.setDatumPlaniranogServisiranja(datumPlaniranogServisiranja);
+        kvar.setOprema(opremaRepository.findById(opremaId).get());
         kvarRepository.save(kvar);
-        return "redirect:/oprema_kvarovi";
+        return "redirect:/pocetna";
     }
 
     @GetMapping("/unos_za_odrzavanje")
