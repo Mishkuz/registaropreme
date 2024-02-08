@@ -9,7 +9,6 @@
 <body>
 <div class="container main-container">
     <div class="row justify-content-center border rounded-2 p-2 bg-white shadow box-area position-relative">
-        <form>
             <div>
                 <header>
                     <p>LabInventoryApp</p>
@@ -38,6 +37,7 @@
                 <form action="/dodavanjenovoguredaja" method="get">
                     <button name="button" class="btn btn-primary" type="submit">Dodaj novu opremu</button>
                 </form>
+                <button th:onclick="window.location.href = '/pokaziKvarove'" class="wrapper">Prikaz kvarova</button>
                 <div class="container d-flex justify-content-center align-items-center">
                     <div>
                         <div class="input-group input-group-dynamic mb-4">
@@ -87,7 +87,7 @@
                             <td class="text-center">
                                 <!--<form th:action="@{'/unos_novog_kvara?opremaId=' + ${oprema.id}}" action2= "/unos_novog_kvara?opremaId=${oprema.id}" method="get"> ?id=${oprema.id}"-->
                                 <a th:href="@{'/unos_za_odrzavanje?opremaId=' + ${oprema.id}}">
-                                    <img src="../static/servispocetna.png" class="img-fluid" style="width: 30px; height:25px;" alt="servispocetna">
+                                    <img  src="../static/servispocetna.png" class="img-fluid img-button" alt="servispocetna">
                                 </a>
                                 <!--</form>-->
                             </td>
@@ -122,7 +122,6 @@
                 </div>
             </div>
             <br><br>
-        </form>
     </div>
 </div>
 <script>
@@ -148,7 +147,7 @@
     }
     .main-container {
         width: 100%; /* Proširuje se na cijelu širinu ekrana */
-        max-width: 1600px; /* Maksimalna širina */
+        max-width: 2400px; /* Maksimalna širina */
         margin: 0 auto; /* Centrira main-container */
     }
     form {
@@ -204,6 +203,16 @@
     }
     .btn-outline-primary {
         border-color: #177245;
+    }
+
+    .img-button {
+        display: inline-block; /* Ensures the container takes up only as much space as the image */
+        border-radius: 5px; /* Adjust the value to change the roundness of the border */
+        height: 40px;
+        overflow: hidden; /* Ensures the image doesn't overflow beyond the rounded border */
+        border: 2px solid #ccc; /* Border color and width */
+        padding: 3px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional: Adds a shadow effect */
     }
 </style>
 </html>

@@ -102,12 +102,7 @@ public class BazaOpremeApplicationController {
         model.addAttribute("vlasnici", vlasnici);
         return "unos_nove_opreme.html";
     }
-    @GetMapping("/oprema_kvarovi")
-    public String kvarovi(Model model) {
-        model.addAttribute(kvarRepository.findAll());
-        model.addAttribute(opremaRepository.findAll());
-        return "oprema_kvarovi.html";
-    }
+
     /*@GetMapping("/evidencijaodrzavanja")
     public String evidencijaodrzavanja(Model model) {
         List<Odrzavanje> odrzavanjeList = odrzavanjeRepository.findAll();
@@ -115,10 +110,9 @@ public class BazaOpremeApplicationController {
         return "evidencijaodrzavanja.html";
     }*/
     @GetMapping("/evidencijaodrzavanja")
-    public String evidencijaodrzavanja(Model model, Long opremaId) {
-        model.addAttribute(opremaRepository.findById(opremaId));
-        model.addAttribute(odrzavanjeRepository.findAll());
-
+    public String evidencijaodrzavanja(Model model) {
+        List<Odrzavanje> odrzavanjeList = odrzavanjeRepository.findAll();
+        model.addAttribute(odrzavanjeList);
         return "evidencijaodrzavanja.html";
     }
     @GetMapping("/spremiKvar")
@@ -196,7 +190,7 @@ public class BazaOpremeApplicationController {
     }
     @GetMapping("/pokaziKvarove")
     public String showFailures(Model model) {
-        model.addAttribute(kvarRepository.findAll());
+        model.addAttribute("kvarList",kvarRepository.findAll());
         return "oprema_kvarovi.html";
     }
 

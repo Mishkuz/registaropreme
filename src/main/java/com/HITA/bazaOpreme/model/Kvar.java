@@ -5,7 +5,7 @@ import jakarta.validation.constraints.Size;
 import lombok.Data;
 import java.time.LocalDate;
 import java.util.Date;
-@Data
+
 @Entity
 @Table(name = "kvar")
 public class Kvar {
