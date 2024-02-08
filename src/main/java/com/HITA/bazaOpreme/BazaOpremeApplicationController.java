@@ -161,7 +161,7 @@ public class BazaOpremeApplicationController {
 
     @GetMapping("/spremiOdrzavanje")
     public String spremiOdrzavanje(
-                    //@RequestParam("serviserId") Long serviserId,
+                    @RequestParam("serviserId") Long serviserId,
                     @RequestParam("opremaId") Long opremaId,
                     @RequestParam("opisOdrzavanja") String opisOdrzavanja,
                     @RequestParam("prijavioRadnik") String prijavioRadnik,
@@ -179,12 +179,13 @@ public class BazaOpremeApplicationController {
                 null, null, null);
         odrzavanje.setPrijavioRadnik(prijavioRadnik);
         odrzavanje.setOpisOdrzavanja(opisOdrzavanja);
-        //odrzavanje.setTvrtkaServiser(tvrtkaRepository.findById(serviserId).orElse(null));
+        odrzavanje.setTvrtkaServiser(tvrtkaRepository.findById(serviserId).orElse(null));
         odrzavanje.setIzvanredan(izvanredan);
         odrzavanje.setUmjeravanje(umjeravanje);
         odrzavanje.setDatumPrijave(new Date());
         odrzavanje.setDatumOtpreme(new Date());
         odrzavanje.setDatumPovrata(new Date());
+        odrzavanje.setOprema(opremaRepository.findById(opremaId).get());
         odrzavanjeRepository.save(odrzavanje);
         return "redirect:/evidencijaodrzavanja";
     }

@@ -56,16 +56,16 @@
                             </thead>
                             <tbody>
                             <tr th:each="odrzavanje : ${odrzavanjeList}">
-                                <td th:text="${oprema.sifra}"></td>
-                                <td th:text="${oprema.naziv}"></td>
+                                <td th:text="${odrzavanje.oprema?.sifra}"></td>
+                                <td th:text="${odrzavanje.oprema?.naziv}"></td>
                                 <td th:text="${odrzavanje.prijavioRadnik}"></td>
                                 <td th:text="${odrzavanje.izvanredan}"></td>
                                 <td th:text="${odrzavanje.umjeravanje}"></td>
-                                <!--<td th:text="${odrzavanje.tvrtkaServiser?.naziv}"></td>-->
-                                <td th:text="${#dates.format(odrzavanje.datumPrijave, 'yyyy-MM-dd')}"></td>
-                                <td th:text="${#dates.format(odrzavanje.datumOtpreme, 'yyyy-MM-dd')}"></td>
-                                <td th:text="${#dates.format(odrzavanje.datumPovrata, 'yyyy-MM-dd')}"></td>
-                                <!--<td th:text="${#temporals.format(oprema.datumPlaniranogServisiranja, ‘dd-MM-yyyy’)}"></td>-->
+                                <td th:text="${odrzavanje.tvrtkaServiser?.naziv}"></td>
+                                <td th:text="${#dates.format(odrzavanje.datumPrijave, 'dd-MM-yyyy')}"></td>
+                                <td th:text="${#dates.format(odrzavanje.datumOtpreme, 'dd-MM-yyyy')}"></td>
+                                <td th:text="${#dates.format(odrzavanje.datumPovrata, 'dd-MM-yyyy')}"></td>
+                                <td th:text="${#dates.format(oprema.datumPlaniranogServisiranja, ‘dd-MM-yyyy’)}"></td>
                                 <td><a th:href="@{'/editOdrzavanje?id=' + ${odrzavanje.id}}"></a>
                                     <button class="btn btn-outline-primary" type="submit">
                                         <img src="../static/uredipocetna.png" class="img-fluid" style="width: 20px; height:25px;" alt="uredipocetna">
