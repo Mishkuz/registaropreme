@@ -30,8 +30,8 @@
                 <input name="naziv" id="naziv"  disabled="true" th:value="${oprema.naziv}" rows="3" cols="54" maxlength="100" required></input>
             </div>
             <div class="input-group input-group-dynamic mb-4">
-                <label class="input-group-text" for="tvrtkaServiserId">Serviser:</label>
-                <select class="form-select" id="tvrtkaServiserId" name="tvrtkaServiserId">
+                <label class="input-group-text" for="tvrtkaId">Serviser:</label>
+                <select class="form-select" id="tvrtkaId" name="tvrtkaId">
                     <option th:each="tvrtka : ${serviseri}" th:value="${tvrtka.id}" th:text="${tvrtka.naziv}"></option>
                 </select>
             </div>
@@ -66,10 +66,11 @@
                 <input type="date" name="datumPovrata" id="datumPovrata" aria-label="Username" aria-describedby="basic-addon-datumPovrata">
             </div>
             <div class="text-center">
-                <button name="button" class="btn btn-primary" type="submit" style="margin-bottom: 5px; margin-top: 20px; margin-right: 10px;">Spremi</button>
+                <form action="/evidencijaodrzavanja" method="get"><button name="button" class="btn btn-primary" type="submit" style="margin-bottom: 5px; margin-top: 20px; margin-right: 10px;">Spremi</button></form>
                 <button name="button" class="btn btn-primary" type="submit" style="margin-bottom: 5px; margin-top: 20px;">Zatvori</button>
             </div>
             <br>
+            <!--<input type="hidden" name="tvrtkaId" th:value="${tvrtka != null ? tvrtka.id : ''}" />-->
         </form>
     </div>
 </div>

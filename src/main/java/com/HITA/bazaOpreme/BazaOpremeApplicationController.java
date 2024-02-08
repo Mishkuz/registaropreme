@@ -140,11 +140,11 @@ public class BazaOpremeApplicationController {
         //oprema.setDatumPlaniranogServisiranja(datumPlaniranogServisiranja);
         kvar.setOprema(opremaRepository.findById(opremaId).get());
         kvarRepository.save(kvar);
-        return "redirect:/pocetna";
+        return "redirect:/pokaziKvarove";
     }
 
     @GetMapping("/unos_za_odrzavanje")
-    public String unos_za_odrzavanje(Model model, Long opremaId) {
+    public String unos_za_odrzavanje( Model model, Long opremaId) {
         List<Oprema> opremaList = opremaRepository.findAll();
         List<Odrzavanje> odrzavanjeList = odrzavanjeRepository.findAll();
         List<Tvrtka> serviseri = tvrtkaRepository.findAll();
@@ -152,11 +152,12 @@ public class BazaOpremeApplicationController {
         model.addAttribute(opremaList);
         model.addAttribute("serviseri", serviseri);
         model.addAttribute(opremaRepository.findById(opremaId).get());
+        //model.addAttribute("tvrtkaId", tvrtkaId);
         return "unos_za_odrzavanje.html";
     }
     @GetMapping("/spremiOdrzavanje")
     public String spremiOdrzavanje(
-                    @RequestParam("serviserId") Long serviserId,
+                    @RequestParam("tvrtkaId") Long tvrtkaId,
                     @RequestParam("opremaId") Long opremaId,
                     @RequestParam("opisOdrzavanja") String opisOdrzavanja,
                     @RequestParam("prijavioRadnik") String prijavioRadnik,
@@ -174,7 +175,7 @@ public class BazaOpremeApplicationController {
                 null, null, null);
         odrzavanje.setPrijavioRadnik(prijavioRadnik);
         odrzavanje.setOpisOdrzavanja(opisOdrzavanja);
-        odrzavanje.setTvrtkaServiser(tvrtkaRepository.findById(serviserId).orElse(null));
+        odrzavanje.setTvrtkaServiser(tvrtkaRepository.findById(tvrtkaId).orElse(null));
         odrzavanje.setIzvanredan(izvanredan);
         odrzavanje.setUmjeravanje(umjeravanje);
         odrzavanje.setDatumPrijave(new Date());
