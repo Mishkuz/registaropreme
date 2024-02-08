@@ -43,15 +43,7 @@ public class BazaOpremeApplicationController {
         model.addAttribute(opremaRepository.findById(opremaId).get());
         return "unos_novog_kvara.html";
     }
-    @GetMapping("/unos_za_odrzavanje")
-    public String unos_za_odrzavanje(Model model, Long opremaId) {
-        List<Oprema> opremaList = opremaRepository.findAll();
-        List<Odrzavanje> odrzavanjeList = odrzavanjeRepository.findAll();
-        model.addAttribute(odrzavanjeList);
-        model.addAttribute(opremaList);
-        model.addAttribute(opremaRepository.findById(opremaId).get());
-        return "unos_za_odrzavanje.html";
-    }
+
     @PostMapping("/spremiuredaj")
     public String spremiUredaj(@RequestParam("sifra") String sifra,
                                @RequestParam("naziv") String naziv,
@@ -86,10 +78,7 @@ public class BazaOpremeApplicationController {
         opremaRepository.save(oprema);
         return "redirect:/pocetna";
     }
-    @GetMapping("/dodavanjenovoguredaja")
-    public String dodavanjenovoguredaja() {
-        return "unos_nove_opreme.html";
-    }
+
     @GetMapping("/unosnoveopreme")
     public String unosnoveopreme(Model model) {
         List<Kategorija> kategorije = kategorijaRepository.findAll();
@@ -103,12 +92,6 @@ public class BazaOpremeApplicationController {
         return "unos_nove_opreme.html";
     }
 
-    /*@GetMapping("/evidencijaodrzavanja")
-    public String evidencijaodrzavanja(Model model) {
-        List<Odrzavanje> odrzavanjeList = odrzavanjeRepository.findAll();
-        model.addAttribute("odrzavanjeList", odrzavanjeList);
-        return "evidencijaodrzavanja.html";
-    }*/
     @GetMapping("/evidencijaodrzavanja")
     public String evidencijaodrzavanja(Model model) {
         List<Odrzavanje> odrzavanjeList = odrzavanjeRepository.findAll();
@@ -159,6 +142,17 @@ public class BazaOpremeApplicationController {
         return "redirect:/oprema_kvarovi";
     }
 
+    @GetMapping("/unos_za_odrzavanje")
+    public String unos_za_odrzavanje(Model model, Long opremaId) {
+        List<Oprema> opremaList = opremaRepository.findAll();
+        List<Odrzavanje> odrzavanjeList = odrzavanjeRepository.findAll();
+        List<Tvrtka> serviseri = tvrtkaRepository.findAll();
+        model.addAttribute(odrzavanjeList);
+        model.addAttribute(opremaList);
+        model.addAttribute("serviseri", serviseri);
+        model.addAttribute(opremaRepository.findById(opremaId).get());
+        return "unos_za_odrzavanje.html";
+    }
     @GetMapping("/spremiOdrzavanje")
     public String spremiOdrzavanje(
                     @RequestParam("serviserId") Long serviserId,
@@ -174,7 +168,7 @@ public class BazaOpremeApplicationController {
                              HttpServletRequest request
     ) {
         HttpSession session = request.getSession();
-        // Stvaranje instance Kvara objekta
+        // Stvaranje instance održavanja objekta
         Odrzavanje odrzavanje = new Odrzavanje(prijavioRadnik, opisOdrzavanja, izvanredan, umjeravanje,
                 null, null, null);
         odrzavanje.setPrijavioRadnik(prijavioRadnik);

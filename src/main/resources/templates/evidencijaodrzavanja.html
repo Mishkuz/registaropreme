@@ -9,8 +9,7 @@
 <body>
 
 <div class="container main-container">
-    <div class="row justify-content-center border rounded-2 p-2 bg-white shadow box-area position-relative">
-        <form>
+    <div class="row justify-content-center border rounded-2 p-2 bg-white shadow box-area position-relative" style="background-color:#F1FFFA;">
             <div class="col-md-12">
                 <header>
                     LabInventoryApp
@@ -50,8 +49,6 @@
                                     <th>Datum prijave</th>
                                     <th>Datum otpreme</th>
                                     <th>Datum povrata</th>
-                                    <th>Datum plan. servisa</th>
-                                    <th>Uredi</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -65,12 +62,6 @@
                                 <td th:text="${#dates.format(odrzavanje.datumPrijave, 'dd-MM-yyyy')}"></td>
                                 <td th:text="${#dates.format(odrzavanje.datumOtpreme, 'dd-MM-yyyy')}"></td>
                                 <td th:text="${#dates.format(odrzavanje.datumPovrata, 'dd-MM-yyyy')}"></td>
-                                <td th:text="${#dates.format(oprema.datumPlaniranogServisiranja, ‘dd-MM-yyyy’)}"></td>
-                                <td><a th:href="@{'/editOdrzavanje?id=' + ${odrzavanje.id}}"></a>
-                                    <button class="btn btn-outline-primary" type="submit">
-                                        <img src="../static/uredipocetna.png" class="img-fluid" style="width: 20px; height:25px;" alt="uredipocetna">
-                                    </button>
-                                </td>
                             </tr>
                             </tbody>
                         </table>
@@ -78,7 +69,6 @@
                 </div>
                 <br><br>
             </div>
-        </form>
     </div>
 </div>
 <script>
@@ -100,6 +90,7 @@
         .main-container {
             min-width: 100%;
             overflow-x: auto;
+            background-color: #F1FFFA;
         }
     }
     container {
@@ -109,8 +100,6 @@
         justify-content: center;
         align-items: center;
         min-width: 2400px;
-    }
-    form {
         background-color: #F1FFFA;
     }
     .btn-outline-primary:hover {

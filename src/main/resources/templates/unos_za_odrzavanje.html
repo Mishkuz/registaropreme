@@ -29,12 +29,12 @@
                 <span class="input-group-text" id="basic-addon-naziv">Naziv opreme: </span>
                 <input name="naziv" id="naziv"  disabled="true" th:value="${oprema.naziv}" rows="3" cols="54" maxlength="100" required></input>
             </div>
-            <!--<div class="input-group input-group-dynamic mb-4">
-                <label class="input-group-text" for="serviserId">Serviser:</label>
-                <select class="form-select" id="serviserId" name="serviserId">
-                    <option th:each="serviser : ${serviseri}" th:value="${serviser.id}" th:text="${serviser.naziv}"></option>
+            <div class="input-group input-group-dynamic mb-4">
+                <label class="input-group-text" for="tvrtkaServiserId">Serviser:</label>
+                <select class="form-select" id="tvrtkaServiserId" name="tvrtkaServiserId">
+                    <option th:each="tvrtka : ${serviseri}" th:value="${tvrtka.id}" th:text="${tvrtka.naziv}"></option>
                 </select>
-            </div>-->
+            </div>
             <div class="input-group input-group-dynamic mb-4">
                 <span class="input-group-text" id="basic-addon-opis">Opis održavanja: </span>
                 <textarea name="opisOdrzavanja" id="opisOdrzavanja" rows="3" cols="69" maxlength="512"></textarea>

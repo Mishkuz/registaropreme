@@ -9,13 +9,15 @@
 <body>
 <div class="container main-container">
     <div class="row justify-content-center border rounded-2 p-2 bg-white shadow box-area position-relative">
-        <form action="/" method="get">
             <div class="col-md-12">
                 <header>
                     LabInventoryApp
                 </header>
                 <br>
-                <div class="col-md-12 text-center">
+                <form action="/pocetna" method="get">
+                    <button name="button" class="btn btn-primary" type="submit">Oprema</button>
+                </form>
+                <div class="col-md-12 text-center" style="margin-bottom:30px;">
                     <h2>Evidencija kvarova</h2>
                 </div>
                 <div class="card">
@@ -28,7 +30,6 @@
                                 <th>Prijavio</th>
                                 <th>Opis kvara</th>
                                 <th>Datum prijave</th>
-                                <th>Uredi</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -38,12 +39,6 @@
                                 <td th:text="${kvar.prijavioRadnik}"></td>
                                 <td th:text="${kvar.opisKvara}"></td>
                                 <td th:text="${#dates.format(kvar.datumPrijave, 'dd-MM-yyyy HH:mm')}"></td>
-                                <td><a th:href="@{'/showEditKvar?id='+ ${kvar.id}}"><button class="btn btn-outline-primary" type="submit">
-                                    <img src="../static/uredipocetna.png" class="img-fluid" style="width: 20px; height:25px;" alt="uredipocetna">
-                                </button></a>
-                                    <!--<td><a th:href="@{'/editKvar?id=' + ${kvar.id}}"></a>-->
-
-                                </td>
                             </tr>
                             </tbody>
                         </table>
@@ -51,7 +46,6 @@
                 </div>
                 <br><br>
             </div>
-        </form>
     </div>
 </div>
 </body>
@@ -70,9 +64,7 @@
         align-items: center;
         min-width: 2400px;
     }
-    form {
-        background-color: #F1FFFA;
-    }
+
     .btn-outline-primary:hover {
         transform: scale(1.06);
         transition: transform 0.3s ease;

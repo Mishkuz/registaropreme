@@ -29,19 +29,21 @@
                 <br>
                 <br>
                 <div class="text-center">
-                    <h2>Oprema</h2>
+                    <h2>Laboratorijski inventar</h2>
                 </div>
+                <form action="/unosnoveopreme" method="get">
+                    <button name="button" class="btn btn-primary" type="submit" style="margin-bottom: 5px;">Dodaj novu opremu</button>
+                </form>
                 <form action="/evidencijaodrzavanja" method="get">
-                    <button name="button" class="btn btn-primary" type="submit" style="margin-bottom: 5px;">Pregled održavanja</button>
+                    <button name="button" class="btn btn-primary" type="submit" style="margin-bottom: 5px;">Evidencija održavanja</button>
                 </form>
-                <form action="/dodavanjenovoguredaja" method="get">
-                    <button name="button" class="btn btn-primary" type="submit">Dodaj novu opremu</button>
+                <form action="/pokaziKvarove" method="get">
+                    <button name="button" class="btn btn-primary" type="submit" style="margin-bottom: 5px;">Evidencija kvarova</button>
                 </form>
-                <button th:onclick="window.location.href = '/pokaziKvarove'" class="wrapper">Prikaz kvarova</button>
                 <div class="container d-flex justify-content-center align-items-center">
                     <div>
                         <div class="input-group input-group-dynamic mb-4">
-                            <input type="text" id="searchInput" style="border-color: #177245;" class="form-control"
+                            <input type="text" id="searchInput" style="border-color: #177245; width: 500px;" class="form-control"
                                    placeholder="Unesi naziv opreme" aria-label="nazivopreme" aria-describedby="basic-addon1">
                             <span class="input-group-text" id="basic-addon1">
                                 <button name="button" class="btn btn-link" type="submit">
@@ -66,9 +68,8 @@
                             <th>Vlasnik</th>
                             <th>Ispravno</th>
                             <th>Datum za servis</th>
-                            <th>Servis</th>
+                            <th>Održavanje</th>
                             <th>Prijavi kvar</th>
-                            <th>Uredi</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -82,39 +83,17 @@
                             <td th:text="${oprema.serijskiBroj}"></td>
                             <td th:text="${oprema.InventarskiBroj}"></td>
                             <td th:text="${oprema.tvrtkaVlasnik?.naziv}"></td>
-                            <td th:text="${oprema.ispravno}"></td>
+                            <td th:text="${oprema.ispravno != null ? (oprema.ispravno ? 'da' : 'ne') : 'N/A'}"></td>
                             <td th:text="${#temporals.format(oprema.datumPlaniranogServisiranja, 'dd-MM-yyyy')}"></td>
                             <td class="text-center">
-                                <!--<form th:action="@{'/unos_novog_kvara?opremaId=' + ${oprema.id}}" action2= "/unos_novog_kvara?opremaId=${oprema.id}" method="get"> ?id=${oprema.id}"-->
                                 <a th:href="@{'/unos_za_odrzavanje?opremaId=' + ${oprema.id}}">
                                     <img  src="../static/servispocetna.png" class="img-fluid img-button" alt="servispocetna">
                                 </a>
-                                <!--</form>-->
                             </td>
-                            <!-- <td class="text-center">
-                                <form th:href="@{'/formaZaUnosOdrzavanja?opremaId=' + ${oprema.id}}" method="get">
-                                    <button class="btn btn-outline-primary" type="submit">
-                                        <img src="../static/servispocetna.png" class="img-fluid" style="width: 30px; height:25px;" alt="servispocetna">
-                                    </button>
-                                </form>
-                            </td>
-                            <td class="text-center">-->
-                                <!--<form th:action="@{'/unos_novog_kvara?opremaId=' + ${oprema.id}}" action2= "/unos_novog_kvara?opremaId=${oprema.id}" method="get"> -->
-                                <!--?id=${oprema.id}"-->
-
-                                <!--<a th:href="@{'/unos_novog_kvara?opremaId=' + ${oprema.id}}">
-                                    <img src="../static/prijavikvar.png" class="img-fluid" style="width: 20px;height:25px;" alt="unos_novog_kvara">
-                                </a>-->
-                            <td>
-                                <button class="btn btn-outline-primary" type="submit">
-                                    <img src="../static/prijavikvar.png" class="img-fluid" style="width: 20px;height:25px;" alt="unos_novog_kvara">
-                                </button>
-                                <!--</form>-->
-                            </td>
-                            <td>
-                                <button class="btn btn-outline-primary" type="submit">
-                                    <img src="../static/uredipocetna.png" class="img-fluid" style="width: 20px; height:25px;" alt="uredipocetna">
-                                </button>
+                            <td class="text-center">
+                                <a th:href="@{'/unos_novog_kvara?opremaId=' + ${oprema.id}}">
+                                    <img src="../static/prijavikvar.png" class="img-fluid img-button" alt="prijavikvar">
+                                </a>
                             </td>
                         </tr>
                         </tbody>
@@ -149,9 +128,6 @@
         width: 100%; /* Proširuje se na cijelu širinu ekrana */
         max-width: 2400px; /* Maksimalna širina */
         margin: 0 auto; /* Centrira main-container */
-    }
-    form {
-        background-color: #F1FFFA
     }
     .btn-outline-primary:hover {
         transform: scale(1.06);
