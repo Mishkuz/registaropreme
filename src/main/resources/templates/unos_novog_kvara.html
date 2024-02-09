@@ -23,20 +23,20 @@
             <input type="hidden" name="opremaId" th:value="${oprema.id}" />
             <div class="input-group input-group-dynamic mb-4">
                 <span class="input-group-text" id="basic-addon-sifra">Šifra opreme: </span>
-                <input type="text" name="sifra" disabled="true" id="sifra" th:value="${oprema.sifra}" aria-label="Šifra" aria-describedby="basic-addon-sifra" maxlength="20" size="30" >
+                <input type="text" name="sifra" disabled="true" id="sifra" th:value="${oprema.sifra}" aria-label="Šifra" aria-describedby="basic-addon-sifra">
             </div>
             <div class="input-group input-group-dynamic mb-4">
                 <span class="input-group-text" id="basic-addon-naziv">Naziv opreme: </span>
-                <input name="naziv" id="naziv"  disabled="true" th:value="${oprema.naziv}" rows="3" cols="54" maxlength="100" required></input>
+                <input name="naziv" id="naziv"  disabled="true" th:value="${oprema.naziv}" maxlength="100">
             </div>
             <div class="input-group input-group-dynamic mb-4">
                 <span class="input-group-text"   >Prijavio: </span>
-                <input type="text" id="prijavioRadnik"  name="prijavioRadnik" aria-label="serijskiBroj" aria-describedby="basic-addon-serijskiBroj" maxlength="20" size="30">
+                <input type="text" id="prijavioRadnik"  name="prijavioRadnik" aria-label="serijskiBroj" aria-describedby="basic-addon-serijskiBroj" maxlength="69" size="42">
             </div>
             <div class="input-group input-group-dynamic mb-4">
-            <span class="input-group-text" id="basic-addon-opisKvara">Opis: </span>
-            <textarea name="opisKvara"  id="opisKvara" rows="3" cols="54" maxlength="100" required></textarea>
-    </div>
+                <span class="input-group-text" id="basic-addon-opisKvara">Opis: </span>
+                <textarea name="opisKvara"  id="opisKvara" rows="3" cols="69" maxlength="512" required></textarea>
+            </div>
     <div class="input-group input-group-dynamic mb-4">
     <span class="input-group-text" id="basic-addon-datumPrijave">Datum: </span>
     <input type="date" name="datumPrijave" id="datumPrijave" aria-label="Datumprijavekvara" aria-describedby="basic-addon-datumPrijave">

@@ -23,11 +23,11 @@
             <br><br>
             <div class="input-group input-group-dynamic mb-4">
                 <span class="input-group-text" id="basic-addon-sifra">Šifra opreme: </span>
-                <input type="text" name="sifra" disabled="true" id="sifra" th:value="${oprema.sifra}" aria-label="Šifra" aria-describedby="basic-addon-sifra" maxlength="20" size="30" >
+                <input type="text" name="sifra" disabled="true" id="sifra" th:value="${oprema.sifra}" aria-label="Šifra" aria-describedby="basic-addon-sifra">
             </div>
             <div class="input-group input-group-dynamic mb-4">
                 <span class="input-group-text" id="basic-addon-naziv">Naziv opreme: </span>
-                <input name="naziv" id="naziv"  disabled="true" th:value="${oprema.naziv}" rows="3" cols="54" maxlength="100" required></input>
+                <input name="naziv" id="naziv"  disabled="true" th:value="${oprema.naziv}">
             </div>
             <div class="input-group input-group-dynamic mb-4">
                 <label class="input-group-text" for="tvrtkaId">Serviser:</label>
@@ -36,12 +36,12 @@
                 </select>
             </div>
             <div class="input-group input-group-dynamic mb-4">
-                <span class="input-group-text" id="basic-addon-opis">Opis: </span>
-                <textarea name="opisOdrzavanja" id="opisOdrzavanja" rows="3" cols="69" maxlength="512"></textarea>
+                <span class="input-group-text"   >Prijavio: </span>
+                <input type="text" id="prijavioRadnik"  name="prijavioRadnik" aria-label="serijskiBroj" aria-describedby="basic-addon-serijskiBroj" maxlength="69" size="42">
             </div>
             <div class="input-group input-group-dynamic mb-4">
-                <span class="input-group-text" id="basic-addon-radnik">Prijavio: </span>
-                <textarea name="prijavioRadnik" id="prijavioRadnik" rows="1" cols="54" maxlength="50" style="width: 280px;"></textarea>
+                <span class="input-group-text" id="basic-addon-opis">Opis: </span>
+                <textarea name="opisOdrzavanja" id="opisOdrzavanja" rows="3" cols="69" maxlength="512"></textarea>
             </div>
             <div class="input-group input-group-dynamic mb-4">
                 <span class="input-group-text" id="basic-addon-izvanredan" style="margin-right: 15px;">Izvanredan servis: </span>
