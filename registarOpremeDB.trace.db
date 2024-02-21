@@ -1,0 +1,754 @@
+2024-02-20 14:24:40.219448+01:00 jdbc[14]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Column "DATUM_PLANIRANOG_SERVISIRANJA" not found; SQL statement:
+INSERT INTO public.odrzavanje (oprema_id,opis_odrzavanja,datum_otpreme,datum_planiranog_servisiranja,datum_povrata,datum_prijave,izvanredan,prijavio_radnik,umjeravanje,tvrtka_serviser_id,opis_održavanja) VALUES
+	 (3,'Odrađeno umjeravanje',NULL,NULL,NULL,'2023-09-08 23:18:05.912',false,'Jelena Kolarić',true,2,NULL),
+	 (12,'Servis zbog kvara',NULL,NULL,NULL,'2024-11-02 23:20:34.368',true,'Ivan Labaš',false,2,NULL),
+	 (2,'Odrađeno sezonsko umjeravanje',NULL,NULL,NULL,'2023-03-02 23:07:11.424',false,'Ivan Labaš',true,1,NULL),
+	 (5,'Servis zbog kvara',NULL,NULL,NULL,'2023-11-12 23:18:45.266',true,'Jelena Kolarić',false,3,NULL),
+	 (1,'redovni servis',NULL,NULL,NULL,'2024-02-09 10:47:30.503',false,'Ozren Pezo',true,2,NULL) [42122-224]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:514)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
+	at org.h2.message.DbException.get(DbException.java:223)
+	at org.h2.message.DbException.get(DbException.java:199)
+	at org.h2.table.Table.getColumn(Table.java:759)
+	at org.h2.command.Parser.parseColumn(Parser.java:1190)
+	at org.h2.command.Parser.parseColumnList(Parser.java:1175)
+	at org.h2.command.Parser.parseInsert(Parser.java:1549)
+	at org.h2.command.Parser.parsePrepared(Parser.java:719)
+	at org.h2.command.Parser.parse(Parser.java:592)
+	at org.h2.command.Parser.parse(Parser.java:564)
+	at org.h2.command.Parser.prepareCommand(Parser.java:483)
+	at org.h2.engine.SessionLocal.prepareLocal(SessionLocal.java:639)
+	at org.h2.engine.SessionLocal.prepareCommand(SessionLocal.java:559)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1166)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:245)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:231)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1345)
+	at org.h2.server.web.WebApp.query(WebApp.java:1143)
+	at org.h2.server.web.WebApp.query(WebApp.java:1119)
+	at org.h2.server.web.WebApp.process(WebApp.java:245)
+	at org.h2.server.web.WebApp.processRequest(WebApp.java:177)
+	at org.h2.server.web.JakartaWebServlet.doGet(JakartaWebServlet.java:129)
+	at org.h2.server.web.JakartaWebServlet.doPost(JakartaWebServlet.java:166)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:590)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:205)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:340)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:391)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:896)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1744)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-02-20 14:24:40.224448+01:00 jdbc[14]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "INSERT INTO public.oprema (sifra,naziv,serijski_broj,vrsta_id,kategorija_id,certifikat,datum_nabave,datum_otpisa,datum_planiranog_servisiranja,godina_proizvodnje,interval_servisiranja_u_mjesecima,inventarski_broj,ispravno,otpisano,tvrtka_proizvodjac_id,tvrtka_vlasnik_id,[*]) VALUES\000d\000a\0009 ('AO-10','Rotofix 32 A','331942',3,1,true,'2020-06-09','2024-03-07','2024-04-14','2020-01-01',12,'34',true,false,1,1),\000d\000a\0009 ('AO-11','Rotofix 32 A','41201',3,1,true,'2020-08-11','2023-06-07','2024-06-02','2020-01-01',12,'35',true,false,1,1),\000d\000a\0009 ('MP-01','Mikroskop','331942',1,4,true,'2021-07-21','2025-04-12','2024-11-05','2021-01-01',18,'17',true,false,2,2),\000d\000a\0009 ('MP-02','Mikroskop','331942',1,4,true,'2021-09-29','2025-04-12','2024-12-17','2021-01-01',18,'18',true,false,2,2),\000d\000a\0009 (' AU680','Beckman Coulter','92131',5,3,true,'2022-02-27','2024-11-05','2025-03-09','2022-01-01',12,'03',false,false,3,3),\000d\000a\0009 ('12191','DXC 700 AU','97713',5,3,true,'2023-05-16',NULL,'2026-01-05','2022-11-23',12,'31',true,NULL,3,3),\000d\000a\0009 ('34','Mikroskop','M34',1,1,true,'2024-02-09',NULL,'2024-02-09','2024-02-09',12,'34M',true,NULL,2,2)"; expected "identifier"; SQL statement:
+INSERT INTO public.oprema (sifra,naziv,serijski_broj,vrsta_id,kategorija_id,certifikat,datum_nabave,datum_otpisa,datum_planiranog_servisiranja,godina_proizvodnje,interval_servisiranja_u_mjesecima,inventarski_broj,ispravno,otpisano,tvrtka_proizvodjac_id,tvrtka_vlasnik_id,) VALUES
+	 ('AO-10','Rotofix 32 A','331942',3,1,true,'2020-06-09','2024-03-07','2024-04-14','2020-01-01',12,'34',true,false,1,1),
+	 ('AO-11','Rotofix 32 A','41201',3,1,true,'2020-08-11','2023-06-07','2024-06-02','2020-01-01',12,'35',true,false,1,1),
+	 ('MP-01','Mikroskop','331942',1,4,true,'2021-07-21','2025-04-12','2024-11-05','2021-01-01',18,'17',true,false,2,2),
+	 ('MP-02','Mikroskop','331942',1,4,true,'2021-09-29','2025-04-12','2024-12-17','2021-01-01',18,'18',true,false,2,2),
+	 (' AU680','Beckman Coulter','92131',5,3,true,'2022-02-27','2024-11-05','2025-03-09','2022-01-01',12,'03',false,false,3,3),
+	 ('12191','DXC 700 AU','97713',5,3,true,'2023-05-16',NULL,'2026-01-05','2022-11-23',12,'31',true,NULL,3,3),
+	 ('34','Mikroskop','M34',1,1,true,'2024-02-09',NULL,'2024-02-09','2024-02-09',12,'34M',true,NULL,2,2) [42001-224]
+2024-02-20 14:26:41.104575+01:00 jdbc[14]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Column "DATUM_PLANIRANOG_SERVISIRANJA" not found; SQL statement:
+INSERT INTO public.odrzavanje (oprema_id,opis_odrzavanja,datum_otpreme,datum_planiranog_servisiranja,datum_povrata,datum_prijave,izvanredan,prijavio_radnik,umjeravanje,tvrtka_serviser_id,opis_održavanja) VALUES
+	 (3,'Odrađeno umjeravanje',NULL,NULL,NULL,'2023-09-08 23:18:05.912',false,'Jelena Kolarić',true,2,NULL),
+	 (12,'Servis zbog kvara',NULL,NULL,NULL,'2024-11-02 23:20:34.368',true,'Ivan Labaš',false,2,NULL),
+	 (2,'Odrađeno sezonsko umjeravanje',NULL,NULL,NULL,'2023-03-02 23:07:11.424',false,'Ivan Labaš',true,1,NULL),
+	 (5,'Servis zbog kvara',NULL,NULL,NULL,'2023-11-12 23:18:45.266',true,'Jelena Kolarić',false,3,NULL),
+	 (1,'redovni servis',NULL,NULL,NULL,'2024-02-09 10:47:30.503',false,'Ozren Pezo',true,2,NULL) [42122-224]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:514)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
+	at org.h2.message.DbException.get(DbException.java:223)
+	at org.h2.message.DbException.get(DbException.java:199)
+	at org.h2.table.Table.getColumn(Table.java:759)
+	at org.h2.command.Parser.parseColumn(Parser.java:1190)
+	at org.h2.command.Parser.parseColumnList(Parser.java:1175)
+	at org.h2.command.Parser.parseInsert(Parser.java:1549)
+	at org.h2.command.Parser.parsePrepared(Parser.java:719)
+	at org.h2.command.Parser.parse(Parser.java:592)
+	at org.h2.command.Parser.parse(Parser.java:564)
+	at org.h2.command.Parser.prepareCommand(Parser.java:483)
+	at org.h2.engine.SessionLocal.prepareLocal(SessionLocal.java:639)
+	at org.h2.engine.SessionLocal.prepareCommand(SessionLocal.java:559)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1166)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:245)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:231)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1345)
+	at org.h2.server.web.WebApp.query(WebApp.java:1143)
+	at org.h2.server.web.WebApp.query(WebApp.java:1119)
+	at org.h2.server.web.WebApp.process(WebApp.java:245)
+	at org.h2.server.web.WebApp.processRequest(WebApp.java:177)
+	at org.h2.server.web.JakartaWebServlet.doGet(JakartaWebServlet.java:129)
+	at org.h2.server.web.JakartaWebServlet.doPost(JakartaWebServlet.java:166)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:590)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:205)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:340)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:391)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:896)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1744)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-02-20 14:26:41.108579+01:00 jdbc[14]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "INSERT INTO public.oprema (sifra,naziv,serijski_broj,vrsta_id,kategorija_id,certifikat,datum_nabave,datum_otpisa,datum_planiranog_servisiranja,godina_proizvodnje,interval_servisiranja_u_mjesecima,inventarski_broj,ispravno,otpisano,tvrtka_proizvodjac_id,tvrtka_vlasnik_id,[*]) VALUES\000d\000a\0009 ('AO-10','Rotofix 32 A','331942',3,1,true,'2020-06-09','2024-03-07','2024-04-14','2020-01-01',12,'34',true,false,1,1),\000d\000a\0009 ('AO-11','Rotofix 32 A','41201',3,1,true,'2020-08-11','2023-06-07','2024-06-02','2020-01-01',12,'35',true,false,1,1),\000d\000a\0009 ('MP-01','Mikroskop','331942',1,4,true,'2021-07-21','2025-04-12','2024-11-05','2021-01-01',18,'17',true,false,2,2),\000d\000a\0009 ('MP-02','Mikroskop','331942',1,4,true,'2021-09-29','2025-04-12','2024-12-17','2021-01-01',18,'18',true,false,2,2),\000d\000a\0009 (' AU680','Beckman Coulter','92131',5,3,true,'2022-02-27','2024-11-05','2025-03-09','2022-01-01',12,'03',false,false,3,3),KATEGORIJA KATEGORIJA KATEGORIJA KATEGORIJA KATEGORIJA KATEGORIJA \000d\000a\0009 ('12191','DXC 700 AU','97713',5,3,true,'2023-05-16',NULL,'2026-01-05','2022-11-23',12,'31',true,NULL,3,3),\000d\000a\0009 ('34','Mikroskop','M34',1,1,true,'2024-02-09',NULL,'2024-02-09','2024-02-09',12,'34M',true,NULL,2,2)"; expected "identifier"; SQL statement:
+INSERT INTO public.oprema (sifra,naziv,serijski_broj,vrsta_id,kategorija_id,certifikat,datum_nabave,datum_otpisa,datum_planiranog_servisiranja,godina_proizvodnje,interval_servisiranja_u_mjesecima,inventarski_broj,ispravno,otpisano,tvrtka_proizvodjac_id,tvrtka_vlasnik_id,) VALUES
+	 ('AO-10','Rotofix 32 A','331942',3,1,true,'2020-06-09','2024-03-07','2024-04-14','2020-01-01',12,'34',true,false,1,1),
+	 ('AO-11','Rotofix 32 A','41201',3,1,true,'2020-08-11','2023-06-07','2024-06-02','2020-01-01',12,'35',true,false,1,1),
+	 ('MP-01','Mikroskop','331942',1,4,true,'2021-07-21','2025-04-12','2024-11-05','2021-01-01',18,'17',true,false,2,2),
+	 ('MP-02','Mikroskop','331942',1,4,true,'2021-09-29','2025-04-12','2024-12-17','2021-01-01',18,'18',true,false,2,2),
+	 (' AU680','Beckman Coulter','92131',5,3,true,'2022-02-27','2024-11-05','2025-03-09','2022-01-01',12,'03',false,false,3,3),KATEGORIJA KATEGORIJA KATEGORIJA KATEGORIJA KATEGORIJA KATEGORIJA 
+	 ('12191','DXC 700 AU','97713',5,3,true,'2023-05-16',NULL,'2026-01-05','2022-11-23',12,'31',true,NULL,3,3),
+	 ('34','Mikroskop','M34',1,1,true,'2024-02-09',NULL,'2024-02-09','2024-02-09',12,'34M',true,NULL,2,2) [42001-224]
+2024-02-20 14:27:13.528153+01:00 jdbc[14]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "([*]1,'redovni servis',NULL,NULL,NULL,'2024-02-09 10:47:30.503',false,'Ozren Pezo',true,2,NULL)"; expected "(, SELECT, TABLE, VALUES"; SQL statement:
+(1,'redovni servis',NULL,NULL,NULL,'2024-02-09 10:47:30.503',false,'Ozren Pezo',true,2,NULL) [42001-224]
+2024-02-20 14:27:13.529653+01:00 jdbc[14]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "INSERT INTO public.oprema (sifra,naziv,serijski_broj,vrsta_id,kategorija_id,certifikat,datum_nabave,datum_otpisa,datum_planiranog_servisiranja,godina_proizvodnje,interval_servisiranja_u_mjesecima,inventarski_broj,ispravno,otpisano,tvrtka_proizvodjac_id,tvrtka_vlasnik_id,[*]) VALUES\000d\000a\0009 ('AO-10','Rotofix 32 A','331942',3,1,true,'2020-06-09','2024-03-07','2024-04-14','2020-01-01',12,'34',true,false,1,1),\000d\000a\0009 ('AO-11','Rotofix 32 A','41201',3,1,true,'2020-08-11','2023-06-07','2024-06-02','2020-01-01',12,'35',true,false,1,1),\000d\000a\0009 ('MP-01','Mikroskop','331942',1,4,true,'2021-07-21','2025-04-12','2024-11-05','2021-01-01',18,'17',true,false,2,2),\000d\000a\0009 ('MP-02','Mikroskop','331942',1,4,true,'2021-09-29','2025-04-12','2024-12-17','2021-01-01',18,'18',true,false,2,2),\000d\000a\0009 (' AU680','Beckman Coulter','92131',5,3,true,'2022-02-27','2024-11-05','2025-03-09','2022-01-01',12,'03',false,false,3,3),KATEGORIJA KATEGORIJA KATEGORIJA KATEGORIJA KATEGORIJA KATEGORIJA \000d\000a\0009 ('12191','DXC 700 AU','97713',5,3,true,'2023-05-16',NULL,'2026-01-05','2022-11-23',12,'31',true,NULL,3,3),\000d\000a\0009 ('34','Mikroskop','M34',1,1,true,'2024-02-09',NULL,'2024-02-09','2024-02-09',12,'34M',true,NULL,2,2)"; expected "identifier"; SQL statement:
+INSERT INTO public.oprema (sifra,naziv,serijski_broj,vrsta_id,kategorija_id,certifikat,datum_nabave,datum_otpisa,datum_planiranog_servisiranja,godina_proizvodnje,interval_servisiranja_u_mjesecima,inventarski_broj,ispravno,otpisano,tvrtka_proizvodjac_id,tvrtka_vlasnik_id,) VALUES
+	 ('AO-10','Rotofix 32 A','331942',3,1,true,'2020-06-09','2024-03-07','2024-04-14','2020-01-01',12,'34',true,false,1,1),
+	 ('AO-11','Rotofix 32 A','41201',3,1,true,'2020-08-11','2023-06-07','2024-06-02','2020-01-01',12,'35',true,false,1,1),
+	 ('MP-01','Mikroskop','331942',1,4,true,'2021-07-21','2025-04-12','2024-11-05','2021-01-01',18,'17',true,false,2,2),
+	 ('MP-02','Mikroskop','331942',1,4,true,'2021-09-29','2025-04-12','2024-12-17','2021-01-01',18,'18',true,false,2,2),
+	 (' AU680','Beckman Coulter','92131',5,3,true,'2022-02-27','2024-11-05','2025-03-09','2022-01-01',12,'03',false,false,3,3),KATEGORIJA KATEGORIJA KATEGORIJA KATEGORIJA KATEGORIJA KATEGORIJA 
+	 ('12191','DXC 700 AU','97713',5,3,true,'2023-05-16',NULL,'2026-01-05','2022-11-23',12,'31',true,NULL,3,3),
+	 ('34','Mikroskop','M34',1,1,true,'2024-02-09',NULL,'2024-02-09','2024-02-09',12,'34M',true,NULL,2,2) [42001-224]
+2024-02-20 14:27:13.530688+01:00 jdbc[14]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Column "DATUM_PLANIRANOG_SERVISIRANJA" not found; SQL statement:
+INSERT INTO public.odrzavanje (oprema_id,opis_odrzavanja,datum_otpreme,datum_planiranog_servisiranja,datum_povrata,datum_prijave,izvanredan,prijavio_radnik,umjeravanje,tvrtka_serviser_id,opis_održavanja) VALUES
+	 (3,'Odrađeno umjeravanje',NULL,NULL,NULL,'2023-09-08 23:18:05.912',false,'Jelena Kolarić',true,2,NULL),
+	 (12,'Servis zbog kvara',NULL,NULL,NULL,'2024-11-02 23:20:34.368',true,'Ivan Labaš',false,2,NULL),
+	 (2,'Odrađeno sezonsko umjeravanje',NULL,NULL,NULL,'2023-03-02 23:07:11.424',false,'Ivan Labaš',true,1,NULL),
+	 (5,'Servis zbog kvara',NULL,NULL,NULL,'2023-11-12 23:18:45.266',true,'Jelena Kolarić',false,3,NULL),
+	 (1,'redovni servis',NULL,NULL,NULL,'2024-02-09 10:47:30.503',false,'Ozren Pezo',true,2,NULL) [42122-224]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:514)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
+	at org.h2.message.DbException.get(DbException.java:223)
+	at org.h2.message.DbException.get(DbException.java:199)
+	at org.h2.table.Table.getColumn(Table.java:759)
+	at org.h2.command.Parser.parseColumn(Parser.java:1190)
+	at org.h2.command.Parser.parseColumnList(Parser.java:1175)
+	at org.h2.command.Parser.parseInsert(Parser.java:1549)
+	at org.h2.command.Parser.parsePrepared(Parser.java:719)
+	at org.h2.command.Parser.parse(Parser.java:592)
+	at org.h2.command.Parser.parse(Parser.java:564)
+	at org.h2.command.Parser.prepareCommand(Parser.java:483)
+	at org.h2.engine.SessionLocal.prepareLocal(SessionLocal.java:639)
+	at org.h2.engine.SessionLocal.prepareCommand(SessionLocal.java:559)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1166)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:245)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:231)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1345)
+	at org.h2.server.web.WebApp.query(WebApp.java:1143)
+	at org.h2.server.web.WebApp.query(WebApp.java:1119)
+	at org.h2.server.web.WebApp.process(WebApp.java:245)
+	at org.h2.server.web.WebApp.processRequest(WebApp.java:177)
+	at org.h2.server.web.JakartaWebServlet.doGet(JakartaWebServlet.java:129)
+	at org.h2.server.web.JakartaWebServlet.doPost(JakartaWebServlet.java:166)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:590)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:205)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:340)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:391)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:896)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1744)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-02-20 14:27:28.304861+01:00 jdbc[14]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "INSERT INTO public.oprema (sifra,naziv,serijski_broj,vrsta_id,kategorija_id,certifikat,datum_nabave,datum_otpisa,datum_planiranog_servisiranja,godina_proizvodnje,interval_servisiranja_u_mjesecima,inventarski_broj,ispravno,otpisano,tvrtka_proizvodjac_id,tvrtka_vlasnik_id,[*]) VALUES\000d\000a\0009 ('AO-10','Rotofix 32 A','331942',3,1,true,'2020-06-09','2024-03-07','2024-04-14','2020-01-01',12,'34',true,false,1,1),\000d\000a\0009 ('AO-11','Rotofix 32 A','41201',3,1,true,'2020-08-11','2023-06-07','2024-06-02','2020-01-01',12,'35',true,false,1,1),\000d\000a\0009 ('MP-01','Mikroskop','331942',1,4,true,'2021-07-21','2025-04-12','2024-11-05','2021-01-01',18,'17',true,false,2,2),\000d\000a\0009 ('MP-02','Mikroskop','331942',1,4,true,'2021-09-29','2025-04-12','2024-12-17','2021-01-01',18,'18',true,false,2,2),\000d\000a\0009 (' AU680','Beckman Coulter','92131',5,3,true,'2022-02-27','2024-11-05','2025-03-09','2022-01-01',12,'03',false,false,3,3),KATEGORIJA KATEGORIJA KATEGORIJA KATEGORIJA KATEGORIJA KATEGORIJA \000d\000a\0009 ('12191','DXC 700 AU','97713',5,3,true,'2023-05-16',NULL,'2026-01-05','2022-11-23',12,'31',true,NULL,3,3),\000d\000a\0009 ('34','Mikroskop','M34',1,1,true,'2024-02-09',NULL,'2024-02-09','2024-02-09',12,'34M',true,NULL,2,2)"; expected "identifier"; SQL statement:
+INSERT INTO public.oprema (sifra,naziv,serijski_broj,vrsta_id,kategorija_id,certifikat,datum_nabave,datum_otpisa,datum_planiranog_servisiranja,godina_proizvodnje,interval_servisiranja_u_mjesecima,inventarski_broj,ispravno,otpisano,tvrtka_proizvodjac_id,tvrtka_vlasnik_id,) VALUES
+	 ('AO-10','Rotofix 32 A','331942',3,1,true,'2020-06-09','2024-03-07','2024-04-14','2020-01-01',12,'34',true,false,1,1),
+	 ('AO-11','Rotofix 32 A','41201',3,1,true,'2020-08-11','2023-06-07','2024-06-02','2020-01-01',12,'35',true,false,1,1),
+	 ('MP-01','Mikroskop','331942',1,4,true,'2021-07-21','2025-04-12','2024-11-05','2021-01-01',18,'17',true,false,2,2),
+	 ('MP-02','Mikroskop','331942',1,4,true,'2021-09-29','2025-04-12','2024-12-17','2021-01-01',18,'18',true,false,2,2),
+	 (' AU680','Beckman Coulter','92131',5,3,true,'2022-02-27','2024-11-05','2025-03-09','2022-01-01',12,'03',false,false,3,3),KATEGORIJA KATEGORIJA KATEGORIJA KATEGORIJA KATEGORIJA KATEGORIJA 
+	 ('12191','DXC 700 AU','97713',5,3,true,'2023-05-16',NULL,'2026-01-05','2022-11-23',12,'31',true,NULL,3,3),
+	 ('34','Mikroskop','M34',1,1,true,'2024-02-09',NULL,'2024-02-09','2024-02-09',12,'34M',true,NULL,2,2) [42001-224]
+2024-02-20 14:27:28.306859+01:00 jdbc[14]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Column "DATUM_PLANIRANOG_SERVISIRANJA" not found; SQL statement:
+INSERT INTO public.odrzavanje (oprema_id,opis_odrzavanja,datum_otpreme,datum_planiranog_servisiranja,datum_povrata,datum_prijave,izvanredan,prijavio_radnik,umjeravanje,tvrtka_serviser_id,opis_održavanja) VALUES
+	 (3,'Odrađeno umjeravanje',NULL,NULL,NULL,'2023-09-08 23:18:05.912',false,'Jelena Kolarić',true,2,NULL),
+	 (12,'Servis zbog kvara',NULL,NULL,NULL,'2024-11-02 23:20:34.368',true,'Ivan Labaš',false,2,NULL),
+	 (2,'Odrađeno sezonsko umjeravanje',NULL,NULL,NULL,'2023-03-02 23:07:11.424',false,'Ivan Labaš',true,1,NULL),
+	 (5,'Servis zbog kvara',NULL,NULL,NULL,'2023-11-12 23:18:45.266',true,'Jelena Kolarić',false,3,NULL),
+	 (1,'redovni servis',NULL,NULL,NULL,'2024-02-09 10:47:30.503',false,'Ozren Pezo',true,2,NULL) [42122-224]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:514)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
+	at org.h2.message.DbException.get(DbException.java:223)
+	at org.h2.message.DbException.get(DbException.java:199)
+	at org.h2.table.Table.getColumn(Table.java:759)
+	at org.h2.command.Parser.parseColumn(Parser.java:1190)
+	at org.h2.command.Parser.parseColumnList(Parser.java:1175)
+	at org.h2.command.Parser.parseInsert(Parser.java:1549)
+	at org.h2.command.Parser.parsePrepared(Parser.java:719)
+	at org.h2.command.Parser.parse(Parser.java:592)
+	at org.h2.command.Parser.parse(Parser.java:564)
+	at org.h2.command.Parser.prepareCommand(Parser.java:483)
+	at org.h2.engine.SessionLocal.prepareLocal(SessionLocal.java:639)
+	at org.h2.engine.SessionLocal.prepareCommand(SessionLocal.java:559)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1166)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:245)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:231)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1345)
+	at org.h2.server.web.WebApp.query(WebApp.java:1143)
+	at org.h2.server.web.WebApp.query(WebApp.java:1119)
+	at org.h2.server.web.WebApp.process(WebApp.java:245)
+	at org.h2.server.web.WebApp.processRequest(WebApp.java:177)
+	at org.h2.server.web.JakartaWebServlet.doGet(JakartaWebServlet.java:129)
+	at org.h2.server.web.JakartaWebServlet.doPost(JakartaWebServlet.java:166)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:590)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:205)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:340)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:391)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:896)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1744)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-02-20 14:32:12.517803+01:00 jdbc[14]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "INSERT INTO public.oprema (sifra,naziv,serijski_broj,vrsta_id,kategorija_id,certifikat,datum_nabave,datum_otpisa,datum_planiranog_servisiranja,godina_proizvodnje,interval_servisiranja_u_mjesecima,inventarski_broj,ispravno,otpisano,tvrtka_proizvodjac_id,tvrtka_vlasnik_id,[*]) VALUES\000d\000a\0009 ('AO-10','Rotofix 32 A','331942',3,1,true,'2020-06-09','2024-03-07','2024-04-14','2020-01-01',12,'34',true,false,1,1),\000d\000a\0009 ('AO-11','Rotofix 32 A','41201',3,1,true,'2020-08-11','2023-06-07','2024-06-02','2020-01-01',12,'35',true,false,1,1),\000d\000a\0009 ('MP-01','Mikroskop','331942',1,4,true,'2021-07-21','2025-04-12','2024-11-05','2021-01-01',18,'17',true,false,2,2),\000d\000a\0009 ('MP-02','Mikroskop','331942',1,4,true,'2021-09-29','2025-04-12','2024-12-17','2021-01-01',18,'18',true,false,2,2),\000d\000a\0009 (' AU680','Beckman Coulter','92131',5,3,true,'2022-02-27','2024-11-05','2025-03-09','2022-01-01',12,'03',false,false,3,3),KATEGORIJA KATEGORIJA KATEGORIJA KATEGORIJA KATEGORIJA KATEGORIJA \000d\000a\0009 ('12191','DXC 700 AU','97713',5,3,true,'2023-05-16',NULL,'2026-01-05','2022-11-23',12,'31',true,NULL,3,3),\000d\000a\0009 ('34','Mikroskop','M34',1,1,true,'2024-02-09',NULL,'2024-02-09','2024-02-09',12,'34M',true,NULL,2,2)"; expected "identifier"; SQL statement:
+INSERT INTO public.oprema (sifra,naziv,serijski_broj,vrsta_id,kategorija_id,certifikat,datum_nabave,datum_otpisa,datum_planiranog_servisiranja,godina_proizvodnje,interval_servisiranja_u_mjesecima,inventarski_broj,ispravno,otpisano,tvrtka_proizvodjac_id,tvrtka_vlasnik_id,) VALUES
+	 ('AO-10','Rotofix 32 A','331942',3,1,true,'2020-06-09','2024-03-07','2024-04-14','2020-01-01',12,'34',true,false,1,1),
+	 ('AO-11','Rotofix 32 A','41201',3,1,true,'2020-08-11','2023-06-07','2024-06-02','2020-01-01',12,'35',true,false,1,1),
+	 ('MP-01','Mikroskop','331942',1,4,true,'2021-07-21','2025-04-12','2024-11-05','2021-01-01',18,'17',true,false,2,2),
+	 ('MP-02','Mikroskop','331942',1,4,true,'2021-09-29','2025-04-12','2024-12-17','2021-01-01',18,'18',true,false,2,2),
+	 (' AU680','Beckman Coulter','92131',5,3,true,'2022-02-27','2024-11-05','2025-03-09','2022-01-01',12,'03',false,false,3,3),KATEGORIJA KATEGORIJA KATEGORIJA KATEGORIJA KATEGORIJA KATEGORIJA 
+	 ('12191','DXC 700 AU','97713',5,3,true,'2023-05-16',NULL,'2026-01-05','2022-11-23',12,'31',true,NULL,3,3),
+	 ('34','Mikroskop','M34',1,1,true,'2024-02-09',NULL,'2024-02-09','2024-02-09',12,'34M',true,NULL,2,2) [42001-224]
+2024-02-20 14:32:12.525304+01:00 jdbc[14]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Column "DATUM_PLANIRANOG_SERVISIRANJA" not found; SQL statement:
+INSERT INTO public.odrzavanje (oprema_id,opis_odrzavanja,datum_otpreme,datum_planiranog_servisiranja,datum_povrata,datum_prijave,izvanredan,prijavio_radnik,umjeravanje,tvrtka_serviser_id,opis_održavanja) VALUES
+	 (3,'Odrađeno umjeravanje',NULL,NULL,NULL,'2023-09-08 23:18:05.912',false,'Jelena Kolarić',true,2,NULL),
+	 (12,'Servis zbog kvara',NULL,NULL,NULL,'2024-11-02 23:20:34.368',true,'Ivan Labaš',false,2,NULL),
+	 (2,'Odrađeno sezonsko umjeravanje',NULL,NULL,NULL,'2023-03-02 23:07:11.424',false,'Ivan Labaš',true,1,NULL),
+	 (5,'Servis zbog kvara',NULL,NULL,NULL,'2023-11-12 23:18:45.266',true,'Jelena Kolarić',false,3,NULL),
+	 (1,'redovni servis',NULL,NULL,NULL,'2024-02-09 10:47:30.503',false,'Ozren Pezo',true,2,NULL) [42122-224]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:514)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
+	at org.h2.message.DbException.get(DbException.java:223)
+	at org.h2.message.DbException.get(DbException.java:199)
+	at org.h2.table.Table.getColumn(Table.java:759)
+	at org.h2.command.Parser.parseColumn(Parser.java:1190)
+	at org.h2.command.Parser.parseColumnList(Parser.java:1175)
+	at org.h2.command.Parser.parseInsert(Parser.java:1549)
+	at org.h2.command.Parser.parsePrepared(Parser.java:719)
+	at org.h2.command.Parser.parse(Parser.java:592)
+	at org.h2.command.Parser.parse(Parser.java:564)
+	at org.h2.command.Parser.prepareCommand(Parser.java:483)
+	at org.h2.engine.SessionLocal.prepareLocal(SessionLocal.java:639)
+	at org.h2.engine.SessionLocal.prepareCommand(SessionLocal.java:559)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1166)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:245)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:231)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1345)
+	at org.h2.server.web.WebApp.query(WebApp.java:1143)
+	at org.h2.server.web.WebApp.query(WebApp.java:1119)
+	at org.h2.server.web.WebApp.process(WebApp.java:245)
+	at org.h2.server.web.WebApp.processRequest(WebApp.java:177)
+	at org.h2.server.web.JakartaWebServlet.doGet(JakartaWebServlet.java:129)
+	at org.h2.server.web.JakartaWebServlet.doPost(JakartaWebServlet.java:166)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:590)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:205)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:340)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:391)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:896)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1744)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-02-20 14:32:26.616436+01:00 jdbc[14]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "INSERT INTO public.oprema (sifra,naziv,serijski_broj,vrsta_id,kategorija_id,certifikat,datum_nabave,datum_otpisa,datum_planiranog_servisiranja,godina_proizvodnje,interval_servisiranja_u_mjesecima,inventarski_broj,ispravno,otpisano,tvrtka_proizvodjac_id,tvrtka_vlasnik_id) VALUES\000d\000a\0009 ('AO-10','Rotofix 32 A','331942',3,1,true,'2020-06-09','2024-03-07','2024-04-14','2020-01-01',12,'34',true,false,1,1),\000d\000a\0009 ('AO-11','Rotofix 32 A','41201',3,1,true,'2020-08-11','2023-06-07','2024-06-02','2020-01-01',12,'35',true,false,1,1),\000d\000a\0009 ('MP-01','Mikroskop','331942',1,4,true,'2021-07-21','2025-04-12','2024-11-05','2021-01-01',18,'17',true,false,2,2),\000d\000a\0009 ('MP-02','Mikroskop','331942',1,4,true,'2021-09-29','2025-04-12','2024-12-17','2021-01-01',18,'18',true,false,2,2),\000d\000a\0009 (' AU680','Beckman Coulter','92131',5,3,true,'2022-02-27','2024-11-05','2025-03-09','2022-01-01',12,'03',false,false,3,3),KATEGORIJA [*]KATEGORIJA KATEGORIJA KATEGORIJA KATEGORIJA KATEGORIJA \000d\000a\0009 ('12191','DXC 700 AU','97713',5,3,true,'2023-05-16',NULL,'2026-01-05','2022-11-23',12,'31',true,NULL,3,3),\000d\000a\0009 ('34','Mikroskop','M34',1,1,true,'2024-02-09',NULL,'2024-02-09','2024-02-09',12,'34M',true,NULL,2,2)"; SQL statement:
+INSERT INTO public.oprema (sifra,naziv,serijski_broj,vrsta_id,kategorija_id,certifikat,datum_nabave,datum_otpisa,datum_planiranog_servisiranja,godina_proizvodnje,interval_servisiranja_u_mjesecima,inventarski_broj,ispravno,otpisano,tvrtka_proizvodjac_id,tvrtka_vlasnik_id) VALUES
+	 ('AO-10','Rotofix 32 A','331942',3,1,true,'2020-06-09','2024-03-07','2024-04-14','2020-01-01',12,'34',true,false,1,1),
+	 ('AO-11','Rotofix 32 A','41201',3,1,true,'2020-08-11','2023-06-07','2024-06-02','2020-01-01',12,'35',true,false,1,1),
+	 ('MP-01','Mikroskop','331942',1,4,true,'2021-07-21','2025-04-12','2024-11-05','2021-01-01',18,'17',true,false,2,2),
+	 ('MP-02','Mikroskop','331942',1,4,true,'2021-09-29','2025-04-12','2024-12-17','2021-01-01',18,'18',true,false,2,2),
+	 (' AU680','Beckman Coulter','92131',5,3,true,'2022-02-27','2024-11-05','2025-03-09','2022-01-01',12,'03',false,false,3,3),KATEGORIJA KATEGORIJA KATEGORIJA KATEGORIJA KATEGORIJA KATEGORIJA 
+	 ('12191','DXC 700 AU','97713',5,3,true,'2023-05-16',NULL,'2026-01-05','2022-11-23',12,'31',true,NULL,3,3),
+	 ('34','Mikroskop','M34',1,1,true,'2024-02-09',NULL,'2024-02-09','2024-02-09',12,'34M',true,NULL,2,2) [42000-224]
+2024-02-20 14:32:26.617436+01:00 jdbc[14]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Column "DATUM_PLANIRANOG_SERVISIRANJA" not found; SQL statement:
+INSERT INTO public.odrzavanje (oprema_id,opis_odrzavanja,datum_otpreme,datum_planiranog_servisiranja,datum_povrata,datum_prijave,izvanredan,prijavio_radnik,umjeravanje,tvrtka_serviser_id,opis_održavanja) VALUES
+	 (3,'Odrađeno umjeravanje',NULL,NULL,NULL,'2023-09-08 23:18:05.912',false,'Jelena Kolarić',true,2,NULL),
+	 (12,'Servis zbog kvara',NULL,NULL,NULL,'2024-11-02 23:20:34.368',true,'Ivan Labaš',false,2,NULL),
+	 (2,'Odrađeno sezonsko umjeravanje',NULL,NULL,NULL,'2023-03-02 23:07:11.424',false,'Ivan Labaš',true,1,NULL),
+	 (5,'Servis zbog kvara',NULL,NULL,NULL,'2023-11-12 23:18:45.266',true,'Jelena Kolarić',false,3,NULL),
+	 (1,'redovni servis',NULL,NULL,NULL,'2024-02-09 10:47:30.503',false,'Ozren Pezo',true,2,NULL) [42122-224]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:514)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
+	at org.h2.message.DbException.get(DbException.java:223)
+	at org.h2.message.DbException.get(DbException.java:199)
+	at org.h2.table.Table.getColumn(Table.java:759)
+	at org.h2.command.Parser.parseColumn(Parser.java:1190)
+	at org.h2.command.Parser.parseColumnList(Parser.java:1175)
+	at org.h2.command.Parser.parseInsert(Parser.java:1549)
+	at org.h2.command.Parser.parsePrepared(Parser.java:719)
+	at org.h2.command.Parser.parse(Parser.java:592)
+	at org.h2.command.Parser.parse(Parser.java:564)
+	at org.h2.command.Parser.prepareCommand(Parser.java:483)
+	at org.h2.engine.SessionLocal.prepareLocal(SessionLocal.java:639)
+	at org.h2.engine.SessionLocal.prepareCommand(SessionLocal.java:559)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1166)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:245)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:231)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1345)
+	at org.h2.server.web.WebApp.query(WebApp.java:1143)
+	at org.h2.server.web.WebApp.query(WebApp.java:1119)
+	at org.h2.server.web.WebApp.process(WebApp.java:245)
+	at org.h2.server.web.WebApp.processRequest(WebApp.java:177)
+	at org.h2.server.web.JakartaWebServlet.doGet(JakartaWebServlet.java:129)
+	at org.h2.server.web.JakartaWebServlet.doPost(JakartaWebServlet.java:166)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:590)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:205)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:340)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:391)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:896)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1744)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-02-20 14:32:27.545918+01:00 jdbc[14]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "INSERT INTO public.oprema (sifra,naziv,serijski_broj,vrsta_id,kategorija_id,certifikat,datum_nabave,datum_otpisa,datum_planiranog_servisiranja,godina_proizvodnje,interval_servisiranja_u_mjesecima,inventarski_broj,ispravno,otpisano,tvrtka_proizvodjac_id,tvrtka_vlasnik_id) VALUES\000d\000a\0009 ('AO-10','Rotofix 32 A','331942',3,1,true,'2020-06-09','2024-03-07','2024-04-14','2020-01-01',12,'34',true,false,1,1),\000d\000a\0009 ('AO-11','Rotofix 32 A','41201',3,1,true,'2020-08-11','2023-06-07','2024-06-02','2020-01-01',12,'35',true,false,1,1),\000d\000a\0009 ('MP-01','Mikroskop','331942',1,4,true,'2021-07-21','2025-04-12','2024-11-05','2021-01-01',18,'17',true,false,2,2),\000d\000a\0009 ('MP-02','Mikroskop','331942',1,4,true,'2021-09-29','2025-04-12','2024-12-17','2021-01-01',18,'18',true,false,2,2),\000d\000a\0009 (' AU680','Beckman Coulter','92131',5,3,true,'2022-02-27','2024-11-05','2025-03-09','2022-01-01',12,'03',false,false,3,3),KATEGORIJA [*]KATEGORIJA KATEGORIJA KATEGORIJA KATEGORIJA KATEGORIJA \000d\000a\0009 ('12191','DXC 700 AU','97713',5,3,true,'2023-05-16',NULL,'2026-01-05','2022-11-23',12,'31',true,NULL,3,3),\000d\000a\0009 ('34','Mikroskop','M34',1,1,true,'2024-02-09',NULL,'2024-02-09','2024-02-09',12,'34M',true,NULL,2,2)"; SQL statement:
+INSERT INTO public.oprema (sifra,naziv,serijski_broj,vrsta_id,kategorija_id,certifikat,datum_nabave,datum_otpisa,datum_planiranog_servisiranja,godina_proizvodnje,interval_servisiranja_u_mjesecima,inventarski_broj,ispravno,otpisano,tvrtka_proizvodjac_id,tvrtka_vlasnik_id) VALUES
+	 ('AO-10','Rotofix 32 A','331942',3,1,true,'2020-06-09','2024-03-07','2024-04-14','2020-01-01',12,'34',true,false,1,1),
+	 ('AO-11','Rotofix 32 A','41201',3,1,true,'2020-08-11','2023-06-07','2024-06-02','2020-01-01',12,'35',true,false,1,1),
+	 ('MP-01','Mikroskop','331942',1,4,true,'2021-07-21','2025-04-12','2024-11-05','2021-01-01',18,'17',true,false,2,2),
+	 ('MP-02','Mikroskop','331942',1,4,true,'2021-09-29','2025-04-12','2024-12-17','2021-01-01',18,'18',true,false,2,2),
+	 (' AU680','Beckman Coulter','92131',5,3,true,'2022-02-27','2024-11-05','2025-03-09','2022-01-01',12,'03',false,false,3,3),KATEGORIJA KATEGORIJA KATEGORIJA KATEGORIJA KATEGORIJA KATEGORIJA 
+	 ('12191','DXC 700 AU','97713',5,3,true,'2023-05-16',NULL,'2026-01-05','2022-11-23',12,'31',true,NULL,3,3),
+	 ('34','Mikroskop','M34',1,1,true,'2024-02-09',NULL,'2024-02-09','2024-02-09',12,'34M',true,NULL,2,2) [42000-224]
+2024-02-20 14:32:27.546919+01:00 jdbc[14]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Column "DATUM_PLANIRANOG_SERVISIRANJA" not found; SQL statement:
+INSERT INTO public.odrzavanje (oprema_id,opis_odrzavanja,datum_otpreme,datum_planiranog_servisiranja,datum_povrata,datum_prijave,izvanredan,prijavio_radnik,umjeravanje,tvrtka_serviser_id,opis_održavanja) VALUES
+	 (3,'Odrađeno umjeravanje',NULL,NULL,NULL,'2023-09-08 23:18:05.912',false,'Jelena Kolarić',true,2,NULL),
+	 (12,'Servis zbog kvara',NULL,NULL,NULL,'2024-11-02 23:20:34.368',true,'Ivan Labaš',false,2,NULL),
+	 (2,'Odrađeno sezonsko umjeravanje',NULL,NULL,NULL,'2023-03-02 23:07:11.424',false,'Ivan Labaš',true,1,NULL),
+	 (5,'Servis zbog kvara',NULL,NULL,NULL,'2023-11-12 23:18:45.266',true,'Jelena Kolarić',false,3,NULL),
+	 (1,'redovni servis',NULL,NULL,NULL,'2024-02-09 10:47:30.503',false,'Ozren Pezo',true,2,NULL) [42122-224]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:514)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
+	at org.h2.message.DbException.get(DbException.java:223)
+	at org.h2.message.DbException.get(DbException.java:199)
+	at org.h2.table.Table.getColumn(Table.java:759)
+	at org.h2.command.Parser.parseColumn(Parser.java:1190)
+	at org.h2.command.Parser.parseColumnList(Parser.java:1175)
+	at org.h2.command.Parser.parseInsert(Parser.java:1549)
+	at org.h2.command.Parser.parsePrepared(Parser.java:719)
+	at org.h2.command.Parser.parse(Parser.java:592)
+	at org.h2.command.Parser.parse(Parser.java:564)
+	at org.h2.command.Parser.prepareCommand(Parser.java:483)
+	at org.h2.engine.SessionLocal.prepareLocal(SessionLocal.java:639)
+	at org.h2.engine.SessionLocal.prepareCommand(SessionLocal.java:559)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1166)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:245)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:231)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1345)
+	at org.h2.server.web.WebApp.query(WebApp.java:1143)
+	at org.h2.server.web.WebApp.query(WebApp.java:1119)
+	at org.h2.server.web.WebApp.process(WebApp.java:245)
+	at org.h2.server.web.WebApp.processRequest(WebApp.java:177)
+	at org.h2.server.web.JakartaWebServlet.doGet(JakartaWebServlet.java:129)
+	at org.h2.server.web.JakartaWebServlet.doPost(JakartaWebServlet.java:166)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:590)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:205)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:340)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:391)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:896)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1744)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-02-20 14:33:21.276744+01:00 jdbc[14]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Column "DATUM_PLANIRANOG_SERVISIRANJA" not found; SQL statement:
+INSERT INTO public.odrzavanje (oprema_id,opis_odrzavanja,datum_otpreme,datum_planiranog_servisiranja,datum_povrata,datum_prijave,izvanredan,prijavio_radnik,umjeravanje,tvrtka_serviser_id,opis_održavanja) VALUES
+	 (3,'Odrađeno umjeravanje',NULL,NULL,NULL,'2023-09-08 23:18:05.912',false,'Jelena Kolarić',true,2,NULL),
+	 (12,'Servis zbog kvara',NULL,NULL,NULL,'2024-11-02 23:20:34.368',true,'Ivan Labaš',false,2,NULL),
+	 (2,'Odrađeno sezonsko umjeravanje',NULL,NULL,NULL,'2023-03-02 23:07:11.424',false,'Ivan Labaš',true,1,NULL),
+	 (5,'Servis zbog kvara',NULL,NULL,NULL,'2023-11-12 23:18:45.266',true,'Jelena Kolarić',false,3,NULL),
+	 (1,'redovni servis',NULL,NULL,NULL,'2024-02-09 10:47:30.503',false,'Ozren Pezo',true,2,NULL) [42122-224]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:514)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
+	at org.h2.message.DbException.get(DbException.java:223)
+	at org.h2.message.DbException.get(DbException.java:199)
+	at org.h2.table.Table.getColumn(Table.java:759)
+	at org.h2.command.Parser.parseColumn(Parser.java:1190)
+	at org.h2.command.Parser.parseColumnList(Parser.java:1175)
+	at org.h2.command.Parser.parseInsert(Parser.java:1549)
+	at org.h2.command.Parser.parsePrepared(Parser.java:719)
+	at org.h2.command.Parser.parse(Parser.java:592)
+	at org.h2.command.Parser.parse(Parser.java:564)
+	at org.h2.command.Parser.prepareCommand(Parser.java:483)
+	at org.h2.engine.SessionLocal.prepareLocal(SessionLocal.java:639)
+	at org.h2.engine.SessionLocal.prepareCommand(SessionLocal.java:559)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1166)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:245)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:231)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1345)
+	at org.h2.server.web.WebApp.query(WebApp.java:1143)
+	at org.h2.server.web.WebApp.query(WebApp.java:1119)
+	at org.h2.server.web.WebApp.process(WebApp.java:245)
+	at org.h2.server.web.WebApp.processRequest(WebApp.java:177)
+	at org.h2.server.web.JakartaWebServlet.doGet(JakartaWebServlet.java:129)
+	at org.h2.server.web.JakartaWebServlet.doPost(JakartaWebServlet.java:166)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:590)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:205)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:340)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:391)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:896)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1744)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-02-20 14:34:32.520465+01:00 jdbc[14]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "[*]OPIS_KVARA"; SQL statement:
+OPIS_KVARA [42000-224]
+2024-02-20 14:34:59.203013+01:00 jdbc[14]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Column "DATUM_PLANIRANOG_SERVISIRANJA" not found; SQL statement:
+INSERT INTO public.odrzavanje (oprema_id,opis_odrzavanja,datum_otpreme,datum_planiranog_servisiranja,datum_povrata,datum_prijave,izvanredan,prijavio_radnik,umjeravanje,tvrtka_serviser_id,opis_održavanja) VALUES
+	 (3,'Odrađeno umjeravanje',NULL,NULL,NULL,'2023-09-08 23:18:05.912',false,'Jelena Kolarić',true,2,NULL),
+	 (12,'Servis zbog kvara',NULL,NULL,NULL,'2024-11-02 23:20:34.368',true,'Ivan Labaš',false,2,NULL),
+	 (2,'Odrađeno sezonsko umjeravanje',NULL,NULL,NULL,'2023-03-02 23:07:11.424',false,'Ivan Labaš',true,1,NULL),
+	 (5,'Servis zbog kvara',NULL,NULL,NULL,'2023-11-12 23:18:45.266',true,'Jelena Kolarić',false,3,NULL),
+	 (1,'redovni servis',NULL,NULL,NULL,'2024-02-09 10:47:30.503',false,'Ozren Pezo',true,2,NULL) [42122-224]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:514)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
+	at org.h2.message.DbException.get(DbException.java:223)
+	at org.h2.message.DbException.get(DbException.java:199)
+	at org.h2.table.Table.getColumn(Table.java:759)
+	at org.h2.command.Parser.parseColumn(Parser.java:1190)
+	at org.h2.command.Parser.parseColumnList(Parser.java:1175)
+	at org.h2.command.Parser.parseInsert(Parser.java:1549)
+	at org.h2.command.Parser.parsePrepared(Parser.java:719)
+	at org.h2.command.Parser.parse(Parser.java:592)
+	at org.h2.command.Parser.parse(Parser.java:564)
+	at org.h2.command.Parser.prepareCommand(Parser.java:483)
+	at org.h2.engine.SessionLocal.prepareLocal(SessionLocal.java:639)
+	at org.h2.engine.SessionLocal.prepareCommand(SessionLocal.java:559)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1166)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:245)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:231)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1345)
+	at org.h2.server.web.WebApp.query(WebApp.java:1143)
+	at org.h2.server.web.WebApp.query(WebApp.java:1119)
+	at org.h2.server.web.WebApp.process(WebApp.java:245)
+	at org.h2.server.web.WebApp.processRequest(WebApp.java:177)
+	at org.h2.server.web.JakartaWebServlet.doGet(JakartaWebServlet.java:129)
+	at org.h2.server.web.JakartaWebServlet.doPost(JakartaWebServlet.java:166)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:590)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:205)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:340)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:391)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:896)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1744)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-02-20 14:34:59.206518+01:00 jdbc[14]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "INSERT INTO public.kvar (opis_kvara,datum_prijave,prijavio_radnik,oprema_id) VALUES\000d\000a\0009 ('Ne želi se upaliti','2024-01-16','Ivan Labaš',5),\000d\000a\0009 ('Čuje se čudan zvuk dok se vrti','2024-01-10','Ivica Sremić',1),\000d\000a\0009 ('Ne radi žarulja','2024-01-07','Alen Kovač',4),\000d\000a\0009 ('Ne rade 2 slova na tipkovnici','2024-01-07','Mate Ćavarović',5),\000d\000a\0009 ('Ne može se zaklopiti','2024-01-03','Matej Hegedušić',2),[*]"; expected "ROW (, (, DEFAULT, INTERSECTS (, NOT, EXISTS, UNIQUE, INTERSECTS"; SQL statement:
+INSERT INTO public.kvar (opis_kvara,datum_prijave,prijavio_radnik,oprema_id) VALUES
+	 ('Ne želi se upaliti','2024-01-16','Ivan Labaš',5),
+	 ('Čuje se čudan zvuk dok se vrti','2024-01-10','Ivica Sremić',1),
+	 ('Ne radi žarulja','2024-01-07','Alen Kovač',4),
+	 ('Ne rade 2 slova na tipkovnici','2024-01-07','Mate Ćavarović',5),
+	 ('Ne može se zaklopiti','2024-01-03','Matej Hegedušić',2), [42001-224]
+2024-02-20 14:42:13.121957+01:00 jdbc[14]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Column "OPIS_ODRŽAVANJA" not found; SQL statement:
+INSERT INTO public.odrzavanje (oprema_id,opis_odrzavanja,datum_otpreme,datum_povrata,datum_prijave,izvanredan,prijavio_radnik,umjeravanje,tvrtka_serviser_id,opis_održavanja) VALUES
+     (3,'Odrađeno umjeravanje',NULL,NULL,'2023-09-08 23:18:05.912',false,'Jelena Kolarić',true,2,NULL),
+     (12,'Servis zbog kvara',NULL,NULL,'2024-11-02 23:20:34.368',true,'Ivan Labaš',false,2,NULL),
+     (2,'Odrađeno sezonsko umjeravanje',NULL,NULL,'2023-03-02 23:07:11.424',false,'Ivan Labaš',true,1,NULL),
+     (5,'Servis zbog kvara',NULL,NULL,'2023-11-12 23:18:45.266',true,'Jelena Kolarić',false,3,NULL),
+     (1,'redovni servis',NULL,NULL,'2024-02-09 10:47:30.503',false,'Ozren Pezo',true,2,NULL) [42122-224]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:514)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
+	at org.h2.message.DbException.get(DbException.java:223)
+	at org.h2.message.DbException.get(DbException.java:199)
+	at org.h2.table.Table.getColumn(Table.java:759)
+	at org.h2.command.Parser.parseColumn(Parser.java:1190)
+	at org.h2.command.Parser.parseColumnList(Parser.java:1175)
+	at org.h2.command.Parser.parseInsert(Parser.java:1549)
+	at org.h2.command.Parser.parsePrepared(Parser.java:719)
+	at org.h2.command.Parser.parse(Parser.java:592)
+	at org.h2.command.Parser.parse(Parser.java:564)
+	at org.h2.command.Parser.prepareCommand(Parser.java:483)
+	at org.h2.engine.SessionLocal.prepareLocal(SessionLocal.java:639)
+	at org.h2.engine.SessionLocal.prepareCommand(SessionLocal.java:559)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1166)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:245)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:231)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1345)
+	at org.h2.server.web.WebApp.query(WebApp.java:1143)
+	at org.h2.server.web.WebApp.query(WebApp.java:1119)
+	at org.h2.server.web.WebApp.process(WebApp.java:245)
+	at org.h2.server.web.WebApp.processRequest(WebApp.java:177)
+	at org.h2.server.web.JakartaWebServlet.doGet(JakartaWebServlet.java:129)
+	at org.h2.server.web.JakartaWebServlet.doPost(JakartaWebServlet.java:166)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:590)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:205)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:340)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:391)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:896)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1744)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
