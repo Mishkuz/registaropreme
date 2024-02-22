@@ -14,11 +14,26 @@
                     Registar opreme
                 </header>
                 <br>
+
+                <div class="col-md-12 text-center" style="margin-bottom:30px;">
+                    <h2>Evidencija kvarova</h2>
+                </div>
                 <form action="/pocetna" method="get">
                     <button name="button" class="btn btn-primary" type="submit">Registar opreme</button>
                 </form>
-                <div class="col-md-12 text-center" style="margin-bottom:30px;">
-                    <h2>Evidencija kvarova</h2>
+                <div class="container d-flex justify-content-center align-items-center">
+                    <div>
+                        <div class="input-group input-group-dynamic mb-4">
+                            <input type="text" id="searchInput" style="border-color: #177245; width: 500px; max-height:40px;" class="form-control"
+                                   placeholder="Unesi naziv opreme" aria-label="nazivopreme" aria-describedby="basic-addon1">
+                            <span class="input-group-text" id="basic-addon1" style="max-height:40px;">
+                                <button name="button" class="btn btn-link" type="submit">
+                                    <img src="../static/povecalo.jpg" class="img-fluid" style="width: 35px; height: 35px;
+                                         border-radius: 50%; background:transparent;" alt="povecalo">
+                                </button>
+                            </span>
+                        </div>
+                    </div>
                 </div>
                 <div class="card">
                     <div class="table-responsive">
@@ -38,7 +53,7 @@
                                 <td th:text="${kvar.oprema != null ? kvar.oprema.naziv : 'N/A'}"></td>
                                 <td th:text="${kvar.prijavioRadnik}"></td>
                                 <td th:text="${kvar.opisKvara}"></td>
-                                <td th:text="${#temporals.format(kvar.datumPrijave, 'dd-MM-yyyy')}"></td>
+                                <td th:text="${#temporals.format(kvar.datumPrijave, 'dd.MM.yyyy')}"></td>
                             </tr>
                             </tbody>
                         </table>
@@ -48,6 +63,50 @@
             </div>
     </div>
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var searchInput = document.getElementById('searchInput');
+        searchInput.addEventListener('input', function () {
+            var searchText = searchInput.value.toLowerCase();
+            var tableRows = document.querySelectorAll('.table tbody tr');
+            tableRows.forEach(function (row) {
+                var rowData = row.textContent.toLowerCase();
+                row.style.display = rowData.includes(searchText) ? 'table-row' : 'none';
+            });
+        });
+    });
+    document.addEventListener('DOMContentLoaded', function () {
+        var tableRows = document.querySelectorAll('.table tbody tr');
+        var rowsArray = Array.from(tableRows);
+
+        rowsArray.sort(function(a, b) {
+            var dateA = new Date(formatDate(a.querySelector('td:nth-child(5)').textContent));
+            var dateB = new Date(formatDate(b.querySelector('td:nth-child(5)').textContent));
+            return dateB - dateA;
+        });
+
+        var tableBody = document.querySelector('.table tbody');
+        tableBody.innerHTML = '';
+        rowsArray.forEach(function(row) {
+            tableBody.appendChild(row);
+        });
+
+        var searchInput = document.getElementById('searchInput');
+        searchInput.addEventListener('input', function () {
+            var searchText = searchInput.value.toLowerCase();
+            rowsArray.forEach(function (row) {
+                var rowData = row.textContent.toLowerCase();
+                row.style.display = rowData.includes(searchText) ? 'table-row' : 'none';
+            });
+        });
+    });
+
+    function formatDate(rawDate) {
+        var parts = rawDate.split('.');
+        return parts[2] + '-' + parts[1] + '-' + parts[0];
+    }
+</script>
 </body>
 <style>
     @media (max-width: 2400px) {

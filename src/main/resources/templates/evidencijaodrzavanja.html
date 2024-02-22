@@ -55,7 +55,7 @@
                                 <td th:text="${odrzavanje.izvanredan ? 'Da' : 'Ne'}"></td>
                                 <td th:text="${odrzavanje.umjeravanje ? 'Da' : 'Ne'}"></td>
                                 <td th:text="${odrzavanje.tvrtkaServiser?.naziv}"></td>
-                                <td th:text="${#dates.format(odrzavanje.datumPrijave, 'dd-MM-yyyy')}"></td>
+                                <td th:text="${#dates.format(odrzavanje.datumPrijave, 'dd.MM.yyyy')}"></td>
                             </tr>
                             </tbody>
                         </table>
@@ -77,6 +77,36 @@
             });
         });
     });
+    document.addEventListener('DOMContentLoaded', function () {
+        var tableRows = document.querySelectorAll('.table tbody tr');
+        var rowsArray = Array.from(tableRows);
+
+        rowsArray.sort(function(a, b) {
+            var dateA = new Date(formatDate(a.querySelector('td:nth-child(7)').textContent));
+            var dateB = new Date(formatDate(b.querySelector('td:nth-child(7)').textContent));
+            return dateB - dateA;
+        });
+
+        var tableBody = document.querySelector('.table tbody');
+        tableBody.innerHTML = '';
+        rowsArray.forEach(function(row) {
+            tableBody.appendChild(row);
+        });
+
+        var searchInput = document.getElementById('searchInput');
+        searchInput.addEventListener('input', function () {
+            var searchText = searchInput.value.toLowerCase();
+            rowsArray.forEach(function (row) {
+                var rowData = row.textContent.toLowerCase();
+                row.style.display = rowData.includes(searchText) ? 'table-row' : 'none';
+            });
+        });
+    });
+
+    function formatDate(rawDate) {
+        var parts = rawDate.split('.');
+        return parts[2] + '-' + parts[1] + '-' + parts[0];
+    }
 </script>
 </body>
 <style>

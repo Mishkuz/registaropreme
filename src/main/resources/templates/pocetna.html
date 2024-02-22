@@ -15,11 +15,11 @@
                 </header>
                 <br>
                 <div class="text-left">
-                    <h3>Opća bolnica Zabok</h3>
+                    <h3></h3>
                 </div>
                 <div class="d-flex align-items-center">
                     <img src="../static/pocetnanaslovna.png" alt="Slika" style="width: 140px; height: 140px;
-                         position: absolute; top:7%; right: 47%; border-radius: 50%;"><img>
+                         position: absolute; top:5%; right: 47%; border-radius: 50%;"><img>
                 </div>
                 <div class="text-left">
                     <h3>Medicinsko biokemijski laboratorij</h3>
@@ -84,7 +84,7 @@
                             <td th:text="${oprema.InventarskiBroj}"></td>
                             <td th:text="${oprema.tvrtkaVlasnik?.naziv}"></td>
                             <td th:text="${oprema.ispravno != null ? (oprema.ispravno ? 'Da' : 'Ne') : 'N/A'}"></td>
-                            <td th:text="${#temporals.format(oprema.datumPlaniranogServisiranja, 'dd-MM-yyyy')}"></td>
+                            <td th:text="${#temporals.format(oprema.datumPlaniranogServisiranja, 'dd.MM.yyyy')}"></td>
                             <td class="text-center">
                                 <a th:href="@{'/unos_za_odrzavanje?opremaId=' + ${oprema.id}}">
                                     <img  src="../static/servispocetna.png" class="img-fluid img-button" alt="servispocetna">
@@ -116,6 +116,8 @@
             });
         });
     });
+
+
 </script>
 </body>
 <style>
