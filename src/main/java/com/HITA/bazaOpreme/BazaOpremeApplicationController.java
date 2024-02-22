@@ -162,4 +162,11 @@ public class BazaOpremeApplicationController {
         return "oprema_kvarovi.html";
     }
 
+    @GetMapping("/1")
+    public String one (Model model){
+        List<Oprema> opremaList = opremaRepository.findAll();
+        model.addAttribute("opremaList", opremaList);
+        model.addAttribute(opremaRepository.findAll());
+        return "z-pocetna.html";
+    }
 }
