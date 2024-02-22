@@ -890,3 +890,5 @@ INSERT INTO "PUBLIC"."OPREMA"("ID","CERTIFIKAT","DATUM_NABAVE","DATUM_OTPISA","D
 org.h2.jdbc.JdbcSQLNonTransientException: The object is already closed [90007-224]
 2024-02-22 17:05:09.268438+01:00 jdbc[3]: exception
 org.h2.jdbc.JdbcSQLNonTransientException: The object is already closed [90007-224]
+2024-02-22 23:14:28.376818+01:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: The object is already closed [90007-224]
