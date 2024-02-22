@@ -13,8 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.LocalDate;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Controller
 public class RegistarOpremeController {
@@ -161,6 +160,7 @@ public class RegistarOpremeController {
     @GetMapping("/")
     public String nada (Model model){
         List<Oprema> opremaList = opremaRepository.findAll();
+       Collections.sort(opremaList, Comparator.comparing(Oprema::getDatumPlaniranogServisiranja, Comparator.reverseOrder()));
         model.addAttribute("opremaList", opremaList);
         model.addAttribute(opremaRepository.findAll());
         return "z-pocetna.html";
