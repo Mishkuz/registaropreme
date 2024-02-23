@@ -32,7 +32,6 @@ public class BazaOpremeApplicationController {
     public String pocetna(Model model) {
         List<Oprema> opremaList = opremaRepository.findAll();
         model.addAttribute("opremaList", opremaList);
-        model.addAttribute(opremaRepository.findAll());
         return "pocetna.html";
     }
     @GetMapping("/unos_novog_kvara")

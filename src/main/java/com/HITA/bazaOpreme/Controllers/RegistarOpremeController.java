@@ -31,13 +31,18 @@ public class RegistarOpremeController {
     private TvrtkaRepository tvrtkaRepository;
 
     @GetMapping("/z-unos_novog_kvara")
-    public String zunos_novog_kvara(Model model, Long opremaId) {
+    public String zunos_novog_kvara(Model model, @RequestParam(name = "opremaId") Long opremaId) {
         List<Oprema> opremaList = opremaRepository.findAll();
         List<Kvar> kvarList = kvarRepository.findAll();
-        model.addAttribute(kvarList);
-        model.addAttribute(opremaList);
-        model.addAttribute(opremaRepository.findById(opremaId).get());
-        return "unos_novog_kvara.html";
+        Optional<Oprema> oprema = opremaRepository.findById(opremaId);
+        if (oprema.isPresent()) {
+            model.addAttribute("oprema", oprema.get());
+        } else {
+            // Ovdje obradite slučaj kada oprema s traženim ID-em nije pronađena
+        }
+        model.addAttribute("kvarList", kvarList);
+        model.addAttribute("opremaList", opremaList);
+        return "z-prijava_kvara.html";
     }
 
     @PostMapping("/z-spremiuredaj")
@@ -94,7 +99,7 @@ public class RegistarOpremeController {
     public String zevidencijaodrzavanja(Model model) {
         List<Odrzavanje> odrzavanjeList = odrzavanjeRepository.findAll();
         model.addAttribute(odrzavanjeList);
-        return "evidencijaodrzavanja.html";
+        return "z-evidencijaodrzavanja.html";
     }
 
     @PostMapping("/z-spremiKvar")

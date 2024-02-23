@@ -13,7 +13,7 @@ public class BazaOpremeApplication {
 		SpringApplication.run(BazaOpremeApplication.class, args);
 		System.out.println("Startup successful!");
 		System.out.println("Go to :");
-		System.out.println("http://localhost:8080/pocetna");
+		System.out.println("http://localhost:8080/");
 	}
 
 }

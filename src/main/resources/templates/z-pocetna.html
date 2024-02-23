@@ -64,7 +64,7 @@
     <div class="sidenav-header">
         <i class="fas fa-times p-3 cursor-pointer text-white opacity-5 position-absolute end-0 top-0 d-none d-xl-none"
            aria-hidden="true" id="iconSidenav"></i>
-        <a class="navbar-brand m-0" href=" https://demos.creative-tim.com/material-dashboard/pages/dashboard "
+        <a class="navbar-brand m-0"
            target="_blank">
             <img src="../static/pocetnanaslovna.png" class="navbar-brand-img h-100" alt="main_logo">
             <span class="ms-1 font-weight-bold text-white">Registar opreme</span>
@@ -78,7 +78,7 @@
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="material-icons opacity-10">dashboard</i>
                     </div>
-                    <span class="nav-link-text ms-1">Dashboard</span>
+                    <span class="nav-link-text ms-1">Pregled opreme</span>
                 </a>
             </li>
             <li class="nav-item">
@@ -98,7 +98,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-white " href="../pages/rtl.html">
+                <a class="nav-link text-white " href="../z-pokaziKvarove">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="material-icons opacity-10">receipt_long</i>
                     </div>
@@ -165,7 +165,7 @@
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
                 </ol>
-                <h3 class="font-weight-bolder mb-0">Dashboard</h3>
+                <h3 class="font-weight-bolder mb-0">Pregled opreme</h3>
             </nav>
             <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
                 <div class="ms-md-auto pe-md-3 d-flex align-items-center">
@@ -263,16 +263,19 @@
             </script>
         </div>
     </div>
-    <style> .past-date-row {
+    <style>
+    .past-date-row {
     background-color: rgba(255, 0, 0, 0.2);
-}
+    }
 
-.past-date-row:hover {
+    .past-date-row:hover {
     background-color: rgba(255, 0, 0, 0.3);
-}
+    }
+
+
     </style>
     <div class="container-fluid py-4">
-        <table class="table align-items-center mx-auto mb-0 table-striped table-hover">
+        <table class="table align-items-center text-center table-striped table-hover">
             <thead>
             <tr>
                 <th>Šifra</th>
@@ -305,12 +308,12 @@
                     th:attr="data-datum=${#temporals.format(oprema.datumPlaniranogServisiranja, 'yyyy-MM-dd')}"
                     th:text="${#temporals.format(oprema.datumPlaniranogServisiranja, 'dd.MM.yyyy')}"></td>
                 <td class="text-center">
-                    <a th:href="@{'/unos_za_odrzavanje?opremaId=' + ${oprema.id}}">
+                    <a th:href="@{'/z-unos_za_odrzavanje?opremaId=' + ${oprema.id}}">
                         <img src="../static/servispocetna.png" class="img-fluid img-button" alt="servispocetna">
                     </a>
                 </td>
                 <td class="text-center">
-                    <a th:href="@{'/unos_novog_kvara?opremaId=' + ${oprema.id}}">
+                    <a th:href="@{/z-unos_novog_kvara(opremaId=${oprema.id})}">
                         <img src="../static/prijavikvar.png" class="img-fluid img-button" alt="prijavikvar">
                     </a>
                 </td>
