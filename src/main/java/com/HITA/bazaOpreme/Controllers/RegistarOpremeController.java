@@ -42,20 +42,20 @@ public class RegistarOpremeController {
 
     @PostMapping("/z-spremiuredaj")
     public String zspremiUredaj(@RequestParam("sifra") String sifra,
-                               @RequestParam("naziv") String naziv,
-                               @RequestParam("serijskiBroj") String serijskiBroj,
-                               @RequestParam("inventarskiBroj") String inventarskiBroj,
-                               @RequestParam("kategorijaId") Long kategorijaId,
-                               @RequestParam("vrstaId") Long vrstaId,
-                               @RequestParam("proizvodjacId") Long proizvodjacId,
-                               @RequestParam("godinaProizvodnje") LocalDate godinaProizvodnje,
-                               @RequestParam("datumNabave") LocalDate datumNabave,
-                               @RequestParam("certifikat") boolean certifikat,
-                               @RequestParam("vlasnikId") Long vlasnikId,
-                               @RequestParam("intervalServisiranjaUMjesecima") Integer intervalServisiranjaUMjesecima,
-                               @RequestParam("datumPlaniranogServisiranja") LocalDate datumPlaniranogServisiranja,
-                               @RequestParam("ispravno") boolean ispravno,
-                               Model model) {
+                                @RequestParam("naziv") String naziv,
+                                @RequestParam("serijskiBroj") String serijskiBroj,
+                                @RequestParam("inventarskiBroj") String inventarskiBroj,
+                                @RequestParam("kategorijaId") Long kategorijaId,
+                                @RequestParam("vrstaId") Long vrstaId,
+                                @RequestParam("proizvodjacId") Long proizvodjacId,
+                                @RequestParam("godinaProizvodnje") LocalDate godinaProizvodnje,
+                                @RequestParam("datumNabave") LocalDate datumNabave,
+                                @RequestParam("certifikat") boolean certifikat,
+                                @RequestParam("vlasnikId") Long vlasnikId,
+                                @RequestParam("intervalServisiranjaUMjesecima") Integer intervalServisiranjaUMjesecima,
+                                @RequestParam("datumPlaniranogServisiranja") LocalDate datumPlaniranogServisiranja,
+                                @RequestParam("ispravno") boolean ispravno,
+                                Model model) {
         // Stvaranje instance Oprema objekta
         Oprema oprema = new Oprema();
         oprema.setSifra(sifra);
@@ -96,13 +96,14 @@ public class RegistarOpremeController {
         model.addAttribute(odrzavanjeList);
         return "evidencijaodrzavanja.html";
     }
+
     @PostMapping("/z-spremiKvar")
     public String zspremiKvar(@RequestParam("opremaId") Long opremaId,
-                             @RequestParam("prijavioRadnik") String prijavioRadnik,
-                             @RequestParam("opisKvara") String opisKvara,
-                             @RequestParam("datumPrijave") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate datumPrijave,
-                             Model model,
-                             HttpServletRequest request
+                              @RequestParam("prijavioRadnik") String prijavioRadnik,
+                              @RequestParam("opisKvara") String opisKvara,
+                              @RequestParam("datumPrijave") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate datumPrijave,
+                              Model model,
+                              HttpServletRequest request
     ) {
         HttpSession session = request.getSession();
         Kvar kvar = new Kvar(prijavioRadnik, opisKvara, null);
@@ -115,7 +116,7 @@ public class RegistarOpremeController {
     }
 
     @GetMapping("/z-unos_za_odrzavanje")
-    public String zunos_za_odrzavanje( Model model, Long opremaId) {
+    public String zunos_za_odrzavanje(Model model, Long opremaId) {
         List<Oprema> opremaList = opremaRepository.findAll();
         List<Odrzavanje> odrzavanjeList = odrzavanjeRepository.findAll();
         List<Tvrtka> serviseri = tvrtkaRepository.findAll();
@@ -125,6 +126,7 @@ public class RegistarOpremeController {
         model.addAttribute(opremaRepository.findById(opremaId).get());
         return "z-unos_za_odrzavanje.html";
     }
+
     @GetMapping("/z-spremiOdrzavanje")
     public String zspremiOdrzavanje(
             @RequestParam("tvrtkaId") Long tvrtkaId,
@@ -151,18 +153,19 @@ public class RegistarOpremeController {
         odrzavanjeRepository.save(odrzavanje);
         return "redirect:/z-evidencijaodrzavanja";
     }
+
     @GetMapping("/z-pokaziKvarove")
     public String zshowFailures(Model model) {
-        model.addAttribute("kvarList",kvarRepository.findAll());
+        model.addAttribute("kvarList", kvarRepository.findAll());
         return "z-oprema_kvarovi.html";
     }
 
     @GetMapping("/")
-    public String nada (Model model){
-        List<Oprema> opremaList = opremaRepository.findAll();
-       Collections.sort(opremaList, Comparator.comparing(Oprema::getDatumPlaniranogServisiranja, Comparator.reverseOrder()));
-        model.addAttribute("opremaList", opremaList);
-        model.addAttribute(opremaRepository.findAll());
+    public String nada(Model model) {
+        List<Oprema> opremaList1 = opremaRepository.findAll();
+        List<Oprema> opremaList = new ArrayList<>(opremaList1);
+        opremaList.sort(Comparator.comparing(Oprema::getDatumPlaniranogServisiranja));
+        model.addAttribute("opremaList",opremaList);
         return "z-pocetna.html";
     }
 }

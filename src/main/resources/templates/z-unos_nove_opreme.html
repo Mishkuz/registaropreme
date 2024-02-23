@@ -135,7 +135,7 @@
         </ul>
     </div>
     <script>
-        /* document.addEventListener('mousemove', function (event) {
+      /*  document.addEventListener('mousemove', function (event) {
         var mouseX = event.clientX;
         var leftEighth = window.innerWidth / 8;
 
@@ -235,7 +235,8 @@
         </div>
     </nav>
     <!-- End Navbar -->
-        <div class="row justify-content-center border rounded-2 p-2 bg shadow box-area">
+    <div class="container main-container">
+        <div class="row justify-content-center border rounded-2 p-2 bg-white shadow box-area position-relative">
             <form id="myForm" action="/spremiuredaj" method="post">
                 <br>
                 <div>
@@ -248,7 +249,7 @@
                 </div>
                 <div class="input-group input-group-dynamic mb-4">
                     <span id="basic-addon-naziv">Naziv: </span>
-                    <textarea name="naziv" id="naziv" rows="3" cols="54" maxlength="100"  class="form-tarea" required></textarea>
+                    <input type="text" name="naziv" id="naziv" rows="3" cols="54" maxlength="100"  class="form-control" required>
                 </div>
                 <div class="input-group input-group-dynamic mb-4">
                     <span id="basic-addon-serijskiBroj">Serijski broj: </span>
@@ -324,7 +325,7 @@
    }
 
    .input-group-dynamic .form-control {
-       width: 40%;
+       width: 25%;
    }
 
          .input-group-dynamic .form-select {

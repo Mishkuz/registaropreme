@@ -135,24 +135,24 @@
         </ul>
     </div>
     <script>
-       /* document.addEventListener('mousemove', function (event) {
-       var mouseX = event.clientX;
-       var leftEighth = window.innerWidth / 8;
+        /* document.addEventListener('mousemove', function (event) {
+        var mouseX = event.clientX;
+        var leftEighth = window.innerWidth / 8;
 
-       var isInLeftEighth = mouseX <= leftEighth;
+        var isInLeftEighth = mouseX <= leftEighth;
 
-       var navigation = document.getElementById('sidenav-main');
+        var navigation = document.getElementById('sidenav-main');
 
-       if (navigation) {  // Provjerite postojanje navigacije
-           if (isInLeftEighth) {
-               navigation.style.display = 'block';
-           } else {
-               navigation.style.display = 'none';
-           }
-       }
+        if (navigation) {  // Provjerite postojanje navigacije
+            if (isInLeftEighth) {
+                navigation.style.display = 'block';
+            } else {
+                navigation.style.display = 'none';
+            }
+        }
 
-       console.log('Mouse X:', mouseX, 'Left Eighth:', leftEighth, 'Is In Left Eighth:', isInLeftEighth);
-   });*/
+        console.log('Mouse X:', mouseX, 'Left Eighth:', leftEighth, 'Is In Left Eighth:', isInLeftEighth);
+    });*/
     </script>
     <div class="sidenav-footer position-absolute w-100 bottom-0 ">
     </div>
@@ -263,6 +263,14 @@
             </script>
         </div>
     </div>
+    <style> .past-date-row {
+    background-color: rgba(255, 0, 0, 0.2);
+}
+
+.past-date-row:hover {
+    background-color: rgba(255, 0, 0, 0.3);
+}
+    </style>
     <div class="container-fluid py-4">
         <table class="table align-items-center mx-auto mb-0 table-striped table-hover">
             <thead>
@@ -293,7 +301,9 @@
                 <td th:text="${oprema.InventarskiBroj}"></td>
                 <td th:text="${oprema.tvrtkaVlasnik?.naziv}"></td>
                 <td th:text="${oprema.ispravno != null ? (oprema.ispravno ? 'Da' : 'Ne') : 'N/A'}"></td>
-                <td th:text="${#temporals.format(oprema.datumPlaniranogServisiranja, 'dd.MM.yyyy')}"></td>
+                <td class="datum-planiranog-servisiranja"
+                    th:attr="data-datum=${#temporals.format(oprema.datumPlaniranogServisiranja, 'yyyy-MM-dd')}"
+                    th:text="${#temporals.format(oprema.datumPlaniranogServisiranja, 'dd.MM.yyyy')}"></td>
                 <td class="text-center">
                     <a th:href="@{'/unos_za_odrzavanje?opremaId=' + ${oprema.id}}">
                         <img src="../static/servispocetna.png" class="img-fluid img-button" alt="servispocetna">
@@ -305,6 +315,34 @@
                     </a>
                 </td>
             </tr>
+            <script>
+                var today = new Date();
+                today.setHours(0, 0, 0, 0);
+
+                var rows = document.querySelectorAll('.datum-planiranog-servisiranja');
+
+                rows.forEach(function(cell) {
+                    var dateString = cell.getAttribute('data-datum');
+                    console.log("Datum iz atributa:", dateString);
+
+                    // Dodajte ovu liniju za ispis originalnog stringa datuma
+                    console.log("Originalni datum string:", dateString);
+
+                    // Ručno parsiranje datuma
+                    var dateParts = dateString.split('-');
+                    var year = parseInt(dateParts[0], 10);
+                    var month = parseInt(dateParts[1], 10) - 1; // Mjeseci idu od 0 do 11
+                    var day = parseInt(dateParts[2], 10);
+
+                    var date = new Date(year, month, day);
+                    console.log("Konstruisani datum:", date);
+                    console.log("Današnji datum:", today);
+
+                    if (!isNaN(date.getTime()) && date.getTime() < today.getTime()) {
+                        cell.parentNode.classList.add('past-date-row');
+                    }
+                });
+            </script>
             </tbody>
         </table>
     </div>
