@@ -7,12 +7,18 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
 @Table(name = "odrzavanje")
+@Data
+@NoArgsConstructor
 public class Odrzavanje {
 
     @Id
@@ -67,89 +73,6 @@ public class Odrzavanje {
         this.umjeravanje = umjeravanje;
         this.datumPrijave = datumPrijave;
         this.datumOtpreme = datumOtpreme;
-        this.datumPovrata = datumPovrata;
-    }
-
-    public Odrzavanje() {
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getPrijavioRadnik() {
-        return prijavioRadnik;
-    }
-
-    public void setPrijavioRadnik(String prijavioRadnik) {
-        this.prijavioRadnik = prijavioRadnik;
-    }
-
-    public String getOpisOdrzavanja() {
-        return opisOdrzavanja;
-    }
-
-    public void setOpisOdrzavanja(String opisOdrzavanja) {
-        this.opisOdrzavanja = opisOdrzavanja;
-    }
-
-    public Oprema getOprema() {
-        return oprema;
-    }
-
-    public void setOprema(Oprema oprema) {
-        this.oprema = oprema;
-    }
-
-    public Tvrtka getTvrtkaServiser() {
-        return tvrtkaServiser;
-    }
-
-    public void setTvrtkaServiser(Tvrtka tvrtkaServiser) {
-        this.tvrtkaServiser = tvrtkaServiser;
-    }
-
-    public boolean isIzvanredan() {
-        return izvanredan;
-    }
-
-    public void setIzvanredan(boolean izvanredan) {
-        this.izvanredan = izvanredan;
-    }
-
-    public boolean isUmjeravanje() {
-        return umjeravanje;
-    }
-
-    public void setUmjeravanje(boolean umjeravanje) {
-        this.umjeravanje = umjeravanje;
-    }
-
-    public Date getDatumPrijave() {
-        return datumPrijave;
-    }
-
-    public void setDatumPrijave(Date datumPrijave) {
-        this.datumPrijave = datumPrijave;
-    }
-
-    public Date getDatumOtpreme() {
-        return datumOtpreme;
-    }
-
-    public void setDatumOtpreme(Date datumOtpreme) {
-        this.datumOtpreme = datumOtpreme;
-    }
-
-    public Date getDatumPovrata() {
-        return datumPovrata;
-    }
-
-    public void setDatumPovrata(Date datumPovrata) {
         this.datumPovrata = datumPovrata;
     }
 

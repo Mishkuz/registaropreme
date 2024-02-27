@@ -2,9 +2,15 @@ package com.HITA.bazaOpreme.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
+import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Table(name = "vrsta")
+@Data
+@NoArgsConstructor
 public class Vrsta {
 
     @Id
@@ -30,40 +36,4 @@ public class Vrsta {
         this.sifra = sifra;
         this.vrsta = vrsta;
     }
-
-    public Vrsta() {
-    }
-
-    public Long getIdVrsta() {
-        return idVrsta;
-    }
-
-    public void setIdVrsta(Long idVrsta) {
-        this.idVrsta = idVrsta;
-    }
-
-    public Kategorija getKategorija() {
-        return kategorija;
-    }
-
-    public void setKategorija(Kategorija kategorija) {
-        this.kategorija = kategorija;
-    }
-
-    public String getSifra() {
-        return sifra;
-    }
-
-    public void setSifra(String sifra) {
-        this.sifra = sifra;
-    }
-
-    public String getVrsta() {
-        return vrsta;
-    }
-
-    public void setVrsta(String vrsta) {
-        this.vrsta = vrsta;
-    }
 }
-
