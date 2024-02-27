@@ -235,10 +235,10 @@
     <!-- End Navbar -->
     <div class="container main-container">
         <div class="row justify-content-center border rounded-2 p-2 bg-white shadow box-area position-relative">
-            <form action="/z-spremiKvar" method="get">
+            <form action="/z-spremiOdrzavanje" method="get">
                 <br>
                 <div>
-                    <h2>Prijava kvara</h2>
+                    <h2>Servis</h2>
                 </div>
                 <input name="opremaId" hidden="true" th:value="${oprema.id}"/>
                 <br><br>
@@ -252,13 +252,20 @@
                     <input name="naziv" id="naziv" class="form-control"  disabled="true" th:value="${oprema.naziv}">
                 </div>
                 <div class="input-group input-group-dynamic mb-4">
-                    <span>Prijavio radnik: </span>
+                    <label for="tvrtkaId">Serviser:</label>
+                    <select class="form-select" id="tvrtkaId" name="tvrtkaId">
+                        <option th:each="tvrtka : ${serviseri}" th:value="${tvrtka.id}"
+                                th:text="${tvrtka.naziv}"></option>
+                    </select>
+                </div>
+                <div class="input-group input-group-dynamic mb-4">
+                    <span>Poslao radnik: </span>
                     <input type="text" id="prijavioRadnik" name="prijavioRadnik" class="form-control"  aria-label="serijskiBroj"
                            aria-describedby="basic-addon-serijskiBroj" maxlength="69" size="42" required>
                 </div>
                 <div class="input-group input-group-dynamic mb-4">
                     <span id="basic-addon-opis">Opis: </span>
-                    <textarea name="opisKvara" id="opisKvara" rows="3" cols="69" class="form-tarea"  maxlength="512" required></textarea>
+                    <textarea name="opisOdrzavanja" id="opisOdrzavanja" rows="3" cols="69" class="form-tarea"  maxlength="512" required></textarea>
                 </div>
                 <div class="input-group input-group-dynamic mb-4">
                     <span>Datum: </span>
@@ -266,9 +273,9 @@
                            aria-describedby="basic-addon-datumPrijave" required>
                 </div>
                 <div class="text-left">
-                    <form action="/z-pokaziKvarove" method="get">
+                    <form action="/z-evidencijaodrzavanja" method="get">
                         <button name="button" class="btn btn-primary" type="submit"
-                                style="margin-bottom: 5px; margin-top: 20px; margin-right: 10px;">Prijavi kvar
+                                style="margin-bottom: 5px; margin-top: 20px; margin-right: 10px;">Spremi
                         </button>
                     </form>
                     <a href="/" class="btn btn-primary" type="submit" style="margin-bottom: 5px; margin-top: 20px;

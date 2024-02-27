@@ -121,8 +121,8 @@ public class RegistarOpremeController {
         return "redirect:/z-pokaziKvarove";
     }
 
-    @GetMapping("/z-unos_za_odrzavanje")
-    public String zunos_za_odrzavanje(Model model, Long opremaId) {
+    @GetMapping("/z-unos_za_servis")
+    public String zunos_za_servis(Model model, Long opremaId) {
         List<Oprema> opremaList = opremaRepository.findAll();
         List<Odrzavanje> odrzavanjeList = odrzavanjeRepository.findAll();
         List<Tvrtka> serviseri = tvrtkaRepository.findAll();
@@ -130,7 +130,18 @@ public class RegistarOpremeController {
         model.addAttribute(opremaList);
         model.addAttribute("serviseri", serviseri);
         model.addAttribute(opremaRepository.findById(opremaId).get());
-        return "z-unos_za_odrzavanje.html";
+        return "z-unos_za_servis.html";
+    }
+    @GetMapping("/z-unos_za_umjeravanje")
+    public String zunos_za_umjeravanje(Model model, Long opremaId) {
+        List<Oprema> opremaList = opremaRepository.findAll();
+        List<Odrzavanje> odrzavanjeList = odrzavanjeRepository.findAll();
+        List<Tvrtka> serviseri = tvrtkaRepository.findAll();
+        model.addAttribute(odrzavanjeList);
+        model.addAttribute(opremaList);
+        model.addAttribute("serviseri", serviseri);
+        model.addAttribute(opremaRepository.findById(opremaId).get());
+        return "z-unos_za_umjeravanje.html";
     }
 
     @GetMapping("/z-spremiOdrzavanje")
@@ -159,6 +170,7 @@ public class RegistarOpremeController {
         odrzavanjeRepository.save(odrzavanje);
         return "redirect:/z-evidencijaodrzavanja";
     }
+
 
     @GetMapping("/z-pokaziKvarove")
     public String zshowFailures(Model model) {
