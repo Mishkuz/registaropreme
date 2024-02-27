@@ -97,11 +97,12 @@ public class RegistarOpremeController {
 
     @GetMapping("/z-evidencijaodrzavanja")
     public String zevidencijaodrzavanja(Model model) {
-        List<Odrzavanje> odrzavanjeList = odrzavanjeRepository.findAll();
+        List<Odrzavanje> odrzavanjeList1 = odrzavanjeRepository.findAll();
+        List<Odrzavanje> odrzavanjeList = new ArrayList<>(odrzavanjeList1);
+        odrzavanjeList.sort(Comparator.comparing(Odrzavanje::getDatumPrijave, Comparator.reverseOrder()));
         model.addAttribute(odrzavanjeList);
         return "z-evidencijaodrzavanja.html";
     }
-
     @PostMapping("/z-spremiKvar")
     public String zspremiKvar(@RequestParam("opremaId") Long opremaId,
                               @RequestParam("prijavioRadnik") String prijavioRadnik,
@@ -161,7 +162,10 @@ public class RegistarOpremeController {
 
     @GetMapping("/z-pokaziKvarove")
     public String zshowFailures(Model model) {
-        model.addAttribute("kvarList", kvarRepository.findAll());
+        List<Kvar> kvarList1 = kvarRepository.findAll();
+        List<Kvar> kvarList = new ArrayList<>(kvarList1);
+        kvarList.sort(Comparator.comparing(Kvar::getDatumPrijave, Comparator.reverseOrder()));
+        model.addAttribute("kvarList", kvarList);
         return "z-oprema_kvarovi.html";
     }
 

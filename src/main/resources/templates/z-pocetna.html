@@ -66,8 +66,7 @@
            aria-hidden="true" id="iconSidenav"></i>
         <a class="navbar-brand m-0"
            target="_blank">
-            <img src="../static/pocetnanaslovna.png" class="navbar-brand-img h-100" alt="main_logo">
-            <span class="ms-1 font-weight-bold text-white">Registar opreme</span>
+            <h4 class="ms-1 font-weight-bold text-white">Registar opreme<h4>
         </a>
     </div>
     <hr class="horizontal light mt-0 mb-2">
@@ -288,7 +287,8 @@
                 <th>Vlasnik</th>
                 <th>Ispravno</th>
                 <th>Datum za servis</th>
-                <th>Održavanje</th>
+                <th>Umjeravanje</th>
+                <th>Servis</th>
                 <th>Prijavi kvar</th>
             </tr>
             </thead>
@@ -307,6 +307,11 @@
                 <td class="datum-planiranog-servisiranja"
                     th:attr="data-datum=${#temporals.format(oprema.datumPlaniranogServisiranja, 'yyyy-MM-dd')}"
                     th:text="${#temporals.format(oprema.datumPlaniranogServisiranja, 'dd.MM.yyyy')}"></td>
+                <td class="text-center">
+                    <a th:href="@{'/z-unos_za_odrzavanje?opremaId=' + ${oprema.id}}">
+                        <img src="../static/servispocetna.png" class="img-fluid img-button" alt="servispocetna">
+                    </a>
+                </td>
                 <td class="text-center">
                     <a th:href="@{'/z-unos_za_odrzavanje?opremaId=' + ${oprema.id}}">
                         <img src="../static/servispocetna.png" class="img-fluid img-button" alt="servispocetna">
