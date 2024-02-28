@@ -191,7 +191,6 @@
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
                 </ol>
-                <h3 class="font-weight-bolder mb-0">Pregled opreme</h3>
             </nav>
             <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
                 <div class="ms-md-auto pe-md-3 d-flex align-items-center">
@@ -261,125 +260,76 @@
         </div>
     </nav>
     <!-- End Navbar -->
-    <div class="container d-flex justify-content-center align-items-center">
-        <div>
-            <div class="input-group input-group-dynamic mb-4">
-                <input type="text" id="searchInput" style="border-color: #177245; width: 500px; max-height:40px;"
-                       class="form-control"
-                       placeholder="Unesi naziv opreme" aria-label="nazivopreme" aria-describedby="basic-addon1">
-                <span class="input-group-text" id="basic-addon1" style="max-height:40px;">
-                                <button name="button" class="btn btn-link" type="submit">
-                                    <img src="../static/povecalo.jpg" class="img-fluid" style="width: 35px; height: 35px;
-                                         border-radius: 50%; background:transparent;" alt="povecalo">
-                                </button>
-                            </span>
-            </div>
-            <script>
-                document.addEventListener('DOMContentLoaded', function () {
-                    var searchInput = document.getElementById('searchInput');
-                    searchInput.addEventListener('input', function () {
-                        var searchText = searchInput.value.toLowerCase();
-                        var tableRows = document.querySelectorAll('.table tbody tr');
-                        tableRows.forEach(function (row) {
-                            var rowData = row.textContent.toLowerCase();
-                            row.style.display = rowData.includes(searchText) ? 'table-row' : 'none';
-                        });
-                    });
-                });
-            </script>
+    <div class="container main-container">
+        <div class="row justify-content-center border rounded-2 p-2 bg- shadow box-area position-relative">
+            <form action="/spremiNovogVlasnika">
+                <div>
+                    <h2>Novi vlasnik</h2>
+                </div>
+                <br><br>
+                <div class="input-group input-group-dynamic mb-4">
+                    <span>Šifra: </span>
+                    <input type="text" aria-label="Username" aria-describedby="basic-addon1" id="sifra" class="form-control" maxlength="20" size="30" required>
+                </div>
+                <div class="input-group input-group-dynamic mb-4">
+                    <span>Naziv: </span>
+                    <input type="text" aria-label="Username" aria-describedby="basic-addon1" class="form-control" id="naziv" maxlength="50" size="60" required>
+                </div>
+                <div class="input-group input-group-dynamic mb-4">
+                    <span>Adresa: </span>
+                    <input type="text" name="adresa" id="adresa" rows="3" cols="54" maxlength="100"   class="form-control" required>
+                </div>
+                <div class="input-group input-group-dynamic mb-4">
+                    <span>Broj telefona: </span>
+                    <input type="text" aria-label="Username" aria-describedby="basic-addon1" id="telefon"  class="form-control"  maxlength="20" size="30">
+                </div>
+                <div class="input-group input-group-dynamic mb-4">
+                    <span>E-mail: </span>
+                    <input type="text" aria-label="Username" aria-describedby="basic-addon1" id="email" class="form-control" maxlength="50" size="60">
+                </div>
+                <div class="input-group input-group-dynamic mb-4">
+                    <span >Kontakt osoba: </span>
+                    <input type="text" aria-label="Username" aria-describedby="basic-addon1" id="kOsoba" class="form-control" maxlength="50" size="60">
+                </div>
+                <div class="text-left">
+                    <button name="submit" class="btn btn-primary" type="submit" style="margin-bottom: 5px; margin-top: 20px;
+                margin-right: 10px;">Unesi vlasnika</button>
+                    <button name="button" class="btn btn-primary" type="submit" style="margin-bottom: 5px; margin-top: 20px;
+                margin-right: 10px;">Odustani</button>
+                </div>
+                <br>
+            </form>
         </div>
+        <style>
+            .input-group-dynamic {
+           display: flex;
+           flex-direction: column;
+       }
+
+       .input-group-dynamic .form-control {
+           width: 25%;
+       }
+
+             .input-group-dynamic .form-select {
+           width: 30%;
+       }
+
+            .input-group-dynamic .form-tarea {
+           width: 50%;
+       }
+        </style>
     </div>
-    <style>
-    .past-date-row {
-    background-color: rgba(255, 0, 0, 0.2);
-    }
-
-    .past-date-row:hover {
-    background-color: rgba(255, 0, 0, 0.3);
-    }
-
-
-    </style>
-    <div class="container-fluid py-4">
-        <table class="table align-items-center text-center table-striped table-hover">
-            <thead>
-            <tr>
-                <th>Šifra</th>
-                <th>Naziv</th>
-                <th>Kategorija</th>
-                <th>Vrsta</th>
-                <th>Proizvođač</th>
-                <th>Serijski br.</th>
-                <th>Inventarski br.</th>
-                <th>Vlasnik</th>
-                <th>Ispravno</th>
-                <th>Datum za servis</th>
-                <th>Umjeravanje</th>
-                <th>Servis</th>
-                <th>Prijavi kvar</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-            <tr th:each="oprema : ${opremaList}">
-                <td th:text="${oprema.sifra}"></td>
-                <td th:text="${oprema.naziv}"></td>
-                <td th:text="${oprema.kategorija?.kategorija}"></td>
-                <td th:text="${oprema.vrsta?.vrsta}"></td>
-                <td th:text="${oprema.proizvodjac?.naziv}"></td>
-                <td th:text="${oprema.serijskiBroj}"></td>
-                <td th:text="${oprema.InventarskiBroj}"></td>
-                <td th:text="${oprema.vlasnik?.naziv}"></td>
-                <td th:text="${oprema.ispravno != null ? (oprema.ispravno ? 'Da' : 'Ne') : 'N/A'}"></td>
-                <td class="datum-planiranog-servisiranja"
-                    th:attr="data-datum=${#temporals.format(oprema.datumPlaniranogServisiranja, 'yyyy-MM-dd')}"
-                    th:text="${#temporals.format(oprema.datumPlaniranogServisiranja, 'dd.MM.yyyy')}"></td>
-                <td class="text-center">
-                    <a th:href="@{'/z-unos_za_umjeravanje?opremaId=' + ${oprema.id}}">
-                        <img src="../static/servispocetna.png" class="img-fluid img-button" alt="servispocetna">
-                    </a>
-                </td>
-                <td class="text-center">
-                    <a th:href="@{'/z-unos_za_servis?opremaId=' + ${oprema.id}}">
-                        <img src="../static/servispocetna.png" class="img-fluid img-button" alt="servispocetna">
-                    </a>
-                </td>
-                <td class="text-center">
-                    <a th:href="@{/z-unos_novog_kvara(opremaId=${oprema.id})}">
-                        <img src="../static/prijavikvar.png" class="img-fluid img-button" alt="prijavikvar">
-                    </a>
-                </td>
-            </tr>
-            <script>
-                var today = new Date();
-                today.setHours(0, 0, 0, 0);
-
-                var rows = document.querySelectorAll('.datum-planiranog-servisiranja');
-
-                rows.forEach(function(cell) {
-                    var dateString = cell.getAttribute('data-datum');
-                    console.log("Datum iz atributa:", dateString);
-
-                    // Dodajte ovu liniju za ispis originalnog stringa datuma
-                    console.log("Originalni datum string:", dateString);
-
-                    // Ručno parsiranje datuma
-                    var dateParts = dateString.split('-');
-                    var year = parseInt(dateParts[0], 10);
-                    var month = parseInt(dateParts[1], 10) - 1; // Mjeseci idu od 0 do 11
-                    var day = parseInt(dateParts[2], 10);
-
-                    var date = new Date(year, month, day);
-                    console.log("Konstruisani datum:", date);
-                    console.log("Današnji datum:", today);
-
-                    if (!isNaN(date.getTime()) && date.getTime() < today.getTime()) {
-                        cell.parentNode.classList.add('past-date-row');
-                    }
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var closeButton = document.querySelector('button[name="button"][type="submit"][value="Zatvori"]');
+            if (closeButton) {
+                closeButton.addEventListener("click", function (event) {
+                    event.preventDefault(); // spriječava slanje obrasca
+                    window.location.href = "/pocetna"; // preusmjerava na /pocetna
                 });
-            </script>
-            </tbody>
-        </table>
+            }
+        });
+    </script>
     </div>
 </main>
 <div class="fixed-plugin">
@@ -483,4 +433,3 @@
 <script src="../static/assets/js/material-dashboard.min.js?v=3.1.0"></script>
 </body>
 
-</html>
