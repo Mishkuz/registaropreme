@@ -30,10 +30,15 @@ public class Vrsta {
     @Size(max = 50, message = "Naziv vrste ne smije biti duži od 50 znakova")
     private String vrsta;
 
-    public Vrsta(Long idVrsta, Kategorija kategorija, String sifra, String vrsta) {
+    @ManyToOne
+    @JoinColumn(name="radiliste_id")
+    Radiliste radiliste;
+
+    public Vrsta(Long idVrsta, Kategorija kategorija, String sifra, String vrsta, Radiliste radiliste) {
         this.idVrsta = idVrsta;
         this.kategorija = kategorija;
         this.sifra = sifra;
         this.vrsta = vrsta;
+        this.radiliste = radiliste;
     }
 }

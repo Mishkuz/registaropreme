@@ -38,11 +38,18 @@ public class Kvar {
     //@NotNull(message = “Datum prijave je obavezan”)
     @Column(name = "datum_prijave", nullable = false)
     private LocalDate datumPrijave;
-    public Kvar(String prijavioRadnik, String opisKvara, LocalDate datumPrijave) {
+
+    @ManyToOne
+    @JoinColumn(name="radiliste_id")
+    Radiliste radiliste;
+
+
+    public Kvar(String prijavioRadnik, String opisKvara, LocalDate datumPrijave, Radiliste radiliste) {
         this.oprema = oprema;
         this.prijavioRadnik = prijavioRadnik;
         this.opisKvara = opisKvara;
         this.datumPrijave = datumPrijave;
+        this.radiliste = radiliste;
     }
 
 }

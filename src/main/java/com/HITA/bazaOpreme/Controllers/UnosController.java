@@ -1,9 +1,14 @@
 package com.HITA.bazaOpreme.Controllers;
 
+import com.HITA.bazaOpreme.model.Korisnik;
+import com.HITA.bazaOpreme.model.Serviser;
+import com.HITA.bazaOpreme.repository.ServiserRepository;
 import com.HITA.bazaOpreme.repository.*;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class UnosController {
@@ -18,12 +23,29 @@ public class UnosController {
     @Autowired
     VrstaRepository vrstaRepository;
     @Autowired
-    private TvrtkaRepository tvrtkaRepository;
+    private ServiserRepository serviserRepository;
 
 
     @GetMapping("/unosProizvodjaca")
         public String unosP(){
         return  "z-unos_proizvođaca.html";
     }
+
+    @GetMapping("/unosNovogServisera")
+    public String unosNS(){
+        return "z-unos_novog_servisera.html";
+    }
+
+@GetMapping("/spremiNovogServisera")
+    public String spremiS(@RequestParam(name = "sifra")String sifra, @RequestParam(name = "naziv") String naziv,
+                          @RequestParam(name="adresa") String adresa, @RequestParam(name= "telefon") String telefon,
+                          @RequestParam(name="email") String email, @RequestParam(name="kOsoba" ) String kOsoba, HttpSession session){
+    Korisnik user = (Korisnik) session.getAttribute("currUser");
+    Serviser serviser = new Serviser(sifra,naziv,adresa,telefon,email,kOsoba,user.getRadiliste());
+    serviserRepository.save(serviser);
+    return "redirect:/";
+    }
+
+
 
 }

@@ -1,8 +1,6 @@
 package com.HITA.bazaOpreme.model;
 
-import com.HITA.bazaOpreme.model.archive.Proizvodjac;
 import com.HITA.bazaOpreme.model.archive.Ups;
-import com.HITA.bazaOpreme.model.archive.Vlasnik;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -13,6 +11,7 @@ import java.time.LocalDate;
 @Entity
 @Table(name = "oprema")
 @Data @NoArgsConstructor @AllArgsConstructor
+@Getter @Setter
 public class Oprema {
 
     @Id
@@ -43,12 +42,12 @@ public class Oprema {
     private Vrsta vrsta;
 
     @ManyToOne
-    @JoinColumn(name = "tvrtka_proizvodjac_id", referencedColumnName = "id")
-    private Tvrtka tvrtkaProizvodjac;
+    @JoinColumn(name = "proizvodjac_id", referencedColumnName = "id")
+    private Proizvodjac proizvodjac;
 
     @ManyToOne
-    @JoinColumn(name = "tvrtka_vlasnik_id", referencedColumnName = "id")
-    private Tvrtka tvrtkaVlasnik;
+    @JoinColumn(name = "vlasnik_id", referencedColumnName = "id")
+    private Vlasnik vlasnik;
 
     @Column(name = "godina_proizvodnje")
     private LocalDate godinaProizvodnje;
@@ -71,5 +70,31 @@ public class Oprema {
     @Column(name = "datum_otpisa")
     private LocalDate datumOtpisa;
 
+    @ManyToOne
+    @JoinColumn(name="radiliste_id")
+    Radiliste radiliste;
+
+    public Oprema(String sifra, String naziv, String serijskiBroj, String inventarskiBroj, Kategorija kategorija, Vrsta vrsta,
+                  Proizvodjac proizvodjac, Vlasnik vlasnik, LocalDate godinaProizvodnje, LocalDate datumNabave,
+                  Boolean certifikat, Integer intervalServisiranjaUMjesecima, LocalDate datumPlaniranogServisiranja, Boolean ispravno, Boolean otpisano,
+                  LocalDate datumOtpisa, Radiliste radiliste) {
+        this.sifra = sifra;
+        this.naziv = naziv;
+        this.serijskiBroj = serijskiBroj;
+        this.inventarskiBroj = inventarskiBroj;
+        this.kategorija = kategorija;
+        this.vrsta = vrsta;
+        this.proizvodjac = proizvodjac;
+        this.vlasnik = vlasnik;
+        this.godinaProizvodnje = godinaProizvodnje;
+        this.datumNabave = datumNabave;
+        this.certifikat = certifikat;
+        this.intervalServisiranjaUMjesecima = intervalServisiranjaUMjesecima;
+        this.datumPlaniranogServisiranja = datumPlaniranogServisiranja;
+        this.ispravno = ispravno;
+        this.otpisano = otpisano;
+        this.datumOtpisa = datumOtpisa;
+        this.radiliste = radiliste;
+    }
 }
 

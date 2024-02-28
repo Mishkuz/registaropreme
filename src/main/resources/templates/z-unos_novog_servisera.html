@@ -235,56 +235,49 @@
     <!-- End Navbar -->
     <div class="container main-container">
         <div class="row justify-content-center border rounded-2 p-2 bg-white shadow box-area position-relative">
-            <form action="/z-spremiOdrzavanje" method="get">
+            <form action="/spremiNovogServisera">
                 <br>
                 <div>
-                    <h2>Servis</h2>
+                    <h2>Novi serviser</h2>
                 </div>
-                <input name="opremaId" hidden="true" th:value="${oprema.id}"/>
                 <br><br>
                 <div class="input-group input-group-dynamic mb-4">
-                    <span>Šifra opreme: </span>
-                    <input type="text" name="sifra" class="form-control"  disabled="true" id="sifra" th:value="${oprema.sifra}"
-                           aria-label="Šifra" aria-describedby="basic-addon-sifra">
+                    <span>Šifra: </span>
+                    <input type="text" aria-label="Username" aria-describedby="basic-addon1" class="form-control" id="sifra" maxlength="20" size="30"
+                           required>
                 </div>
                 <div class="input-group input-group-dynamic mb-4">
-                    <span>Naziv opreme: </span>
-                    <input name="naziv" id="naziv" class="form-control"  disabled="true" th:value="${oprema.naziv}">
+                    <span>Naziv: </span>
+                    <input type="text" aria-label="Username" aria-describedby="basic-addon1" class="form-control" id="naziv"  maxlength="50" size="60"
+                           required>
                 </div>
                 <div class="input-group input-group-dynamic mb-4">
-                    <label for="tvrtkaId">Serviser:</label>
-                    <select class="form-select" id="tvrtkaId" name="tvrtkaId">
-                        <option th:each="tvrtka : ${serviseri}" th:value="${tvrtka.id}"
-                                th:text="${tvrtka.naziv}"></option>
-                    </select>
+                    <span>Adresa: </span>
+                    <input id="adresa" rows="3" cols="54" class="form-control" id="adresa" maxlength="100" required>
                 </div>
                 <div class="input-group input-group-dynamic mb-4">
-                    <span>Poslao radnik: </span>
-                    <input type="text" id="prijavioRadnik" name="prijavioRadnik" class="form-control"  aria-label="serijskiBroj"
-                           aria-describedby="basic-addon-serijskiBroj" maxlength="69" size="42" required>
+                    <span >Broj telefona: </span>
+                    <input type="number" aria-label="Username" aria-describedby="basic-addon1" class="form-control" id="telefon" maxlength="20" size="30">
                 </div>
                 <div class="input-group input-group-dynamic mb-4">
-                    <span id="basic-addon-opis">Opis: </span>
-                    <textarea name="opisOdrzavanja" id="opisOdrzavanja" rows="3" cols="69" class="form-tarea"  maxlength="512" required></textarea>
+                    <span >E-mail: </span>
+                    <input type="text" aria-label="Username" aria-describedby="basic-addon1" class="form-control" id="email" maxlength="50" size="60">
                 </div>
                 <div class="input-group input-group-dynamic mb-4">
-                    <span>Datum: </span>
-                    <input type="date" name="datumPrijave" id="datumPrijave" class="form-control"  aria-label="Username"
-                           aria-describedby="basic-addon-datumPrijave" required>
+                    <span>Kontakt osoba: </span>
+                    <input type="text" aria-label="Username" aria-describedby="basic-addon1" class="form-control" id="kOsoba"  maxlength="50" size="60">
                 </div>
-                <div class="text-left">
-                    <form action="/z-evidencijaodrzavanja" method="get">
-                        <button name="button" class="btn btn-primary" type="submit"
-                                style="margin-bottom: 5px; margin-top: 20px; margin-right: 10px;">Spremi
-                        </button>
-                    </form>
-                    <a href="/" class="btn btn-primary" type="submit" style="margin-bottom: 5px; margin-top: 20px;
-                margin-right: 10px;">Odustani</a>
+                <div class="text-center">
+                    <button name="submit" class="btn btn-primary" type="submit" style="margin-bottom: 5px; margin-top: 20px;
+                margin-right: 10px;">Unesi servisera
+                    </button>
+                    <button name="button" class="btn btn-primary" type="submit" style="margin-bottom: 5px; margin-top: 20px;
+                margin-right: 10px;">Odustani
+                    </button>
                 </div>
                 <br>
             </form>
         </div>
-    </div>
     <style>
         .input-group-dynamic {
        display: flex;
@@ -292,7 +285,7 @@
    }
 
    .input-group-dynamic .form-control {
-       width: 40%;
+       width: 25%;
    }
 
          .input-group-dynamic .form-select {
@@ -418,4 +411,3 @@
 <script src="../static/assets/js/material-dashboard.min.js?v=3.1.0"></script>
 </body>
 
-</html>

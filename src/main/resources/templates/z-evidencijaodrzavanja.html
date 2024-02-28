@@ -73,7 +73,7 @@
     <div class="collapse navbar-collapse w-auto hide-navigation" id="sidenav-collapse-main">
         <ul class="navbar-nav">
             <li class="nav-item">
-                <a class="nav-link text-white " href="../">
+                <a class="nav-link text-white " href="../pocetna">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="material-icons opacity-10">dashboard</i>
                     </div>
@@ -116,11 +116,11 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-white " href="../pages/sign-in.html">
+                <a class="nav-link text-white " href="../unosNovogServisera">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="material-icons opacity-10">login</i>
                     </div>
-                    <span class="nav-link-text ms-1">Dodaj korisnika</span>
+                    <span class="nav-link-text ms-1">Unos servisera</span>
                 </a>
             </li>
             <li class="nav-item">
@@ -313,7 +313,7 @@
                     <td th:text="${odrzavanje.prijavioRadnik}"></td>
                     <td th:text="${odrzavanje.izvanredan ? 'Da' : 'Ne'}"></td>
                     <td th:text="${odrzavanje.umjeravanje ? 'Da' : 'Ne'}"></td>
-                    <td th:text="${odrzavanje.tvrtkaServiser?.naziv}"></td>
+                    <td th:text="${odrzavanje.serviser?.naziv}"></td>
                     <td th:text="${#dates.format(odrzavanje.datumPrijave, 'dd.MM.yyyy')}"></td>
                 </tr>
                 </tbody>

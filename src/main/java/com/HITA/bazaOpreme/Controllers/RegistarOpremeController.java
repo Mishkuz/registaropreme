@@ -28,12 +28,17 @@ public class RegistarOpremeController {
     @Autowired
     VrstaRepository vrstaRepository;
     @Autowired
-    private TvrtkaRepository tvrtkaRepository;
+    ProizvodjacRepository proizvodjacRepository;
+    @Autowired
+    private VlasnikRepository vlasnikRepository;
+    @Autowired
+    private ServiserRepository serviserRepository;
 
     @GetMapping("/z-unos_novog_kvara")
-    public String zunos_novog_kvara(Model model, @RequestParam(name = "opremaId") Long opremaId) {
-        List<Oprema> opremaList = opremaRepository.findAll();
-        List<Kvar> kvarList = kvarRepository.findAll();
+    public String zunos_novog_kvara(Model model, @RequestParam(name = "opremaId") Long opremaId, HttpSession session) {
+        Korisnik user = (Korisnik) session.getAttribute("currUser");
+        List<Oprema> opremaList = opremaRepository.findByRadiliste(user.getRadiliste());
+        List<Kvar> kvarList = kvarRepository.findByRadiliste(user.getRadiliste());
         Optional<Oprema> oprema = opremaRepository.findById(opremaId);
         if (oprema.isPresent()) {
             model.addAttribute("oprema", oprema.get());
@@ -60,7 +65,8 @@ public class RegistarOpremeController {
                                 @RequestParam("intervalServisiranjaUMjesecima") Integer intervalServisiranjaUMjesecima,
                                 @RequestParam("datumPlaniranogServisiranja") LocalDate datumPlaniranogServisiranja,
                                 @RequestParam("ispravno") boolean ispravno,
-                                Model model) {
+                                Model model, HttpSession session) {
+        Korisnik user = (Korisnik) session.getAttribute("currUser");
         // Stvaranje instance Oprema objekta
         Oprema oprema = new Oprema();
         oprema.setSifra(sifra);
@@ -69,25 +75,27 @@ public class RegistarOpremeController {
         oprema.setInventarskiBroj(inventarskiBroj);
         oprema.setKategorija(kategorijaRepository.findById(kategorijaId).orElse(null));
         oprema.setVrsta(vrstaRepository.findById(vrstaId).orElse(null));
-        oprema.setTvrtkaProizvodjac(tvrtkaRepository.findById(proizvodjacId).orElse(null));
+        oprema.setProizvodjac(proizvodjacRepository.findById(proizvodjacId).orElse(null));
         oprema.setKategorija(kategorijaRepository.findById(kategorijaId).orElse(null));
         oprema.setGodinaProizvodnje(godinaProizvodnje);
         oprema.setDatumNabave(datumNabave);
         oprema.setCertifikat(certifikat);
         oprema.setIspravno(ispravno);
-        oprema.setTvrtkaVlasnik(tvrtkaRepository.findById(vlasnikId).orElse(null));
+        oprema.setVlasnik(vlasnikRepository.findById(vlasnikId).orElse(null));
         oprema.setIntervalServisiranjaUMjesecima(intervalServisiranjaUMjesecima);
         oprema.setDatumPlaniranogServisiranja(datumPlaniranogServisiranja);
+        oprema.setRadiliste(user.getRadiliste());
         opremaRepository.save(oprema);
         return "redirect:/";
     }
 
     @GetMapping("/z-unosnoveopreme")
-    public String zunosnoveopreme(Model model) {
-        List<Kategorija> kategorije = kategorijaRepository.findAll();
-        List<Vrsta> vrste = vrstaRepository.findAll();
-        List<Tvrtka> proizvodjaci = tvrtkaRepository.findAll();
-        List<Tvrtka> vlasnici = tvrtkaRepository.findAll();
+    public String zunosnoveopreme(Model model, HttpSession session) {
+        Korisnik user = (Korisnik) session.getAttribute("currUser");
+        List<Kategorija> kategorije = kategorijaRepository.findByRadiliste(user.getRadiliste());
+        List<Vrsta> vrste = vrstaRepository.findByRadiliste(user.getRadiliste());
+        List<Proizvodjac> proizvodjaci = proizvodjacRepository.findByRadiliste(user.getRadiliste());
+        List<Vlasnik> vlasnici = vlasnikRepository.findByRadiliste(user.getRadiliste());
         model.addAttribute("kategorije", kategorije);
         model.addAttribute("vrste", vrste);
         model.addAttribute("proizvodjaci", proizvodjaci);
@@ -96,23 +104,23 @@ public class RegistarOpremeController {
     }
 
     @GetMapping("/z-evidencijaodrzavanja")
-    public String zevidencijaodrzavanja(Model model) {
-        List<Odrzavanje> odrzavanjeList1 = odrzavanjeRepository.findAll();
+    public String zevidencijaodrzavanja(Model model, HttpSession session) {
+        Korisnik user = (Korisnik) session.getAttribute("currUser");
+        List<Odrzavanje> odrzavanjeList1 = odrzavanjeRepository.findByRadiliste(user.getRadiliste());
         List<Odrzavanje> odrzavanjeList = new ArrayList<>(odrzavanjeList1);
         odrzavanjeList.sort(Comparator.comparing(Odrzavanje::getDatumPrijave, Comparator.reverseOrder()));
         model.addAttribute(odrzavanjeList);
         return "z-evidencijaodrzavanja.html";
     }
+
     @PostMapping("/z-spremiKvar")
     public String zspremiKvar(@RequestParam("opremaId") Long opremaId,
                               @RequestParam("prijavioRadnik") String prijavioRadnik,
                               @RequestParam("opisKvara") String opisKvara,
                               @RequestParam("datumPrijave") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate datumPrijave,
-                              Model model,
-                              HttpServletRequest request
-    ) {
-        HttpSession session = request.getSession();
-        Kvar kvar = new Kvar(prijavioRadnik, opisKvara, null);
+                              Model model, HttpSession session) {
+        Korisnik user = (Korisnik) session.getAttribute("currUser");
+        Kvar kvar = new Kvar(prijavioRadnik, opisKvara, null, user.getRadiliste());
         kvar.setPrijavioRadnik(prijavioRadnik);
         kvar.setOpisKvara(opisKvara);
         kvar.setDatumPrijave(datumPrijave);
@@ -122,21 +130,24 @@ public class RegistarOpremeController {
     }
 
     @GetMapping("/z-unos_za_servis")
-    public String zunos_za_servis(Model model, Long opremaId) {
-        List<Oprema> opremaList = opremaRepository.findAll();
-        List<Odrzavanje> odrzavanjeList = odrzavanjeRepository.findAll();
-        List<Tvrtka> serviseri = tvrtkaRepository.findAll();
+    public String zunos_za_servis(Model model, Long opremaId, HttpSession session) {
+        Korisnik user = (Korisnik) session.getAttribute("currUser");
+        List<Oprema> opremaList = opremaRepository.findByRadiliste(user.getRadiliste());
+        List<Odrzavanje> odrzavanjeList = odrzavanjeRepository.findByRadiliste(user.getRadiliste());
+        List<Serviser> serviseri = serviserRepository.findByRadiliste(user.getRadiliste());
         model.addAttribute(odrzavanjeList);
         model.addAttribute(opremaList);
         model.addAttribute("serviseri", serviseri);
         model.addAttribute(opremaRepository.findById(opremaId).get());
         return "z-unos_za_servis.html";
     }
+
     @GetMapping("/z-unos_za_umjeravanje")
-    public String zunos_za_umjeravanje(Model model, Long opremaId) {
-        List<Oprema> opremaList = opremaRepository.findAll();
-        List<Odrzavanje> odrzavanjeList = odrzavanjeRepository.findAll();
-        List<Tvrtka> serviseri = tvrtkaRepository.findAll();
+    public String zunos_za_umjeravanje(Model model, Long opremaId, HttpSession session) {
+        Korisnik user = (Korisnik) session.getAttribute("currUser");
+        List<Oprema> opremaList = opremaRepository.findByRadiliste(user.getRadiliste());
+        List<Odrzavanje> odrzavanjeList = odrzavanjeRepository.findByRadiliste(user.getRadiliste());
+        List<Serviser> serviseri = serviserRepository.findByRadiliste(user.getRadiliste());
         model.addAttribute(odrzavanjeList);
         model.addAttribute(opremaList);
         model.addAttribute("serviseri", serviseri);
@@ -153,16 +164,14 @@ public class RegistarOpremeController {
             @RequestParam("izvanredan") boolean izvanredan,
             @RequestParam("umjeravanje") boolean umjeravanje,
             @RequestParam("datumPrijave") String datumPrijave,
-            Model model,
-            HttpServletRequest request
-    ) {
-        HttpSession session = request.getSession();
+            Model model, HttpSession session) {
+        Korisnik user = (Korisnik) session.getAttribute("currUser");
         // Stvaranje instance održavanja objekta
         Odrzavanje odrzavanje = new Odrzavanje(prijavioRadnik, opisOdrzavanja, izvanredan, umjeravanje,
-                null, null, null);
+                null, null, null, user.getRadiliste());
         odrzavanje.setPrijavioRadnik(prijavioRadnik);
         odrzavanje.setOpisOdrzavanja(opisOdrzavanja);
-        odrzavanje.setTvrtkaServiser(tvrtkaRepository.findById(tvrtkaId).orElse(null));
+        odrzavanje.setServiser(serviserRepository.findById(tvrtkaId).orElse(null));
         odrzavanje.setIzvanredan(izvanredan);
         odrzavanje.setUmjeravanje(umjeravanje);
         odrzavanje.setDatumPrijave(new Date());
@@ -173,20 +182,22 @@ public class RegistarOpremeController {
 
 
     @GetMapping("/z-pokaziKvarove")
-    public String zshowFailures(Model model) {
-        List<Kvar> kvarList1 = kvarRepository.findAll();
+    public String zshowFailures(Model model, HttpSession session) {
+        Korisnik user = (Korisnik) session.getAttribute("currUser");
+        List<Kvar> kvarList1 = kvarRepository.findByRadiliste(user.getRadiliste());
         List<Kvar> kvarList = new ArrayList<>(kvarList1);
         kvarList.sort(Comparator.comparing(Kvar::getDatumPrijave, Comparator.reverseOrder()));
         model.addAttribute("kvarList", kvarList);
         return "z-oprema_kvarovi.html";
     }
 
-    @GetMapping("/")
-    public String nada(Model model) {
-        List<Oprema> opremaList1 = opremaRepository.findAll();
+    @GetMapping("/pocetna")
+    public String nada(Model model, HttpSession session) {
+        Korisnik user = (Korisnik) session.getAttribute("currUser");
+        List<Oprema> opremaList1 = opremaRepository.findByRadiliste(user.getRadiliste());
         List<Oprema> opremaList = new ArrayList<>(opremaList1);
         opremaList.sort(Comparator.comparing(Oprema::getDatumPlaniranogServisiranja));
-        model.addAttribute("opremaList",opremaList);
+        model.addAttribute("opremaList", opremaList);
         return "z-pocetna.html";
     }
 }

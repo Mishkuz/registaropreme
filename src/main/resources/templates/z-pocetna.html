@@ -73,7 +73,7 @@
     <div class="collapse navbar-collapse w-auto hide-navigation" id="sidenav-collapse-main">
         <ul class="navbar-nav">
             <li class="nav-item">
-                <a class="nav-link text-white " href="../">
+                <a class="nav-link text-white " href="../pocetna">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="material-icons opacity-10">dashboard</i>
                     </div>
@@ -299,10 +299,10 @@
                 <td th:text="${oprema.naziv}"></td>
                 <td th:text="${oprema.kategorija?.kategorija}"></td>
                 <td th:text="${oprema.vrsta?.vrsta}"></td>
-                <td th:text="${oprema.tvrtkaProizvodjac?.naziv}"></td>
+                <td th:text="${oprema.proizvodjac?.naziv}"></td>
                 <td th:text="${oprema.serijskiBroj}"></td>
                 <td th:text="${oprema.InventarskiBroj}"></td>
-                <td th:text="${oprema.tvrtkaVlasnik?.naziv}"></td>
+                <td th:text="${oprema.vlasnik?.naziv}"></td>
                 <td th:text="${oprema.ispravno != null ? (oprema.ispravno ? 'Da' : 'Ne') : 'N/A'}"></td>
                 <td class="datum-planiranog-servisiranja"
                     th:attr="data-datum=${#temporals.format(oprema.datumPlaniranogServisiranja, 'yyyy-MM-dd')}"

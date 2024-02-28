@@ -20,9 +20,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="apple-touch-icon" sizes="76x76" href="../static/assets/img/apple-icon.png">
     <link rel="icon" type="image/png" href="../static/assets/img/favicon.png">
-    <title>
-        Material Dashboard 2 by Creative Tim
-    </title>
     <!--     Fonts and icons     -->
     <link rel="stylesheet" type="text/css"
           href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700"/>
@@ -66,17 +63,17 @@
                             </div>
                             <div class="card-body">
                                 <h4 class="font-weight-bolder">Prijavi se</h4>
-                                <form role="form">
+                                <form role="form" action="/login" method="post">
                                     <div class="input-group input-group-outline mb-3">
-                                        <input type="email" class="form-control" placeholder="Email" id="email" required>
+                                        <input type="email" class="form-control" placeholder="Email" id="email"  name="email" required>
                                     </div>
                                     <div class="input-group input-group-outline mb-3">
-                                        <input type="password" class="form-control" placeholder="Password" id="password" required>
+                                        <input type="password" class="form-control" placeholder="Password" id="password"  name="password" required>
                                     </div>
                                     <a href="../pages/sign-in.html" class="text-primary text-gradient font-weight-bold">Zaboravljena
                                         lozinka? </a>
                                     <div class="text-center">
-                                        <button type="button"
+                                        <button type="submit"
                                                 class="btn btn-lg bg-gradient-primary btn-lg w-100 mt-4 mb-0">Prijavi se
                                         </button>
                                     </div>

@@ -1,6 +1,7 @@
 package com.HITA.bazaOpreme.repository;
 
 import com.HITA.bazaOpreme.model.Oprema;
+import com.HITA.bazaOpreme.model.Radiliste;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -14,5 +15,7 @@ public interface OpremaRepository extends JpaRepository<Oprema, Long> {
 
     @Override
     List<Oprema> findAll();
+
+    List<Oprema> findByRadiliste(Radiliste radiliste);
 }
 

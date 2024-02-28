@@ -7,11 +7,11 @@ import jakarta.validation.constraints.Size;
 import lombok.*;
 
 @Entity
-@Table(name = "tvrtka")
+@Table(name = "vlasnik")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Tvrtka {
+public class Vlasnik {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -40,4 +40,17 @@ public class Tvrtka {
     @Column(name = "kontakt_osoba")
     private String kontaktOsoba;
 
+    @ManyToOne
+    @JoinColumn(name="radiliste_id")
+    Radiliste radiliste;
+
+    public Vlasnik(String sifra, String naziv, String adresa, String telefon, String email, String kontaktOsoba, Radiliste radiliste ) {
+        this.sifra = sifra;
+        this.naziv = naziv;
+        this.adresa = adresa;
+        this.telefon = telefon;
+        this.email = email;
+        this.kontaktOsoba = kontaktOsoba;
+        this.radiliste = radiliste;
+    }
 }

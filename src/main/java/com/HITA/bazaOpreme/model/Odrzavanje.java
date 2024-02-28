@@ -1,7 +1,6 @@
 package com.HITA.bazaOpreme.model;
 
 import com.HITA.bazaOpreme.model.archive.Radnik;
-import com.HITA.bazaOpreme.model.archive.Serviser;
 import com.HITA.bazaOpreme.model.archive.TipServisa;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
@@ -47,8 +46,8 @@ public class Odrzavanje {
     private Oprema oprema;
 
     @ManyToOne
-    @JoinColumn(name = "tvrtka_serviser_id")
-    private Tvrtka tvrtkaServiser;
+    @JoinColumn(name = "serviser_id")
+    private Serviser serviser;
 
     private boolean izvanredan;
 
@@ -64,9 +63,14 @@ public class Odrzavanje {
     @Column(name = "datum_povrata")
     private Date datumPovrata;
 
+    @ManyToOne
+    @JoinColumn(name="radiliste_id")
+    Radiliste radiliste;
+
+
 
     public Odrzavanje(String prijavioRadnik, String opisOdrzavanja, boolean izvanredan, boolean umjeravanje,
-                      Date datumPrijave, Date datumOtpreme, Date datumPovrata) {
+                      Date datumPrijave, Date datumOtpreme, Date datumPovrata, Radiliste radiliste ) {
         this.prijavioRadnik = prijavioRadnik;
         this.opisOdrzavanja = opisOdrzavanja;
         this.izvanredan = izvanredan;
@@ -74,6 +78,7 @@ public class Odrzavanje {
         this.datumPrijave = datumPrijave;
         this.datumOtpreme = datumOtpreme;
         this.datumPovrata = datumPovrata;
+        this.radiliste = radiliste;
     }
 
 }
