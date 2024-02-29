@@ -49,18 +49,14 @@ public class Odrzavanje {
     @JoinColumn(name = "serviser_id")
     private Serviser serviser;
 
-    private boolean izvanredan;
 
-    private boolean umjeravanje;
+    @Column(name = "datum_umjeravanja", nullable = true)
+    private LocalDate datumUmjeravanja;
 
-    @NotNull(message = "Datum prijave je obavezan")
-    @Column(name = "datum_prijave")
-    private Date datumPrijave;
+    @Column(name = "datum_otpreme",  nullable = true)
+    private LocalDate datumOtpreme;
 
-    @Column(name = "datum_otpreme")
-    private Date datumOtpreme;
-
-    @Column(name = "datum_povrata")
+    @Column(name = "datum_povrata", nullable = true)
     private Date datumPovrata;
 
     @ManyToOne
@@ -69,16 +65,23 @@ public class Odrzavanje {
 
 
 
-    public Odrzavanje(String prijavioRadnik, String opisOdrzavanja, boolean izvanredan, boolean umjeravanje,
-                      Date datumPrijave, Date datumOtpreme, Date datumPovrata, Radiliste radiliste ) {
+    public Odrzavanje(String prijavioRadnik, String opisOdrzavanja,
+                       LocalDate datumOtpreme, Date datumPovrata, Radiliste radiliste, Oprema oprema) {
         this.prijavioRadnik = prijavioRadnik;
         this.opisOdrzavanja = opisOdrzavanja;
-        this.izvanredan = izvanredan;
-        this.umjeravanje = umjeravanje;
-        this.datumPrijave = datumPrijave;
         this.datumOtpreme = datumOtpreme;
         this.datumPovrata = datumPovrata;
         this.radiliste = radiliste;
+        this.oprema=oprema;
+    }
+
+
+    public Odrzavanje(String prijavioRadnik,LocalDate datumUmjeravanja, Radiliste radiliste, Oprema oprema) {
+        this.prijavioRadnik = prijavioRadnik;
+        this.datumUmjeravanja = datumUmjeravanja;
+        this.radiliste = radiliste;
+        this.oprema = oprema;
+
     }
 
 }

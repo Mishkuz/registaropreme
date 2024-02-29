@@ -103,14 +103,31 @@ public class RegistarOpremeController {
         return "z-unos_nove_opreme.html";
     }
 
-    @GetMapping("/z-evidencijaodrzavanja")
+    @GetMapping("/z-evidencija_servisa")
     public String zevidencijaodrzavanja(Model model, HttpSession session) {
         Korisnik user = (Korisnik) session.getAttribute("currUser");
         List<Odrzavanje> odrzavanjeList1 = odrzavanjeRepository.findByRadiliste(user.getRadiliste());
         List<Odrzavanje> odrzavanjeList = new ArrayList<>(odrzavanjeList1);
-        odrzavanjeList.sort(Comparator.comparing(Odrzavanje::getDatumPrijave, Comparator.reverseOrder()));
+        odrzavanjeList.sort(Comparator.comparing(Odrzavanje::getDatumOtpreme, Comparator.reverseOrder()));
         model.addAttribute(odrzavanjeList);
-        return "z-evidencijaodrzavanja.html";
+        return "z-evidencija_servisa.html";
+    }
+    @GetMapping("/z-evidencija_umjeravanja")
+    public String zevidencijaumjeravanja(Model model, HttpSession session) {
+        Korisnik user = (Korisnik) session.getAttribute("currUser");
+        List<Odrzavanje> odrzavanjeList1 = odrzavanjeRepository.findByRadiliste(user.getRadiliste());
+        List<Odrzavanje> odrzavanjeList = new ArrayList<>();
+
+        // Iterirajte kroz listu i preskočite redak ako je datumUmjeravanja null
+        for (Odrzavanje odrzavanje : odrzavanjeList1) {
+            if (odrzavanje.getDatumUmjeravanja() != null) {
+                odrzavanjeList.add(odrzavanje);
+            }
+        }
+
+        odrzavanjeList.sort(Comparator.comparing(Odrzavanje::getDatumUmjeravanja, Comparator.reverseOrder()));
+        model.addAttribute("odrzavanjeList", odrzavanjeList);
+        return "z-evidencija_umjeravanja.html";
     }
 
     @PostMapping("/z-spremiKvar")
@@ -155,30 +172,36 @@ public class RegistarOpremeController {
         return "z-unos_za_umjeravanje.html";
     }
 
-    @GetMapping("/z-spremiOdrzavanje")
-    public String zspremiOdrzavanje(
+    @GetMapping("/z-spremiServis")
+    public String zspremiServis(
             @RequestParam("tvrtkaId") Long tvrtkaId,
             @RequestParam("opremaId") Long opremaId,
             @RequestParam("opisOdrzavanja") String opisOdrzavanja,
             @RequestParam("prijavioRadnik") String prijavioRadnik,
-            @RequestParam("izvanredan") boolean izvanredan,
-            @RequestParam("umjeravanje") boolean umjeravanje,
-            @RequestParam("datumPrijave") String datumPrijave,
+            @RequestParam("datumOtpreme") LocalDate datumOtpreme,
             Model model, HttpSession session) {
         Korisnik user = (Korisnik) session.getAttribute("currUser");
-        // Stvaranje instance održavanja objekta
-        Odrzavanje odrzavanje = new Odrzavanje(prijavioRadnik, opisOdrzavanja, izvanredan, umjeravanje,
-                null, null, null, user.getRadiliste());
-        odrzavanje.setPrijavioRadnik(prijavioRadnik);
-        odrzavanje.setOpisOdrzavanja(opisOdrzavanja);
+
+
+        Odrzavanje odrzavanje = new Odrzavanje(prijavioRadnik, opisOdrzavanja, datumOtpreme, null, user.getRadiliste(), opremaRepository.findById(opremaId).get());
         odrzavanje.setServiser(serviserRepository.findById(tvrtkaId).orElse(null));
-        odrzavanje.setIzvanredan(izvanredan);
-        odrzavanje.setUmjeravanje(umjeravanje);
-        odrzavanje.setDatumPrijave(new Date());
-        odrzavanje.setOprema(opremaRepository.findById(opremaId).get());
         odrzavanjeRepository.save(odrzavanje);
-        return "redirect:/z-evidencijaodrzavanja";
+        return "redirect:/z-evidencija_servisa";
     }
+
+    @GetMapping("/z-spremiUmjeravanje")
+    public String zspremiUmjeravanje(
+            @RequestParam("prijavioRadnik") String prijavioRadnik,
+            @RequestParam("datumUmjeravanja") LocalDate datumUmjeravanja,
+            @RequestParam("opremaId") Long opremaId,
+            Model model, HttpSession session) {
+        Korisnik user = (Korisnik) session.getAttribute("currUser");
+
+        Odrzavanje odrzavanje = new Odrzavanje(prijavioRadnik,datumUmjeravanja ,user.getRadiliste(),opremaRepository.findById(opremaId).get());
+        odrzavanjeRepository.save(odrzavanje);
+        return "redirect:/z-evidencija_umjeravanja";
+    }
+
 
 
     @GetMapping("/z-pokaziKvarove")
