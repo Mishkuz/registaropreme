@@ -81,11 +81,19 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-white " href="../z-evidencijaodrzavanja">
+                <a class="nav-link text-white " href="../z-evidencija_servisa">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="material-icons opacity-10">receipt_long</i>
                     </div>
-                    <span class="nav-link-text ms-1">Evidencija održavanja</span>
+                    <span class="nav-link-text ms-1">Evidencija servisa</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-white " href="../z-evidencija_umjeravanja">
+                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="material-icons opacity-10">receipt_long</i>
+                    </div>
+                    <span class="nav-link-text ms-1">Evidencija umjeravanja</span>
                 </a>
             </li>
             <li class="nav-item">
@@ -288,39 +296,6 @@
                 });
             </script>
         </div>
-        <div class="container d-flex justify-content-center align-items-center">
-            <div>
-                <div class="input-group input-group-dynamic mb-4">
-                    <input type="date" id="datumOdInput" class="form-control" aria-label="datumOd" aria-describedby="basic-addon1">
-                    <input type="date" id="datumDoInput" class="form-control" aria-label="datumDo" aria-describedby="basic-addon1">
-                    <button type="button" id="btnPretraziDatum" class="btn btn-primary">Pretraži po datumu</button>
-                </div>
-            </div>
-        </div>
-
-        <script>
-            document.addEventListener('DOMContentLoaded', function () {
-                var btnPretraziDatum = document.getElementById('btnPretraziDatum');
-                btnPretraziDatum.addEventListener('click', function () {
-                    var datumOd = new Date(document.getElementById('datumOdInput').value);
-                    var datumDo = new Date(document.getElementById('datumDoInput').value);
-                    var tableRows = document.querySelectorAll('.table tbody tr');
-
-                    tableRows.forEach(function (row) {
-                        var datumServisa = new Date(row.querySelector('.datumPlaniranogServiranja').getAttribute('data-datum'));
-                        if (datumOd && datumDo) {
-                        if (datumServisa >= datumOd && datumServisa <= datumDo) {
-                            row.style.display = ''; // Prikaži red
-                        } else {
-                            row.style.display = 'none'; // Sakrij red
-                        }
-                    } else {
-                        row.style.display = ''; // Prikaži red ako nema filtera
-                    }
-                    });
-                });
-            });
-        </script>
     </div>
     <style>
     .past-date-row {

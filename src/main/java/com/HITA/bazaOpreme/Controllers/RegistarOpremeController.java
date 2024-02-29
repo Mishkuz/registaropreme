@@ -107,9 +107,17 @@ public class RegistarOpremeController {
     public String zevidencijaodrzavanja(Model model, HttpSession session) {
         Korisnik user = (Korisnik) session.getAttribute("currUser");
         List<Odrzavanje> odrzavanjeList1 = odrzavanjeRepository.findByRadiliste(user.getRadiliste());
-        List<Odrzavanje> odrzavanjeList = new ArrayList<>(odrzavanjeList1);
+        List<Odrzavanje> odrzavanjeList = new ArrayList<>();
+
+        // Iterirajte kroz listu i preskočite redak ako je datumOtpreme null
+        for (Odrzavanje odrzavanje : odrzavanjeList1) {
+            if (odrzavanje.getDatumOtpreme() != null) {
+                odrzavanjeList.add(odrzavanje);
+            }
+        }
+
         odrzavanjeList.sort(Comparator.comparing(Odrzavanje::getDatumOtpreme, Comparator.reverseOrder()));
-        model.addAttribute(odrzavanjeList);
+        model.addAttribute("odrzavanjeList", odrzavanjeList);
         return "z-evidencija_servisa.html";
     }
     @GetMapping("/z-evidencija_umjeravanja")
