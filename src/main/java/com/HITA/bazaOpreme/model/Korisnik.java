@@ -2,14 +2,12 @@ package com.HITA.bazaOpreme.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Entity
 @Data
 @AllArgsConstructor
-@NoArgsConstructor
+@NoArgsConstructor @Getter @Setter
 public class Korisnik {
 
     @Id

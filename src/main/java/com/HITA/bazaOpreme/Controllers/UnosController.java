@@ -44,7 +44,7 @@ public class UnosController {
                           @RequestParam(name = "adresa") String adresa, @RequestParam(name = "telefon") String telefon,
                           @RequestParam(name = "email") String email, @RequestParam(name = "kOsoba") String kOsoba, HttpSession session) {
         Korisnik user = (Korisnik) session.getAttribute("currUser");
-        Serviser serviser = new Serviser(sifra, naziv, adresa, telefon, email, kOsoba, user.getRadiliste());
+        Serviser serviser = new Serviser(sifra, naziv, adresa, telefon, email, kOsoba,user.getRadiliste());
         serviserRepository.save(serviser);
         return "redirect:/pocetna";
     }
