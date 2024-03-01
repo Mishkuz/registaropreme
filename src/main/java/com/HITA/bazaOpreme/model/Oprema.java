@@ -70,6 +70,9 @@ public class Oprema {
     @Column(name = "datum_otpisa")
     private LocalDate datumOtpisa;
 
+    @Column(name = "na_servisu", nullable = true)
+    private boolean naServisu;
+
     @ManyToOne
     @JoinColumn(name="radiliste_id")
     Radiliste radiliste;

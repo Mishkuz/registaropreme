@@ -4,7 +4,10 @@ import com.HITA.bazaOpreme.model.Oprema;
 import com.HITA.bazaOpreme.model.Radiliste;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -17,5 +20,17 @@ public interface OpremaRepository extends JpaRepository<Oprema, Long> {
     List<Oprema> findAll();
 
     List<Oprema> findByRadiliste(Radiliste radiliste);
+
+    @Transactional
+    @Modifying
+    @Query("update Oprema o set o.naServisu = ?1 where o.id = ?2")
+    void updateNaServisuById(boolean naServisu, Long id);
+
+    List<Oprema> findByRadilisteAndNaServisu(Radiliste radiliste, boolean naServisu);
+
+    @Transactional
+    @Modifying
+    @Query("update Oprema o set o.ispravno = ?1 where o.id = ?2")
+    int updateIspravnoById(Boolean ispravno, Long id);
 }
 

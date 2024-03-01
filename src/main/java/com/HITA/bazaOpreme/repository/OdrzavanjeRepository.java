@@ -17,6 +17,14 @@ public interface OdrzavanjeRepository extends JpaRepository<Odrzavanje, Long> {
      List<Odrzavanje> findAll();
 
      List<Odrzavanje> findByRadiliste(Radiliste radiliste);
+
+     List<Odrzavanje> findByTip(String tip);
+
+     List<Odrzavanje> findByTipOrTip(String tip, String tip1);
+
+     List<Odrzavanje> findByRadilisteAndTip(Radiliste radiliste, String tip);
+
+     List<Odrzavanje> findByRadilisteAndTipOrTip(Radiliste radiliste, String tip, String tip1);
 }
 
 

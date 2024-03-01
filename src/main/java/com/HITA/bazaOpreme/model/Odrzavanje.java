@@ -49,6 +49,8 @@ public class Odrzavanje {
     @JoinColumn(name = "serviser_id")
     private Serviser serviser;
 
+    @Column(name = "tip", nullable = true)
+    private String tip;
 
     @Column(name = "datum_umjeravanja", nullable = true)
     private LocalDate datumUmjeravanja;

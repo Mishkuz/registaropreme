@@ -199,6 +199,7 @@
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
                 </ol>
+                <h3 class="font-weight-bolder mb-0">Oprema na servisu</h3>
             </nav>
             <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
                 <div class="ms-md-auto pe-md-3 d-flex align-items-center">
@@ -268,81 +269,85 @@
         </div>
     </nav>
     <!-- End Navbar -->
-    <div class="container main-container">
-        <div class="row justify-content-center border rounded-2 p-2 bg-white shadow box-area position-relative">
-            <form action="/z-spremiKvar" method="get">
-                <br>
-                <div>
-                    <h2>Prijava kvara</h2>
-                </div>
-                <input name="opremaId" hidden="true" th:value="${oprema.id}"/>
-                <br><br>
-                <div class="input-group input-group-dynamic mb-4">
-                    <span>Šifra opreme: </span>
-                    <input type="text" name="sifra" class="form-control"  disabled="true" id="sifra" th:value="${oprema.sifra}"
-                           aria-label="Šifra" aria-describedby="basic-addon-sifra">
-                </div>
-                <div class="input-group input-group-dynamic mb-4">
-                    <span>Naziv opreme: </span>
-                    <input name="naziv" id="naziv" class="form-control"  disabled="true" th:value="${oprema.naziv}">
-                </div>
-                <div class="input-group input-group-dynamic mb-4">
-                    <span>Prijavio radnik: </span>
-                    <input type="text" id="prijavioRadnik" name="prijavioRadnik" class="form-control"  aria-label="serijskiBroj"
-                           aria-describedby="basic-addon-serijskiBroj" maxlength="69" size="42" required>
-                </div>
-                <div class="input-group input-group-dynamic mb-4">
-                    <span id="basic-addon-opis">Opis: </span>
-                    <textarea name="opisKvara" id="opisKvara" rows="3" cols="69" class="form-tarea"  maxlength="512" required></textarea>
-                </div>
-                <div class="input-group input-group-dynamic mb-4">
-                    <span>Datum: </span>
-                    <input type="date" name="datumPrijave" id="datumPrijave" class="form-control"  aria-label="Username"
-                           aria-describedby="basic-addon-datumPrijave" required>
-                </div>
-                <div class="text-left">
-                    <form action="/z-pokaziKvarove" method="get">
-                        <button name="button" class="btn btn-primary" type="submit"
-                                style="margin-bottom: 5px; margin-top: 20px; margin-right: 10px;">Prijavi kvar
-                        </button>
-                    </form>
-                    <a href="/" class="btn btn-primary" type="submit" style="margin-bottom: 5px; margin-top: 20px;
-                margin-right: 10px;">Odustani</a>
-                </div>
-                <br>
-            </form>
+    <div class="container d-flex justify-content-center align-items-center">
+        <div>
+            <div class="input-group input-group-dynamic mb-4">
+                <input type="text" id="searchInput" style="border-color: #177245; width: 500px; max-height:40px;"
+                       class="form-control"
+                       placeholder="Unesi naziv opreme" aria-label="nazivopreme" aria-describedby="basic-addon1">
+                <span class="input-group-text" id="basic-addon1" style="max-height:40px;">
+                                <button name="button" class="btn btn-link" type="submit">
+                                    <img src="../static/povecalo.jpg" class="img-fluid" style="width: 35px; height: 35px;
+                                         border-radius: 50%; background:transparent;" alt="povecalo">
+                                </button>
+                            </span>
+            </div>
+            <script>
+                document.addEventListener('DOMContentLoaded', function () {
+                    var searchInput = document.getElementById('searchInput');
+                    searchInput.addEventListener('input', function () {
+                        var searchText = searchInput.value.toLowerCase();
+                        var tableRows = document.querySelectorAll('.table tbody tr');
+                        tableRows.forEach(function (row) {
+                            var rowData = row.textContent.toLowerCase();
+                            row.style.display = rowData.includes(searchText) ? 'table-row' : 'none';
+                        });
+                    });
+                });
+            </script>
         </div>
     </div>
     <style>
-        .input-group-dynamic {
-       display: flex;
-       flex-direction: column;
-   }
+        .past-date-row {
+        background-color: rgba(255, 0, 0, 0.2);
+        }
 
-   .input-group-dynamic .form-control {
-       width: 40%;
-   }
+        .past-date-row:hover {
+        background-color: rgba(255, 0, 0, 0.3);
+        }
 
-         .input-group-dynamic .form-select {
-       width: 30%;
-   }
 
-        .input-group-dynamic .form-tarea {
-       width: 50%;
-   }
     </style>
-    </div>
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            var closeButton = document.querySelector('button[name="button"][type="submit"][value="Zatvori"]');
-            if (closeButton) {
-                closeButton.addEventListener("click", function (event) {
-                    event.preventDefault(); // spriječava slanje obrasca
-                    window.location.href = "/pocetna"; // preusmjerava na /pocetna
-                });
-            }
-        });
-    </script>
+    <div class="container-fluid py-4">
+        <table class="table align-items-center text-center table-striped table-hover">
+            <thead>
+            <tr>
+                <th>Šifra</th>
+                <th>Naziv</th>
+                <th>Kategorija</th>
+                <th>Vrsta</th>
+                <th>Proizvođač</th>
+                <th>Serijski br.</th>
+                <th>Inventarski br.</th>
+                <th>Vlasnik</th>
+                <th>Ispravno</th>
+                <th>Datum za servis</th>
+                <th>Vrati sa servisa</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+            <tr th:each="oprema : ${opremaList}">
+                <td th:text="${oprema.sifra}"></td>
+                <td th:text="${oprema.naziv}"></td>
+                <td th:text="${oprema.kategorija?.kategorija}"></td>
+                <td th:text="${oprema.vrsta?.vrsta}"></td>
+                <td th:text="${oprema.proizvodjac?.naziv}"></td>
+                <td th:text="${oprema.serijskiBroj}"></td>
+                <td th:text="${oprema.InventarskiBroj}"></td>
+                <td th:text="${oprema.vlasnik?.naziv}"></td>
+                <td th:text="${oprema.ispravno != null ? (oprema.ispravno ? 'Da' : 'Ne') : 'N/A'}"></td>
+                <td class="datum-planiranog-servisiranja"
+                    th:attr="data-datum=${#temporals.format(oprema.datumPlaniranogServisiranja, 'yyyy-MM-dd')}"
+                    th:text="${#temporals.format(oprema.datumPlaniranogServisiranja, 'dd.MM.yyyy')}"></td>
+                <td class="text-center">
+                    <a th:href="@{'/z-vratiSaServisa?opremaId=' + ${oprema.id}}">
+                        <img src="../static/servispocetna.png" class="img-fluid img-button" alt="servispocetna">
+                    </a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
     </div>
 </main>
 <div class="fixed-plugin">
