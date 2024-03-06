@@ -2,41 +2,47 @@ package com.HITA.bazaOpreme.Controllers;
 
 import com.HITA.bazaOpreme.model.*;
 import com.HITA.bazaOpreme.repository.*;
+import com.HITA.bazaOpreme.service.CustomKorisnikDetails;
+import com.HITA.bazaOpreme.service.CustomKorisnikDetailsService;
+import jakarta.annotation.PostConstruct;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.kafka.KafkaProperties;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDate;
 import java.util.*;
 
 @Controller
+@AllArgsConstructor
 public class RegistarOpremeController {
-    @Autowired
-    OpremaRepository opremaRepository;
-    @Autowired
-    KvarRepository kvarRepository;
-    @Autowired
-    KategorijaRepository kategorijaRepository;
-    @Autowired
-    OdrzavanjeRepository odrzavanjeRepository;
-    @Autowired
-    VrstaRepository vrstaRepository;
-    @Autowired
-    ProizvodjacRepository proizvodjacRepository;
-    @Autowired
-    private VlasnikRepository vlasnikRepository;
-    @Autowired
-    private ServiserRepository serviserRepository;
+
+    private final OpremaRepository opremaRepository;
+    private final KvarRepository kvarRepository;
+    private final KategorijaRepository kategorijaRepository;
+    private final OdrzavanjeRepository odrzavanjeRepository;
+    private final VrstaRepository vrstaRepository;
+    private final ProizvodjacRepository proizvodjacRepository;
+    private final VlasnikRepository vlasnikRepository;
+    private final ServiserRepository serviserRepository;
+
 
     private final String servisS = "Servis";
     private final String servisIzvanredanS = "Izvanredan servis";
     private final String umjeravanjeS = "umjeravanje";
+    @Autowired
+    private KorisnikRepository korisnikRepository;
 
 
     @GetMapping("/z-unos_novog_kvara")
@@ -112,7 +118,7 @@ public class RegistarOpremeController {
     @GetMapping("/z-evidencija_servisa")
     public String zevidencijaodrzavanja(Model model, HttpSession session) {
         Korisnik user = (Korisnik) session.getAttribute("currUser");
-        List<Odrzavanje> odrzavanjeList1 =   odrzavanjeRepository.findByRadilisteAndTipOrTip(user.getRadiliste(),servisS, servisIzvanredanS);
+        List<Odrzavanje> odrzavanjeList1 = odrzavanjeRepository.findByRadilisteAndTipOrTip(user.getRadiliste(), servisS, servisIzvanredanS);
         odrzavanjeList1.sort(Comparator.comparing(Odrzavanje::getDatumOtpreme, Comparator.reverseOrder()));
         model.addAttribute("odrzavanjeList", odrzavanjeList1);
         return "z-evidencija_servisa.html";
@@ -121,7 +127,7 @@ public class RegistarOpremeController {
     @GetMapping("/z-evidencija_umjeravanja")
     public String zevidencijaumjeravanja(Model model, HttpSession session) {
         Korisnik user = (Korisnik) session.getAttribute("currUser");
-        List<Odrzavanje> odrzavanjeList1 = odrzavanjeRepository.findByRadilisteAndTip(user.getRadiliste(),umjeravanjeS);
+        List<Odrzavanje> odrzavanjeList1 = odrzavanjeRepository.findByRadilisteAndTip(user.getRadiliste(), umjeravanjeS);
         odrzavanjeList1.sort(Comparator.comparing(Odrzavanje::getDatumUmjeravanja, Comparator.reverseOrder()));
         model.addAttribute("odrzavanjeList", odrzavanjeList1);
         return "z-evidencija_umjeravanja.html";
@@ -217,8 +223,9 @@ public class RegistarOpremeController {
     }
 
     @GetMapping("/pocetna")
-    public String nada(Model model, HttpSession session) {
-        Korisnik user = (Korisnik) session.getAttribute("currUser");
+    public String nada(@AuthenticationPrincipal CustomKorisnikDetails customKorisnikDetails, Model model, HttpSession session) {
+        Korisnik user = korisnikRepository.findByEmail(customKorisnikDetails.getUsername());
+        session.setAttribute("currUser", user);
         List<Oprema> opremaList1 = opremaRepository.findByRadiliste(user.getRadiliste());
         List<Oprema> opremaList = new ArrayList<>(opremaList1);
         opremaList.sort(Comparator.comparing(Oprema::getDatumPlaniranogServisiranja));

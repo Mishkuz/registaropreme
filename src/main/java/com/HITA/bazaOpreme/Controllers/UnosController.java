@@ -6,26 +6,25 @@ import com.HITA.bazaOpreme.model.Vlasnik;
 import com.HITA.bazaOpreme.repository.ServiserRepository;
 import com.HITA.bazaOpreme.repository.*;
 import jakarta.servlet.http.HttpSession;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
+@AllArgsConstructor
 public class UnosController {
-    @Autowired
-    OpremaRepository opremaRepository;
-    @Autowired
-    KvarRepository kvarRepository;
-    @Autowired
-    KategorijaRepository kategorijaRepository;
-    @Autowired
-    OdrzavanjeRepository odrzavanjeRepository;
-    @Autowired
-    VrstaRepository vrstaRepository;
-    @Autowired
-    private ServiserRepository serviserRepository;
-    @Autowired
+
+
+    private final OpremaRepository opremaRepository;
+    private final KvarRepository kvarRepository;
+    private final KategorijaRepository kategorijaRepository;
+    private final OdrzavanjeRepository odrzavanjeRepository;
+    private final VrstaRepository vrstaRepository;
+    private final  ServiserRepository serviserRepository;
     private VlasnikRepository vlasnikRepository;
 
 
@@ -42,7 +41,7 @@ public class UnosController {
     @GetMapping("/spremiNovogServisera")
     public String spremiS(@RequestParam(name = "sifra") String sifra, @RequestParam(name = "naziv") String naziv,
                           @RequestParam(name = "adresa") String adresa, @RequestParam(name = "telefon") String telefon,
-                          @RequestParam(name = "email") String email, @RequestParam(name = "kOsoba") String kOsoba, HttpSession session) {
+                          @RequestParam(name = "email") String email, @RequestParam(name = "kOsoba") String kOsoba, HttpSession session, @AuthenticationPrincipal UserDetails userDetails) {
         Korisnik user = (Korisnik) session.getAttribute("currUser");
         Serviser serviser = new Serviser(sifra, naziv, adresa, telefon, email, kOsoba,user.getRadiliste());
         serviserRepository.save(serviser);

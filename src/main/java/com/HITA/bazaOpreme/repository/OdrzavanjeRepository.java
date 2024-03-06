@@ -5,8 +5,10 @@ import com.HITA.bazaOpreme.model.Oprema;
 import com.HITA.bazaOpreme.model.Radiliste;
 import com.HITA.bazaOpreme.model.archive.Odrzavanja_Old;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Repository
@@ -25,6 +27,8 @@ public interface OdrzavanjeRepository extends JpaRepository<Odrzavanje, Long> {
      List<Odrzavanje> findByRadilisteAndTip(Radiliste radiliste, String tip);
 
      List<Odrzavanje> findByRadilisteAndTipOrTip(Radiliste radiliste, String tip, String tip1);
+
+
 }
 
 
