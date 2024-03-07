@@ -268,7 +268,7 @@ public class RegistarOpremeController {
 
     @GetMapping("/spremiNovuKategoriju")
     public String spremiNovuKategoriju(@RequestParam("sifra") String sifra,
-                                     @RequestParam("kategorija") String kategorija,
+                                     @RequestParam("naziv") String naziv,
                                      HttpSession session) {
         Korisnik user = (Korisnik) session.getAttribute("currUser");
 
@@ -278,7 +278,7 @@ public class RegistarOpremeController {
 
         Kategorija novaKategorija = new Kategorija();
         novaKategorija.setSifra(sifra);
-        novaKategorija.setKategorija(kategorija);
+        novaKategorija.setKategorija(naziv);
         novaKategorija.setRadiliste(user.getRadiliste());
 
         kategorijaRepository.save(novaKategorija);
@@ -297,7 +297,7 @@ public class RegistarOpremeController {
 
     @GetMapping("/spremiNovuVrstu")
     public String unosNoveVrste(@RequestParam("sifra") String sifra,
-                                @RequestParam("vrsta") String vrsta,
+                                @RequestParam("naziv") String naziv,
                                 @RequestParam("kategorijaId") Long kategorijaId,
                                 HttpSession session) {
         Korisnik user = (Korisnik) session.getAttribute("currUser");
@@ -307,7 +307,7 @@ public class RegistarOpremeController {
         }
         Vrsta novaVrsta = new Vrsta();
         novaVrsta.setSifra(sifra);
-        novaVrsta.setVrsta(vrsta);
+        novaVrsta.setVrsta(naziv);
         novaVrsta.setRadiliste(user.getRadiliste());
         novaVrsta.setKategorija(kategorijaRepository.findById(kategorijaId).orElse(null));
         vrstaRepository.save(novaVrsta);
