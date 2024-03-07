@@ -9,6 +9,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Repository
@@ -32,5 +33,10 @@ public interface OpremaRepository extends JpaRepository<Oprema, Long> {
     @Modifying
     @Query("update Oprema o set o.ispravno = ?1 where o.id = ?2")
     int updateIspravnoById(Boolean ispravno, Long id);
+
+    @Transactional
+    @Modifying
+    @Query("update Oprema o set o.datumPlaniranogServisiranja = ?1 where o.id = ?2")
+    int updateDatumPlaniranogServisiranjaById(LocalDate datumPlaniranogServisiranja, Long id);
 }
 

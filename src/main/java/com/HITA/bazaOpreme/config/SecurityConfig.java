@@ -58,8 +58,13 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.ignoringRequestMatchers("/h2-console/**")
                 )
                  .headers(headers -> headers.disable())
-                .formLogin(form -> form.loginPage("/login").permitAll().usernameParameter("email").passwordParameter("password").loginProcessingUrl("/login").permitAll().defaultSuccessUrl("/pocetna").permitAll())
-                //  .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .formLogin(form -> form.loginPage("/login").permitAll().usernameParameter("email").passwordParameter("password").loginProcessingUrl("/login").permitAll().defaultSuccessUrl("/pocetna") .successHandler((request, response, authentication) -> {
+                    if (request.isUserInRole(Role.ADMIN.name())) {
+                        response.sendRedirect("/admin/pocetna");
+                    } else {
+                        response.sendRedirect("/pocetna");
+                    }}).permitAll()
+                )
                 .logout(httpSecurityLogoutConfigurer -> httpSecurityLogoutConfigurer
                         .clearAuthentication(true)
                         .invalidateHttpSession(true)

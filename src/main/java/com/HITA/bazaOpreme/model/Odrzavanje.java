@@ -59,7 +59,10 @@ public class Odrzavanje {
     private LocalDate datumOtpreme;
 
     @Column(name = "datum_povrata", nullable = true)
-    private Date datumPovrata;
+    private LocalDate datumPovrata;
+
+    @Column(name = "datum_planiranog_servisiranja", nullable = true)
+    private LocalDate datumPlaniranogServisiranja;
 
     @ManyToOne
     @JoinColumn(name="radiliste_id")
@@ -68,7 +71,7 @@ public class Odrzavanje {
 
 
     public Odrzavanje(String prijavioRadnik, String opisOdrzavanja,
-                       LocalDate datumOtpreme, Date datumPovrata, Radiliste radiliste, Oprema oprema) {
+                       LocalDate datumOtpreme, LocalDate datumPovrata, Radiliste radiliste, Oprema oprema) {
         this.prijavioRadnik = prijavioRadnik;
         this.opisOdrzavanja = opisOdrzavanja;
         this.datumOtpreme = datumOtpreme;
