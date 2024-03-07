@@ -294,6 +294,11 @@ public class RegistarOpremeController {
         return "redirect:/pocetna";
     }
 
+    @GetMapping("/unosNoveKategorije")
+    public String unosKategorije(Model model, HttpSession session) {
+        Korisnik user = (Korisnik) session.getAttribute("currUser");
+        return "z-unos_kategorije";
+    }
 
     @GetMapping("/unosNoveVrste")
     public String unosVrste(Model model, HttpSession session) {

@@ -64,14 +64,14 @@
                 <p><strong>Naziv:</strong> <span th:text="${oprema.naziv}"></span></p>
                 <p><strong>Serijski broj:</strong> <span th:text="${oprema.serijskiBroj}"></span></p>
                 <p><strong>Inventarski broj:</strong> <span th:text="${oprema.inventarskiBroj}"></span></p>
-                <p><strong>Kategorija:</strong> <span th:text="${oprema.kategorija}"></span></p>
-                <p><strong>Vrsta:</strong> <span th:text="${oprema.vrsta}"></span></p>
+                <p><strong>Kategorija:</strong> <span th:text="${oprema.kategorija?.kategorija}"></span></p>
+                <p><strong>Vrsta:</strong> <span th:text="${oprema.vrsta?.vrsta}"></span></p>
                 <p><strong>Proizvođač:</strong> <span th:text="${oprema.proizvodjac}"></span></p>
                 <p><strong>Vlasnik:</strong> <span th:text="${oprema.vlasnik}"></span></p>
-                <p><strong>Datum proizvodnje:</strong> <span th:text="${oprema.godinaProizvodnje}"></span></p>
-                <p><strong>Certifikat:</strong> <span th:text="${oprema.certifikat}"></span></p>
+                <p><strong>Datum proizvodnje:</strong> <span th:text="${#temporals.format(oprema.godinaProizvodnje, 'dd.MM.yyyy')}"></span></p>
+                <p><strong>Certifikat:</strong> <span th:text="${oprema.certifikat ? 'ima' : 'nema'}"></span></p>
                 <p><strong>Interval servisiranja (u mj.):</strong> <span th:text="${oprema.intervalServisiranjaUMjesecima}"></span></p>
-                <p><strong>Datum planiranog servisiranja:</strong> <span th:text="${oprema.datumPlaniranogServisiranja}"></span></p>
+                <p><strong>Datum planiranog servisiranja:</strong> <span th:text="${#temporals.format(oprema.datumPlaniranogServisiranja, 'dd.MM.yyyy')}"></span></p>
                 <div class="text-left">
                     <div class="text-left">
                         <button name="button" class="btn btn-primary" type="submit" style="margin-bottom: 5px; margin-top: 20px; margin-right: 10px;">Ispiši</button>

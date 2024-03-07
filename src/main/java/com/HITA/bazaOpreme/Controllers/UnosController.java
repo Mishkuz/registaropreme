@@ -1,6 +1,7 @@
 package com.HITA.bazaOpreme.Controllers;
 
 import com.HITA.bazaOpreme.model.Korisnik;
+import com.HITA.bazaOpreme.model.Proizvodjac;
 import com.HITA.bazaOpreme.model.Serviser;
 import com.HITA.bazaOpreme.model.Vlasnik;
 import com.HITA.bazaOpreme.repository.ServiserRepository;
@@ -26,6 +27,7 @@ public class UnosController {
     private final VrstaRepository vrstaRepository;
     private final  ServiserRepository serviserRepository;
     private VlasnikRepository vlasnikRepository;
+    private final ProizvodjacRepository proizvodjacRepository;
 
 
     @GetMapping("/unosProizvodjaca")
@@ -47,7 +49,15 @@ public class UnosController {
         serviserRepository.save(serviser);
         return "redirect:/pocetna";
     }
-
+    @GetMapping("/spremiNovogProizvodaca")
+    public String spremiP(@RequestParam(name = "sifra") String sifra, @RequestParam(name = "naziv") String naziv,
+                          @RequestParam(name = "adresa") String adresa, @RequestParam(name = "telefon") String telefon,
+                          @RequestParam(name = "email") String email, @RequestParam(name = "kOsoba") String kOsoba, HttpSession session, @AuthenticationPrincipal UserDetails userDetails) {
+        Korisnik user = (Korisnik) session.getAttribute("currUser");
+        Proizvodjac proizvodjac = new Proizvodjac(sifra, naziv, adresa, telefon, email, kOsoba,user.getRadiliste());
+        proizvodjacRepository.save(proizvodjac);
+        return "redirect:/pocetna";
+    }
 
     @GetMapping("/unosNovogVlasnika")
     public String unosNV() {
