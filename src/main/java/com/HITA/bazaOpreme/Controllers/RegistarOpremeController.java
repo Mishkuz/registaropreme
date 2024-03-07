@@ -17,6 +17,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -257,6 +258,61 @@ public class RegistarOpremeController {
         return "z-evidencija_opreme_na_servisu.html";
     }
 
+    @GetMapping("/z-pregled_pojedine_opreme")
+    public String prikaziDetaljeOpreme(Long opremaId, Model model) {
+        Oprema oprema = opremaRepository.findById(opremaId).orElse(null);
+        model.addAttribute("oprema", oprema);
+        return "z-pregled_pojedine_opreme";
+    }
+
+
+    @GetMapping("/spremiNovuKategoriju")
+    public String spremiNovuKategoriju(@RequestParam("sifra") String sifra,
+                                     @RequestParam("naziv") String naziv,
+                                     HttpSession session) {
+        Korisnik user = (Korisnik) session.getAttribute("currUser");
+
+        if (user == null) {
+            return "redirect:/login";
+        }
+
+        Kategorija novaKategorija = new Kategorija();
+        novaKategorija.setSifra(sifra);
+        novaKategorija.setKategorija(naziv);
+        novaKategorija.setRadiliste(user.getRadiliste());
+
+        kategorijaRepository.save(novaKategorija);
+
+        return "redirect:/pocetna";
+    }
+
+
+    @GetMapping("/unosNoveVrste")
+    public String unosVrste(Model model, HttpSession session) {
+        Korisnik user = (Korisnik) session.getAttribute("currUser");
+        List<Kategorija> kategorije = kategorijaRepository.findByRadiliste(user.getRadiliste());
+        model.addAttribute("kategorije", kategorije);
+        return "z-unos_vrste";
+    }
+
+    @GetMapping("/spremiNovuVrstu")
+    public String unosNoveVrste(@RequestParam("sifra") String sifra,
+                                @RequestParam("naziv") String naziv,
+                                @RequestParam("kategorijaId") Long kategorijaId,
+                                HttpSession session) {
+        Korisnik user = (Korisnik) session.getAttribute("currUser");
+
+        if (user == null) {
+            return "redirect:/login";
+        }
+        Vrsta novaVrsta = new Vrsta();
+        novaVrsta.setSifra(sifra);
+        novaVrsta.setVrsta(naziv);
+        novaVrsta.setRadiliste(user.getRadiliste());
+        novaVrsta.setKategorija(kategorijaRepository.findById(kategorijaId).orElse(null));
+        vrstaRepository.save(novaVrsta);
+        return "redirect:/pocetna";
+    }
 
 }
 

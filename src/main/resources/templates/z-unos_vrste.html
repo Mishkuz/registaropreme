@@ -53,56 +53,69 @@
     <!-- Navbar -->
     <nav th:replace="~{fragments/navbar::navbar}" ></nav>
     <!-- End Navbar -->
-
-    <div class="container mt-2 p-4 d-flex justify-content-center align-items-center">
-
-        <div class="col-md-8">
-            <div class="input-group input-group-dynamic mb-4" style="max-width: 800px;">
-                <input type="text" id="searchInput" style="border-color: #177245; max-height:40px;" class="form-control"  placeholder="Unesi naziv opreme" aria-label="nazivopreme" aria-describedby="basic-addon1">
-                <span class="input-group-text" id="basic-addon1" style="max-height:40px;">
-                                <button name="button" class="btn btn-link" type="submit">
-                                    <img src="../static/povecalo.jpg" class="img-fluid" style="width: 35px; height: 35px; border-radius: 50%; background:transparent;" alt="povecalo">
-                                </button>
-                            </span>
-                <script>
-                    document.addEventListener('DOMContentLoaded', function () {
-                        var searchInput = document.getElementById('searchInput');
-                        searchInput.addEventListener('input', function () {
-                            var searchText = searchInput.value.toLowerCase();
-                            var tableRows = document.querySelectorAll('.table tbody tr');
-                            tableRows.forEach(function (row) {
-                                var rowData = row.textContent.toLowerCase();
-                                row.style.display = rowData.includes(searchText) ? 'table-row' : 'none';
-                            });
-                        });
-                    });
-                </script>
-            </div>
+    <div class="container main-container">
+        <div class="row justify-content-center border rounded-2 p-2 bg- shadow box-area position-relative">
+            <form action="/spremiNovuVrstu">
+                <br>
+                <div>
+                    <h2>Nova vrsta</h2>
+                </div>
+                <br><br>
+                <div class="input-group input-group-dynamic mb-4">
+                    <span>Šifra: </span>
+                    <input type="text" aria-label="Username" aria-describedby="basic-addon1" class="form-control" id="sifra" maxlength="20" size="30"
+                           required>
+                </div>
+                <div class="input-group input-group-dynamic mb-4">
+                    <span>Naziv vrste: </span>
+                    <input type="text" aria-label="Username" aria-describedby="basic-addon1" class="form-control" id="naziv"  maxlength="50" size="60"
+                           required>
+                </div>
+                <div class="input-group input-group-dynamic mb-4">
+                    <label for="kategorijaId">Kategorija:</label>
+                    <select class="form-select" id="kategorijaId" name="kategorijaId">
+                        <option th:each="kategorija : ${kategorije}" th:value="${kategorija.idKategorija}" th:text="${kategorija.kategorija}"></option>
+                    </select>
+                </div>
+                <div class="text-center">
+                    <button name="submit" class="btn btn-primary" type="submit" style="margin-bottom: 5px; margin-top: 20px;
+                margin-right: 10px;">Spremi vrstu</button>
+                    <a href="/pocetna" class="btn btn-primary" type="submit" style="margin-bottom: 5px; margin-top: 20px;
+                margin-right: 10px;">Odustani</a>
+                </div>
+                <br>
+            </form>
         </div>
+        <style>
+            .input-group-dynamic {
+           display: flex;
+           flex-direction: column;
+       }
+
+       .input-group-dynamic .form-control {
+           width: 25%;
+       }
+
+             .input-group-dynamic .form-select {
+           width: 30%;
+       }
+
+            .input-group-dynamic .form-tarea {
+           width: 50%;
+       }
+        </style>
     </div>
-    <div class="card">
-        <div class="table-responsive">
-            <table class="table align-items-center text-center mb-0 table-striped table-hover">
-                <thead>
-                <tr>
-                    <th>Šifra</th>
-                    <th>Naziv opreme</th>
-                    <th>Prijavio</th>
-                    <th>Opis kvara</th>
-                    <th>Datum prijave</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr th:each="kvar : ${kvarList}">
-                    <td th:text="${kvar.oprema != null ? kvar.oprema.sifra : 'N/A'}"></td>
-                    <td th:text="${kvar.oprema != null ? kvar.oprema.naziv : 'N/A'}"></td>
-                    <td th:text="${kvar.prijavioRadnik}"></td>
-                    <td th:text="${kvar.opisKvara}"></td>
-                    <td th:text="${#temporals.format(kvar.datumPrijave, 'dd.MM.yyyy')}"></td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var closeButton = document.querySelector('button[name="button"][type="submit"][value="Zatvori"]');
+            if (closeButton) {
+                closeButton.addEventListener("click", function (event) {
+                    event.preventDefault(); // spriječava slanje obrasca
+                    window.location.href = "/pocetna"; // preusmjerava na /pocetna
+                });
+            }
+        });
+    </script>
     </div>
 </main>
 <div class="fixed-plugin">
@@ -206,4 +219,3 @@
 <script src="../static/assets/js/material-dashboard.min.js?v=3.1.0"></script>
 </body>
 
-</html>
