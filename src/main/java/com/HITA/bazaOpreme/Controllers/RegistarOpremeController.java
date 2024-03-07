@@ -17,6 +17,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -256,6 +257,22 @@ public class RegistarOpremeController {
         model.addAttribute("opremaList", opremaList);
         return "z-evidencija_opreme_na_servisu.html";
     }
+
+    @GetMapping("/z-pregled_pojedine_opreme")
+    public String prikaziDetaljeOpreme(Long opremaId, Model model) {
+        Oprema oprema = opremaRepository.findById(opremaId).orElse(null);
+        model.addAttribute("oprema", oprema);
+        return "z-pregled_pojedine_opreme";
+    }
+
+
+
+
+
+
+
+
+
 
 
 }
