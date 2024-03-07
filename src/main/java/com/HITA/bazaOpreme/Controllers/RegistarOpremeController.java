@@ -266,14 +266,53 @@ public class RegistarOpremeController {
     }
 
 
+    @GetMapping("/spremiNovuKategoriju")
+    public String spremiNovuKategoriju(@RequestParam("sifra") String sifra,
+                                     @RequestParam("kategorija") String kategorija,
+                                     HttpSession session) {
+        Korisnik user = (Korisnik) session.getAttribute("currUser");
+
+        if (user == null) {
+            return "redirect:/login";
+        }
+
+        Kategorija novaKategorija = new Kategorija();
+        novaKategorija.setSifra(sifra);
+        novaKategorija.setKategorija(kategorija);
+        novaKategorija.setRadiliste(user.getRadiliste());
+
+        kategorijaRepository.save(novaKategorija);
+
+        return "redirect:/pocetna";
+    }
 
 
+    @GetMapping("/unosNoveVrste")
+    public String unosVrste(Model model, HttpSession session) {
+        Korisnik user = (Korisnik) session.getAttribute("currUser");
+        List<Kategorija> kategorije = kategorijaRepository.findByRadiliste(user.getRadiliste());
+        model.addAttribute("kategorije", kategorije);
+        return "z-unos_vrste";
+    }
 
+    @GetMapping("/spremiNovuVrstu")
+    public String unosNoveVrste(@RequestParam("sifra") String sifra,
+                                @RequestParam("vrsta") String vrsta,
+                                @RequestParam("kategorijaId") Long kategorijaId,
+                                HttpSession session) {
+        Korisnik user = (Korisnik) session.getAttribute("currUser");
 
-
-
-
-
+        if (user == null) {
+            return "redirect:/login";
+        }
+        Vrsta novaVrsta = new Vrsta();
+        novaVrsta.setSifra(sifra);
+        novaVrsta.setVrsta(vrsta);
+        novaVrsta.setRadiliste(user.getRadiliste());
+        novaVrsta.setKategorija(kategorijaRepository.findById(kategorijaId).orElse(null));
+        vrstaRepository.save(novaVrsta);
+        return "redirect:/pocetna";
+    }
 
 }
 
