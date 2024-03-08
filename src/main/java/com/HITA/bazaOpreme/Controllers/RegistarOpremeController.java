@@ -59,6 +59,7 @@ public class RegistarOpremeController {
         }
         model.addAttribute("kvarList", kvarList);
         model.addAttribute("opremaList", opremaList);
+        model.addAttribute("user", user);
         return "z-prijava_kvara.html";
     }
 
@@ -99,6 +100,7 @@ public class RegistarOpremeController {
         oprema.setRadiliste(user.getRadiliste());
         oprema.setNaServisu(false);
         opremaRepository.save(oprema);
+        model.addAttribute("user", user);
         return "redirect:/";
     }
 
@@ -113,6 +115,7 @@ public class RegistarOpremeController {
         model.addAttribute("vrste", vrste);
         model.addAttribute("proizvodjaci", proizvodjaci);
         model.addAttribute("vlasnici", vlasnici);
+        model.addAttribute("user", user);
         return "z-unos_nove_opreme.html";
     }
 
@@ -122,6 +125,7 @@ public class RegistarOpremeController {
         List<Odrzavanje> odrzavanjeList1 = odrzavanjeRepository.findByRadilisteAndTipOrTip(user.getRadiliste(), servisS, servisIzvanredanS);
         odrzavanjeList1.sort(Comparator.comparing(Odrzavanje::getDatumOtpreme, Comparator.reverseOrder()));
         model.addAttribute("odrzavanjeList", odrzavanjeList1);
+        model.addAttribute("user", user);
         return "z-evidencija_servisa.html";
     }
 
@@ -131,6 +135,7 @@ public class RegistarOpremeController {
         List<Odrzavanje> odrzavanjeList1 = odrzavanjeRepository.findByRadilisteAndTip(user.getRadiliste(), umjeravanjeS);
         odrzavanjeList1.sort(Comparator.comparing(Odrzavanje::getDatumUmjeravanja, Comparator.reverseOrder()));
         model.addAttribute("odrzavanjeList", odrzavanjeList1);
+        model.addAttribute("user", user);
         return "z-evidencija_umjeravanja.html";
     }
 
@@ -148,6 +153,7 @@ public class RegistarOpremeController {
         kvar.setDatumPrijave(datumPrijave);
         kvar.setOprema(opremaRepository.findById(opremaId).get());
         kvarRepository.save(kvar);
+        model.addAttribute("user", user);
         return "redirect:/z-pokaziKvarove";
     }
 
@@ -161,6 +167,7 @@ public class RegistarOpremeController {
         model.addAttribute(opremaList);
         model.addAttribute("serviseri", serviseri);
         model.addAttribute(opremaRepository.findById(opremaId).get());
+        model.addAttribute("user", user);
         return "z-unos_za_servis.html";
     }
 
@@ -174,6 +181,7 @@ public class RegistarOpremeController {
         model.addAttribute(opremaList);
         model.addAttribute("serviseri", serviseri);
         model.addAttribute(opremaRepository.findById(opremaId).get());
+        model.addAttribute("user", user);
         return "z-unos_za_umjeravanje.html";
     }
 
@@ -198,6 +206,7 @@ public class RegistarOpremeController {
             odrzavanje.setTip(servisS);
         }
         odrzavanjeRepository.save(odrzavanje);
+        model.addAttribute("user", user);
         return "redirect:/z-evidencija_servisa";
     }
 
@@ -211,6 +220,7 @@ public class RegistarOpremeController {
         Odrzavanje odrzavanje = new Odrzavanje(prijavioRadnik, datumUmjeravanja, user.getRadiliste(), opremaRepository.findById(opremaId).get());
         odrzavanje.setTip(umjeravanjeS);
         odrzavanjeRepository.save(odrzavanje);
+        model.addAttribute("user", user);
         return "redirect:/z-evidencija_umjeravanja";
     }
 
@@ -222,6 +232,7 @@ public class RegistarOpremeController {
         List<Kvar> kvarList = new ArrayList<>(kvarList1);
         kvarList.sort(Comparator.comparing(Kvar::getDatumPrijave, Comparator.reverseOrder()));
         model.addAttribute("kvarList", kvarList);
+        model.addAttribute("user", user);
         return "z-oprema_kvarovi.html";
     }
 
@@ -245,6 +256,7 @@ public class RegistarOpremeController {
         List<Oprema> opremaList = new ArrayList<>(opremaList1);
         opremaList.sort(Comparator.comparing(Oprema::getDatumPlaniranogServisiranja));
         model.addAttribute("opremaList", opremaList);
+        model.addAttribute("user", user);
         return "z-evidencija_opreme_na_servisu.html";
     }
 
@@ -264,11 +276,13 @@ public class RegistarOpremeController {
         List<Oprema> opremaList = new ArrayList<>(opremaList1);
         opremaList.sort(Comparator.comparing(Oprema::getDatumPlaniranogServisiranja));
         model.addAttribute("opremaList", opremaList);
+        model.addAttribute("user", user);
         return "z-evidencija_opreme_na_servisu.html";
     }
 
     @GetMapping("/z-pregled_pojedine_opreme")
-    public String prikaziDetaljeOpreme(Long opremaId, Model model) {
+    public String prikaziDetaljeOpreme(Long opremaId, Model model, HttpSession session) {
+        Korisnik user = (Korisnik) session.getAttribute("currUser");
         Oprema oprema = opremaRepository.findById(opremaId).orElse(null);
         List<Odrzavanje> odrzavanjeList = odrzavanjeRepository.findByOpremaAndTip(oprema, umjeravanjeS);
         List<Odrzavanje> odrzavanjeSList = odrzavanjeRepository.findByOpremaAndTipOrTip(oprema, servisS, servisIzvanredanS);
@@ -279,6 +293,7 @@ public class RegistarOpremeController {
         model.addAttribute("odrzavanjeSList", odrzavanjeSList);
         model.addAttribute("odrzavanjeList", odrzavanjeList);
         model.addAttribute("oprema", oprema);
+        model.addAttribute("user", user);
         return "z-pregled_pojedine_opreme";
     }
 
@@ -286,7 +301,7 @@ public class RegistarOpremeController {
     @GetMapping("/spremiNovuKategoriju")
     public String spremiNovuKategoriju(@RequestParam("sifra") String sifra,
                                        @RequestParam("naziv") String naziv,
-                                       HttpSession session) {
+                                       HttpSession session, Model model) {
         Korisnik user = (Korisnik) session.getAttribute("currUser");
 
         if (user == null) {
@@ -299,13 +314,14 @@ public class RegistarOpremeController {
         novaKategorija.setRadiliste(user.getRadiliste());
 
         kategorijaRepository.save(novaKategorija);
-
+        model.addAttribute("user", user);
         return "redirect:/pocetna";
     }
 
     @GetMapping("/unosNoveKategorije")
     public String unosKategorije(Model model, HttpSession session) {
         Korisnik user = (Korisnik) session.getAttribute("currUser");
+        model.addAttribute("user", user);
         return "z-unos_kategorije";
     }
 
@@ -314,6 +330,7 @@ public class RegistarOpremeController {
         Korisnik user = (Korisnik) session.getAttribute("currUser");
         List<Kategorija> kategorije = kategorijaRepository.findByRadiliste(user.getRadiliste());
         model.addAttribute("kategorije", kategorije);
+        model.addAttribute("user", user);
         return "z-unos_vrste";
     }
 
@@ -321,7 +338,7 @@ public class RegistarOpremeController {
     public String unosNoveVrste(@RequestParam("sifra") String sifra,
                                 @RequestParam("naziv") String naziv,
                                 @RequestParam("kategorijaId") Long kategorijaId,
-                                HttpSession session) {
+                                HttpSession session, Model model) {
         Korisnik user = (Korisnik) session.getAttribute("currUser");
         if (user == null) {
             return "redirect:/login";
@@ -332,6 +349,7 @@ public class RegistarOpremeController {
         novaVrsta.setRadiliste(user.getRadiliste());
         novaVrsta.setKategorija(kategorijaRepository.findById(kategorijaId).orElse(null));
         vrstaRepository.save(novaVrsta);
+        model.addAttribute("user", user);
         return "redirect:/pocetna";
     }
 

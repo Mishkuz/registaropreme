@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -43,19 +44,22 @@ public class UnosController {
     @GetMapping("/spremiNovogServisera")
     public String spremiS(@RequestParam(name = "sifra") String sifra, @RequestParam(name = "naziv") String naziv,
                           @RequestParam(name = "adresa") String adresa, @RequestParam(name = "telefon") String telefon,
-                          @RequestParam(name = "email") String email, @RequestParam(name = "kOsoba") String kOsoba, HttpSession session, @AuthenticationPrincipal UserDetails userDetails) {
+                          @RequestParam(name = "email") String email, @RequestParam(name = "kOsoba") String kOsoba, HttpSession session,
+                          @AuthenticationPrincipal UserDetails userDetails, Model model) {
         Korisnik user = (Korisnik) session.getAttribute("currUser");
         Serviser serviser = new Serviser(sifra, naziv, adresa, telefon, email, kOsoba,user.getRadiliste());
         serviserRepository.save(serviser);
+        model.addAttribute("user", user);
         return "redirect:/pocetna";
     }
     @GetMapping("/spremiNovogProizvodaca")
     public String spremiP(@RequestParam(name = "sifra") String sifra, @RequestParam(name = "naziv") String naziv,
                           @RequestParam(name = "adresa") String adresa, @RequestParam(name = "telefon") String telefon,
-                          @RequestParam(name = "email") String email, @RequestParam(name = "kOsoba") String kOsoba, HttpSession session, @AuthenticationPrincipal UserDetails userDetails) {
+                          @RequestParam(name = "email") String email, @RequestParam(name = "kOsoba") String kOsoba, HttpSession session, @AuthenticationPrincipal UserDetails userDetails, Model model) {
         Korisnik user = (Korisnik) session.getAttribute("currUser");
         Proizvodjac proizvodjac = new Proizvodjac(sifra, naziv, adresa, telefon, email, kOsoba,user.getRadiliste());
         proizvodjacRepository.save(proizvodjac);
+        model.addAttribute("user", user);
         return "redirect:/pocetna";
     }
 
@@ -68,10 +72,11 @@ public class UnosController {
     @GetMapping("/spremiNovogVlasnika")
     public String spremiNV(@RequestParam(name = "sifra") String sifra, @RequestParam(name = "naziv") String naziv,
                            @RequestParam(name = "adresa") String adresa, @RequestParam(name = "telefon") String telefon,
-                           @RequestParam(name = "email") String email, @RequestParam(name = "kOsoba") String kOsoba, HttpSession session) {
+                           @RequestParam(name = "email") String email, @RequestParam(name = "kOsoba") String kOsoba, HttpSession session, Model model) {
         Korisnik user = (Korisnik) session.getAttribute("currUser");
         Vlasnik vlasnik = new Vlasnik(sifra, naziv, adresa, telefon, email, kOsoba, user.getRadiliste());
         vlasnikRepository.save(vlasnik);
+        model.addAttribute("user", user);
         return "redirect:/pocetna";
     }
 }
