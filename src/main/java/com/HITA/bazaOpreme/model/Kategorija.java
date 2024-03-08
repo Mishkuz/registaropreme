@@ -26,10 +26,10 @@ public class Kategorija {
     @Size(max = 50, message = "Naziv kategorije ne smije biti duži od 50 znakova")
     private String kategorija;
 
-
     @ManyToOne
     @JoinColumn(name = "radiliste_id")
     private Radiliste radiliste ;
+
 
     public Kategorija(Long idKategorija, String sifra, String kategorija, Radiliste radiliste) {
         this.idKategorija = idKategorija;

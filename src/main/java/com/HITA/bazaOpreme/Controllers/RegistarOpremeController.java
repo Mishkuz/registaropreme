@@ -188,7 +188,7 @@ public class RegistarOpremeController {
             Model model, HttpSession session) {
         Korisnik user = (Korisnik) session.getAttribute("currUser");
         LocalDate ld = LocalDate.now();
-        Odrzavanje odrzavanje = new Odrzavanje(prijavioRadnik, opisOdrzavanja,ld, null, user.getRadiliste(), opremaRepository.findById(opremaId).get());
+        Odrzavanje odrzavanje = new Odrzavanje(prijavioRadnik, opisOdrzavanja, ld, null, user.getRadiliste(), opremaRepository.findById(opremaId).get());
         odrzavanje.setServiser(serviserRepository.findById(tvrtkaId).orElse(null));
         odrzavanje.setDatumPlaniranogServisiranja(opremaRepository.findById(opremaId).get().getDatumPlaniranogServisiranja());
         opremaRepository.updateNaServisuById(true, opremaId);
@@ -233,6 +233,7 @@ public class RegistarOpremeController {
         List<Oprema> opremaList = new ArrayList<>(opremaList1);
         opremaList.sort(Comparator.comparing(Oprema::getDatumPlaniranogServisiranja));
         model.addAttribute("opremaList", opremaList);
+        model.addAttribute("user", user);
         return "z-pocetna.html";
     }
 
@@ -269,6 +270,14 @@ public class RegistarOpremeController {
     @GetMapping("/z-pregled_pojedine_opreme")
     public String prikaziDetaljeOpreme(Long opremaId, Model model) {
         Oprema oprema = opremaRepository.findById(opremaId).orElse(null);
+        List<Odrzavanje> odrzavanjeList = odrzavanjeRepository.findByOpremaAndTip(oprema, umjeravanjeS);
+        List<Odrzavanje> odrzavanjeSList = odrzavanjeRepository.findByOpremaAndTipOrTip(oprema, servisS, servisIzvanredanS);
+        List<Kvar> kvarList = kvarRepository.findByOprema(oprema);
+        odrzavanjeList.sort(Comparator.comparing(Odrzavanje::getDatumUmjeravanja));
+        odrzavanjeSList.sort(Comparator.comparing(Odrzavanje::getDatumOtpreme));
+        kvarList.sort(Comparator.comparing(Kvar::getDatumPrijave));
+        model.addAttribute("odrzavanjeSList", odrzavanjeSList);
+        model.addAttribute("odrzavanjeList", odrzavanjeList);
         model.addAttribute("oprema", oprema);
         return "z-pregled_pojedine_opreme";
     }
@@ -314,7 +323,6 @@ public class RegistarOpremeController {
                                 @RequestParam("kategorijaId") Long kategorijaId,
                                 HttpSession session) {
         Korisnik user = (Korisnik) session.getAttribute("currUser");
-
         if (user == null) {
             return "redirect:/login";
         }
@@ -326,6 +334,7 @@ public class RegistarOpremeController {
         vrstaRepository.save(novaVrsta);
         return "redirect:/pocetna";
     }
+
 
 }
 

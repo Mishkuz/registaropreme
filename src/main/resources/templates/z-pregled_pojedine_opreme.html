@@ -48,58 +48,145 @@
     </style>
 </head>
 <body class="g-sidenav-show  bg-gray-200">
-<aside th:replace="~{fragments/menu::menu}" ></aside>
+<aside th:replace="~{fragments/menu::menu}"></aside>
 <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
     <!-- Navbar -->
-    <nav th:replace="~{fragments/navbar::navbar}" ></nav>
+    <nav th:replace="~{fragments/navbar::navbar}"></nav>
     <!-- End Navbar -->
     <div class="container main-container" style="text-align: left; margin-left: 100px;">
-            <form id="myForm" action="/spremiuredaj" method="post">
-                <br>
-                <div>
-                    <h2>Pregled povijesti</h2>
-                </div>
-                <br><br>
-                <p><strong>Šifra:</strong> <span th:text="${oprema.sifra}"></span></p>
-                <p><strong>Naziv:</strong> <span th:text="${oprema.naziv}"></span></p>
-                <p><strong>Serijski broj:</strong> <span th:text="${oprema.serijskiBroj}"></span></p>
-                <p><strong>Inventarski broj:</strong> <span th:text="${oprema.inventarskiBroj}"></span></p>
-                <p><strong>Kategorija:</strong> <span th:text="${oprema.kategorija?.kategorija}"></span></p>
-                <p><strong>Vrsta:</strong> <span th:text="${oprema.vrsta?.vrsta}"></span></p>
-                <p><strong>Proizvođač:</strong> <span th:text="${oprema.proizvodjac}"></span></p>
-                <p><strong>Vlasnik:</strong> <span th:text="${oprema.vlasnik}"></span></p>
-                <p><strong>Datum proizvodnje:</strong> <span th:text="${#temporals.format(oprema.godinaProizvodnje, 'dd.MM.yyyy')}"></span></p>
-                <p><strong>Certifikat:</strong> <span th:text="${oprema.certifikat ? 'ima' : 'nema'}"></span></p>
-                <p><strong>Interval servisiranja (u mj.):</strong> <span th:text="${oprema.intervalServisiranjaUMjesecima}"></span></p>
-                <p><strong>Datum planiranog servisiranja:</strong> <span th:text="${#temporals.format(oprema.datumPlaniranogServisiranja, 'dd.MM.yyyy')}"></span></p>
+        <form id="myForm" action="/spremiuredaj" method="post">
+            <br>
+            <div>
+                <h2>Pregled opreme</h2>
+            </div>
+            <br><br>
+            <p><strong>Šifra:</strong> <span th:text="${oprema.sifra}"></span></p>
+            <p><strong>Naziv:</strong> <span th:text="${oprema.naziv}"></span></p>
+            <p><strong>Serijski broj:</strong> <span th:text="${oprema.serijskiBroj}"></span></p>
+            <p><strong>Inventarski broj:</strong> <span th:text="${oprema.inventarskiBroj}"></span></p>
+            <p><strong>Kategorija:</strong> <span th:text="${oprema.kategorija}"></span></p>
+            <p><strong>Vrsta:</strong> <span th:text="${oprema.vrsta}"></span></p>
+            <p><strong>Proizvođač:</strong> <span th:text="${oprema.proizvodjac}"></span></p>
+            <p><strong>Vlasnik:</strong> <span th:text="${oprema.vlasnik}"></span></p>
+            <p><strong>Datum proizvodnje:</strong> <span th:text="${oprema.godinaProizvodnje}"></span></p>
+            <p><strong>Certifikat:</strong> <span th:text="${oprema.certifikat}"></span></p>
+            <p><strong>Interval servisiranja (u mj.):</strong> <span
+                    th:text="${oprema.intervalServisiranjaUMjesecima}"></span></p>
+            <p><strong>Datum planiranog servisiranja:</strong> <span
+                    th:text="${oprema.datumPlaniranogServisiranja}"></span></p>
+            <div class="text-left">
                 <div class="text-left">
-                    <div class="text-left">
-                        <button name="button" class="btn btn-primary" type="submit" style="margin-bottom: 5px; margin-top: 20px; margin-right: 10px;">Ispiši</button>
-                        <a href="/" class="btn btn-primary" type="submit" style="margin-bottom: 5px; margin-top: 20px;
+                    <button name="button" class="btn btn-primary" type="submit"
+                            style="margin-bottom: 5px; margin-top: 20px; margin-right: 10px;">Ispiši
+                    </button>
+                    <a href="/" class="btn btn-primary" type="submit" style="margin-bottom: 5px; margin-top: 20px;
                 margin-right: 10px;">Odustani</a>
-                    </div>
                 </div>
-                <br>
-            </form>
+            </div>
+            <br>
+        </form>
+    </div>
+        <h3 style="text-align:left; margin-left: 50px;">Umjeravanja</h3>
+        <div class="table-responsive">
+            <table class="table align-items-center text-center mb-0 table-striped table-hover">
+                <thead>
+                <tr>
+                    <th>Šifra opreme</th>
+                    <th>Naziv opreme</th>
+                    <th>Umjeravanje odradio</th>
+                    <th>Datum umjeravanja</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:if="${odrzavanjeList== null or odrzavanjeList.size() == 0}">
+                    <td colspan="5" class="text-center">Nema umjeravanja</td>
+                </tr>
+                <tr th:each="odrzavanje : ${odrzavanjeList}" th:unless="${odrzavanjeList== null or odrzavanjeList.size() == 0}">
+                    <td th:text="${odrzavanje.oprema?.sifra}"></td>
+                    <td th:text="${odrzavanje.oprema?.naziv}"></td>
+                    <td th:text="${odrzavanje.prijavioRadnik}"></td>
+                    <td th:text="${#dates.format(#strings.replace(odrzavanje.datumUmjeravanja, '-', '/'), 'dd.MM.yyyy')}"></td>
+                </tr>
+                </tbody>
+            </table>
         </div>
-        <style>
-            .input-group-dynamic {
-           display: flex;
-           flex-direction: column;
-       }
+    </div>
+   <br>
+        <h3 style="text-align:left; margin-left: 50px;">Servisi</h3>
+        <div class="table-responsive">
+            <table class="table align-items-center text-center mb-0 table-striped table-hover">
+                <thead>
+                <tr>
+                    <th>Šifra opreme</th>
+                    <th>Naziv opreme</th>
+                    <th>Opis</th>
+                    <th>Prijavio</th>
+                    <th>Serviser</th>
+                    <th>Datum otpreme</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:if="${odrzavanjeSList== null or odrzavanjeSList.size() == 0}">
+                    <td colspan="5" class="text-center">Nema servisa</td>
+                </tr>
+                <tr th:each="odrzavanje : ${odrzavanjeSList}"  th:unless="${odrzavanjeSList== null or odrzavanjeSList.size() == 0}">
+                    <td th:text="${odrzavanje.oprema?.sifra}"></td>
+                    <td th:text="${odrzavanje.oprema?.naziv}"></td>
+                    <td th:text="${odrzavanje.opisOdrzavanja}"></td>
+                    <td th:text="${odrzavanje.prijavioRadnik}"></td>
+                    <td th:text="${odrzavanje.serviser?.naziv}"></td>
+                    <td th:text="${#dates.format(#strings.replace(odrzavanje.datumOtpreme, '-', '/'), 'dd.MM.yyyy')}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <br>
+        <h3 style="text-align:left; margin-left: 50px;">Kvarovi</h3>
+        <div class="table-responsive">
+            <table class="table align-items-center text-center mb-0 table-striped table-hover">
+                <thead>
+                <tr>
+                    <th>Šifra</th>
+                    <th>Naziv opreme</th>
+                    <th>Prijavio</th>
+                    <th>Opis kvara</th>
+                    <th>Datum prijave</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:if="${kvarList == null or kvarList.size() == 0}">
+                    <td colspan="5" class="text-center">Nema kvarova</td>
+                </tr>
+                <tr th:each="kvar : ${kvarList}" th:unless="${kvarList == null or kvarList.size() == 0}">
+                    <td th:text="${kvar.oprema != null ? kvar.oprema.sifra : 'N/A'}"></td>
+                    <td th:text="${kvar.oprema != null ? kvar.oprema.naziv : 'N/A'}"></td>
+                    <td th:text="${kvar.prijavioRadnik}"></td>
+                    <td th:text="${kvar.opisKvara}"></td>
+                    <td th:text="${#temporals.format(kvar.datumPrijave, 'dd.MM.yyyy')}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <style>
+        .input-group-dynamic {
+       display: flex;
+       flex-direction: column;
+   }
 
-       .input-group-dynamic .form-control {
-           width: 40%;
-       }
+   .input-group-dynamic .form-control {
+       width: 40%;
+   }
 
-             .input-group-dynamic .form-select {
-           width: 30%;
-       }
+         .input-group-dynamic .form-select {
+       width: 30%;
+   }
 
-            .input-group-dynamic .form-tarea {
-           width: 50%;
-       }
-        </style>
+        .input-group-dynamic .form-tarea {
+       width: 50%;
+   }
+    </style>
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             var closeButton = document.querySelector('button[name="button"][type="submit"][value="Zatvori"]');

@@ -14,7 +14,6 @@
 -->
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
-
 <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -48,10 +47,10 @@
     </style>
 </head>
 <body class="g-sidenav-show  bg-gray-200">
-<aside th:replace="~{fragments/menu::menu}" ></aside>
+<aside th:replace="~{fragments/menu::menu}"></aside>
 <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
     <!-- Navbar -->
-    <nav th:replace="~{fragments/navbar::navbar}" ></nav>
+    <nav th:replace="~{fragments/navbar::navbar}"></nav>
     <!-- End Navbar -->
     <h2 class="h2" style="text-align:left; margin-left: 50px;">Pregled opreme</h2>
     <div class="container d-flex justify-content-center align-items-center">
@@ -65,7 +64,7 @@
                                     <img src="../static/povecalo.jpg" class="img-fluid" style="width: 35px; height: 35px;
                                          border-radius: 50%; background:transparent;" alt="povecalo">
                                 </button>
-                            </span>
+                </span>
             </div>
             <script>
                 document.addEventListener('DOMContentLoaded', function () {
@@ -83,15 +82,13 @@
         </div>
     </div>
     <style>
-    .past-date-row {
-    background-color: rgba(255, 0, 0, 0.2);
-    }
+        .past-date-row {
+        background-color: rgba(255, 0, 0, 0.2);
+        }
 
-    .past-date-row:hover {
-    background-color: rgba(255, 0, 0, 0.3);
-    }
-
-
+        .past-date-row:hover {
+        background-color: rgba(255, 0, 0, 0.3);
+        }
     </style>
     <div class="container-fluid py-4">
         <table class="table align-items-center text-center table-striped table-hover">
@@ -115,7 +112,9 @@
             <tbody>
             <tr th:each="oprema : ${opremaList}">
                 <td th:text="${oprema.sifra}"></td>
-                <td th:attr="text=${oprema.naziv}, href=@{'/z-pregled_pojedine_opreme?opremaId=' + ${oprema.id}}"><a th:text="${oprema.naziv}" th:href="@{'/z-pregled_pojedine_opreme?opremaId=' + ${oprema.id}}"></a></td>
+                <td th:attr="text=${oprema.naziv}, href=@{'/z-pregled_pojedine_opreme?opremaId=' + ${oprema.id}}"><a
+                        th:text="${oprema.naziv}"
+                        th:href="@{'/z-pregled_pojedine_opreme?opremaId=' + ${oprema.id}}"></a></td>
                 <td th:text="${oprema.kategorija?.kategorija}"></td>
                 <td th:text="${oprema.vrsta?.vrsta}"></td>
                 <td th:text="${oprema.proizvodjac?.naziv}"></td>
@@ -145,9 +144,7 @@
             <script>
                 var today = new Date();
                 today.setHours(0, 0, 0, 0);
-
                 var rows = document.querySelectorAll('.datum-planiranog-servisiranja');
-
                 rows.forEach(function(cell) {
                     var dateString = cell.getAttribute('data-datum');
                     console.log("Datum iz atributa:", dateString);

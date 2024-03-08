@@ -32,13 +32,11 @@ public class AdminController {
     private final ProizvodjacRepository proizvodjacRepository;
     private final VlasnikRepository vlasnikRepository;
     private final ServiserRepository serviserRepository;
-
-
     private final String servisS = "Servis";
     private final String servisIzvanredanS = "Izvanredan servis";
     private final String umjeravanjeS = "umjeravanje";
-    @Autowired
-    private KorisnikRepository korisnikRepository;
+
+    private final  KorisnikRepository korisnikRepository;
     private final UstanovaRepository ustanovaRepository;
     private final RadilisteRepository radilisteRepository;
 
@@ -116,18 +114,34 @@ public class AdminController {
     @GetMapping("/admin/z-evidencija_servisa")
     public String adminzevidencijaodrzavanja(Model model, HttpSession session) {
         Korisnik user = (Korisnik) session.getAttribute("currUser");
-        List<Odrzavanje> odrzavanjeList1 = odrzavanjeRepository.findByRadilisteAndTipOrTip(user.getRadiliste(), servisS, servisIzvanredanS);
-        odrzavanjeList1.sort(Comparator.comparing(Odrzavanje::getDatumOtpreme, Comparator.reverseOrder()));
-        model.addAttribute("odrzavanjeList", odrzavanjeList1);
+        Radiliste radiliste = user.getRadiliste();
+        Ustanova ustanova = radiliste.getUstanova();
+        List<Radiliste> radilisteList = radilisteRepository.findByUstanova(ustanova);
+        List<Odrzavanje> odrzavanjeList = null;
+        for (Radiliste r : radilisteList) {
+            List<Odrzavanje> o = odrzavanjeRepository.findByRadilisteAndTipOrTip(r, servisS, servisIzvanredanS);
+            for (Odrzavanje odrzavanje : o)
+                odrzavanjeList.add(odrzavanje);
+        }
+        odrzavanjeList.sort(Comparator.comparing(Odrzavanje::getDatumOtpreme, Comparator.reverseOrder()));
+        model.addAttribute("odrzavanjeList", odrzavanjeList);
         return "z-evidencija_servisa.html";
     }
 
     @GetMapping("/admin/z-evidencija_umjeravanja")
     public String adminevidencijaumjeravanja(Model model, HttpSession session) {
         Korisnik user = (Korisnik) session.getAttribute("currUser");
-        List<Odrzavanje> odrzavanjeList1 = odrzavanjeRepository.findByRadilisteAndTip(user.getRadiliste(), umjeravanjeS);
-        odrzavanjeList1.sort(Comparator.comparing(Odrzavanje::getDatumUmjeravanja, Comparator.reverseOrder()));
-        model.addAttribute("odrzavanjeList", odrzavanjeList1);
+        Radiliste radiliste = user.getRadiliste();
+        Ustanova ustanova = radiliste.getUstanova();
+        List<Radiliste> radilisteList = radilisteRepository.findByUstanova(ustanova);
+        List<Odrzavanje> odrzavanjeList = null;
+        for (Radiliste r : radilisteList) {
+            List<Odrzavanje> o = odrzavanjeRepository.findByRadilisteAndTip(r, umjeravanjeS);
+            for (Odrzavanje odrzavanje : o)
+                odrzavanjeList.add(odrzavanje);
+        }
+        odrzavanjeList.sort(Comparator.comparing(Odrzavanje::getDatumUmjeravanja, Comparator.reverseOrder()));
+        model.addAttribute("odrzavanjeList", odrzavanjeList);
         return "z-evidencija_umjeravanja.html";
     }
 
@@ -213,8 +227,15 @@ public class AdminController {
     @GetMapping("/admin/z-pokaziKvarove")
     public String adminzshowFailures(Model model, HttpSession session) {
         Korisnik user = (Korisnik) session.getAttribute("currUser");
-        List<Kvar> kvarList1 = kvarRepository.findByRadiliste(user.getRadiliste());
-        List<Kvar> kvarList = new ArrayList<>(kvarList1);
+        Radiliste radiliste = user.getRadiliste();
+        Ustanova ustanova = radiliste.getUstanova();
+        List<Radiliste> radilisteList = radilisteRepository.findByUstanova(ustanova);
+        List<Kvar> kvarList = null;
+        for (Radiliste r : radilisteList) {
+            List<Kvar> o = kvarRepository.findByRadiliste(r);
+            for (Kvar kvar : o)
+                kvarList.add(kvar);
+        }
         kvarList.sort(Comparator.comparing(Kvar::getDatumPrijave, Comparator.reverseOrder()));
         model.addAttribute("kvarList", kvarList);
         return "z-oprema_kvarovi.html";
@@ -242,8 +263,15 @@ public class AdminController {
     @GetMapping("/admin/evidencijaOpremeNaServisu")
     public String evidencijaOpremeNaServisu(Model model, HttpSession session) {
         Korisnik user = (Korisnik) session.getAttribute("currUser");
-        List<Oprema> opremaList1 = opremaRepository.findByRadilisteAndNaServisu(user.getRadiliste(), true);
-        List<Oprema> opremaList = new ArrayList<>(opremaList1);
+        Radiliste radiliste = user.getRadiliste();
+        Ustanova ustanova = radiliste.getUstanova();
+        List<Radiliste> radilisteList = radilisteRepository.findByUstanova(ustanova);
+        List<Oprema> opremaList = null;
+        for (Radiliste r : radilisteList) {
+            List<Oprema> o = opremaRepository.findByRadilisteAndNaServisu(r, true);
+            for (Oprema oprema : o)
+                opremaList.add(oprema);
+        }
         opremaList.sort(Comparator.comparing(Oprema::getDatumPlaniranogServisiranja));
         model.addAttribute("opremaList", opremaList);
         return "z-evidencija_opreme_na_servisu.html";
@@ -255,8 +283,15 @@ public class AdminController {
         Korisnik user = (Korisnik) session.getAttribute("currUser");
         opremaRepository.updateNaServisuById(false, opremaId);
         opremaRepository.updateIspravnoById(true, opremaId);
-        List<Oprema> opremaList1 = opremaRepository.findByRadilisteAndNaServisu(user.getRadiliste(), true);
-        List<Oprema> opremaList = new ArrayList<>(opremaList1);
+        Radiliste radiliste = user.getRadiliste();
+        Ustanova ustanova = radiliste.getUstanova();
+        List<Radiliste> radilisteList = radilisteRepository.findByUstanova(ustanova);
+        List<Oprema> opremaList = null;
+        for (Radiliste r : radilisteList) {
+            List<Oprema> o = opremaRepository.findByRadilisteAndNaServisu(r, true);
+            for (Oprema oprema : o)
+                opremaList.add(oprema);
+        }
         opremaList.sort(Comparator.comparing(Oprema::getDatumPlaniranogServisiranja));
         model.addAttribute("opremaList", opremaList);
         return "z-evidencija_opreme_na_servisu.html";

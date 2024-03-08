@@ -2,6 +2,7 @@ package com.HITA.bazaOpreme.repository;
 
 import com.HITA.bazaOpreme.model.Kvar;
 import com.HITA.bazaOpreme.model.Odrzavanje;
+import com.HITA.bazaOpreme.model.Oprema;
 import com.HITA.bazaOpreme.model.Radiliste;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -16,4 +17,6 @@ public interface KvarRepository extends JpaRepository<Kvar, Long> {
     List<Kvar> findAll();
 
     List<Kvar> findByRadiliste(Radiliste radiliste);
+
+    List<Kvar> findByOprema(Oprema oprema);
 }
