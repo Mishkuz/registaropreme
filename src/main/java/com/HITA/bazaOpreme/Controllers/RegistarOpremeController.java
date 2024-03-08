@@ -63,7 +63,7 @@ public class RegistarOpremeController {
         return "z-prijava_kvara.html";
     }
 
-    @PostMapping("/z-spremiuredaj")
+    @GetMapping("/z-spremiuredaj")
     public String zspremiUredaj(@RequestParam("sifra") String sifra,
                                 @RequestParam("naziv") String naziv,
                                 @RequestParam("serijskiBroj") String serijskiBroj,
@@ -101,7 +101,7 @@ public class RegistarOpremeController {
         oprema.setNaServisu(false);
         opremaRepository.save(oprema);
         model.addAttribute("user", user);
-        return "redirect:/";
+        return "redirect:/pocetna";
     }
 
     @GetMapping("/z-unosnoveopreme")
@@ -297,60 +297,57 @@ public class RegistarOpremeController {
         return "z-pregled_pojedine_opreme";
     }
 
-
-    @GetMapping("/spremiNovuKategoriju")
-    public String spremiNovuKategoriju(@RequestParam("sifra") String sifra,
-                                       @RequestParam("naziv") String naziv,
-                                       HttpSession session, Model model) {
+    @GetMapping("/popis_proizvodjaca")
+    public String prikaziPopisProizvodjaca(HttpSession session, Model model) {
         Korisnik user = (Korisnik) session.getAttribute("currUser");
-
-        if (user == null) {
-            return "redirect:/login";
-        }
-
-        Kategorija novaKategorija = new Kategorija();
-        novaKategorija.setSifra(sifra);
-        novaKategorija.setKategorija(naziv);
-        novaKategorija.setRadiliste(user.getRadiliste());
-
-        kategorijaRepository.save(novaKategorija);
+        List<Proizvodjac> proizvodjaci = proizvodjacRepository.findAll();
+        model.addAttribute("proizvodjaci", proizvodjaci);
         model.addAttribute("user", user);
-        return "redirect:/pocetna";
+        return "popis_proizvodjaca";
     }
 
-    @GetMapping("/unosNoveKategorije")
-    public String unosKategorije(Model model, HttpSession session) {
+    @GetMapping("/popis_servisera")
+    public String prikaziPopisServisera(HttpSession session, Model model) {
         Korisnik user = (Korisnik) session.getAttribute("currUser");
+        List<Serviser> serviseri = serviserRepository.findAll();
+        model.addAttribute("serviseri", serviseri);
         model.addAttribute("user", user);
-        return "z-unos_kategorije";
+        return "popis_servisera";
     }
 
-    @GetMapping("/unosNoveVrste")
-    public String unosVrste(Model model, HttpSession session) {
+    @GetMapping("/popis_vlasnika")
+    public String prikaziPopisVlasnika(HttpSession session, Model model) {
         Korisnik user = (Korisnik) session.getAttribute("currUser");
-        List<Kategorija> kategorije = kategorijaRepository.findByRadiliste(user.getRadiliste());
-        model.addAttribute("kategorije", kategorije);
+        List<Vlasnik> vlasnici = vlasnikRepository.findAll();
+        model.addAttribute("vlasnici", vlasnici);
         model.addAttribute("user", user);
-        return "z-unos_vrste";
+        return "popis_vlasnika";
     }
 
-    @GetMapping("/spremiNovuVrstu")
-    public String unosNoveVrste(@RequestParam("sifra") String sifra,
-                                @RequestParam("naziv") String naziv,
-                                @RequestParam("kategorijaId") Long kategorijaId,
-                                HttpSession session, Model model) {
+    @GetMapping("/pregled_pojedinog_proizvodjaca")
+    public String prikaziDetaljeProizvodjaca(Long proizvodjacId,HttpSession session, Model model) {
         Korisnik user = (Korisnik) session.getAttribute("currUser");
-        if (user == null) {
-            return "redirect:/login";
-        }
-        Vrsta novaVrsta = new Vrsta();
-        novaVrsta.setSifra(sifra);
-        novaVrsta.setVrsta(naziv);
-        novaVrsta.setRadiliste(user.getRadiliste());
-        novaVrsta.setKategorija(kategorijaRepository.findById(kategorijaId).orElse(null));
-        vrstaRepository.save(novaVrsta);
+        Proizvodjac proizvodjac = proizvodjacRepository.findById(proizvodjacId).orElse(null);
+        model.addAttribute("proizvodjac", proizvodjac);
         model.addAttribute("user", user);
-        return "redirect:/pocetna";
+        return "pregled_pojedinog_proizvodjaca";
+    }
+    @GetMapping("/pregled_pojedinog_vlasnika")
+    public String prikaziDetaljeVlasnika(Long vlasnikId,HttpSession session, Model model) {
+        Korisnik user = (Korisnik) session.getAttribute("currUser");
+        Vlasnik vlasnik = vlasnikRepository.findById(vlasnikId).orElse(null);
+        model.addAttribute("vlasnik", vlasnik);
+        model.addAttribute("user", user);
+        return "pregled_pojedinog_vlasnika";
+    }
+
+    @GetMapping("/pregled_pojedinog_servisera")
+    public String prikaziDetaljeServisera(Long serviserId,HttpSession session, Model model) {
+        Korisnik user = (Korisnik) session.getAttribute("currUser");
+        Serviser serviser = serviserRepository.findById(serviserId).orElse(null);
+        model.addAttribute("serviser", serviser);
+        model.addAttribute("user", user);
+        return "pregled_pojedinog_servisera";
     }
 
 

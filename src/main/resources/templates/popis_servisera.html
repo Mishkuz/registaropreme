@@ -53,120 +53,61 @@
     <!-- Navbar -->
     <nav th:replace="~{fragments/navbar::navbar}" ></nav>
     <!-- End Navbar -->
-    <div class="container main-container">
-        <div class="row justify-content-center border rounded-2 p-2 shadow box-area position-relative">
-            <form id="myForm" action="/z-spremiuredaj">
-                <br>
-                <div>
-                    <h2>Unos nove opreme</h2>
-                </div>
-                <br><br>
-                <div class="input-group input-group-dynamic mb-4">
-                                       <span id="basic-addon-sifra">Šifra: </span>
-                    <input type="text"  name="sifra" id="unos-sifra" aria-label="Šifra" class="form-control" aria-describedby="basic-addon-sifra" maxlength="20" size="30" required>
-                </div>
-                <div class="input-group input-group-dynamic mb-4">
-                    <span id="basic-addon-naziv">Naziv: </span>
-                    <input type="text" name="naziv" id="naziv" rows="3" cols="54" maxlength="100"  class="form-control" required>
-                </div>
-                <div class="input-group input-group-dynamic mb-4">
-                    <span id="basic-addon-serijskiBroj">Serijski broj: </span>
-                    <input type="text" name="serijskiBroj"aria-label="serijskiBroj" id="unos-serijski" class="form-control" aria-describedby="basic-addon-serijskiBroj" maxlength="20" size="30">
-                </div>
-                <div class="input-group input-group-dynamic mb-4">
-                    <span  id="basic-addon-inventarskiBroj">Inventarski broj: </span>
-                    <input type="text" name="inventarskiBroj" id="inventarskiBroj" aria-label="inverntarskiBroj"  class="form-control" aria-describedby="basic-addon1" maxlength="20" size="30">
-                </div>
-                <div class="input-group input-group-dynamic mb-4">
-                    <label for="kategorijaId">Kategorija:</label>
-                    <select class="form-select" id="kategorijaId" name="kategorijaId">
-                        <option th:each="kategorija : ${kategorije}" th:value="${kategorija.idKategorija}" th:text="${kategorija.kategorija}"></option>
-                    </select>
-                </div>
-                <div class="input-group input-group-dynamic mb-4">
-                    <label for="vrstaId">Vrsta:</label>
-                    <select class="form-select" id="vrstaId" name="vrstaId">
-                        <option th:each="vrsta : ${vrste}" th:value="${vrsta.idVrsta}" th:text="${vrsta.vrsta}"></option>
-                    </select>
-                </div>
-                <div class="input-group input-group-dynamic mb-4">
-                    <label for="proizvodjacId">Proizvođač:</label>
-                    <select class="form-select" id="proizvodjacId" name="proizvodjacId">
-                        <option th:each="proizvodjac : ${proizvodjaci}" th:value="${proizvodjac.id}" th:text="${proizvodjac.naziv}"></option>
-                    </select>
-                </div>
-                <div class="input-group input-group-dynamic mb-4">
-                    <span id="basic-addon-godinaProizvodnje">Datum proizvodnje: </span>
-                    <input type="date" name="godinaProizvodnje" id="godinaProizvodnje" aria-label="godinaProizvodnje" class="form-control" aria-describedby="basic-addon-godinaProizvodnje">
-                </div>
-                <div class="input-group input-group-dynamic mb-4">
-                    <span  id="basic-addon-datumNabave">Datum nabave: </span>
-                    <input type="date" name="datumNabave" id="datumNabave" aria-label="Username" aria-describedby="basic-addon-datumNabave" class="form-control">
-                </div>
-                <div class="input-group input-group-dynamic mb-4">
-                    <span  id="basic-addon-certifikat" style="margin-right: 15px;">Certifikat: </span>
-                    <input type="checkbox" id="certifikatid" name="certifikat" style="width:25px; height:25px;">
-                    <input type="hidden" name="certifikat" value="false">
-                </div>
-                <div class="input-group input-group-dynamic mb-4">
-                    <span id="basic-addon-ispravno" style="margin-right: 15px;">Ispravno: </span>
-                    <input type="checkbox" id="ispravnoCheckbox" name="ispravno" style="width:25px; height:25px;">
-                    <input type="hidden" id="ispravnoHidden" name="ispravno" value="false">
-                </div>
-                <div class="input-group input-group-dynamic mb-4">
-                    <label  for="vlasnikId">Vlasnik:</label>
-                    <select class="form-select" id="vlasnikId" name="vlasnikId">
-                        <option th:each="vlasnik : ${vlasnici}" th:value="${vlasnik.id}" th:text="${vlasnik.naziv}"></option>
-                    </select>
-                </div>
-                <div class="input-group input-group-dynamic mb-4">
-                    <span  id="basic-addon-intervalServisiranjaUMjesecima">Interval servisa (u mj.): </span>
-                    <input type="number" name="intervalServisiranjaUMjesecima" id="intervalServisiranjaUMjesecima" class="form-control" aria-label="intervalServisiranjaUMjesecima" aria-describedby="basic-addon-intervalServisiranjaUMjesecima">
-                </div>
-                <div class="input-group input-group-dynamic mb-4">
-                    <span  id="basic-addon-datumPlaniranogServisiranja">Sljedeći servis: </span>
-                    <input type="date" name="datumPlaniranogServisiranja" id="datumPlaniranogServisiranja" class="form-control" aria-label="Username" aria-describedby="basic-addon-datumPlaniranogServisiranja">
-                </div>
-                <div class="text-left">
-                    <div class="text-left">
-                        <button name="button" class="btn btn-primary" type="submit" style="margin-bottom: 5px; margin-top: 20px; margin-right: 10px;">Spremi</button>
-                        <a href="/pocetna" class="btn btn-primary" type="submit" style="margin-bottom: 5px; margin-top: 20px;
-                margin-right: 10px;">Odustani</a>
-                    </div>
-                </div>
-                <br>
-            </form>
+    <h2 class="h2" style="text-align:left; margin-left: 50px;">Popis servisera</h2>
+    <div class="container mt-2 p-4 d-flex justify-content-center align-items-center">
+
+        <div class="col-md-8">
+            <div class="input-group input-group-dynamic mb-4" style="max-width: 800px;">
+                <input type="text" id="searchInput" style="border-color: #177245; max-height:40px;" class="form-control"
+                       placeholder="Unesi naziv opreme" aria-label="nazivopreme" aria-describedby="basic-addon1">
+                <span class="input-group-text" id="basic-addon1" style="max-height:40px;">
+                                <button name="button" class="btn btn-link" type="submit">
+                                    <img src="../static/povecalo.jpg" class="img-fluid"
+                                         style="width: 35px; height: 35px; border-radius: 50%; background:transparent;"
+                                         alt="povecalo">
+                                </button>
+                            </span>
+                <script>
+                    document.addEventListener('DOMContentLoaded', function () {
+                        var searchInput = document.getElementById('searchInput');
+                        searchInput.addEventListener('input', function () {
+                            var searchText = searchInput.value.toLowerCase();
+                            var tableRows = document.querySelectorAll('.table tbody tr');
+                            tableRows.forEach(function (row) {
+                                var rowData = row.textContent.toLowerCase();
+                                row.style.display = rowData.includes(searchText) ? 'table-row' : 'none';
+                            });
+                        });
+                    });
+                </script>
+            </div>
         </div>
-    <style>
-        .input-group-dynamic {
-       display: flex;
-       flex-direction: column;
-   }
-
-   .input-group-dynamic .form-control {
-       width: 25%;
-   }
-
-         .input-group-dynamic .form-select {
-       width: 30%;
-   }
-
-        .input-group-dynamic .form-tarea {
-       width: 50%;
-   }
-    </style>
     </div>
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            var closeButton = document.querySelector('button[name="button"][type="submit"][value="Zatvori"]');
-            if (closeButton) {
-                closeButton.addEventListener("click", function (event) {
-                    event.preventDefault(); // spriječava slanje obrasca
-                    window.location.href = "/pocetna"; // preusmjerava na /pocetna
-                });
-            }
-        });
-    </script>
+    <div class="card">
+        <div class="table-responsive">
+            <table class="table align-items-center text-center mb-0 table-striped table-hover">
+                <thead>
+                <tr>
+                    <th>Šifra</th>
+                    <th>Naziv</th>
+                    <th>Adresa</th>
+                    <th>Telefon</th>
+                    <th>E-mail</th>
+                    <th>Kontakt Osoba</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="serviser : ${serviseri}">
+                    <td th:text="${serviser.sifra}"></td>
+                    <td th:text="${serviser.naziv}"></td>
+                    <td th:text="${serviser.adresa}"></td>
+                    <td th:text="${serviser.telefon}"></td>
+                    <td th:text="${serviser.email}"></td>
+                    <td th:text="${serviser.kontaktOsoba}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 </main>
 <div class="fixed-plugin">
@@ -176,8 +117,7 @@
     <div class="card shadow-lg">
         <div class="card-header pb-0 pt-3">
             <div class="float-start">
-                <h5 class="mt-3 mb-0">Material UI Configurator</h5>
-                <p>See our dashboard options.</p>
+                <h5 class="mt-3 mb-0">UI konfiguracija</h5>
             </div>
             <div class="float-end mt-4">
                 <button class="btn btn-link text-dark p-0 fixed-plugin-close-button">

@@ -53,90 +53,20 @@
     <!-- Navbar -->
     <nav th:replace="~{fragments/navbar::navbar}" ></nav>
     <!-- End Navbar -->
-    <div class="container main-container">
-        <div class="row justify-content-center border rounded-2 p-2 shadow box-area position-relative">
-            <form id="myForm" action="/z-spremiuredaj">
-                <br>
-                <div>
-                    <h2>Unos nove opreme</h2>
-                </div>
-                <br><br>
-                <div class="input-group input-group-dynamic mb-4">
-                                       <span id="basic-addon-sifra">Šifra: </span>
-                    <input type="text"  name="sifra" id="unos-sifra" aria-label="Šifra" class="form-control" aria-describedby="basic-addon-sifra" maxlength="20" size="30" required>
-                </div>
-                <div class="input-group input-group-dynamic mb-4">
-                    <span id="basic-addon-naziv">Naziv: </span>
-                    <input type="text" name="naziv" id="naziv" rows="3" cols="54" maxlength="100"  class="form-control" required>
-                </div>
-                <div class="input-group input-group-dynamic mb-4">
-                    <span id="basic-addon-serijskiBroj">Serijski broj: </span>
-                    <input type="text" name="serijskiBroj"aria-label="serijskiBroj" id="unos-serijski" class="form-control" aria-describedby="basic-addon-serijskiBroj" maxlength="20" size="30">
-                </div>
-                <div class="input-group input-group-dynamic mb-4">
-                    <span  id="basic-addon-inventarskiBroj">Inventarski broj: </span>
-                    <input type="text" name="inventarskiBroj" id="inventarskiBroj" aria-label="inverntarskiBroj"  class="form-control" aria-describedby="basic-addon1" maxlength="20" size="30">
-                </div>
-                <div class="input-group input-group-dynamic mb-4">
-                    <label for="kategorijaId">Kategorija:</label>
-                    <select class="form-select" id="kategorijaId" name="kategorijaId">
-                        <option th:each="kategorija : ${kategorije}" th:value="${kategorija.idKategorija}" th:text="${kategorija.kategorija}"></option>
-                    </select>
-                </div>
-                <div class="input-group input-group-dynamic mb-4">
-                    <label for="vrstaId">Vrsta:</label>
-                    <select class="form-select" id="vrstaId" name="vrstaId">
-                        <option th:each="vrsta : ${vrste}" th:value="${vrsta.idVrsta}" th:text="${vrsta.vrsta}"></option>
-                    </select>
-                </div>
-                <div class="input-group input-group-dynamic mb-4">
-                    <label for="proizvodjacId">Proizvođač:</label>
-                    <select class="form-select" id="proizvodjacId" name="proizvodjacId">
-                        <option th:each="proizvodjac : ${proizvodjaci}" th:value="${proizvodjac.id}" th:text="${proizvodjac.naziv}"></option>
-                    </select>
-                </div>
-                <div class="input-group input-group-dynamic mb-4">
-                    <span id="basic-addon-godinaProizvodnje">Datum proizvodnje: </span>
-                    <input type="date" name="godinaProizvodnje" id="godinaProizvodnje" aria-label="godinaProizvodnje" class="form-control" aria-describedby="basic-addon-godinaProizvodnje">
-                </div>
-                <div class="input-group input-group-dynamic mb-4">
-                    <span  id="basic-addon-datumNabave">Datum nabave: </span>
-                    <input type="date" name="datumNabave" id="datumNabave" aria-label="Username" aria-describedby="basic-addon-datumNabave" class="form-control">
-                </div>
-                <div class="input-group input-group-dynamic mb-4">
-                    <span  id="basic-addon-certifikat" style="margin-right: 15px;">Certifikat: </span>
-                    <input type="checkbox" id="certifikatid" name="certifikat" style="width:25px; height:25px;">
-                    <input type="hidden" name="certifikat" value="false">
-                </div>
-                <div class="input-group input-group-dynamic mb-4">
-                    <span id="basic-addon-ispravno" style="margin-right: 15px;">Ispravno: </span>
-                    <input type="checkbox" id="ispravnoCheckbox" name="ispravno" style="width:25px; height:25px;">
-                    <input type="hidden" id="ispravnoHidden" name="ispravno" value="false">
-                </div>
-                <div class="input-group input-group-dynamic mb-4">
-                    <label  for="vlasnikId">Vlasnik:</label>
-                    <select class="form-select" id="vlasnikId" name="vlasnikId">
-                        <option th:each="vlasnik : ${vlasnici}" th:value="${vlasnik.id}" th:text="${vlasnik.naziv}"></option>
-                    </select>
-                </div>
-                <div class="input-group input-group-dynamic mb-4">
-                    <span  id="basic-addon-intervalServisiranjaUMjesecima">Interval servisa (u mj.): </span>
-                    <input type="number" name="intervalServisiranjaUMjesecima" id="intervalServisiranjaUMjesecima" class="form-control" aria-label="intervalServisiranjaUMjesecima" aria-describedby="basic-addon-intervalServisiranjaUMjesecima">
-                </div>
-                <div class="input-group input-group-dynamic mb-4">
-                    <span  id="basic-addon-datumPlaniranogServisiranja">Sljedeći servis: </span>
-                    <input type="date" name="datumPlaniranogServisiranja" id="datumPlaniranogServisiranja" class="form-control" aria-label="Username" aria-describedby="basic-addon-datumPlaniranogServisiranja">
-                </div>
-                <div class="text-left">
-                    <div class="text-left">
-                        <button name="button" class="btn btn-primary" type="submit" style="margin-bottom: 5px; margin-top: 20px; margin-right: 10px;">Spremi</button>
-                        <a href="/pocetna" class="btn btn-primary" type="submit" style="margin-bottom: 5px; margin-top: 20px;
-                margin-right: 10px;">Odustani</a>
-                    </div>
-                </div>
-                <br>
-            </form>
+    <div class="container main-container" style="text-align: left; margin-left: 100px;">
+        <br>
+        <div>
+            <h2>Pregled proizovđača</h2>
         </div>
+        <br><br>
+        <p><strong>Šifra:</strong> <span th:text="${proizvodjac.sifra}"></span></p>
+        <p><strong>Naziv:</strong> <span th:text="${proizvodjac.naziv}"></span></p>
+        <p><strong>Adresa:</strong> <span th:text="${proizvodjac.adresa}"></span></p>
+        <p><strong>Telefon:</strong> <span th:text="${proizvodjac.telefon}"></span></p>
+        <p><strong>Email:</strong> <span th:text="${proizvodjac.email}"></span></p>
+        <p><strong>Kontakt osoba:</strong> <span th:text="${proizvodjac.kontaktOsoba}"></span></p>
+        <br>
+    </div>
     <style>
         .input-group-dynamic {
        display: flex;
@@ -144,7 +74,7 @@
    }
 
    .input-group-dynamic .form-control {
-       width: 25%;
+       width: 40%;
    }
 
          .input-group-dynamic .form-select {
@@ -155,7 +85,6 @@
        width: 50%;
    }
     </style>
-    </div>
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             var closeButton = document.querySelector('button[name="button"][type="submit"][value="Zatvori"]');

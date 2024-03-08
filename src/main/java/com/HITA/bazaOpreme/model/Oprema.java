@@ -1,6 +1,5 @@
 package com.HITA.bazaOpreme.model;
 
-import com.HITA.bazaOpreme.model.archive.Ups;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
