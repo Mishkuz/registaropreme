@@ -98,11 +98,10 @@
                 <th>Naziv</th>
                 <th>Kategorija</th>
                 <th>Vrsta</th>
-                <th>Proizvođač</th>
-                <th>Serijski br.</th>
                 <th>Inventarski br.</th>
+                <th>Serijski br.</th>
+                <th>Proizvođač</th>
                 <th>Vlasnik</th>
-                <th>Ispravno</th>
                 <th>Datum za servis</th>
                 <th>Umjeravanje</th>
                 <th>Servis</th>
@@ -117,17 +116,16 @@
                         th:href="@{'/z-pregled_pojedine_opreme?opremaId=' + ${oprema.id}}"></a></td>
                 <td th:text="${oprema.kategorija?.kategorija}"></td>
                 <td th:text="${oprema.vrsta?.vrsta}"></td>
+                <td th:text="${oprema.InventarskiBroj}"></td>
+                <td th:text="${oprema.serijskiBroj}"></td>
                 <td th:attr="text=${oprema.proizvodjac?.naziv}, href=@{'/pregled_pojedinog_proizvodjaca?proizvodjacId=' + ${oprema.proizvodjac?.id}}">
                     <a th:text="${oprema.proizvodjac?.naziv}"
                        th:href="@{'/pregled_pojedinog_proizvodjaca?proizvodjacId=' + ${oprema.proizvodjac?.id}}"></a>
                 </td>
-                <td th:text="${oprema.serijskiBroj}"></td>
-                <td th:text="${oprema.InventarskiBroj}"></td>
                 <td th:attr="text=${oprema.vlasnik?.naziv}, href=@{'/pregled_pojedinog_vlasnika?vlasnikId=' + ${oprema.vlasnik?.id}}">
                     <a th:text="${oprema.vlasnik?.naziv}"
                        th:href="@{'/pregled_pojedinog_vlasnika?vlasnikId=' + ${oprema.vlasnik?.id}}"></a>
                 </td>
-                <td th:text="${oprema.ispravno != null ? (oprema.ispravno ? 'Da' : 'Ne') : 'N/A'}"></td>
                 <td class="datum-planiranog-servisiranja"
                     th:attr="data-datum=${#temporals.format(oprema.datumPlaniranogServisiranja, 'yyyy-MM-dd')}"
                     th:text="${#temporals.format(oprema.datumPlaniranogServisiranja, 'dd.MM.yyyy')}"></td>

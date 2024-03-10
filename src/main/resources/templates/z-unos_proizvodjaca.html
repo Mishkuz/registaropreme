@@ -54,9 +54,8 @@
     <nav th:replace="~{fragments/navbar::navbar}" ></nav>
     <!-- End Navbar -->
     <div class="container main-container">
-        <div class="row justify-content-left border rounded-2 p-2 bg-shadow box-area position-relative">
+        <div class="row justify-content-center border rounded-2 p-2 bg- shadow box-area position-relative">
             <form action="/spremiNovogProizvodjaca">
-                <br>
                 <div>
                     <h2>Novi proizvođač</h2>
                 </div>
@@ -89,32 +88,31 @@
                 </div>
                 <div class="text-left">
                     <button name="submit" class="btn btn-primary" type="submit" style="margin-bottom: 5px; margin-top: 20px;
-                margin-right: 10px;">Unesi proizvođača
+                margin-right: 10px;">Unesi vlasnika</button>
                     <a href="/pocetna" class="btn btn-primary" type="submit" style="margin-bottom: 5px; margin-top: 20px;
                 margin-right: 10px;">Odustani</a>
                 </div>
                 <br>
             </form>
         </div>
-    </div>
-    <style>
-        .input-group-dynamic {
-       display: flex;
-       flex-direction: column;
-    }
+        <style>
+            .input-group-dynamic {
+           display: flex;
+           flex-direction: column;
+       }
 
-    .input-group-dynamic .form-control {
-       width: 40%;
-    }
+       .input-group-dynamic .form-control {
+           width: 25%;
+       }
 
-         .input-group-dynamic .form-select {
-       width: 30%;
-    }
+             .input-group-dynamic .form-select {
+           width: 30%;
+       }
 
-        .input-group-dynamic .form-tarea {
-       width: 50%;
-    }
-    </style>
+            .input-group-dynamic .form-tarea {
+           width: 50%;
+       }
+        </style>
     </div>
     <script>
         document.addEventListener("DOMContentLoaded", function () {
@@ -127,7 +125,6 @@
             }
         });
     </script>
-    </div>
 </main>
 <div class="fixed-plugin">
     <a class="fixed-plugin-button text-dark position-fixed px-3 py-2">
@@ -230,4 +227,3 @@
 <script src="../static/assets/js/material-dashboard.min.js?v=3.1.0"></script>
 </body>
 
-</html>
