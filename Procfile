@@ -1,1 +1,1 @@
-web: java -jar build/libs/bazaopreme2-0.0.1-SNAPSHOT.jar -Dserver.port=$PORT $JAR_OPTS
+web: java -jar build/libs/registaropreme-0.0.1-SNAPSHOT.jar -Dserver.port=$PORT $JAR_OPTS
