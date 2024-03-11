@@ -191,7 +191,6 @@ public class RegistarOpremeController {
             @RequestParam("opremaId") Long opremaId,
             @RequestParam("opisOdrzavanja") String opisOdrzavanja,
             @RequestParam("prijavioRadnik") String prijavioRadnik,
-            @RequestParam("datumOtpreme") LocalDate datumOtpreme,
             @RequestParam("izvanredan") boolean izvanredan,
             Model model, HttpSession session) {
         Korisnik user = (Korisnik) session.getAttribute("currUser");
