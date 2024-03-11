@@ -191,7 +191,7 @@ public class RegistarOpremeController {
             @RequestParam("opremaId") Long opremaId,
             @RequestParam("opisOdrzavanja") String opisOdrzavanja,
             @RequestParam("prijavioRadnik") String prijavioRadnik,
-            @RequestParam("izvanredan") boolean izvanredan,
+            @RequestParam(value = "izvanredan", required = false) Boolean izvanredan ,
             Model model, HttpSession session) {
         Korisnik user = (Korisnik) session.getAttribute("currUser");
         LocalDate ld = LocalDate.now();
@@ -199,9 +199,9 @@ public class RegistarOpremeController {
         odrzavanje.setServiser(serviserRepository.findById(tvrtkaId).orElse(null));
         odrzavanje.setDatumPlaniranogServisiranja(opremaRepository.findById(opremaId).get().getDatumPlaniranogServisiranja());
         opremaRepository.updateNaServisuById(true, opremaId);
-        if (izvanredan) {
+        if (izvanredan != null && izvanredan) {
             odrzavanje.setTip(servisIzvanredanS);
-        } else if (!izvanredan) {
+        } else  {
             odrzavanje.setTip(servisS);
         }
         odrzavanjeRepository.save(odrzavanje);
@@ -212,11 +212,11 @@ public class RegistarOpremeController {
     @GetMapping("/z-spremiUmjeravanje")
     public String zspremiUmjeravanje(
             @RequestParam("prijavioRadnik") String prijavioRadnik,
-            @RequestParam("datumUmjeravanja") LocalDate datumUmjeravanja,
             @RequestParam("opremaId") Long opremaId,
             Model model, HttpSession session) {
         Korisnik user = (Korisnik) session.getAttribute("currUser");
-        Odrzavanje odrzavanje = new Odrzavanje(prijavioRadnik, datumUmjeravanja, user.getRadiliste(), opremaRepository.findById(opremaId).get());
+        LocalDate.now();
+        Odrzavanje odrzavanje = new Odrzavanje(prijavioRadnik, LocalDate.now(), user.getRadiliste(), opremaRepository.findById(opremaId).get());
         odrzavanje.setTip(umjeravanjeS);
         odrzavanjeRepository.save(odrzavanje);
         model.addAttribute("user", user);
@@ -291,6 +291,7 @@ public class RegistarOpremeController {
         kvarList.sort(Comparator.comparing(Kvar::getDatumPrijave));
         model.addAttribute("odrzavanjeSList", odrzavanjeSList);
         model.addAttribute("odrzavanjeList", odrzavanjeList);
+        model.addAttribute("kvarList",  kvarList);
         model.addAttribute("oprema", oprema);
         model.addAttribute("user", user);
         return "z-pregled_pojedine_opreme";
