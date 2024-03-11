@@ -34,7 +34,7 @@ public class UnosController {
     public String unosP(Model model, HttpSession session) {
         Korisnik user = (Korisnik) session.getAttribute("currUser");
         model.addAttribute("user", user);
-        return "z-unos_proizvođaca";
+        return "z-unos_proizvodjaca";
     }
     @GetMapping("/unosNovogServisera")
     public String unosNS(Model model, HttpSession session) {
