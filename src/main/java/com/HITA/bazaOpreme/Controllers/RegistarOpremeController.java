@@ -75,6 +75,7 @@ public class RegistarOpremeController {
                                 @RequestParam("datumNabave") LocalDate datumNabave,
                                 @RequestParam("certifikat") boolean certifikat,
                                 @RequestParam("vlasnikId") Long vlasnikId,
+                                @RequestParam("ups") String ups,
                                 @RequestParam("intervalServisiranjaUMjesecima") Integer intervalServisiranjaUMjesecima,
                                 @RequestParam("datumPlaniranogServisiranja") LocalDate datumPlaniranogServisiranja,
                                 @RequestParam("ispravno") boolean ispravno,
@@ -99,6 +100,7 @@ public class RegistarOpremeController {
         oprema.setDatumPlaniranogServisiranja(datumPlaniranogServisiranja);
         oprema.setRadiliste(user.getRadiliste());
         oprema.setNaServisu(false);
+        oprema.setUps(ups);
         opremaRepository.save(oprema);
         model.addAttribute("user", user);
         return "redirect:/pocetna";
@@ -284,7 +286,7 @@ public class RegistarOpremeController {
         Korisnik user = (Korisnik) session.getAttribute("currUser");
         Oprema oprema = opremaRepository.findById(opremaId).orElse(null);
         List<Odrzavanje> odrzavanjeList = odrzavanjeRepository.findByOpremaAndTip(oprema, umjeravanjeS);
-        List<Odrzavanje> odrzavanjeSList = odrzavanjeRepository.findByOpremaAndTipOrTip(oprema, servisS, servisIzvanredanS);
+        List<Odrzavanje> odrzavanjeSList = odrzavanjeRepository.findByOpremaAndTipOrOpremaAndTip(oprema,servisS,oprema,servisIzvanredanS);
         List<Kvar> kvarList = kvarRepository.findByOprema(oprema);
         odrzavanjeList.sort(Comparator.comparing(Odrzavanje::getDatumUmjeravanja));
         odrzavanjeSList.sort(Comparator.comparing(Odrzavanje::getDatumOtpreme));

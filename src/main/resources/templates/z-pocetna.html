@@ -89,6 +89,10 @@
         .past-date-row:hover {
         background-color: rgba(255, 0, 0, 0.3);
         }
+
+    .yellow-date-row {
+     background-color: rgba(255, 255, 0, 0.3);
+    }
     </style>
     <div class="container-fluid py-4">
         <table class="table align-items-center text-center table-striped table-hover">
@@ -149,6 +153,7 @@
                 var today = new Date();
                 today.setHours(0, 0, 0, 0);
                 var rows = document.querySelectorAll('.datum-planiranog-servisiranja');
+
                 rows.forEach(function(cell) {
                     var dateString = cell.getAttribute('data-datum');
                     console.log("Datum iz atributa:", dateString);
@@ -165,6 +170,16 @@
                     var date = new Date(year, month, day);
                     console.log("Konstruisani datum:", date);
                     console.log("Današnji datum:", today);
+
+
+                     var daysUntilDate = Math.floor((date - today) / (1000 * 60 * 60 * 24));
+                     console.log("Dana do datuma:", daysUntilDate);
+
+                    if (!isNaN(date.getTime()) && date.getTime() < today.getTime()) {
+                    cell.parentNode.classList.add('past-date-row');
+                        } else if (daysUntilDate <= 30) {
+                    cell.parentNode.classList.add('yellow-date-row'); // Dodajte klasu za žutu boju
+                    }
 
                     if (!isNaN(date.getTime()) && date.getTime() < today.getTime()) {
                         cell.parentNode.classList.add('past-date-row');

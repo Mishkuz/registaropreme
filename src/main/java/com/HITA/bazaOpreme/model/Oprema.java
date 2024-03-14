@@ -9,8 +9,10 @@ import java.time.LocalDate;
 
 @Entity
 @Table(name = "oprema")
-@NoArgsConstructor @AllArgsConstructor
-@Getter @Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
 public class Oprema {
 
     @Id
@@ -72,8 +74,11 @@ public class Oprema {
     @Column(name = "na_servisu", nullable = true)
     private boolean naServisu;
 
+    @Column(name = "ups", nullable = true)
+    private String ups;
+
     @ManyToOne
-    @JoinColumn(name="radiliste_id")
+    @JoinColumn(name = "radiliste_id")
     Radiliste radiliste;
 
     public Oprema(String sifra, String naziv, String serijskiBroj, String inventarskiBroj, Kategorija kategorija, Vrsta vrsta,

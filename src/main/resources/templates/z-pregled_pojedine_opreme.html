@@ -54,113 +54,116 @@
     <nav th:replace="~{fragments/navbar::navbar}"></nav>
     <!-- End Navbar -->
     <div class="container main-container" style="text-align: left; margin-left: 100px;">
-            <br>
-            <div>
-                <h2>Detalji opreme</h2>
-            </div>
-            <br><br>
-            <p><strong>Šifra:</strong> <span th:text="${oprema.sifra}"></span></p>
-            <p><strong>Naziv:</strong> <span th:text="${oprema.naziv}"></span></p>
-            <p><strong>Serijski broj:</strong> <span th:text="${oprema.serijskiBroj}"></span></p>
-            <p><strong>Inventarski broj:</strong> <span th:text="${oprema.inventarskiBroj}"></span></p>
-            <p><strong>Kategorija:</strong> <span th:text="${oprema.kategorija?.kategorija}"></span></p>
-            <p><strong>Vrsta:</strong> <span th:text="${oprema.vrsta?.vrsta}"></span></p>
-            <p><strong>Proizvođač:</strong> <span th:text="${oprema.proizvodjac?.naziv}"></span></p>
-            <p><strong>Vlasnik:</strong> <span th:text="${oprema.vlasnik?.naziv}"></span></p>
-            <p><strong>Datum proizvodnje:</strong>
-                <span th:text="${#temporals.format(oprema.godinaProizvodnje, 'dd.MM.yyyy')}"></span>
-            </p>
-            <p><strong>Certifikat:</strong> <span th:text="${oprema.certifikat} ? 'Da' : 'Ne'"></span></p>
-            <p><strong>Interval servisiranja (u mj.):</strong> <span
-                    th:text="${oprema.intervalServisiranjaUMjesecima}"></span></p>
-            <p><strong>Datum planiranog servisiranja:</strong>
-                <span th:text="${#temporals.format(oprema.datumPlaniranogServisiranja, 'dd.MM.yyyy')}"></span>
-            </p>
+        <br>
+        <div>
+            <h2>Detalji opreme</h2>
         </div>
+        <br><br>
+        <p><strong>Šifra:</strong> <span th:text="${oprema.sifra}"></span></p>
+        <p><strong>Naziv:</strong> <span th:text="${oprema.naziv}"></span></p>
+        <p><strong>Serijski broj:</strong> <span th:text="${oprema.serijskiBroj}"></span></p>
+        <p><strong>Inventarski broj:</strong> <span th:text="${oprema.inventarskiBroj}"></span></p>
+        <p><strong>Kategorija:</strong> <span th:text="${oprema.kategorija?.kategorija}"></span></p>
+        <p><strong>Vrsta:</strong> <span th:text="${oprema.vrsta?.vrsta}"></span></p>
+        <p><strong>Proizvođač:</strong> <span th:text="${oprema.proizvodjac?.naziv}"></span></p>
+        <p><strong>Vlasnik:</strong> <span th:text="${oprema.vlasnik?.naziv}"></span></p>
+        <p><strong>Datum proizvodnje:</strong>
+            <span th:text="${#temporals.format(oprema.godinaProizvodnje, 'dd.MM.yyyy')}"></span>
+        </p>
+        <p><strong>UPS:</strong> <span th:text="${oprema.ups}"></span></p>
+        <p><strong>Certifikat:</strong> <span th:text="${oprema.certifikat} ? 'Da' : 'Ne'"></span></p>
+        <p><strong>Interval servisiranja (u mj.):</strong> <span
+                th:text="${oprema.intervalServisiranjaUMjesecima}"></span></p>
+        <p><strong>Datum planiranog servisiranja:</strong>
+            <span th:text="${#temporals.format(oprema.datumPlaniranogServisiranja, 'dd.MM.yyyy')}"></span>
+        </p>
+    </div>
     <br><br>
-        <h3 style="text-align:left; margin-left: 50px;">Umjeravanja</h3>
-        <div class="table-responsive">
-            <table class="table align-items-center text-center mb-0 table-striped table-hover">
-                <thead>
-                <tr>
-                    <th>Šifra opreme</th>
-                    <th>Naziv opreme</th>
-                    <th>Umjeravanje odradio</th>
-                    <th>Datum umjeravanja</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr th:if="${odrzavanjeList== null or odrzavanjeList.size() == 0}">
-                    <td colspan="5" class="text-center">Nema umjeravanja</td>
-                </tr>
-                <tr th:each="odrzavanje : ${odrzavanjeList}" th:unless="${odrzavanjeList== null or odrzavanjeList.size() == 0}">
-                    <td th:text="${odrzavanje.oprema?.sifra}"></td>
-                    <td th:text="${odrzavanje.oprema?.naziv}"></td>
-                    <td th:text="${odrzavanje.prijavioRadnik}"></td>
-                    <td th:text="${#dates.format(#strings.replace(odrzavanje.datumUmjeravanja, '-', '/'), 'dd.MM.yyyy')}"></td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-   <br>
-        <h3 style="text-align:left; margin-left: 50px;">Servisi</h3>
-        <div class="table-responsive">
-            <table class="table align-items-center text-center mb-0 table-striped table-hover">
-                <thead>
-                <tr>
-                    <th>Šifra opreme</th>
-                    <th>Naziv opreme</th>
-                    <th>Opis</th>
-                    <th>Prijavio</th>
-                    <th>Serviser</th>
-                    <th>Planirani datum servisa</th>
-                    <th>Datum otpreme</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr th:if="${odrzavanjeSList== null or odrzavanjeSList.size() == 0}">
-                    <td colspan="7" class="text-center">Nema servisa</td>
-                </tr>
-                <tr th:each="odrzavanje : ${odrzavanjeSList}"  th:unless="${odrzavanjeSList== null or odrzavanjeSList.size() == 0}">
-                    <td th:text="${odrzavanje.oprema?.sifra}"></td>
-                    <td th:text="${odrzavanje.oprema?.naziv}"></td>
-                    <td th:text="${odrzavanje.opisOdrzavanja}"></td>
-                    <td th:text="${odrzavanje.prijavioRadnik}"></td>
-                    <td th:text="${odrzavanje.serviser?.naziv}"></td>
-                    <td th:text="${#dates.format(#strings.replace(odrzavanje.datumPlaniranogServisiranja, '-', '/'), 'dd.MM.yyyy')}"></td>
-                    <td th:text="${#dates.format(#strings.replace(odrzavanje.datumOtpreme, '-', '/'), 'dd.MM.yyyy')}"></td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
+    <h3 style="text-align:left; margin-left: 50px;">Umjeravanja</h3>
+    <div class="table-responsive">
+        <table class="table align-items-center text-center mb-0 table-striped table-hover">
+            <thead>
+            <tr>
+                <th>Šifra opreme</th>
+                <th>Naziv opreme</th>
+                <th>Umjeravanje odradio</th>
+                <th>Datum umjeravanja</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:if="${odrzavanjeList== null or odrzavanjeList.size() == 0}">
+                <td colspan="5" class="text-center">Nema umjeravanja</td>
+            </tr>
+            <tr th:each="odrzavanje : ${odrzavanjeList}"
+                th:unless="${odrzavanjeList== null or odrzavanjeList.size() == 0}">
+                <td th:text="${odrzavanje.oprema?.sifra}"></td>
+                <td th:text="${odrzavanje.oprema?.naziv}"></td>
+                <td th:text="${odrzavanje.prijavioRadnik}"></td>
+                <td th:text="${#dates.format(#strings.replace(odrzavanje.datumUmjeravanja, '-', '/'), 'dd.MM.yyyy')}"></td>
+            </tr>
+            </tbody>
+        </table>
     </div>
     <br>
-        <h3 style="text-align:left; margin-left: 50px;">Kvarovi</h3>
-        <div class="table-responsive">
-            <table class="table align-items-center text-center mb-0 table-striped table-hover">
-                <thead>
-                <tr>
-                    <th>Šifra</th>
-                    <th>Naziv opreme</th>
-                    <th>Prijavio</th>
-                    <th>Opis kvara</th>
-                    <th>Datum prijave</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr th:if="${kvarList == null or kvarList.size() == 0}">
-                    <td colspan="5" class="text-center">Nema kvarova</td>
-                </tr>
-                <tr th:each="kvar : ${kvarList}" th:unless="${kvarList == null or kvarList.size() == 0}">
-                    <td th:text="${kvar.oprema != null ? kvar.oprema.sifra : 'N/A'}"></td>
-                    <td th:text="${kvar.oprema != null ? kvar.oprema.naziv : 'N/A'}"></td>
-                    <td th:text="${kvar.prijavioRadnik}"></td>
-                    <td th:text="${kvar.opisKvara}"></td>
-                    <td th:text="${#temporals.format(kvar.datumPrijave, 'dd.MM.yyyy')}"></td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
+    <h3 style="text-align:left; margin-left: 50px;">Servisi</h3>
+    <div class="table-responsive">
+        <table class="table align-items-center text-center mb-0 table-striped table-hover">
+            <thead>
+            <tr>
+                <th>Šifra opreme</th>
+                <th>Naziv opreme</th>
+                <th>Opis</th>
+                <th>Prijavio</th>
+                <th>Serviser</th>
+                <th>Planirani datum servisa</th>
+                <th>Datum otpreme</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:if="${odrzavanjeSList== null or odrzavanjeSList.size() == 0}">
+                <td colspan="7" class="text-center">Nema servisa</td>
+            </tr>
+            <tr th:each="odrzavanje : ${odrzavanjeSList}"
+                th:unless="${odrzavanjeSList== null or odrzavanjeSList.size() == 0}">
+                <td th:text="${odrzavanje.oprema?.sifra}"></td>
+                <td th:text="${odrzavanje.oprema?.naziv}"></td>
+                <td th:text="${odrzavanje.opisOdrzavanja}"></td>
+                <td th:text="${odrzavanje.prijavioRadnik}"></td>
+                <td th:text="${odrzavanje.serviser?.naziv}"></td>
+                <td th:text="${#dates.format(#strings.replace(odrzavanje.datumPlaniranogServisiranja, '-', '/'), 'dd.MM.yyyy')}"></td>
+                <td th:text="${#dates.format(#strings.replace(odrzavanje.datumOtpreme, '-', '/'), 'dd.MM.yyyy')}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    </div>
+    <br>
+    <h3 style="text-align:left; margin-left: 50px;">Kvarovi</h3>
+    <div class="table-responsive">
+        <table class="table align-items-center text-center mb-0 table-striped table-hover">
+            <thead>
+            <tr>
+                <th>Šifra</th>
+                <th>Naziv opreme</th>
+                <th>Prijavio</th>
+                <th>Opis kvara</th>
+                <th>Datum prijave</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:if="${kvarList == null or kvarList.size() == 0}">
+                <td colspan="5" class="text-center">Nema kvarova</td>
+            </tr>
+            <tr th:each="kvar : ${kvarList}" th:unless="${kvarList == null or kvarList.size() == 0}">
+                <td th:text="${kvar.oprema != null ? kvar.oprema.sifra : 'N/A'}"></td>
+                <td th:text="${kvar.oprema != null ? kvar.oprema.naziv : 'N/A'}"></td>
+                <td th:text="${kvar.prijavioRadnik}"></td>
+                <td th:text="${kvar.opisKvara}"></td>
+                <td th:text="${#temporals.format(kvar.datumPrijave, 'dd.MM.yyyy')}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
     <br><br>
     <div class="text-left">
         <div class="text-left">

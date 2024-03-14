@@ -97,11 +97,11 @@
                 </div>
                 <div class="input-group input-group-dynamic mb-4">
                     <span id="basic-addon-godinaProizvodnje">Datum proizvodnje: </span>
-                    <input type="date" name="godinaProizvodnje" id="godinaProizvodnje" aria-label="godinaProizvodnje" class="form-control" aria-describedby="basic-addon-godinaProizvodnje">
+                    <input type="date" name="godinaProizvodnje" id="godinaProizvodnje" aria-label="godinaProizvodnje" class="form-control" aria-describedby="basic-addon-godinaProizvodnje" required>
                 </div>
                 <div class="input-group input-group-dynamic mb-4">
                     <span  id="basic-addon-datumNabave">Datum nabave: </span>
-                    <input type="date" name="datumNabave" id="datumNabave" aria-label="Username" aria-describedby="basic-addon-datumNabave" class="form-control">
+                    <input type="date" name="datumNabave" id="datumNabave" aria-label="Username" aria-describedby="basic-addon-datumNabave" class="form-control" required>
                 </div>
                 <div class="input-group input-group-dynamic mb-4">
                     <span  id="basic-addon-certifikat" style="margin-right: 15px;">Certifikat: </span>
@@ -117,6 +117,14 @@
                     <label  for="vlasnikId">Vlasnik:</label>
                     <select class="form-select" id="vlasnikId" name="vlasnikId">
                         <option th:each="vlasnik : ${vlasnici}" th:value="${vlasnik.id}" th:text="${vlasnik.naziv}"></option>
+                    </select>
+                </div>
+                <div class="input-group input-group-dynamic mb-4">
+                    <label  for="ups">UPS:</label>
+                    <select class="form-select" id="ups" name="ups">
+                        <option>Ima</option>
+                        <option>Nema</option>
+                        <option>Ima vlastiti</option>
                     </select>
                 </div>
                 <div class="input-group input-group-dynamic mb-4">
