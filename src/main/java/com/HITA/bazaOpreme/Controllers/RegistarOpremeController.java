@@ -16,11 +16,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.util.*;
@@ -241,7 +237,7 @@ public class RegistarOpremeController {
     public String nada(@AuthenticationPrincipal CustomKorisnikDetails customKorisnikDetails, Model model, HttpSession session) {
         Korisnik user = korisnikRepository.findByEmail(customKorisnikDetails.getUsername());
         session.setAttribute("currUser", user);
-        List<Oprema> opremaList1 = opremaRepository.findByRadiliste(user.getRadiliste());
+        List<Oprema> opremaList1 = opremaRepository.findByRadilisteAndOtpisanoIsNull(user.getRadiliste());
         List<Oprema> opremaList = new ArrayList<>(opremaList1);
         opremaList.sort(Comparator.comparing(Oprema::getDatumPlaniranogServisiranja));
         model.addAttribute("opremaList", opremaList);
@@ -352,6 +348,38 @@ public class RegistarOpremeController {
         return "pregled_pojedinog_servisera";
     }
 
+    @GetMapping("/otpisi_opremu")
+    public String otpisiOpremu(@RequestParam("opremaId") Long opremaId,HttpSession session, Model model) {
+        Korisnik user = (Korisnik) session.getAttribute("currUser");
+        Oprema oprema = opremaRepository.findById(opremaId).orElse(null);
+        model.addAttribute("user", user);
+        if (oprema != null) {
+            oprema.setOtpisano(true);
+            oprema.setDatumOtpisa(LocalDate.now());
+            opremaRepository.save(oprema);
+            return "redirect:/z-pregled_pojedine_opreme?opremaId=" + oprema.getId();
+        } else {
+            return "redirect:/error";
+        }
+    }
+
+    @GetMapping("/pregled_otpisane_opreme")
+    public String pregledOtpisaneOpreme(HttpSession session, Model model) {
+        Korisnik user = (Korisnik) session.getAttribute("currUser");
+        List<Oprema> otpisanaOpremaList = opremaRepository.findByOtpisano(true);
+        model.addAttribute("otpisanaOpremaList", otpisanaOpremaList);
+        model.addAttribute("user", user);
+        return "pregled_otpisane_opreme";
+    }
+
+    @GetMapping("/evidencija_opreme_u_kvaru")
+    public String prikaziOpremuUKvaru(Model model, HttpSession session) {
+        Korisnik user = (Korisnik) session.getAttribute("currUser");
+        List<Oprema> opremaUKvaruList = opremaRepository.findByRadilisteAndIspravnoFalse(user.getRadiliste());
+        model.addAttribute("opremaList", opremaUKvaruList);
+        model.addAttribute("user", user);
+        return "evidencija_opreme_u_kvaru";
+    }
 
 }
 

@@ -22,6 +22,7 @@ public interface OpremaRepository extends JpaRepository<Oprema, Long> {
 
     List<Oprema> findByRadiliste(Radiliste radiliste);
 
+    List<Oprema> findByRadilisteAndOtpisanoIsNull(Radiliste radiliste);
     @Transactional
     @Modifying
     @Query("update Oprema o set o.naServisu = ?1 where o.id = ?2")
@@ -38,5 +39,9 @@ public interface OpremaRepository extends JpaRepository<Oprema, Long> {
     @Modifying
     @Query("update Oprema o set o.datumPlaniranogServisiranja = ?1 where o.id = ?2")
     int updateDatumPlaniranogServisiranjaById(LocalDate datumPlaniranogServisiranja, Long id);
+
+    List<Oprema> findByOtpisano(boolean otpisano);
+
+    List<Oprema> findByRadilisteAndIspravnoFalse(Radiliste radiliste);
 }
 

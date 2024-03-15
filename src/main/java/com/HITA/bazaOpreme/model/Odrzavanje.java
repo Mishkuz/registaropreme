@@ -77,7 +77,7 @@ public class Odrzavanje {
         this.datumOtpreme = datumOtpreme;
         this.datumPovrata = datumPovrata;
         this.radiliste = radiliste;
-        this.oprema=oprema;
+        this.oprema = oprema;
     }
 
 
