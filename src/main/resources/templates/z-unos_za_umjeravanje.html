@@ -72,10 +72,39 @@
                     <input name="naziv" id="naziv" class="form-control"  disabled="true" th:value="${oprema.naziv}">
                 </div>
                 <div class="input-group input-group-dynamic mb-4">
-                    <span>Odradio radnik: </span>
-                    <input type="text" id="prijavioRadnik" name="prijavioRadnik" class="form-control"  aria-label="serijskiBroj"
-                           aria-describedby="basic-addon-serijskiBroj" maxlength="69" size="42" required>
+                    <label for="serviserId">Serviser:</label>
+                    <select class="form-select" id="serviserId" name="serviserId">
+                        <option th:each="serviser : ${serviseri}" th:value="${serviser.id}"
+                                th:text="${serviser.naziv}"></option>
+                    </select>
                 </div>
+                <div class="input-group input-group-dynamic mb-4">
+                    <span>Umjerio radnik: </span>
+                    <input type="text" id="umjerioRadnik" name="umjerioRadnik" class="form-control"  aria-label="serijskiBroj"
+                           aria-describedby="basic-addon-serijskiBroj" maxlength="69" size="42">
+                </div>
+                <div class="input-group input-group-dynamic mb-4">
+                    <span>Datum otpreme</span>
+                    <input type="text" class="form-control" name="date" id="date" placeholder="Odaberite datum" required>
+                </div>
+                <div class="input-group input-group-dynamic mb-4">
+                    <span>Datum povrata</span>
+                    <input type="text" class="form-control" name="dateP" id="dateP" placeholder="Odaberite datum" required>
+                </div>
+                <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+                <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+                <script>
+                    document.addEventListener('DOMContentLoaded', function() {
+           flatpickr("#date", {
+               dateFormat: "Y-m-d",
+
+           });
+           flatpickr("#dateP", {
+               dateFormat: "Y-m-d",
+
+           });
+       });
+                </script>
                 <div class="text-left">
                     <form action="/z-evidencija_umjeravanja" method="get">
                         <button name="button" class="btn btn-primary" type="submit"

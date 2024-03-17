@@ -33,6 +33,8 @@ public interface OdrzavanjeRepository extends JpaRepository<Odrzavanje, Long> {
      List<Odrzavanje> findByOpremaAndTipOrTip(Oprema oprema, String tip, String tip1);
 
     List<Odrzavanje> findByOpremaAndTipOrOpremaAndTip(Oprema oprema, String tip, Oprema oprema1, String tip1);
+
+    List<Odrzavanje> findByRadilisteAndTipOrRadilisteAndTip(Radiliste radiliste, String tip, Radiliste radiliste1, String tip1);
 }
 
 

@@ -45,14 +45,17 @@ public class RegistarOpremeController {
     @GetMapping("/z-unos_novog_kvara")
     public String zunos_novog_kvara(Model model, @RequestParam(name = "opremaId") Long opremaId, HttpSession session) {
         Korisnik user = (Korisnik) session.getAttribute("currUser");
+
         List<Oprema> opremaList = opremaRepository.findByRadiliste(user.getRadiliste());
         List<Kvar> kvarList = kvarRepository.findByRadiliste(user.getRadiliste());
         Optional<Oprema> oprema = opremaRepository.findById(opremaId);
+
         if (oprema.isPresent()) {
             model.addAttribute("oprema", oprema.get());
         } else {
             // Ovdje obradite slučaj kada oprema s traženim ID-em nije pronađena
         }
+
         model.addAttribute("kvarList", kvarList);
         model.addAttribute("opremaList", opremaList);
         model.addAttribute("user", user);
@@ -91,6 +94,7 @@ public class RegistarOpremeController {
         oprema.setDatumNabave(datumNabave);
         oprema.setCertifikat(certifikat);
         oprema.setIspravno(ispravno);
+        oprema.setNaUmjeravanju(false);
         oprema.setVlasnik(vlasnikRepository.findById(vlasnikId).orElse(null));
         oprema.setIntervalServisiranjaUMjesecima(intervalServisiranjaUMjesecima);
         oprema.setDatumPlaniranogServisiranja(datumPlaniranogServisiranja);
@@ -105,10 +109,12 @@ public class RegistarOpremeController {
     @GetMapping("/z-unosnoveopreme")
     public String zunosnoveopreme(Model model, HttpSession session) {
         Korisnik user = (Korisnik) session.getAttribute("currUser");
+
         List<Kategorija> kategorije = kategorijaRepository.findByRadiliste(user.getRadiliste());
         List<Vrsta> vrste = vrstaRepository.findByRadiliste(user.getRadiliste());
         List<Proizvodjac> proizvodjaci = proizvodjacRepository.findByRadiliste(user.getRadiliste());
         List<Vlasnik> vlasnici = vlasnikRepository.findByRadiliste(user.getRadiliste());
+
         model.addAttribute("kategorije", kategorije);
         model.addAttribute("vrste", vrste);
         model.addAttribute("proizvodjaci", proizvodjaci);
@@ -117,21 +123,15 @@ public class RegistarOpremeController {
         return "z-unos_nove_opreme.html";
     }
 
-    @GetMapping("/z-evidencija_servisa")
-    public String zevidencijaodrzavanja(Model model, HttpSession session) {
-        Korisnik user = (Korisnik) session.getAttribute("currUser");
-        List<Odrzavanje> odrzavanjeList1 = odrzavanjeRepository.findByRadilisteAndTipOrTip(user.getRadiliste(), servisS, servisIzvanredanS);
-        odrzavanjeList1.sort(Comparator.comparing(Odrzavanje::getDatumOtpreme, Comparator.reverseOrder()));
-        model.addAttribute("odrzavanjeList", odrzavanjeList1);
-        model.addAttribute("user", user);
-        return "z-evidencija_servisa.html";
-    }
+
 
     @GetMapping("/z-evidencija_umjeravanja")
     public String zevidencijaumjeravanja(Model model, HttpSession session) {
         Korisnik user = (Korisnik) session.getAttribute("currUser");
+
         List<Odrzavanje> odrzavanjeList1 = odrzavanjeRepository.findByRadilisteAndTip(user.getRadiliste(), umjeravanjeS);
         odrzavanjeList1.sort(Comparator.comparing(Odrzavanje::getDatumUmjeravanja, Comparator.reverseOrder()));
+
         model.addAttribute("odrzavanjeList", odrzavanjeList1);
         model.addAttribute("user", user);
         return "z-evidencija_umjeravanja.html";
@@ -155,79 +155,16 @@ public class RegistarOpremeController {
         return "redirect:/z-pokaziKvarove";
     }
 
-    @GetMapping("/z-unos_za_servis")
-    public String zunos_za_servis(Model model, Long opremaId, HttpSession session) {
-        Korisnik user = (Korisnik) session.getAttribute("currUser");
-        List<Oprema> opremaList = opremaRepository.findByRadiliste(user.getRadiliste());
-        List<Odrzavanje> odrzavanjeList = odrzavanjeRepository.findByRadiliste(user.getRadiliste());
-        List<Serviser> serviseri = serviserRepository.findByRadiliste(user.getRadiliste());
-        model.addAttribute(odrzavanjeList);
-        model.addAttribute(opremaList);
-        model.addAttribute("serviseri", serviseri);
-        model.addAttribute(opremaRepository.findById(opremaId).get());
-        model.addAttribute("user", user);
-        return "z-unos_za_servis.html";
-    }
-
-    @GetMapping("/z-unos_za_umjeravanje")
-    public String zunos_za_umjeravanje(Model model, Long opremaId, HttpSession session) {
-        Korisnik user = (Korisnik) session.getAttribute("currUser");
-        List<Oprema> opremaList = opremaRepository.findByRadiliste(user.getRadiliste());
-        List<Odrzavanje> odrzavanjeList = odrzavanjeRepository.findByRadiliste(user.getRadiliste());
-        List<Serviser> serviseri = serviserRepository.findByRadiliste(user.getRadiliste());
-        model.addAttribute(odrzavanjeList);
-        model.addAttribute(opremaList);
-        model.addAttribute("serviseri", serviseri);
-        model.addAttribute(opremaRepository.findById(opremaId).get());
-        model.addAttribute("user", user);
-        return "z-unos_za_umjeravanje.html";
-    }
-
-    @GetMapping("/z-spremiServis")
-    public String zspremiServis(
-            @RequestParam("tvrtkaId") Long tvrtkaId,
-            @RequestParam("opremaId") Long opremaId,
-            @RequestParam("opisOdrzavanja") String opisOdrzavanja,
-            @RequestParam("prijavioRadnik") String prijavioRadnik,
-            @RequestParam(value = "izvanredan", required = false) Boolean izvanredan ,
-            Model model, HttpSession session) {
-        Korisnik user = (Korisnik) session.getAttribute("currUser");
-        LocalDate ld = LocalDate.now();
-        Odrzavanje odrzavanje = new Odrzavanje(prijavioRadnik, opisOdrzavanja, ld, null, user.getRadiliste(), opremaRepository.findById(opremaId).get());
-        odrzavanje.setServiser(serviserRepository.findById(tvrtkaId).orElse(null));
-        odrzavanje.setDatumPlaniranogServisiranja(opremaRepository.findById(opremaId).get().getDatumPlaniranogServisiranja());
-        opremaRepository.updateNaServisuById(true, opremaId);
-        if (izvanredan != null && izvanredan) {
-            odrzavanje.setTip(servisIzvanredanS);
-        } else  {
-            odrzavanje.setTip(servisS);
-        }
-        odrzavanjeRepository.save(odrzavanje);
-        model.addAttribute("user", user);
-        return "redirect:/z-evidencija_servisa";
-    }
-
-    @GetMapping("/z-spremiUmjeravanje")
-    public String zspremiUmjeravanje(
-            @RequestParam("prijavioRadnik") String prijavioRadnik,
-            @RequestParam("opremaId") Long opremaId,
-            Model model, HttpSession session) {
-        Korisnik user = (Korisnik) session.getAttribute("currUser");
-        LocalDate.now();
-        Odrzavanje odrzavanje = new Odrzavanje(prijavioRadnik, LocalDate.now(), user.getRadiliste(), opremaRepository.findById(opremaId).get());
-        odrzavanje.setTip(umjeravanjeS);
-        odrzavanjeRepository.save(odrzavanje);
-        model.addAttribute("user", user);
-        return "redirect:/z-evidencija_umjeravanja";
-    }
 
 
     @GetMapping("/z-pokaziKvarove")
     public String zshowFailures(Model model, HttpSession session) {
         Korisnik user = (Korisnik) session.getAttribute("currUser");
+
         List<Kvar> kvarList1 = kvarRepository.findByRadiliste(user.getRadiliste());
         List<Kvar> kvarList = new ArrayList<>(kvarList1);
         kvarList.sort(Comparator.comparing(Kvar::getDatumPrijave, Comparator.reverseOrder()));
+
         model.addAttribute("kvarList", kvarList);
         model.addAttribute("user", user);
         return "z-oprema_kvarovi.html";
@@ -237,112 +174,105 @@ public class RegistarOpremeController {
     public String nada(@AuthenticationPrincipal CustomKorisnikDetails customKorisnikDetails, Model model, HttpSession session) {
         Korisnik user = korisnikRepository.findByEmail(customKorisnikDetails.getUsername());
         session.setAttribute("currUser", user);
+
         List<Oprema> opremaList1 = opremaRepository.findByRadilisteAndOtpisanoIsNull(user.getRadiliste());
         List<Oprema> opremaList = new ArrayList<>(opremaList1);
         opremaList.sort(Comparator.comparing(Oprema::getDatumPlaniranogServisiranja));
+
         model.addAttribute("opremaList", opremaList);
         model.addAttribute("user", user);
         return "z-pocetna.html";
     }
 
 
-    @GetMapping("/evidencijaOpremeNaServisu")
-    public String evidencijaOpremeNaServisu(Model model, HttpSession session) {
-        Korisnik user = (Korisnik) session.getAttribute("currUser");
-        List<Oprema> opremaList1 = opremaRepository.findByRadilisteAndNaServisu(user.getRadiliste(), true);
-        List<Oprema> opremaList = new ArrayList<>(opremaList1);
-        opremaList.sort(Comparator.comparing(Oprema::getDatumPlaniranogServisiranja));
-        model.addAttribute("opremaList", opremaList);
-        model.addAttribute("user", user);
-        return "z-evidencija_opreme_na_servisu.html";
-    }
-
-
-    @GetMapping("/z-vratiSaServisa")
-    public String vratiSaServisa(Model model, HttpSession session, @RequestParam("opremaId") Long opremaId) {
-        Korisnik user = (Korisnik) session.getAttribute("currUser");
-        opremaRepository.updateNaServisuById(false, opremaId);
-        opremaRepository.updateIspravnoById(true, opremaId);
-        int i = opremaRepository.findById(opremaId).get().getIntervalServisiranjaUMjesecima();
-        Optional<Oprema> o = opremaRepository.findById(opremaId);
-        LocalDate l = o.get().getDatumPlaniranogServisiranja();
-        int iFinal = i * 30;
-        l.plusDays(iFinal);
-        opremaRepository.updateDatumPlaniranogServisiranjaById(l, opremaId);
-        List<Oprema> opremaList1 = opremaRepository.findByRadilisteAndNaServisu(user.getRadiliste(), true);
-        List<Oprema> opremaList = new ArrayList<>(opremaList1);
-        opremaList.sort(Comparator.comparing(Oprema::getDatumPlaniranogServisiranja));
-        model.addAttribute("opremaList", opremaList);
-        model.addAttribute("user", user);
-        return "z-evidencija_opreme_na_servisu.html";
-    }
-
     @GetMapping("/z-pregled_pojedine_opreme")
     public String prikaziDetaljeOpreme(Long opremaId, Model model, HttpSession session) {
         Korisnik user = (Korisnik) session.getAttribute("currUser");
+
         Oprema oprema = opremaRepository.findById(opremaId).orElse(null);
         List<Odrzavanje> odrzavanjeList = odrzavanjeRepository.findByOpremaAndTip(oprema, umjeravanjeS);
-        List<Odrzavanje> odrzavanjeSList = odrzavanjeRepository.findByOpremaAndTipOrOpremaAndTip(oprema,servisS,oprema,servisIzvanredanS);
+        List<Odrzavanje> odrzavanjeSList = odrzavanjeRepository.findByOpremaAndTipOrOpremaAndTip(oprema, servisS, oprema, servisIzvanredanS);
         List<Kvar> kvarList = kvarRepository.findByOprema(oprema);
         odrzavanjeList.sort(Comparator.comparing(Odrzavanje::getDatumUmjeravanja));
         odrzavanjeSList.sort(Comparator.comparing(Odrzavanje::getDatumOtpreme));
         kvarList.sort(Comparator.comparing(Kvar::getDatumPrijave));
+
         model.addAttribute("odrzavanjeSList", odrzavanjeSList);
         model.addAttribute("odrzavanjeList", odrzavanjeList);
-        model.addAttribute("kvarList",  kvarList);
+        model.addAttribute("kvarList", kvarList);
         model.addAttribute("oprema", oprema);
         model.addAttribute("user", user);
         return "z-pregled_pojedine_opreme";
     }
 
+
     @GetMapping("/popis_proizvodjaca")
     public String prikaziPopisProizvodjaca(HttpSession session, Model model) {
         Korisnik user = (Korisnik) session.getAttribute("currUser");
+
         List<Proizvodjac> proizvodjaci = proizvodjacRepository.findAll();
+
         model.addAttribute("proizvodjaci", proizvodjaci);
         model.addAttribute("user", user);
         return "popis_proizvodjaca";
     }
 
+
     @GetMapping("/popis_servisera")
     public String prikaziPopisServisera(HttpSession session, Model model) {
         Korisnik user = (Korisnik) session.getAttribute("currUser");
+
         List<Serviser> serviseri = serviserRepository.findAll();
+
         model.addAttribute("serviseri", serviseri);
         model.addAttribute("user", user);
         return "popis_servisera";
     }
 
+
     @GetMapping("/popis_vlasnika")
     public String prikaziPopisVlasnika(HttpSession session, Model model) {
         Korisnik user = (Korisnik) session.getAttribute("currUser");
+
         List<Vlasnik> vlasnici = vlasnikRepository.findAll();
+
         model.addAttribute("vlasnici", vlasnici);
         model.addAttribute("user", user);
         return "popis_vlasnika";
     }
 
+
     @GetMapping("/pregled_pojedinog_proizvodjaca")
-    public String prikaziDetaljeProizvodjaca(Long proizvodjacId,HttpSession session, Model model) {
+    public String prikaziDetaljeProizvodjaca(Long proizvodjacId, HttpSession session, Model model) {
         Korisnik user = (Korisnik) session.getAttribute("currUser");
+
         Proizvodjac proizvodjac = proizvodjacRepository.findById(proizvodjacId).orElse(null);
+
         model.addAttribute("proizvodjac", proizvodjac);
         model.addAttribute("user", user);
         return "pregled_pojedinog_proizvodjaca";
     }
+
+
+
     @GetMapping("/pregled_pojedinog_vlasnika")
-    public String prikaziDetaljeVlasnika(Long vlasnikId,HttpSession session, Model model) {
+    public String prikaziDetaljeVlasnika(Long vlasnikId, HttpSession session, Model model) {
         Korisnik user = (Korisnik) session.getAttribute("currUser");
+
         Vlasnik vlasnik = vlasnikRepository.findById(vlasnikId).orElse(null);
+
         model.addAttribute("vlasnik", vlasnik);
         model.addAttribute("user", user);
         return "pregled_pojedinog_vlasnika";
     }
 
+
     @GetMapping("/pregled_pojedinog_servisera")
-    public String prikaziDetaljeServisera(Long serviserId,HttpSession session, Model model) {
+    public String prikaziDetaljeServisera(Long serviserId, HttpSession session, Model model) {
         Korisnik user = (Korisnik) session.getAttribute("currUser");
+
         Serviser serviser = serviserRepository.findById(serviserId).orElse(null);
+
         model.addAttribute("serviser", serviser);
         model.addAttribute("user", user);
         return "pregled_pojedinog_servisera";
@@ -351,8 +281,11 @@ public class RegistarOpremeController {
     @GetMapping("/otpisi_opremu")
     public String otpisiOpremu(@RequestParam("opremaId") Long opremaId,HttpSession session, Model model) {
         Korisnik user = (Korisnik) session.getAttribute("currUser");
+
         Oprema oprema = opremaRepository.findById(opremaId).orElse(null);
+
         model.addAttribute("user", user);
+
         if (oprema != null) {
             oprema.setOtpisano(true);
             oprema.setDatumOtpisa(LocalDate.now());
@@ -363,19 +296,25 @@ public class RegistarOpremeController {
         }
     }
 
+
     @GetMapping("/pregled_otpisane_opreme")
     public String pregledOtpisaneOpreme(HttpSession session, Model model) {
         Korisnik user = (Korisnik) session.getAttribute("currUser");
+
         List<Oprema> otpisanaOpremaList = opremaRepository.findByOtpisano(true);
+
         model.addAttribute("otpisanaOpremaList", otpisanaOpremaList);
         model.addAttribute("user", user);
         return "pregled_otpisane_opreme";
     }
 
+
     @GetMapping("/evidencija_opreme_u_kvaru")
     public String prikaziOpremuUKvaru(Model model, HttpSession session) {
         Korisnik user = (Korisnik) session.getAttribute("currUser");
+
         List<Oprema> opremaUKvaruList = opremaRepository.findByRadilisteAndIspravnoFalse(user.getRadiliste());
+
         model.addAttribute("opremaList", opremaUKvaruList);
         model.addAttribute("user", user);
         return "evidencija_opreme_u_kvaru";

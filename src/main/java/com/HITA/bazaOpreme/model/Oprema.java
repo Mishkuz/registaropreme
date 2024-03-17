@@ -74,6 +74,9 @@ public class Oprema {
     @Column(name = "na_servisu", nullable = true)
     private boolean naServisu;
 
+    @Column(name = "na_umjeravanju", nullable = true)
+    private boolean naUmjeravanju;
+
     @Column(name = "ups", nullable = true)
     private String ups;
 

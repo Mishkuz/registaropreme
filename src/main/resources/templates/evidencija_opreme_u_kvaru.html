@@ -89,7 +89,7 @@
                 <th>Šifra</th>
                 <th>Naziv</th>
                 <th>Datum za servis</th>
-                <th>Pošalji na servis</th>
+                <th>Servis</th>
             </tr>
             </thead>
             <tbody>
@@ -100,7 +100,7 @@
                     th:attr="data-datum=${#temporals.format(oprema.datumPlaniranogServisiranja, 'yyyy-MM-dd')}"
                     th:text="${#temporals.format(oprema.datumPlaniranogServisiranja, 'dd.MM.yyyy')}"></td>
                 <td class="text-center">
-                    <a th:href="@{'/?opremaId=' + ${oprema.id}}">
+                    <a th:href="@{'/staviNaServis?opremaId=' + ${oprema.id}}">
                         <img src="../static/servispocetna.png" class="img-fluid img-button" alt="servispocetna">
                     </a>
                 </td>

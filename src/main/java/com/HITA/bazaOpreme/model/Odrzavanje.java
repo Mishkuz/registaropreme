@@ -13,6 +13,7 @@ import lombok.Setter;
 
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.Optional;
 
 @Entity
 @Table(name = "odrzavanje")
@@ -35,7 +36,7 @@ public class Odrzavanje {
 
     @NotBlank(message = "Ime i prezime radnika treba biti difiniran")
     @Size(max = 100, message = "Ime i prezime trebaju biti 512 znakova")
-    private String prijavioRadnik;
+    private String radnik;
 
 
     @Size(max = 512, message = "Opis održavanja ne smije biti duži od 512 znakova")
@@ -70,9 +71,9 @@ public class Odrzavanje {
 
 
 
-    public Odrzavanje(String prijavioRadnik, String opisOdrzavanja,
+    public Odrzavanje(String radnik, String opisOdrzavanja,
                        LocalDate datumOtpreme, LocalDate datumPovrata, Radiliste radiliste, Oprema oprema) {
-        this.prijavioRadnik = prijavioRadnik;
+        this.radnik = radnik;
         this.opisOdrzavanja = opisOdrzavanja;
         this.datumOtpreme = datumOtpreme;
         this.datumPovrata = datumPovrata;
@@ -81,13 +82,14 @@ public class Odrzavanje {
     }
 
 
-    public Odrzavanje(String prijavioRadnik,LocalDate datumUmjeravanja, Radiliste radiliste, Oprema oprema) {
-        this.prijavioRadnik = prijavioRadnik;
+    public Odrzavanje(String radnik,LocalDate datumUmjeravanja, Radiliste radiliste, Oprema oprema) {
+        this.radnik = radnik;
         this.datumUmjeravanja = datumUmjeravanja;
         this.radiliste = radiliste;
         this.oprema = oprema;
 
     }
+
 
 }
 

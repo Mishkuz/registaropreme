@@ -134,12 +134,12 @@
                     th:attr="data-datum=${#temporals.format(oprema.datumPlaniranogServisiranja, 'yyyy-MM-dd')}"
                     th:text="${#temporals.format(oprema.datumPlaniranogServisiranja, 'dd.MM.yyyy')}"></td>
                 <td class="text-center">
-                    <a th:href="@{'/z-unos_za_umjeravanje?opremaId=' + ${oprema.id}}">
+                    <a th:href="@{'/staviNaUmjeravanje?opremaId=' + ${oprema.id}}">
                         <img src="../static/umjeravanje.png" class="img-fluid img-button" alt="umjeravanje">
                     </a>
                 </td>
                 <td class="text-center">
-                    <a th:href="@{'/z-unos_za_servis?opremaId=' + ${oprema.id}}">
+                    <a th:href="@{'/staviNaServis?opremaId=' + ${oprema.id}}">
                         <img src="../static/servispocetna.png" class="img-fluid img-button" alt="servispocetna">
                     </a>
                 </td>
