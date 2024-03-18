@@ -58,6 +58,16 @@
         <div>
             <h2>Detalji opreme</h2>
         </div>
+        <div class="right-align">
+        <form class="inline-form" th:action="@{/otpisi_opremu}">
+            <input type="hidden" th:name="opremaId" th:value="${oprema.id}" />
+            <button type="submit" class="btn btn-primary">Otpiši opremu</button>
+        </form>
+            <form class="inline-form" th:action="@{/export}">
+            <input type="hidden" th:name="opremaId" th:value="${oprema.id}" />
+            <button type="submit" class="btn btn-primary">Preuzmi</button>
+        </form>
+        </div>
         <br><br>
         <p><strong>Šifra:</strong> <span th:text="${oprema.sifra}"></span></p>
         <p><strong>Naziv:</strong> <span th:text="${oprema.naziv}"></span></p>
@@ -80,16 +90,9 @@
         <p><strong>Datum otpisa:</strong>
             <span th:text="${#temporals.format(oprema.datumOtpisa, 'dd.MM.yyyy')}"></span>
         </p>
-        <br><br>
-        <form th:action="@{/otpisi_opremu}">
-            <input type="hidden" th:name="opremaId" th:value="${oprema.id}" />
-            <button type="submit" class="btn btn-primary">Otpis opreme</button>
-        </form>
-        <form th:action="@{/export}">
-            <input type="hidden" th:name="opremaId" th:value="${oprema.id}" />
-            <button type="submit" class="btn btn-primary">Preuzmi</button>
-        </form>
-    </div>
+        <br>
+
+
     <br><br>
     <h3 style="text-align:left; margin-left: 50px;">Umjeravanja</h3>
     <div class="table-responsive">
@@ -148,7 +151,6 @@
             </tbody>
         </table>
     </div>
-    </div>
     <br>
     <h3 style="text-align:left; margin-left: 50px;">Kvarovi</h3>
     <div class="table-responsive">
@@ -206,6 +208,15 @@
         .input-group-dynamic .form-tarea {
        width: 50%;
    }
+.right-align{
+        text-align:right;
+        }
+
+
+.inline-form {
+    display: inline-block;
+    margin-left: 10px; /* Adjust this value as needed */
+}
     </style>
     <script>
         document.addEventListener("DOMContentLoaded", function () {
