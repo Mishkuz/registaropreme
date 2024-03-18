@@ -37,8 +37,10 @@ dependencies {
     implementation 'io.jsonwebtoken:jjwt-api:0.12.5'
     // https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt-impl
     runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.12.5'
-   // https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt-jackson
+    // https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt-jackson
     runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.12.5'
+    // https://mvnrepository.com/artifact/org.apache.poi/poi
+    implementation group: 'org.apache.poi', name: 'poi', version: '5.2.5'
 
 
 }

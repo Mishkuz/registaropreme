@@ -85,6 +85,10 @@
             <input type="hidden" th:name="opremaId" th:value="${oprema.id}" />
             <button type="submit" class="btn btn-primary">Otpis opreme</button>
         </form>
+        <form th:action="@{/export}">
+            <input type="hidden" th:name="opremaId" th:value="${oprema.id}" />
+            <button type="submit" class="btn btn-primary">Preuzmi</button>
+        </form>
     </div>
     <br><br>
     <h3 style="text-align:left; margin-left: 50px;">Umjeravanja</h3>
