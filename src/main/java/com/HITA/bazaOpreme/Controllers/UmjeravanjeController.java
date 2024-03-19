@@ -56,6 +56,15 @@ public class UmjeravanjeController {
         o.setRadnik(umjerioRadnik);
         o.setDatumOtpreme(datumOtpreme);
         o.setDatumPovrata(datumPovrata);
+        o.setDatumPlaniranogServisiranja(opremaRepository.findById(opremaId).get().getDatumPlaniranogServisiranja());
+
+
+        LocalDate l = opremaRepository.findById(opremaId).get().getDatumPlaniranogServisiranja();
+        int i = opremaRepository.findById(opremaId).get().getIntervalServisiranjaUMjesecima();
+        int iFinal = i * 30;
+        l = l.plusDays(iFinal);
+
+        opremaRepository.updateDatumPlaniranogServisiranjaById(l, opremaId);
 
         odrzavanjeRepository.save(o);
         opremaRepository.updateNaUmjeravanjuById(false, opremaId);

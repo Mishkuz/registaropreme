@@ -95,6 +95,8 @@
                     <th>Prijavio</th>
                     <th>Serviser</th>
                     <th>Datum otpreme</th>
+                    <th>Datum povrata</th>
+                    <th>Datum planiranog servisa</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -102,12 +104,14 @@
                     <td th:text="${odrzavanje.oprema?.sifra}"></td>
                     <td th:text="${odrzavanje.oprema?.naziv}"></td>
                     <td th:text="${odrzavanje.opisOdrzavanja}"></td>
-                    <td th:text="${odrzavanje.prijavioRadnik}"></td>
+                    <td th:text="${odrzavanje.radnik}"></td>
                     <td th:attr="text=${odrzavanje.serviser?.naziv}, href=@{'/pregled_pojedinog_servisera?serviserId=' + ${odrzavanje.serviser?.id}}">
                         <a th:text="${odrzavanje.serviser?.naziv}"
                            th:href="@{'/pregled_pojedinog_servisera?serviserId=' + ${odrzavanje.serviser?.id}}"></a>
                     </td>
                     <td th:text="${#dates.format(#strings.replace(odrzavanje.datumOtpreme, '-', '/'), 'dd.MM.yyyy')}"></td>
+                    <td th:text="${#dates.format(#strings.replace(odrzavanje.datumPovrata, '-', '/'), 'dd.MM.yyyy')}"></td>
+                    <td th:text="${#dates.format(#strings.replace(odrzavanje.datumPlaniranogServisiranja, '-', '/'), 'dd.MM.yyyy')}"></td>
                 </tr>
                 </tbody>
             </table>

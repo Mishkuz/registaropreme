@@ -89,9 +89,8 @@ public class ServisController {
             Model model, HttpSession session) {
         Korisnik user = (Korisnik) session.getAttribute("currUser");
 
-        LocalDate ld = LocalDate.now();
 
-        Odrzavanje odrzavanje = new Odrzavanje(prijavioRadnik, opisOdrzavanja, ld, null, user.getRadiliste(), opremaRepository.findById(opremaId).get());
+        Odrzavanje odrzavanje = new Odrzavanje(prijavioRadnik, opisOdrzavanja, null, user.getRadiliste(), opremaRepository.findById(opremaId).get());
         odrzavanje.setServiser(serviserRepository.findById(tvrtkaId).orElse(null));
         odrzavanje.setDatumOtpreme(datumOtpreme);
         odrzavanje.setDatumPovrata(datumPovrata);
@@ -110,14 +109,14 @@ public class ServisController {
 
         opremaRepository.updateNaServisuById(false, opremaId);
         opremaRepository.updateIspravnoById(true, opremaId);
-
-        int i = opremaRepository.findById(opremaId).get().getIntervalServisiranjaUMjesecima();
-        Optional<Oprema> o = opremaRepository.findById(opremaId);
-        LocalDate l = o.get().getDatumPlaniranogServisiranja();
-        int iFinal = i * 30;
-        l = l.plusDays(iFinal);
-        opremaRepository.updateDatumPlaniranogServisiranjaById(l, opremaId);
-
+        if (b = true) {
+            int i = opremaRepository.findById(opremaId).get().getIntervalServisiranjaUMjesecima();
+            Optional<Oprema> o = opremaRepository.findById(opremaId);
+            LocalDate l = o.get().getDatumPlaniranogServisiranja();
+            int iFinal = i * 30;
+            l = l.plusDays(iFinal);
+            opremaRepository.updateDatumPlaniranogServisiranjaById(l, opremaId);
+        }
         List<Oprema> opremaList1 = opremaRepository.findByRadilisteAndNaServisu(user.getRadiliste(), true);
         List<Oprema> opremaList = new ArrayList<>(opremaList1);
         opremaList.sort(Comparator.comparing(Oprema::getDatumPlaniranogServisiranja));
@@ -158,46 +157,6 @@ public class ServisController {
         model.addAttribute(opremaRepository.findById(opremaId).get());
         model.addAttribute("user", user);
         return "z-unos_za_Iservis.html";
-    }
-
-    @GetMapping("/z-spremiIzvanredanServis")
-    public String zspremIiServis(
-            @RequestParam("tvrtkaId") Long tvrtkaId,
-            @RequestParam("opremaId") Long opremaId,
-            @RequestParam("opisOdrzavanja") String opisOdrzavanja,
-            @RequestParam("prijavioRadnik") String prijavioRadnik,
-            Model model, HttpSession session) {
-        Korisnik user = (Korisnik) session.getAttribute("currUser");
-
-        LocalDate ld = LocalDate.now();
-
-        Odrzavanje odrzavanje = new Odrzavanje(prijavioRadnik, opisOdrzavanja, ld, null, user.getRadiliste(), opremaRepository.findById(opremaId).get());
-        odrzavanje.setServiser(serviserRepository.findById(tvrtkaId).orElse(null));
-        odrzavanje.setDatumPlaniranogServisiranja(opremaRepository.findById(opremaId).get().getDatumPlaniranogServisiranja());
-
-        opremaRepository.updateNaServisuById(true, opremaId);
-
-        odrzavanje.setTip(servisIzvanredanS);
-        odrzavanjeRepository.save(odrzavanje);
-        model.addAttribute("user", user);
-
-        opremaRepository.updateNaServisuById(false, opremaId);
-        opremaRepository.updateIspravnoById(true, opremaId);
-
-        int i = opremaRepository.findById(opremaId).get().getIntervalServisiranjaUMjesecima();
-        Optional<Oprema> o = opremaRepository.findById(opremaId);
-        LocalDate l = o.get().getDatumPlaniranogServisiranja();
-        int iFinal = i * 30;
-        l = l.plusDays(iFinal);
-        opremaRepository.updateDatumPlaniranogServisiranjaById(l, opremaId);
-
-        List<Oprema> opremaList1 = opremaRepository.findByRadilisteAndNaServisu(user.getRadiliste(), true);
-        List<Oprema> opremaList = new ArrayList<>(opremaList1);
-        opremaList.sort(Comparator.comparing(Oprema::getDatumPlaniranogServisiranja));
-        model.addAttribute("opremaList", opremaList);
-        model.addAttribute("user", user);
-        return "z-evidencija_opreme_na_servisu.html";
-
     }
 
 

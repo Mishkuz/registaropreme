@@ -72,7 +72,7 @@ public class Odrzavanje {
 
 
     public Odrzavanje(String radnik, String opisOdrzavanja,
-                       LocalDate datumOtpreme, LocalDate datumPovrata, Radiliste radiliste, Oprema oprema) {
+                       LocalDate datumOtpreme, Radiliste radiliste, Oprema oprema) {
         this.radnik = radnik;
         this.opisOdrzavanja = opisOdrzavanja;
         this.datumOtpreme = datumOtpreme;
