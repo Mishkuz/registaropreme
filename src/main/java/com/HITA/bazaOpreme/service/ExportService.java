@@ -9,9 +9,13 @@ import jakarta.servlet.ServletOutputStream;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import lombok.AllArgsConstructor;
+import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.CreationHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -46,7 +50,9 @@ public class ExportService {
         kvarList.sort(Comparator.comparing(Kvar::getDatumPrijave));
 
         HSSFWorkbook workbook = new HSSFWorkbook();
+
         HSSFSheet sheet = workbook.createSheet("PregledPojedineOpreme");
+
         HSSFRow row = sheet.createRow(0);
 
         row.createCell(0).setCellValue("Pregled opreme");
@@ -58,11 +64,21 @@ public class ExportService {
 
         HSSFRow dn = sheet.createRow(4);
         dn.createCell(0).setCellValue("Datum nabave: ");
-        dn.createCell(1).setCellValue(oprema.getDatumNabave());
+
+// Formatiranje datuma
+        CellStyle dateCellStyle = workbook.createCellStyle();
+        CreationHelper createHelper = workbook.getCreationHelper();
+        dateCellStyle.setDataFormat(createHelper.createDataFormat().getFormat("dd.MM.yyyy")); // Prilagodite formatu datuma prema potrebi
+
+// Postavljanje formatiranog datuma u ćeliju
+        Cell dateCell = dn.createCell(1);
+        dateCell.setCellValue(oprema.getDatumNabave());
+        dateCell.setCellStyle(dateCellStyle);
 
         HSSFRow gp = sheet.createRow(5);
         gp.createCell(0).setCellValue("Godina proizvodnje: ");
-        gp.createCell(1).setCellValue(oprema.getGodinaProizvodnje());
+        HSSFCell godinaProizvodnjeCell = gp.createCell(1);
+        godinaProizvodnjeCell.setCellValue(oprema.getGodinaProizvodnje());
 
         HSSFRow sb = sheet.createRow(6);
         sb.createCell(0).setCellValue("Serijski broj: ");
@@ -100,7 +116,8 @@ public class ExportService {
 
         HSSFRow dps = sheet.createRow(14);
         dps.createCell(0).setCellValue("Datum planiranog servisiranja: ");
-        dps.createCell(1).setCellValue(oprema.getDatumPlaniranogServisiranja());
+        HSSFCell datumPlaniranogServisiranjaCell = dps.createCell(1);
+        datumPlaniranogServisiranjaCell.setCellValue(oprema.getDatumPlaniranogServisiranja());
 
         HSSFRow vla = sheet.createRow(15);
         vla.createCell(0).setCellValue("Vlasnik: ");
@@ -116,15 +133,17 @@ public class ExportService {
 
         HSSFRow dot = sheet.createRow(18);
         dot.createCell(0).setCellValue("Datum otpisa: ");
-        dot.createCell(1).setCellValue(oprema.getDatumOtpisa());
-
+        HSSFCell datumOtpisaCell = dot.createCell(1);
+        datumOtpisaCell.setCellValue(oprema.getDatumOtpisa());
         int dRI = 25;
 
 
         HSSFRow hu = sheet.createRow(dRI + 1);
         hu.createCell(0).setCellValue("Umjeravanja ");
+        dRI++;
+        dRI++;
 
-        HSSFRow hss = sheet.createRow(dRI + 1);
+        HSSFRow hss = sheet.createRow(dRI);
         hss.createCell(0).setCellValue("Datum otpreme: ");
         hss.createCell(1).setCellValue("Datum povrata: ");
         hss.createCell(2).setCellValue("Serviser: ");
@@ -134,8 +153,15 @@ public class ExportService {
 
         for (Odrzavanje odrzavanje : odrzavanjeList) {
             HSSFRow dataRow = sheet.createRow(dRI);
+            CellStyle dateCellStyl = workbook.createCellStyle();
+            CreationHelper creationHelper = workbook.getCreationHelper();
+            dateCellStyl.setDataFormat(creationHelper.createDataFormat().getFormat("dd/MM/yyyy"));
+
             dataRow.createCell(0).setCellValue(odrzavanje.getDatumOtpreme());
             dataRow.createCell(1).setCellValue(odrzavanje.getDatumPovrata());
+
+            dataRow.getCell(0).setCellStyle(dateCellStyl);
+            dataRow.getCell(1).setCellStyle(dateCellStyl);
             dataRow.createCell(2).setCellValue(odrzavanje.getServiser().getNaziv());
             dataRow.createCell(3).setCellValue(odrzavanje.getRadnik());
             dRI++;
@@ -143,8 +169,10 @@ public class ExportService {
         }
         HSSFRow h = sheet.createRow(dRI + 1);
         h.createCell(0).setCellValue("Seervisi: ");
+        dRI++;
+        dRI++;
 
-        HSSFRow hs = sheet.createRow(dRI + 1);
+        HSSFRow hs = sheet.createRow(dRI);
         hs.createCell(0).setCellValue("Datum otpreme: ");
         hs.createCell(1).setCellValue("Datum povrata: ");
         hs.createCell(2).setCellValue("Datum planiranog servisa: ");
@@ -156,9 +184,17 @@ public class ExportService {
 
         for (Odrzavanje odrzavanje : odrzavanjeSList) {
             HSSFRow dataRow = sheet.createRow(dRI);
+            CellStyle dateCellSty = workbook.createCellStyle();
+            CreationHelper creationHelper = workbook.getCreationHelper();
+            dateCellSty.setDataFormat(creationHelper.createDataFormat().getFormat("dd/MM/yyyy"));
+
             dataRow.createCell(0).setCellValue(odrzavanje.getDatumOtpreme());
             dataRow.createCell(1).setCellValue(odrzavanje.getDatumPovrata());
             dataRow.createCell(2).setCellValue(odrzavanje.getDatumPlaniranogServisiranja());
+
+            dataRow.getCell(0).setCellStyle(dateCellSty);
+            dataRow.getCell(1).setCellStyle(dateCellSty);
+            dataRow.getCell(2).setCellStyle(dateCellSty);
             dataRow.createCell(3).setCellValue(odrzavanje.getTip());
             dataRow.createCell(4).setCellValue(odrzavanje.getServiser().getNaziv());
             dataRow.createCell(5).setCellValue(odrzavanje.getRadnik());
@@ -169,23 +205,61 @@ public class ExportService {
 
         HSSFRow hk = sheet.createRow(dRI + 1);
         hk.createCell(0).setCellValue("Kvarovi: ");
+        dRI++;
+        dRI++;
 
-        HSSFRow d3 = sheet.createRow(dRI + 1);
+
+        HSSFRow d3 = sheet.createRow(dRI);
         d3.createCell(0).setCellValue("Datum prijave: ");
         d3.createCell(1).setCellValue("Prijavio radnik: ");
         d3.createCell(2).setCellValue("Opis kvara: ");
-
         dRI++;
 
 
         for (Kvar kvar : kvarList) {
             HSSFRow dataRow = sheet.createRow(dRI);
+
+            CellStyle dateCellSt = workbook.createCellStyle();
+            CreationHelper creationHelper = workbook.getCreationHelper();
+            dateCellSt.setDataFormat(creationHelper.createDataFormat().getFormat("dd/MM/yyyy"));
+
             dataRow.createCell(0).setCellValue(kvar.getDatumPrijave());
+            dataRow.getCell(0).setCellStyle(dateCellSt);
             dataRow.createCell(1).setCellValue(kvar.getPrijavioRadnik());
             dataRow.createCell(2).setCellValue(kvar.getOpisKvara());
             dRI++;
 
         }
+
+        int[] columnWidths = new int[20]; // Promijenite 20 na broj kolona koje imate
+        for (int i = 0; i <= dRI; i++) {
+            HSSFRow r = sheet.getRow(i);
+            if (r != null) {
+                for (int j = 0; j < row.getLastCellNum(); j++) {
+                    HSSFCell cell = row.getCell(j);
+                    if (cell != null) {
+                        int contentLength = cell.getStringCellValue().length(); // Dobivanje duljine sadržaja ćelije
+                        // Ako je duljina sadržaja veća od maksimalne širine za ovu kolonu, ažurirajte maksimalnu širinu
+                        if (contentLength * 256 > columnWidths[j]) {
+                            columnWidths[j] = contentLength * 256; // Ažuriranje maksimalne širine za ovu kolonu
+                        }
+                    }
+                }
+            }
+        }
+
+    // Prolazak kroz redove kako bi se postavila širina kolone na maksimalnu širinu
+        for (int i = 0; i <= dRI; i++) {
+            HSSFRow r = sheet.getRow(i);
+            if (r != null) {
+                for (int j = 0; j < row.getLastCellNum(); j++) {
+                    HSSFCell cell = row.getCell(j);
+                    if (cell != null)
+                        // Postavljanje širine kolone na maksimalnu širinu za tu kolonu
+                        sheet.setColumnWidth(j, columnWidths[j]);
+                    }
+                }
+            }
 
 
         ServletOutputStream ops = response.getOutputStream();
