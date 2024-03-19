@@ -130,7 +130,6 @@ public class RegistarOpremeController {
         Korisnik user = (Korisnik) session.getAttribute("currUser");
 
         List<Odrzavanje> odrzavanjeList1 = odrzavanjeRepository.findByRadilisteAndTip(user.getRadiliste(), umjeravanjeS);
-        odrzavanjeList1.sort(Comparator.comparing(Odrzavanje::getDatumUmjeravanja, Comparator.reverseOrder()));
 
         model.addAttribute("odrzavanjeList", odrzavanjeList1);
         model.addAttribute("user", user);

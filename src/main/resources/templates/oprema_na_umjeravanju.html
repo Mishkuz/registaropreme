@@ -66,7 +66,7 @@
                                          border-radius: 50%; background:transparent;" alt="povecalo">
                                 </button>
                             </span>
-      </div>
+
       <script>
         document.addEventListener('DOMContentLoaded', function () {
             var searchInput = document.getElementById('searchInput');
@@ -80,6 +80,7 @@
             });
         });
       </script>
+      </div>
     </div>
   </div>
   <style>
@@ -93,8 +94,9 @@
 
 
   </style>
-  <div class="container-fluid py-4">
-    <table class="table align-items-center text-center table-striped table-hover">
+  <div class="card">
+  <div class="table-responsive">
+    <table class="table align-items-center text-center mb-0 table-striped table-hover">
       <thead>
       <tr>
         <th>Šifra</th>
@@ -110,7 +112,6 @@
       </tr>
       </thead>
       <tbody>
-      <tr>
       <tr th:each="oprema : ${opremaList}">
         <td th:text="${oprema.sifra}"></td>
         <td th:text="${oprema.naziv}"></td>
@@ -129,6 +130,7 @@
       </tr>
       </tbody>
     </table>
+  </div>
   </div>
 </main>
 <div class="fixed-plugin">

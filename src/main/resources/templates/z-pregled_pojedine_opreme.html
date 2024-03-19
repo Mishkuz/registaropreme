@@ -67,6 +67,10 @@
             <input type="hidden" th:name="opremaId" th:value="${oprema.id}" />
             <button type="submit" class="btn btn-primary">Preuzmi</button>
         </form>
+            <form class="inline-form" th:action="@{/uredi_opremu}">
+                <input type="hidden" th:name="opremaId" th:value="${oprema.id}" />
+                <button type="submit" class="btn btn-primary">Uredi opremu</button>
+            </form>
         </div>
         <br><br>
         <p><strong>Šifra:</strong> <span th:text="${oprema.sifra}"></span></p>
