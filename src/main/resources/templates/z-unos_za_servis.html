@@ -74,10 +74,11 @@
                 </div>
                 <div class="input-group input-group-dynamic mb-4">
                     <label for="tvrtkaId">Serviser:</label>
-                    <select class="form-select" id="tvrtkaId" name="tvrtkaId">
-                        <option th:each="tvrtka : ${serviseri}" th:value="${tvrtka.id}"
-                                th:text="${tvrtka.naziv}"></option>
-                    </select>
+                    <input id="tvrtkaId" name="tvrtkaId" class="form-control" disabled="true"  th:text="${serviser.naziv}"">
+                </div>
+                <div class="input-group input-group-dynamic mb-4">
+                    <label for="date">Datum otpreme</label>
+                    <input  name="date" id="date" class="form-control" disabled="true"  th:text="${serviser.naziv}"">
                 </div>
                 <div class="input-group input-group-dynamic mb-4">
                     <span>Servisirao radnik: </span>
@@ -89,10 +90,6 @@
                     <span id="basic-addon-opis">Opis: </span>
                     <textarea name="opisOdrzavanja" id="opisOdrzavanja" rows="3" cols="69" class="form-tarea"
                               maxlength="512" placeholder="Opcionalno"></textarea>
-                </div>
-                <div class="input-group input-group-dynamic mb-4">
-                    <span>Datum otpreme</span>
-                    <input type="text" class="form-control" name="date" id="date" placeholder="Odaberite datum" required>
                 </div>
                 <div class="input-group input-group-dynamic mb-4">
                     <span>Datum povrata</span>

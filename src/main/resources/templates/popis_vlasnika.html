@@ -54,6 +54,10 @@
     <nav th:replace="~{fragments/navbar::navbar}" ></nav>
     <!-- End Navbar -->
     <h2 class="h2" style="text-align:left; margin-left: 50px;">Popis vlasnika</h2>
+    <form class="inline-form" th:action="@{/unosNovogVlasnika}">
+        <button type="submit" class="btn btn-primary">Dodaj vlasnika</button>
+    </form>
+
     <div class="container mt-2 p-4 d-flex justify-content-center align-items-center">
 
         <div class="col-md-8">
@@ -84,6 +88,7 @@
         </div>
     </div>
     <div class="card">
+
         <div class="table-responsive">
             <table class="table align-items-center text-center mb-0 table-striped table-hover">
                 <thead>

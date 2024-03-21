@@ -1,9 +1,6 @@
 package com.HITA.bazaOpreme.Controllers;
 
-import com.HITA.bazaOpreme.model.Korisnik;
-import com.HITA.bazaOpreme.model.Odrzavanje;
-import com.HITA.bazaOpreme.model.Oprema;
-import com.HITA.bazaOpreme.model.Serviser;
+import com.HITA.bazaOpreme.model.*;
 import com.HITA.bazaOpreme.repository.*;
 import jakarta.servlet.http.HttpSession;
 import lombok.AllArgsConstructor;
@@ -31,6 +28,7 @@ public class ServisController {
     private final ProizvodjacRepository proizvodjacRepository;
     private final VlasnikRepository vlasnikRepository;
     private final ServiserRepository serviserRepository;
+    private final PrivOdRepository privOdRepository;
 
 
     private final String servisS = "Servis";
@@ -58,8 +56,12 @@ public class ServisController {
 
         List<Oprema> opremaList = opremaRepository.findByRadiliste(user.getRadiliste());
         List<Odrzavanje> odrzavanjeList = odrzavanjeRepository.findByRadiliste(user.getRadiliste());
-        List<Serviser> serviseri = serviserRepository.findByRadiliste(user.getRadiliste());
-
+        List<Serviser> serviseri = null;
+        PrivOd p = privOdRepository.findByOprema_Id(opremaId);
+        Serviser s = p.getServiser();
+        serviseri.add(s);
+        LocalDate l = p.getDatumOtpreme();
+        model.addAttribute("datumOtpreme",l);
         model.addAttribute(odrzavanjeList);
         model.addAttribute(opremaList);
         model.addAttribute("serviseri", serviseri);
@@ -72,11 +74,32 @@ public class ServisController {
     @GetMapping("/staviNaServis")
     public String sNs(Model model, Long opremaId, HttpSession session) {
         Korisnik user = (Korisnik) session.getAttribute("currUser");
-
+        List<Serviser> serviseri = serviserRepository.findByRadiliste(user.getRadiliste());
         opremaRepository.updateNaServisuById(true, opremaId);
-        return "redirect:/evidencijaOpremeNaServisu";
+        model.addAttribute("user", user);
+        model.addAttribute("serviseri", serviseri);
+        model.addAttribute(opremaRepository.findById(opremaId).get());
+
+        return "z-unos_za_servis1.html";
     }
 
+    @GetMapping("/z-spremiPriServis")
+    public String sPNs(Model model,
+                       @RequestParam("tvrtkaId") Long tvrtkaId,
+                       @RequestParam("opremaId") Long opremaId,
+                       @RequestParam("date") @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate datumOtpreme,
+                       HttpSession session) {
+        Korisnik user = (Korisnik) session.getAttribute("currUser");
+        Oprema o = opremaRepository.findById(opremaId).orElse(null);
+        Serviser s = serviserRepository.findById(tvrtkaId).orElse(null);
+        PrivOd p = new PrivOd();
+        privOdRepository.save(p);
+        opremaRepository.updateNaServisuById(true, opremaId);
+        model.addAttribute("user", user);
+        model.addAttribute("oprema", opremaRepository.findById(opremaId));
+
+        return "redirect:/evidencijaOpremeNaServisu";
+    }
 
     @GetMapping("/z-spremiServis")
     public String zspremiServis(
@@ -95,7 +118,7 @@ public class ServisController {
         odrzavanje.setDatumOtpreme(datumOtpreme);
         odrzavanje.setDatumPovrata(datumPovrata);
         odrzavanje.setDatumPlaniranogServisiranja(opremaRepository.findById(opremaId).get().getDatumPlaniranogServisiranja());
-
+        privOdRepository.deleteByOprema(opremaRepository.findById(opremaId));
 
         boolean b = opremaRepository.findById(opremaId).get().getIspravno();
         if (b == false) {
@@ -137,26 +160,6 @@ public class ServisController {
         model.addAttribute("opremaList", opremaList);
         model.addAttribute("user", user);
         return "z-evidencija_opreme_na_servisu.html";
-    }
-
-
-// Dio s IZVANREDNIM SERVISOM
-
-
-    @GetMapping("/z-unos_za_IzvanredniServisservis")
-    public String zunos_za_Iservis(Model model, Long opremaId, HttpSession session) {
-        Korisnik user = (Korisnik) session.getAttribute("currUser");
-
-        List<Oprema> opremaList = opremaRepository.findByRadiliste(user.getRadiliste());
-        List<Odrzavanje> odrzavanjeList = odrzavanjeRepository.findByRadiliste(user.getRadiliste());
-        List<Serviser> serviseri = serviserRepository.findByRadiliste(user.getRadiliste());
-
-        model.addAttribute(odrzavanjeList);
-        model.addAttribute(opremaList);
-        model.addAttribute("serviseri", serviseri);
-        model.addAttribute(opremaRepository.findById(opremaId).get());
-        model.addAttribute("user", user);
-        return "z-unos_za_Iservis.html";
     }
 
 

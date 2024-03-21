@@ -18,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
@@ -58,23 +59,18 @@ public class ExportService {
         CreationHelper createHelper = workbook.getCreationHelper();
         dateCellStyle.setDataFormat(createHelper.createDataFormat().getFormat("dd.MM.yyyy")); // Prilagodite formatu datuma prema potrebi
         // Bojanje ćelija
-        CellStyle style = workbook.createCellStyle();
-        style.setFillForegroundColor(IndexedColors.LIGHT_BLUE.getIndex());
-        style.setFillPattern(FillPatternType.SOLID_FOREGROUND);
 
         HSSFCell cel = row.createCell(0);
         cel.setCellValue("Pregled opreme");
-        cel.setCellStyle(style);
         row.createCell(1).setCellValue(oprema.getNaziv());
 
         HSSFRow p = sheet.createRow(3);
         HSSFCell celll = p.createCell(0);
         celll.setCellValue("Proizvođač: ");
-        celll.setCellStyle(style);
         p.createCell(1).setCellValue(oprema.getProizvodjac().getNaziv());
 
         HSSFRow dn = sheet.createRow(4);
-       // HSSFCell celi
+        // HSSFCell celi
         dn.createCell(0).setCellValue("Datum nabave: ");
 
 
@@ -145,24 +141,29 @@ public class ExportService {
         HSSFCell datumOtpisaCell = dot.createCell(1);
         datumOtpisaCell.setCellValue(oprema.getDatumOtpisa());
         datumOtpisaCell.setCellStyle(dateCellStyle);
-        int dRI = 25;
 
 
-        HSSFRow hu = sheet.createRow(dRI + 1);
+        int dRI2 = 1;
+
+        HSSFSheet sheet2 = workbook.createSheet("Umjeravanja");
+        HSSFRow hu = sheet.createRow(dRI2 + 1);
         hu.createCell(0).setCellValue("Umjeravanja ");
-        dRI++;
-        dRI++;
+        dRI2++;
+        dRI2++;
 
-        HSSFRow hss = sheet.createRow(dRI);
+        HSSFRow hss = sheet2.createRow(dRI2);
         hss.createCell(0).setCellValue("Datum otpreme: ");
         hss.createCell(1).setCellValue("Datum povrata: ");
         hss.createCell(2).setCellValue("Serviser: ");
         hss.createCell(3).setCellValue("Radnik: ");
-        dRI++;
+        dRI2++;
+
+
+
 
 
         for (Odrzavanje odrzavanje : odrzavanjeList) {
-            HSSFRow dataRow = sheet.createRow(dRI);
+            HSSFRow dataRow = sheet2.createRow(dRI2);
 
 
             dataRow.createCell(0).setCellValue(odrzavanje.getDatumOtpreme());
@@ -172,15 +173,20 @@ public class ExportService {
             dataRow.getCell(1).setCellStyle(dateCellStyle);
             dataRow.createCell(2).setCellValue(odrzavanje.getServiser().getNaziv());
             dataRow.createCell(3).setCellValue(odrzavanje.getRadnik());
-            dRI++;
+            dRI2++;
 
         }
-        HSSFRow h = sheet.createRow(dRI + 1);
-        h.createCell(0).setCellValue("Seervisi: ");
-        dRI++;
-        dRI++;
 
-        HSSFRow hs = sheet.createRow(dRI);
+
+
+        HSSFSheet sheet3 = workbook.createSheet("Servisi");
+        int dRI3 = 1;
+        HSSFRow h = sheet3.createRow(dRI3 + 1);
+        h.createCell(0).setCellValue("Seervisi: ");
+        dRI3++;
+        dRI3++;
+
+        HSSFRow hs = sheet3.createRow(dRI3);
         hs.createCell(0).setCellValue("Datum otpreme: ");
         hs.createCell(1).setCellValue("Datum povrata: ");
         hs.createCell(2).setCellValue("Datum planiranog servisa: ");
@@ -188,10 +194,10 @@ public class ExportService {
         hs.createCell(4).setCellValue("Serviser: ");
         hs.createCell(5).setCellValue("Radnik: ");
         hs.createCell(6).setCellValue("Opis: ");
-        dRI++;
+        dRI3++;
 
         for (Odrzavanje odrzavanje : odrzavanjeSList) {
-            HSSFRow dataRow = sheet.createRow(dRI);
+            HSSFRow dataRow = sheet3.createRow(dRI3);
 
             dataRow.createCell(0).setCellValue(odrzavanje.getDatumOtpreme());
             dataRow.createCell(1).setCellValue(odrzavanje.getDatumPovrata());
@@ -204,64 +210,146 @@ public class ExportService {
             dataRow.createCell(4).setCellValue(odrzavanje.getServiser().getNaziv());
             dataRow.createCell(5).setCellValue(odrzavanje.getRadnik());
             dataRow.createCell(6).setCellValue(odrzavanje.getOpisOdrzavanja());
-            dRI++;
+            dRI3++;
 
         }
 
-        HSSFRow hk = sheet.createRow(dRI + 1);
+        HSSFSheet sheet4 = workbook.createSheet("Kvarovi");
+        int dRi4=1;
+        HSSFRow hk = sheet4.createRow(dRi4 + 1);
         hk.createCell(0).setCellValue("Kvarovi: ");
-        dRI++;
-        dRI++;
+        dRi4++;
+        dRi4++;
 
 
-        HSSFRow d3 = sheet.createRow(dRI);
+        HSSFRow d3 = sheet4.createRow(dRi4);
         d3.createCell(0).setCellValue("Datum prijave: ");
         d3.createCell(1).setCellValue("Prijavio radnik: ");
         d3.createCell(2).setCellValue("Opis kvara: ");
-        dRI++;
+        dRi4++;
 
 
         for (Kvar kvar : kvarList) {
-            HSSFRow dataRow = sheet.createRow(dRI);
+            HSSFRow dataRow = sheet4.createRow(dRi4);
 
 
             dataRow.createCell(0).setCellValue(kvar.getDatumPrijave());
             dataRow.getCell(0).setCellStyle(dateCellStyle);
             dataRow.createCell(1).setCellValue(kvar.getPrijavioRadnik());
             dataRow.createCell(2).setCellValue(kvar.getOpisKvara());
-            dRI++;
+            dRi4++;
 
         }
 
-        int[] columnWidths = new int[20]; // Promijenite 20 na broj kolona koje imate
-        for (int i = 0; i <= dRI; i++) {
+        int[] columnWidths = new int[30];
+        for (int i = 0; i <= 30 ; i++) {
             HSSFRow r = sheet.getRow(i);
             if (r != null) {
                 for (int j = 0; j < row.getLastCellNum(); j++) {
                     HSSFCell cell = row.getCell(j);
                     if (cell != null) {
-                        int contentLength = cell.getStringCellValue().length(); // Dobivanje duljine sadržaja ćelije
-                        // Ako je duljina sadržaja veća od maksimalne širine za ovu kolonu, ažurirajte maksimalnu širinu
+                        int contentLength = cell.getStringCellValue().length();
+
                         if (contentLength * 256 > columnWidths[j]) {
-                            columnWidths[j] = contentLength * 256; // Ažuriranje maksimalne širine za ovu kolonu
+                            columnWidths[j] = contentLength * 256;
                         }
                     }
                 }
             }
         }
 
-        // Prolazak kroz redove kako bi se postavila širina kolone na maksimalnu širinu
-        for (int i = 0; i <= dRI; i++) {
+        for (int i = 0; i <= 30; i++) {
             HSSFRow r = sheet.getRow(i);
             if (r != null) {
                 for (int j = 0; j < row.getLastCellNum(); j++) {
                     HSSFCell cell = row.getCell(j);
                     if (cell != null)
-                        // Postavljanje širine kolone na maksimalnu širinu za tu kolonu
                         sheet.setColumnWidth(j, columnWidths[j]);
                 }
             }
         }
+
+        int[] columnWidths2 = new int[dRI2];
+        for (int i = 0; i <= dRI2 ; i++) {
+            HSSFRow r = sheet2.getRow(i);
+            if (r != null) {
+                for (int j = 0; j < row.getLastCellNum(); j++) {
+                    HSSFCell cell = row.getCell(j);
+                    if (cell != null) {
+                        int contentLength = cell.getStringCellValue().length();
+
+                        if (contentLength * 256 > columnWidths2[j]) {
+                            columnWidths2[j] = contentLength * 256;
+                        }
+                    }
+                }
+            }
+        }
+
+        for (int i = 0; i <= dRI2; i++) {
+            HSSFRow r = sheet2.getRow(i);
+            if (r != null) {
+                for (int j = 0; j < row.getLastCellNum(); j++) {
+                    HSSFCell cell = row.getCell(j);
+                    if (cell != null)
+                        sheet2.setColumnWidth(j, columnWidths2[j]);
+                }
+            }
+        }
+        int[] columnWidths3 = new int[dRI3];
+        for (int i = 0; i <= dRI3; i++) {
+            HSSFRow r = sheet3.getRow(i);
+            if (r != null) {
+                for (int j = 0; j < row.getLastCellNum(); j++) {
+                    HSSFCell cell = row.getCell(j);
+                    if (cell != null) {
+                        int contentLength = cell.getStringCellValue().length();
+
+                        if (contentLength * 256 > columnWidths3[j]) {
+                            columnWidths3[j] = contentLength * 256;
+                        }
+                    }
+                }
+            }
+        }
+
+        for (int i = 0; i <= dRI3; i++) {
+            HSSFRow r = sheet3.getRow(i);
+            if (r != null) {
+                for (int j = 0; j < row.getLastCellNum(); j++) {
+                    HSSFCell cell = row.getCell(j);
+                    if (cell != null)
+                        sheet3.setColumnWidth(j, columnWidths3[j]);
+                }
+            }
+        }
+        int[] columnWidths4 = new int[dRi4];
+        for (int i = 0; i <= dRi4 ; i++) {
+            HSSFRow r = sheet4.getRow(i);
+            if (r != null) {
+                for (int j = 0; j < row.getLastCellNum(); j++) {
+                    HSSFCell cell = row.getCell(j);
+                    if (cell != null) {
+                        int contentLength = cell.getStringCellValue().length();
+
+                        if (contentLength * 256 > columnWidths4[j]) {
+                            columnWidths4[j] = contentLength * 256;
+                        }
+                    }
+                }
+            }
+        }
+        for (int i = 0; i <= dRi4; i++) {
+            HSSFRow r = sheet4.getRow(i);
+            if (r != null) {
+                for (int j = 0; j < row.getLastCellNum(); j++) {
+                    HSSFCell cell = row.getCell(j);
+                    if (cell != null)
+                        sheet4.setColumnWidth(j, columnWidths4[j]);
+                }
+            }
+        }
+
 
 
         ServletOutputStream ops = response.getOutputStream();

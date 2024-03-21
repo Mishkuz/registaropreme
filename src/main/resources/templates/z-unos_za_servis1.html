@@ -13,7 +13,7 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 -->
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:HH="http://www.w3.org/1999/xhtml">
 
 <head>
     <meta charset="utf-8"/>
@@ -48,19 +48,19 @@
     </style>
 </head>
 <body class="g-sidenav-show  bg-gray-200">
-<aside th:replace="~{fragments/menu::menu}" ></aside>
+<aside th:replace="~{fragments/menu::menu}"></aside>
 <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
     <!-- Navbar -->
-    <nav th:replace="~{fragments/navbar::navbar}" ></nav>
+    <nav th:replace="~{fragments/navbar::navbar}"></nav>
     <!-- End Navbar -->
     <div class="container main-container">
         <div class="row justify-content-center border rounded-2 p-2 bg-white shadow box-area position-relative">
-            <form action="/z-spremiUmjeravanje" method="get">
+            <form action="/z-spremiPriServis" method="get">
                 <br>
                 <div>
-                    <h2>Umjeravanje</h2>
+                    <h2>Servis</h2>
                 </div>
-                <input name="opremaId" hidden="true" th:value="${oprema.id}"/>
+                <input name="opremaId" id="opremaId" hidden="true" th:value="${oprema.id}"/>
                 <br><br>
                 <div class="input-group input-group-dynamic mb-4">
                     <span>Šifra opreme: </span>
@@ -74,26 +74,14 @@
                 </div>
                 <div class="input-group input-group-dynamic mb-4">
                     <label for="tvrtkaId">Serviser:</label>
-                    <input id="tvrtkaId" name="tvrtkaId" class="form-control" disabled="true"  th:value="${serviser.naziv}">
+                    <select class="form-select" id="tvrtkaId" name="tvrtkaId">
+                        <option th:each="tvrtka : ${serviseri}" th:value="${tvrtka.id}"
+                                th:text="${tvrtka.naziv}"></option>
+                    </select>
                 </div>
                 <div class="input-group input-group-dynamic mb-4">
-                    <label for="date">Datum otpreme</label>
-                    <input  name="date" id="date" class="form-control" disabled="true"  th:value="${datumOtpreme}">
-                </div>
-                <div class="input-group input-group-dynamic mb-4">
-                    <span>Servisirao radnik: </span>
-                    <input type="text" id="prijavioRadnik" name="prijavioRadnik" class="form-control"
-                           aria-label="serijskiBroj"
-                           aria-describedby="basic-addon-serijskiBroj" maxlength="69" size="42">
-                </div>
-                <div class="input-group input-group-dynamic mb-4">
-                    <span id="basic-addon-opis">Opis: </span>
-                    <textarea name="opisOdrzavanja" id="opisOdrzavanja" rows="3" cols="69" class="form-tarea"
-                              maxlength="512" placeholder="Opcionalno"></textarea>
-                </div>
-                <div class="input-group input-group-dynamic mb-4">
-                    <span>Datum povrata</span>
-                    <input type="text" class="form-control" name="dateP" id="dateP" placeholder="Odaberite datum" required>
+                    <span>Datum otpreme</span>
+                    <input type="text" class="form-control" name="date" id="date" placeholder="Odaberite datum" required>
                 </div>
                 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
                 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
@@ -110,10 +98,11 @@
        });
                 </script>
                 <div class="text-left">
-
+                    <form action="/z-evidencija_servisa" method="get">
                         <button name="button" class="btn btn-primary" type="submit"
                                 style="margin-bottom: 5px; margin-top: 20px; margin-right: 10px;">Spremi
                         </button>
+                    </form>
                     <a href="/pocetna" class="btn btn-primary" type="submit" style="margin-bottom: 5px; margin-top: 20px;
                 margin-right: 10px;">Odustani</a>
                 </div>
