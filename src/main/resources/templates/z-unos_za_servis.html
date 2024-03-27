@@ -74,15 +74,15 @@
                 </div>
                 <div class="input-group input-group-dynamic mb-4">
                     <label for="tvrtkaId">Serviser:</label>
-                    <input id="tvrtkaId" name="tvrtkaId" class="form-control" disabled="true"  th:text="${serviser.naziv}"">
+                    <input id="tvrtkaId" name="tvrtkaId" class="form-control" disabled="true"  th:value="${serviser.naziv}">
                 </div>
                 <div class="input-group input-group-dynamic mb-4">
                     <label for="date">Datum otpreme</label>
-                    <input  name="date" id="date" class="form-control" disabled="true"  th:text="${serviser.naziv}"">
+                    <input  name="date" id="date" class="form-control" disabled="true"  th:value="${datumOtpreme}">
                 </div>
                 <div class="input-group input-group-dynamic mb-4">
                     <span>Servisirao radnik: </span>
-                    <input type="text" id="prijavioRadnik" name="prijavioRadnik" class="form-control"
+                    <input type="text" id="umjerioRadnik" name="umjerioRadnik" class="form-control"
                            aria-label="serijskiBroj"
                            aria-describedby="basic-addon-serijskiBroj" maxlength="69" size="42" required>
                 </div>

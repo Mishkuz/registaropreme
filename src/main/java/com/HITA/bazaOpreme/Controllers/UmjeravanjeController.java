@@ -40,6 +40,7 @@ public class UmjeravanjeController {
     @GetMapping("/z-spremiUmjeravanje")
     public String zspremiUmjeravanje(
             @RequestParam("opremaId") Long opremaId,
+            @RequestParam("opisOdrzavanja") String opisOdrzavanja,
             @RequestParam(value = "umjerioRadnik", required = false) String umjerioRadnik,
             @RequestParam("dateP") @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate datumPovrata,
             Model model, HttpSession session) {
@@ -54,6 +55,7 @@ public class UmjeravanjeController {
         o.setRadnik(umjerioRadnik);
         o.setDatumOtpreme(p.getDatumOtpreme());
         o.setDatumPovrata(datumPovrata);
+        o.setOpisOdrzavanja(opisOdrzavanja);
         o.setDatumPlaniranogServisiranja(opremaRepository.findById(opremaId).get().getDatumPlaniranogServisiranja());
 
 
@@ -85,7 +87,7 @@ public class UmjeravanjeController {
         p.setDatumOtpreme(datumOtpreme);
         privOdRepository.save(p);
         opremaRepository.updateNaUmjeravanjuById(true, opremaId);
-        model.addAttribute("user", user);
+
         return "redirect:/opremaNaUmjeravanju";
     }
 

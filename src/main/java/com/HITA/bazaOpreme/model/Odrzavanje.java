@@ -1,6 +1,7 @@
 package com.HITA.bazaOpreme.model;
 
 
+import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -33,8 +34,9 @@ public class Odrzavanje {
     */
 
 
-    @NotBlank(message = "Ime i prezime radnika treba biti difiniran")
+
     @Size(max = 100, message = "Ime i prezime trebaju biti 512 znakova")
+    @Nullable
     private String radnik;
 
 
