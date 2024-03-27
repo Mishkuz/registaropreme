@@ -114,7 +114,10 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:each="odrzavanje : ${odrzavanjeList}">
+            <tr th:if="${odrzavanjeList == null or odrzavanjeList.size() == 0}">
+                <td colspan="8" class="text-center">Nema umjeravanja</td>
+            </tr>
+            <tr th:each="odrzavanje : ${odrzavanjeList}" th:unless="${odrzavanjeList == null or odrzavanjeList.size() == 0}">
                 <td th:text="${odrzavanje.oprema?.sifra}"></td>
                 <td th:text="${odrzavanje.oprema?.naziv}"></td>
                 <td th:text="${odrzavanje.opisOdrzavanja}"></td>
@@ -147,7 +150,10 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:each="odrzavanje : ${odrzavanjeSList}">
+            <tr th:if="${odrzavanjeSList == null or odrzavanjeSList.size() == 0}">
+                <td colspan="8" class="text-center">Nema servisa</td>
+            </tr>
+            <tr th:each="odrzavanje : ${odrzavanjeSList}" th:unless="${odrzavanjeSList == null or odrzavanjeSList.size() == 0}">
                 <td th:text="${odrzavanje.oprema?.sifra}"></td>
                 <td th:text="${odrzavanje.oprema?.naziv}"></td>
                 <td th:text="${odrzavanje.opisOdrzavanja}"></td>
