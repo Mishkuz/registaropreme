@@ -240,6 +240,27 @@ public class RegistarOpremeController {
         return "popis_vlasnika";
     }
 
+    @GetMapping("/popis_vrsta")
+    public String prikaziPopisVrsta(HttpSession session, Model model) {
+        Korisnik user = (Korisnik) session.getAttribute("currUser");
+
+        List<Vrsta> vrste = vrstaRepository.findAll();
+
+        model.addAttribute("vrste", vrste);
+        model.addAttribute("user", user);
+        return "popis_vrsta";
+    }
+
+    @GetMapping("/popis_kategorija")
+    public String prikaziPopisKategorija(HttpSession session, Model model) {
+        Korisnik user = (Korisnik) session.getAttribute("currUser");
+
+        List<Kategorija> kategorije = kategorijaRepository.findAll();
+
+        model.addAttribute("kategorije", kategorije);
+        model.addAttribute("user", user);
+        return "popis_kategorija";
+    }
 
     @GetMapping("/pregled_pojedinog_proizvodjaca")
     public String prikaziDetaljeProizvodjaca(Long proizvodjacId, HttpSession session, Model model) {

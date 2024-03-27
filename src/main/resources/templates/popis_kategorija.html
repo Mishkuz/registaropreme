@@ -53,9 +53,9 @@
     <!-- Navbar -->
     <nav th:replace="~{fragments/navbar::navbar}" ></nav>
     <!-- End Navbar -->
-    <h2 class="h2" style="text-align:left; margin-left: 50px;">Vrste opreme</h2>
-    <form class="inline-form" th:action="@{/unosNoveVrste}">
-        <button type="submit" class="btn btn-primary">Dodaj vrstu</button>
+    <h2 class="h2" style="text-align:left; margin-left: 50px;">Kategorije opreme</h2>
+    <form class="inline-form" th:action="@{/unosNoveKategorije}">
+        <button type="submit" class="btn btn-primary">Dodaj kategoriju</button>
     </form>
     <div class="container mt-2 p-4 d-flex justify-content-center align-items-center">
 
@@ -93,14 +93,12 @@
                 <tr>
                     <th>Šifra</th>
                     <th>Naziv</th>
-                    <th>Kategorija</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="vrsta : ${vrste}">
-                    <td th:text="${vrsta.sifra}"></td>
-                    <td th:text="${vrsta.vrsta}"></td>
-                    <td th:text="${vrsta.kategorija?.kategorija}"></td>
+                <tr th:each="kategorija : ${kategorije}">
+                    <td th:text="${kategorija.sifra}"></td>
+                    <td th:text="${kategorija.kategorija}"></td>
                 </tr>
                 </tbody>
             </table>
