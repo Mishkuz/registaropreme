@@ -198,7 +198,7 @@ public class AdminController {
             @RequestParam("izvanredan") boolean izvanredan,
             Model model, HttpSession session) {
         Korisnik user = (Korisnik) session.getAttribute("currUser");
-        Odrzavanje odrzavanje = new Odrzavanje(prijavioRadnik, opisOdrzavanja, datumOtpreme, null, user.getRadiliste(), opremaRepository.findById(opremaId).get());
+    /*    Odrzavanje odrzavanje = new Odrzavanje(prijavioRadnik, opisOdrzavanja, datumOtpreme, null, user.getRadiliste(), opremaRepository.findById(opremaId).get());
         odrzavanje.setServiser(serviserRepository.findById(tvrtkaId).orElse(null));
         opremaRepository.updateNaServisuById(true, opremaId);
         if (izvanredan) {
@@ -206,7 +206,7 @@ public class AdminController {
         } else if (!izvanredan) {
             odrzavanje.setTip(servisS);
         }
-        odrzavanjeRepository.save(odrzavanje);
+        odrzavanjeRepository.save(odrzavanje);*/
         return "redirect:/z-evidencija_servisa";
     }
 

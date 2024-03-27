@@ -13,7 +13,7 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 -->
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:HH="http://www.w3.org/1999/xhtml">
 
 <head>
     <meta charset="utf-8"/>
@@ -48,73 +48,98 @@
     </style>
 </head>
 <body class="g-sidenav-show  bg-gray-200">
-<aside th:replace="~{fragments/menu::menu}" ></aside>
+<aside th:replace="~{fragments/menu::menu}"></aside>
 <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
     <!-- Navbar -->
-    <nav th:replace="~{fragments/navbar::navbar}" ></nav>
+    <nav th:replace="~{fragments/navbar::navbar}"></nav>
     <!-- End Navbar -->
-    <h2 class="h2" style="text-align:left; margin-left: 50px;">Evidencija umjeravanja</h2>
-    <div class="container mt-2 p-4 d-flex justify-content-center align-items-center">
-
-        <div class="col-md-8">
-            <div class="input-group input-group-dynamic mb-4" style="max-width: 800px;">
-                <input type="text" id="searchInput" style="border-color: #177245; max-height:40px;" class="form-control"
-                       placeholder="Unesi naziv opreme" aria-label="nazivopreme" aria-describedby="basic-addon1">
-                <span class="input-group-text" id="basic-addon1" style="max-height:40px;">
-                                <button name="button" class="btn btn-link" type="submit">
-                                    <img src="../static/povecalo.jpg" class="img-fluid"
-                                         style="width: 35px; height: 35px; border-radius: 50%; background:transparent;"
-                                         alt="povecalo">
-                                </button>
-                            </span>
+    <div class="container main-container">
+        <div class="row justify-content-center border rounded-2 p-2 bg-white shadow box-area position-relative">
+            <form action="/z-spremiPriServis" method="get">
+                <br>
+                <div>
+                    <h2>Servis</h2>
+                </div>
+                <input name="opremaId" id="opremaId" hidden="true" th:value="${oprema.id}"/>
+                <br><br>
+                <div class="input-group input-group-dynamic mb-4">
+                    <span>Šifra opreme: </span>
+                    <input type="text" name="sifra" class="form-control" disabled="true" id="sifra"
+                           th:value="${oprema.sifra}"
+                           aria-label="Šifra" aria-describedby="basic-addon-sifra">
+                </div>
+                <div class="input-group input-group-dynamic mb-4">
+                    <span>Naziv opreme: </span>
+                    <input name="naziv" id="naziv" class="form-control" disabled="true" th:value="${oprema.naziv}">
+                </div>
+                <div class="input-group input-group-dynamic mb-4">
+                    <label for="tvrtkaId">Serviser:</label>
+                    <select class="form-select" id="tvrtkaId" name="tvrtkaId">
+                        <option th:each="tvrtka : ${serviseri}" th:value="${tvrtka.id}"
+                                th:text="${tvrtka.naziv}"></option>
+                    </select>
+                </div>
+                <div class="input-group input-group-dynamic mb-4">
+                    <span>Datum otpreme</span>
+                    <input type="text" class="form-control" name="date" id="date" placeholder="Odaberite datum" required>
+                </div>
+                <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+                <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
                 <script>
-                    document.addEventListener('DOMContentLoaded', function () {
-                        var searchInput = document.getElementById('searchInput');
-                        searchInput.addEventListener('input', function () {
-                            var searchText = searchInput.value.toLowerCase();
-                            var tableRows = document.querySelectorAll('.table tbody tr');
-                            tableRows.forEach(function (row) {
-                                var rowData = row.textContent.toLowerCase();
-                                row.style.display = rowData.includes(searchText) ? 'table-row' : 'none';
-                            });
-                        });
-                    });
+                    document.addEventListener('DOMContentLoaded', function() {
+           flatpickr("#date", {
+               dateFormat: "Y-m-d",
+
+           });
+           flatpickr("#dateP", {
+               dateFormat: "Y-m-d",
+
+           });
+       });
                 </script>
-            </div>
+                <div class="text-left">
+                    <form action="/z-evidencija_servisa" method="get">
+                        <button name="button" class="btn btn-primary" type="submit"
+                                style="margin-bottom: 5px; margin-top: 20px; margin-right: 10px;">Spremi
+                        </button>
+                    </form>
+                    <a href="/pocetna" class="btn btn-primary" type="submit" style="margin-bottom: 5px; margin-top: 20px;
+                margin-right: 10px;">Odustani</a>
+                </div>
+                <br>
+            </form>
         </div>
     </div>
-    <div class="card">
-        <div class="table-responsive">
-            <table class="table align-items-center text-center mb-0 table-striped table-hover">
-                <thead>
-                <tr>
-                    <th>Šifra opreme</th>
-                    <th>Naziv opreme</th>
-                    <th>Opis</th>
-                    <th>Prijavio</th>
-                    <th>Serviser</th>
-                    <th>Datum otpreme</th>
-                    <th>Datum povrata</th>
-                    <th>Datum planiranog servisa</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr th:each="odrzavanje : ${odrzavanjeList}">
-                    <td th:text="${odrzavanje.oprema?.sifra}"></td>
-                    <td th:text="${odrzavanje.oprema?.naziv}"></td>
-                    <td th:text="${odrzavanje.opisOdrzavanja}"></td>
-                    <td th:text="${odrzavanje.radnik}"></td>
-                    <td th:attr="text=${odrzavanje.serviser?.naziv}, href=@{'/pregled_pojedinog_servisera?serviserId=' + ${odrzavanje.serviser?.id}}">
-                        <a th:text="${odrzavanje.serviser?.naziv}"
-                           th:href="@{'/pregled_pojedinog_servisera?serviserId=' + ${odrzavanje.serviser?.id}}"></a>
-                    </td>
-                    <td th:text="${#dates.format(#strings.replace(odrzavanje.datumOtpreme, '-', '/'), 'dd.MM.yyyy')}"></td>
-                    <td th:text="${#dates.format(#strings.replace(odrzavanje.datumPovrata, '-', '/'), 'dd.MM.yyyy')}"></td>
-                    <td th:text="${#dates.format(#strings.replace(odrzavanje.datumPlaniranogServisiranja, '-', '/'), 'dd.MM.yyyy')}"></td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
+    <style>
+        .input-group-dynamic {
+       display: flex;
+       flex-direction: column;
+   }
+
+   .input-group-dynamic .form-control {
+       width: 40%;
+   }
+
+         .input-group-dynamic .form-select {
+       width: 30%;
+   }
+
+        .input-group-dynamic .form-tarea {
+       width: 50%;
+   }
+    </style>
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var closeButton = document.querySelector('button[name="button"][type="submit"][value="Zatvori"]');
+            if (closeButton) {
+                closeButton.addEventListener("click", function (event) {
+                    event.preventDefault(); // spriječava slanje obrasca
+                    window.location.href = "/pocetna"; // preusmjerava na /pocetna
+                });
+            }
+        });
+    </script>
     </div>
 </main>
 <div class="fixed-plugin">
@@ -124,7 +149,8 @@
     <div class="card shadow-lg">
         <div class="card-header pb-0 pt-3">
             <div class="float-start">
-                <h5 class="mt-3 mb-0">UI konfiguracija</h5>
+                <h5 class="mt-3 mb-0">Material UI Configurator</h5>
+                <p>See our dashboard options.</p>
             </div>
             <div class="float-end mt-4">
                 <button class="btn btn-link text-dark p-0 fixed-plugin-close-button">

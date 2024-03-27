@@ -1,7 +1,7 @@
 package com.HITA.bazaOpreme.model;
 
-import com.HITA.bazaOpreme.model.archive.Radnik;
-import com.HITA.bazaOpreme.model.archive.TipServisa;
+
+import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -34,8 +34,9 @@ public class Odrzavanje {
     */
 
 
-    @NotBlank(message = "Ime i prezime radnika treba biti difiniran")
+
     @Size(max = 100, message = "Ime i prezime trebaju biti 512 znakova")
+    @Nullable
     private String radnik;
 
 
@@ -72,7 +73,7 @@ public class Odrzavanje {
 
 
     public Odrzavanje(String radnik, String opisOdrzavanja,
-                       LocalDate datumOtpreme, LocalDate datumPovrata, Radiliste radiliste, Oprema oprema) {
+                       LocalDate datumOtpreme, Radiliste radiliste, Oprema oprema) {
         this.radnik = radnik;
         this.opisOdrzavanja = opisOdrzavanja;
         this.datumOtpreme = datumOtpreme;

@@ -54,6 +54,9 @@
     <nav th:replace="~{fragments/navbar::navbar}" ></nav>
     <!-- End Navbar -->
     <h2 class="h2" style="text-align:left; margin-left: 50px;">Popis proizvođača</h2>
+    <form class="inline-form" th:action="@{/unosProizvodjaca}">
+        <button type="submit" class="btn btn-primary">Dodaj proizvođača</button>
+    </form>
     <div class="container mt-2 p-4 d-flex justify-content-center align-items-center">
 
         <div class="col-md-8">
