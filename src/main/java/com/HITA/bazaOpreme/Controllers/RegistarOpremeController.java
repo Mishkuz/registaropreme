@@ -101,6 +101,7 @@ public class RegistarOpremeController {
         oprema.setRadiliste(user.getRadiliste());
         oprema.setNaServisu(false);
         oprema.setUps(ups);
+        oprema.setOtpisano(false);
         opremaRepository.save(oprema);
         model.addAttribute("user", user);
         return "redirect:/pocetna";
@@ -174,7 +175,7 @@ public class RegistarOpremeController {
         Korisnik user = korisnikRepository.findByEmail(customKorisnikDetails.getUsername());
         session.setAttribute("currUser", user);
 
-        List<Oprema> opremaList1 = opremaRepository.findByRadilisteAndOtpisanoIsNull(user.getRadiliste());
+        List<Oprema> opremaList1 = opremaRepository.findByRadilisteAndIspravnoAndNaServisuAndNaUmjeravanjuAndOtpisano(user.getRadiliste(),true,false, false,false);
         List<Oprema> opremaList = new ArrayList<>(opremaList1);
         opremaList.sort(Comparator.comparing(Oprema::getDatumPlaniranogServisiranja));
 

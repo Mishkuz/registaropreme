@@ -53,7 +53,7 @@ public class UnosController {
         model.addAttribute("user", user);
         return "redirect:/pocetna";
     }
-    @GetMapping("/spremiNovogProizvodaca")
+    @GetMapping("/spremiNovogProizvodjaca")
     public String spremiP(@RequestParam(name = "sifra") String sifra, @RequestParam(name = "naziv") String naziv,
                           @RequestParam(name = "adresa") String adresa, @RequestParam(name = "telefon") String telefon,
                           @RequestParam(name = "email") String email, @RequestParam(name = "kOsoba") String kOsoba, HttpSession session, @AuthenticationPrincipal UserDetails userDetails, Model model) {
