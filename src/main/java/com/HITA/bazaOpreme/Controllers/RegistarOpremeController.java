@@ -17,6 +17,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.time.LocalDate;
 import java.util.*;
@@ -341,5 +342,187 @@ public class RegistarOpremeController {
         return "evidencija_opreme_u_kvaru";
     }
 
+
+    @GetMapping("/uredi_servisera")
+    public String prikaziFormuZaUredjivanjeServisera(@RequestParam("serviserId") Long serviserId, Model model, HttpSession session) {
+        Korisnik user = (Korisnik) session.getAttribute("currUser");
+
+        Optional<Serviser> serviserOptional = serviserRepository.findById(serviserId);
+        Serviser serviser = serviserOptional.orElseThrow(() -> new IllegalArgumentException("Ne postoji serviser s ID-om: " + serviserId));
+
+        model.addAttribute("serviser", serviser);
+        model.addAttribute("user", user);
+        return "uredi_servisera";
+    }
+
+    @PostMapping("/spremiUredjenePodatkeServisera")
+    public String spremiUredjenePodatkeServisera(@RequestParam("id") Long id, @RequestParam("sifra") String sifra,
+                                                 @RequestParam("naziv") String naziv, @RequestParam("adresa") String adresa,
+                                                 @RequestParam("telefon") String telefon, @RequestParam("email") String email,
+                                                 @RequestParam("kontaktOsoba") String kontaktOsoba, HttpSession session,
+                                                 RedirectAttributes redirectAttributes, Model model) {
+        Korisnik user = (Korisnik) session.getAttribute("currUser");
+
+        Optional<Serviser> serviserOptional = serviserRepository.findById(id);
+        Serviser serviser = serviserOptional.orElseThrow(() -> new IllegalArgumentException("Ne postoji serviser s ID-om: " + id));
+
+
+        serviser.setSifra(sifra);
+        serviser.setNaziv(naziv);
+        serviser.setAdresa(adresa);
+        serviser.setTelefon(telefon);
+        serviser.setEmail(email);
+        serviser.setKontaktOsoba(kontaktOsoba);
+
+
+        serviserRepository.save(serviser);
+
+
+        redirectAttributes.addFlashAttribute("message", "Podaci servisera su uspješno ažurirani.");
+        model.addAttribute("user", user);
+        return "redirect:/popis_servisera";
+    }
+
+    @GetMapping("/uredi_vlasnika")
+    public String prikaziFormuZaUredjivanjeVlasnika(@RequestParam("vlasnikId") Long vlasnikId, Model model, HttpSession session) {
+        Korisnik user = (Korisnik) session.getAttribute("currUser");
+
+        Optional<Vlasnik> vlasnikOptional = vlasnikRepository.findById(vlasnikId);
+        Vlasnik vlasnik = vlasnikOptional.orElseThrow(() -> new IllegalArgumentException("Ne postoji vlasnik s ID-om: " + vlasnikId));
+
+        model.addAttribute("vlasnik", vlasnik);
+        model.addAttribute("user", user);
+        return "uredi_vlasnika";
+    }
+
+    @PostMapping("/spremiUredjenePodatkeVlasnika")
+    public String spremiUredjenePodatkeVlasnika(@RequestParam("id") Long id, @RequestParam("sifra") String sifra,
+                                                 @RequestParam("naziv") String naziv, @RequestParam("adresa") String adresa,
+                                                 @RequestParam("telefon") String telefon, @RequestParam("email") String email,
+                                                 @RequestParam("kontaktOsoba") String kontaktOsoba, HttpSession session,
+                                                 RedirectAttributes redirectAttributes, Model model) {
+        Korisnik user = (Korisnik) session.getAttribute("currUser");
+
+        Optional<Vlasnik> vlasnikOptional = vlasnikRepository.findById(id);
+        Vlasnik vlasnik = vlasnikOptional.orElseThrow(() -> new IllegalArgumentException("Ne postoji vlasnik s ID-om: " + id));
+
+
+        vlasnik.setSifra(sifra);
+        vlasnik.setNaziv(naziv);
+        vlasnik.setAdresa(adresa);
+        vlasnik.setTelefon(telefon);
+        vlasnik.setEmail(email);
+        vlasnik.setKontaktOsoba(kontaktOsoba);
+
+
+        vlasnikRepository.save(vlasnik);
+
+        // Postavljanje poruke za korisnika
+        redirectAttributes.addFlashAttribute("message", "Podaci vlasnika su uspješno ažurirani.");
+        model.addAttribute("user", user);
+        return "redirect:/popis_vlasnika";
+    }
+    @GetMapping("/uredi_proizvodjaca")
+    public String prikaziFormuZaUredjivanjeProizvodjaca(@RequestParam("proizvodjacId") Long proizvodjacId, Model model, HttpSession session) {
+        Korisnik user = (Korisnik) session.getAttribute("currUser");
+
+        Optional<Proizvodjac> proizvodjacOptional = proizvodjacRepository.findById(proizvodjacId);
+        Proizvodjac proizvodjac = proizvodjacOptional.orElseThrow(() -> new IllegalArgumentException("Ne postoji proizvodjac s ID-om: " + proizvodjacId));
+
+        model.addAttribute("proizvodjac", proizvodjac);
+        model.addAttribute("user", user);
+        return "uredi_proizvodjaca";
+    }
+
+    @PostMapping("/spremiUredjenogProizvodjaca")
+    public String spremiUredjenogProizvodjaca(@RequestParam("id") Long id, @RequestParam("sifra") String sifra,
+                                                @RequestParam("naziv") String naziv, @RequestParam("adresa") String adresa,
+                                                @RequestParam("telefon") String telefon, @RequestParam("email") String email,
+                                                @RequestParam("kontaktOsoba") String kontaktOsoba, HttpSession session,
+                                                RedirectAttributes redirectAttributes, Model model) {
+        Korisnik user = (Korisnik) session.getAttribute("currUser");
+
+        Optional<Proizvodjac> proizvodjacOptional = proizvodjacRepository.findById(id);
+        Proizvodjac proizvodjac = proizvodjacOptional.orElseThrow(() -> new IllegalArgumentException("Ne postoji proizvodjac s ID-om: " + id));
+
+
+        proizvodjac.setSifra(sifra);
+        proizvodjac.setNaziv(naziv);
+        proizvodjac.setAdresa(adresa);
+        proizvodjac.setTelefon(telefon);
+        proizvodjac.setEmail(email);
+        proizvodjac.setKontaktOsoba(kontaktOsoba);
+
+
+        proizvodjacRepository.save(proizvodjac);
+
+
+        redirectAttributes.addFlashAttribute("message", "Podaci proizvodjac su uspješno ažurirani.");
+        model.addAttribute("user", user);
+        return "redirect:/popis_proizvodjaca";
+    }
+    @GetMapping("/uredi_opremu")
+    public String urediOpremu(@RequestParam("opremaId") Long opremaId, Model model, HttpSession session) {
+        Korisnik user = (Korisnik) session.getAttribute("currUser");
+
+        Oprema oprema = opremaRepository.findById(opremaId).orElse(null);
+        if (oprema == null || !oprema.getRadiliste().equals(user.getRadiliste())) {
+            return "redirect:/pocetna";
+        }
+
+        List<Kategorija> kategorije = kategorijaRepository.findByRadiliste(user.getRadiliste());
+        List<Vrsta> vrste = vrstaRepository.findByRadiliste(user.getRadiliste());
+        List<Proizvodjac> proizvodjaci = proizvodjacRepository.findByRadiliste(user.getRadiliste());
+        List<Vlasnik> vlasnici = vlasnikRepository.findByRadiliste(user.getRadiliste());
+
+        model.addAttribute("oprema", oprema);
+        model.addAttribute("kategorije", kategorije);
+        model.addAttribute("vrste", vrste);
+        model.addAttribute("proizvodjaci", proizvodjaci);
+        model.addAttribute("vlasnici", vlasnici);
+        model.addAttribute("user", user);
+
+        return "uredi_opremu.html";
+    }
+    @PostMapping("/spremi_uredjenu_opremu")
+    public String spremiUredjenuOpremu(@RequestParam("id") Long id,
+                                       @RequestParam("sifra") String sifra,
+                                       @RequestParam("naziv") String naziv,
+                                       @RequestParam("serijskiBroj") String serijskiBroj,
+                                       @RequestParam("inventarskiBroj") String inventarskiBroj,
+                                       @RequestParam("kategorijaId") Long kategorijaId,
+                                       @RequestParam("vrstaId") Long vrstaId,
+                                       @RequestParam("proizvodjacId") Long proizvodjacId,
+                                       @RequestParam("godinaProizvodnje") LocalDate godinaProizvodnje,
+                                       @RequestParam("datumNabave") LocalDate datumNabave,
+                                       @RequestParam("certifikat") boolean certifikat,
+                                       @RequestParam("vlasnikId") Long vlasnikId,
+                                       @RequestParam("intervalServisiranjaUMjesecima") Integer intervalServisiranjaUMjesecima,
+                                       @RequestParam("datumPlaniranogServisiranja") LocalDate datumPlaniranogServisiranja,
+                                       Model model, HttpSession session) {
+        Korisnik user = (Korisnik) session.getAttribute("currUser");
+
+        Oprema oprema = opremaRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Ne postoji oprema s ID-om: " + id));
+
+        oprema.setSifra(sifra);
+        oprema.setNaziv(naziv);
+        oprema.setSerijskiBroj(serijskiBroj);
+        oprema.setInventarskiBroj(inventarskiBroj);
+        oprema.setKategorija(kategorijaRepository.findById(kategorijaId).orElse(null));
+        oprema.setVrsta(vrstaRepository.findById(vrstaId).orElse(null));
+        oprema.setProizvodjac(proizvodjacRepository.findById(proizvodjacId).orElse(null));
+        oprema.setGodinaProizvodnje(godinaProizvodnje);
+        oprema.setDatumNabave(datumNabave);
+        oprema.setCertifikat(certifikat);
+        oprema.setVlasnik(vlasnikRepository.findById(vlasnikId).orElse(null));
+        oprema.setIntervalServisiranjaUMjesecima(intervalServisiranjaUMjesecima);
+        oprema.setDatumPlaniranogServisiranja(datumPlaniranogServisiranja);
+        // Ostatak atributa ne mijenjamo
+
+        opremaRepository.save(oprema);
+
+        model.addAttribute("user", user);
+        return "redirect:/pocetna";
+    }
 }
 

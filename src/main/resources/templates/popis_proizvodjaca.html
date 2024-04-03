@@ -55,8 +55,13 @@
     <!-- End Navbar -->
     <h2 class="h2" style="text-align:left; margin-left: 50px;">Popis proizvođača</h2>
     <form class="inline-form" th:action="@{/unosProizvodjaca}">
-        <button type="submit" class="btn btn-primary">Dodaj proizvođača</button>
+        <button type="submit" class="btn btn-primary custom-margin">Dodaj proizvođača</button>
     </form>
+    <style>
+        .custom-margin {
+            margin-left: 2075px;
+        }
+    </style>
     <div class="container mt-2 p-4 d-flex justify-content-center align-items-center">
 
         <div class="col-md-8">
@@ -97,6 +102,7 @@
                     <th>Telefon</th>
                     <th>E-mail</th>
                     <th>Kontakt Osoba</th>
+                    <th>Uredi</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -107,6 +113,11 @@
                     <td th:text="${proizvodjac.telefon}"></td>
                     <td th:text="${proizvodjac.email}"></td>
                     <td th:text="${proizvodjac.kontaktOsoba}"></td>
+                    <td >
+                        <a th:href="@{/uredi_proizvodjaca(proizvodjacId=${proizvodjac.id})}">
+                            <img src="../static/prijavikvar.png" class="img-fluid img-button" alt="prijavikvar">
+                        </a>
+                    </td>
                 </tr>
                 </tbody>
             </table>

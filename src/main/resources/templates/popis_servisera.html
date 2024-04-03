@@ -54,10 +54,17 @@
     <nav th:replace="~{fragments/navbar::navbar}" ></nav>
     <!-- End Navbar -->
     <h2 class="h2" style="text-align:left; margin-left: 50px;">Popis servisera</h2>
-    <form class="inline-form" th:action="@{/unosNovogServisera}">
-        <button type="submit" class="btn btn-primary">Dodaj servisera</button>
-    </form>
-    <div class="container mt-2 p-4 d-flex justify-content-center align-items-center">
+    <div class="text-right">
+        <form class="inline-form" th:action="@{/unosNovogServisera}">
+            <button type="submit" class="btn btn-primary custom-margin">Dodaj servisera</button>
+        </form>
+    </div>
+    <style>
+        .custom-margin {
+            margin-left: 2100px;
+        }
+    </style>
+        <div class="container mt-2 p-4 d-flex justify-content-center align-items-center">
 
         <div class="col-md-8">
             <div class="input-group input-group-dynamic mb-4" style="max-width: 800px;">
@@ -97,6 +104,7 @@
                     <th>Telefon</th>
                     <th>E-mail</th>
                     <th>Kontakt Osoba</th>
+                    <th>Uredi</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -107,6 +115,11 @@
                     <td th:text="${serviser.telefon}"></td>
                     <td th:text="${serviser.email}"></td>
                     <td th:text="${serviser.kontaktOsoba}"></td>
+                    <td >
+                        <a th:href="@{/uredi_servisera(serviserId=${serviser.id})}">
+                            <img src="../static/prijavikvar.png" class="img-fluid img-button" alt="prijavikvar">
+                        </a>
+                    </td>
                 </tr>
                 </tbody>
             </table>

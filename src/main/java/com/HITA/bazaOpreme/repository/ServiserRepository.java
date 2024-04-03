@@ -10,4 +10,5 @@ public interface ServiserRepository extends JpaRepository<Serviser, Long> {
 
 
     List<Serviser> findByRadiliste(Radiliste radiliste);
+
 }

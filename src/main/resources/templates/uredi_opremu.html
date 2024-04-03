@@ -1,0 +1,273 @@
+<!--
+=========================================================
+* Material Dashboard 2 - v3.1.0
+=========================================================
+
+* Product Page: https://www.creative-tim.com/product/material-dashboard
+* Copyright 2023 Creative Tim (https://www.creative-tim.com)
+* Licensed under MIT (https://www.creative-tim.com/license)
+* Coded by Creative Tim
+
+=========================================================
+
+* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+-->
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="apple-touch-icon" sizes="76x76" href="../static/assets/img/apple-icon.png">
+  <link rel="icon" type="image/png" href="../static/assets/img/favicon.png">
+  <title>
+    Registar Opreme
+  </title>
+  <!--     Fonts and icons     -->
+  <link rel="stylesheet" type="text/css"
+        href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700"/>
+  <!-- Nucleo Icons -->
+  <link href="../static/assets/css/nucleo-icons.css" rel="stylesheet"/>
+  <link href="../static/assets/css/nucleo-svg.css" rel="stylesheet"/>
+  <!-- Font Awesome Icons -->
+  <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+  <!-- Material Icons -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+  <!-- CSS Files -->
+  <link id="pagestyle" href="../static/assets/css/material-dashboard.css?v=3.1.0" rel="stylesheet"/>
+  <!-- Nepcha Analytics (nepcha.com) -->
+  <!-- Nepcha is a easy-to-use web analytics. No cookies and fully compliant with GDPR, CCPA and PECR. -->
+  <script defer data-site="YOUR_DOMAIN_HERE" src="https://api.nepcha.com/js/nepcha-analytics.js"></script>
+  <style>
+    .img-button {
+    display: inline-block;
+    height: 40px;
+    overflow: hidden;
+    padding: 3px;
+}
+  </style>
+</head>
+<body class="g-sidenav-show  bg-gray-200">
+<aside th:replace="~{fragments/menu::menu}" ></aside>
+<main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
+  <!-- Navbar -->
+  <nav th:replace="~{fragments/navbar::navbar}" ></nav>
+  <!-- End Navbar -->
+  <div class="container main-container">
+    <div class="row justify-content-center border rounded-2 p-2 shadow box-area position-relative">
+      <form id="myForm" action="/spremi_uredjenu_opremu" method="post">
+        <br>
+        <div>
+          <h2>Uređivanje opreme</h2>
+        </div>
+        <br><br>
+        <input type="hidden" name="opremaId" th:value="${oprema.id}" />
+        <div class="input-group input-group-dynamic mb-4">
+          <span id="basic-addon-sifra">Šifra: </span>
+          <input type="text" name="sifra" id="unos-sifra" aria-label="Šifra" class="form-control" aria-describedby="basic-addon-sifra" maxlength="20" size="30" required th:value="${oprema.sifra}">
+        </div>
+        <div class="input-group input-group-dynamic mb-4">
+          <span id="basic-addon-naziv">Naziv: </span>
+          <input type="text" name="naziv" id="naziv" rows="3" cols="54" maxlength="100" class="form-control" required th:value="${oprema.naziv}">
+        </div>
+        <div class="input-group input-group-dynamic mb-4">
+          <span id="basic-addon-serijskiBroj">Serijski broj: </span>
+          <input type="text" name="serijskiBroj" aria-label="serijskiBroj" id="unos-serijski" class="form-control" aria-describedby="basic-addon-serijskiBroj" maxlength="20" size="30" th:value="${oprema.serijskiBroj}">
+        </div>
+        <div class="input-group input-group-dynamic mb-4">
+          <span id="basic-addon-inventarskiBroj">Inventarski broj: </span>
+          <input type="text" name="inventarskiBroj" id="inventarskiBroj" aria-label="inverntarskiBroj" class="form-control" aria-describedby="basic-addon1" maxlength="20" size="30" th:value="${oprema.inventarskiBroj}">
+        </div>
+        <div class="input-group input-group-dynamic mb-4">
+          <label for="kategorijaId">Kategorija:</label>
+          <select class="form-select" id="kategorijaId" name="kategorijaId">
+            <option th:each="kategorija : ${kategorije}" th:value="${kategorija.idKategorija}" th:text="${kategorija.kategorija}"></option>
+          </select>
+        </div>
+        <div class="input-group input-group-dynamic mb-4">
+          <label for="vrstaId">Vrsta:</label>
+          <select class="form-select" id="vrstaId" name="vrstaId">
+            <option th:each="vrsta : ${vrste}" th:value="${vrsta.idVrsta}" th:text="${vrsta.vrsta}"></option>
+          </select>
+        </div>
+        <div class="input-group input-group-dynamic mb-4">
+          <label for="proizvodjacId">Proizvođač:</label>
+          <select class="form-select" id="proizvodjacId" name="proizvodjacId">
+            <option th:each="proizvodjac : ${proizvodjaci}" th:value="${proizvodjac.id}" th:text="${proizvodjac.naziv}"></option>
+          </select>
+        </div>
+        <div class="input-group input-group-dynamic mb-4">
+          <span id="basic-addon-godinaProizvodnje">Datum proizvodnje: </span>
+          <input type="date" name="godinaProizvodnje" id="godinaProizvodnje" aria-label="godinaProizvodnje" class="form-control" aria-describedby="basic-addon-godinaProizvodnje" th:value="${oprema.godinaProizvodnje}">
+        </div>
+        <div class="input-group input-group-dynamic mb-4">
+          <span id="basic-addon-datumNabave">Datum nabave: </span>
+          <input type="date" name="datumNabave" id="datumNabave" aria-label="datumNabave" class="form-control" aria-describedby="basic-addon-datumNabave" th:value="${oprema.datumNabave}">
+        </div>
+        <div class="input-group input-group-dynamic mb-4">
+          <span id="basic-addon-certifikat" style="margin-right: 15px;">Certifikat: </span>
+          <input type="checkbox" id="certifikatid" name="certifikat" style="width:25px; height:25px;" th:checked="${oprema.certifikat}">
+          <input type="hidden" name="certifikat" value="false">
+        </div>
+        <div class="input-group input-group-dynamic mb-4">
+          <span id="basic-addon-ispravno" style="margin-right: 15px;">Ispravno: </span>
+          <input type="checkbox" id="ispravnoCheckbox" name="ispravno" style="width:25px; height:25px;" th:checked="${oprema.ispravno}">
+          <input type="hidden" id="ispravnoHidden" name="ispravno" value="false">
+        </div>
+        <div class="input-group input-group-dynamic mb-4">
+          <label for="vlasnikId">Vlasnik:</label>
+          <select class="form-select" id="vlasnikId" name="vlasnikId">
+            <option th:each="vlasnik : ${vlasnici}" th:value="${vlasnik.id}" th:text="${vlasnik.naziv}"></option>
+          </select>
+        </div>
+        <div class="input-group input-group-dynamic mb-4">
+          <span id="basic-addon-intervalServisiranjaUMjesecima">Interval servisa/umjeravanja (u mj.): </span>
+          <input type="number" name="intervalServisiranjaUMjesecima" id="intervalServisiranjaUMjesecima" class="form-control" aria-label="intervalServisiranjaUMjesecima" aria-describedby="basic-addon-intervalServisiranjaUMjesecima" th:value="${oprema.intervalServisiranjaUMjesecima}">
+        </div>
+        <div class="input-group input-group-dynamic mb-4">
+          <span id="basic-addon-datumPlaniranogServisiranja">Sljedeći servis/umjeravanje: </span>
+          <input type="date" name="datumPlaniranogServisiranja" id="datumPlaniranogServisiranja" class="form-control" aria-label="datumPlaniranogServisiranja" aria-describedby="basic-addon-datumPlaniranogServisiranja" th:value="${oprema.datumPlaniranogServisiranja}">
+        </div>
+        <div class="text-left">
+          <div class="text-left">
+            <button name="button" class="btn btn-primary" type="submit" style="margin-bottom: 5px; margin-top: 20px; margin-right: 10px;">Spremi</button>
+            <a href="/pocetna" class="btn btn-primary" type="submit" style="margin-bottom: 5px; margin-top: 20px; margin-right: 10px;">Odustani</a>
+          </div>
+        </div>
+        <br>
+      </form>
+    </div>
+    <style>
+      .input-group-dynamic {
+     display: flex;
+     flex-direction: column;
+ }
+
+ .input-group-dynamic .form-control {
+     width: 25%;
+ }
+
+       .input-group-dynamic .form-select {
+     width: 30%;
+ }
+
+      .input-group-dynamic .form-tarea {
+     width: 50%;
+ }
+    </style>
+  </div>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        var closeButton = document.querySelector('button[name="button"][type="submit"][value="Zatvori"]');
+        if (closeButton) {
+            closeButton.addEventListener("click", function (event) {
+                event.preventDefault(); // spriječava slanje obrasca
+                window.location.href = "/pocetna"; // preusmjerava na /pocetna
+            });
+        }
+    });
+  </script>
+  </div>
+</main>
+<div class="fixed-plugin">
+  <a class="fixed-plugin-button text-dark position-fixed px-3 py-2">
+    <i class="material-icons py-2">settings</i>
+  </a>
+  <div class="card shadow-lg">
+    <div class="card-header pb-0 pt-3">
+      <div class="float-start">
+        <h5 class="mt-3 mb-0">Material UI Configurator</h5>
+        <p>See our dashboard options.</p>
+      </div>
+      <div class="float-end mt-4">
+        <button class="btn btn-link text-dark p-0 fixed-plugin-close-button">
+          <i class="material-icons">clear</i>
+        </button>
+      </div>
+      <!-- End Toggle Button -->
+    </div>
+    <hr class="horizontal dark my-1">
+    <div class="card-body pt-sm-3 pt-0">
+      <!-- Sidebar Backgrounds -->
+      <div>
+        <h6 class="mb-0">Sidebar Colors</h6>
+      </div>
+      <a href="javascript:void(0)" class="switch-trigger background-color">
+        <div class="badge-colors my-2 text-start">
+                    <span class="badge filter bg-gradient-primary active" data-color="primary"
+                          onclick="sidebarColor(this)"></span>
+          <span class="badge filter bg-gradient-dark" data-color="dark" onclick="sidebarColor(this)"></span>
+          <span class="badge filter bg-gradient-info" data-color="info" onclick="sidebarColor(this)"></span>
+          <span class="badge filter bg-gradient-success" data-color="success"
+                onclick="sidebarColor(this)"></span>
+          <span class="badge filter bg-gradient-warning" data-color="warning"
+                onclick="sidebarColor(this)"></span>
+          <span class="badge filter bg-gradient-danger" data-color="danger"
+                onclick="sidebarColor(this)"></span>
+        </div>
+      </a>
+      <!-- Sidenav Type -->
+      <div class="mt-3">
+        <h6 class="mb-0">Sidenav Type</h6>
+        <p class="text-sm">Choose between 2 different sidenav types.</p>
+      </div>
+      <div class="d-flex">
+        <button class="btn bg-gradient-dark px-3 mb-2 active" data-class="bg-gradient-dark"
+                onclick="sidebarType(this)">Dark
+        </button>
+        <button class="btn bg-gradient-dark px-3 mb-2 ms-2" data-class="bg-transparent"
+                onclick="sidebarType(this)">Transparent
+        </button>
+        <button class="btn bg-gradient-dark px-3 mb-2 ms-2" data-class="bg-white" onclick="sidebarType(this)">
+          White
+        </button>
+      </div>
+      <p class="text-sm d-xl-none d-block mt-2">You can change the sidenav type just on desktop view.</p>
+      <!-- Navbar Fixed -->
+      <div class="mt-3 d-flex">
+        <h6 class="mb-0">Navbar Fixed</h6>
+        <div class="form-check form-switch ps-0 ms-auto my-auto">
+          <input class="form-check-input mt-1 ms-auto" type="checkbox" id="navbarFixed"
+                 onclick="navbarFixed(this)">
+        </div>
+      </div>
+      <hr class="horizontal dark my-3">
+      <div class="mt-2 d-flex">
+        <h6 class="mb-0">Light / Dark</h6>
+        <div class="form-check form-switch ps-0 ms-auto my-auto">
+          <input class="form-check-input mt-1 ms-auto" type="checkbox" id="dark-version"
+                 onclick="darkMode(this)">
+        </div>
+      </div>
+      <hr class="horizontal dark my-sm-4">
+      <a class="btn bg-gradient-info w-100" href="https://www.creative-tim.com/product/material-dashboard-pro">Free
+        Download</a>
+      <a class="btn btn-outline-dark w-100"
+         href="https://www.creative-tim.com/learning-lab/bootstrap/overview/material-dashboard">View
+        documentation</a>
+      <div class="w-100 text-center">
+      </div>
+    </div>
+  </div>
+</div>
+<!--   Core JS Files   -->
+<script src="../static/assets/js/core/popper.min.js"></script>
+<script src="../static/assets/js/core/bootstrap.min.js"></script>
+<script src="../static/assets/js/plugins/perfect-scrollbar.min.js"></script>
+<script src="../static/assets/js/plugins/smooth-scrollbar.min.js"></script>
+<script>
+  var win = navigator.platform.indexOf('Win') > -1;
+  if (win && document.querySelector('#sidenav-scrollbar')) {
+    var options = {
+      damping: '0.5'
+    }
+    Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
+  }
+</script>
+<!-- Github buttons -->
+<script async defer src="https://buttons.github.io/buttons.js"></script>
+<!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
+<script src="../static/assets/js/material-dashboard.min.js?v=3.1.0"></script>
+</body>
+
+</html>
