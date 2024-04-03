@@ -55,13 +55,13 @@
   <!-- End Navbar -->
   <div class="container main-container">
     <div class="row justify-content-center border rounded-2 p-2 shadow box-area position-relative">
-      <form id="myForm" action="/spremi_uredjenu_opremu" method="post">
+      <form id="myForm" action="/spremi_uredjenu_opremu">
         <br>
         <div>
           <h2>Uređivanje opreme</h2>
         </div>
         <br><br>
-        <input type="hidden" name="opremaId" th:value="${oprema.id}" />
+        <input type="hidden" name="id" th:value="${oprema.id}" />
         <div class="input-group input-group-dynamic mb-4">
           <span id="basic-addon-sifra">Šifra: </span>
           <input type="text" name="sifra" id="unos-sifra" aria-label="Šifra" class="form-control" aria-describedby="basic-addon-sifra" maxlength="20" size="30" required th:value="${oprema.sifra}">

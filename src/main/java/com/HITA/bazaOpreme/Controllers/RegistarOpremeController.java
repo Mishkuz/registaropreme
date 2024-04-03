@@ -466,25 +466,22 @@ public class RegistarOpremeController {
         Korisnik user = (Korisnik) session.getAttribute("currUser");
 
         Oprema oprema = opremaRepository.findById(opremaId).orElse(null);
-        if (oprema == null || !oprema.getRadiliste().equals(user.getRadiliste())) {
-            return "redirect:/pocetna";
-        }
 
-        List<Kategorija> kategorije = kategorijaRepository.findByRadiliste(user.getRadiliste());
-        List<Vrsta> vrste = vrstaRepository.findByRadiliste(user.getRadiliste());
-        List<Proizvodjac> proizvodjaci = proizvodjacRepository.findByRadiliste(user.getRadiliste());
-        List<Vlasnik> vlasnici = vlasnikRepository.findByRadiliste(user.getRadiliste());
+            List<Kategorija> kategorije = kategorijaRepository.findByRadiliste(user.getRadiliste());
+            List<Vrsta> vrste = vrstaRepository.findByRadiliste(user.getRadiliste());
+            List<Proizvodjac> proizvodjaci = proizvodjacRepository.findByRadiliste(user.getRadiliste());
+            List<Vlasnik> vlasnici = vlasnikRepository.findByRadiliste(user.getRadiliste());
 
-        model.addAttribute("oprema", oprema);
-        model.addAttribute("kategorije", kategorije);
-        model.addAttribute("vrste", vrste);
-        model.addAttribute("proizvodjaci", proizvodjaci);
-        model.addAttribute("vlasnici", vlasnici);
-        model.addAttribute("user", user);
+            model.addAttribute("oprema", oprema);
+            model.addAttribute("kategorije", kategorije);
+            model.addAttribute("vrste", vrste);
+            model.addAttribute("proizvodjaci", proizvodjaci);
+            model.addAttribute("vlasnici", vlasnici);
+            model.addAttribute("user", user);
 
-        return "uredi_opremu.html";
+            return "uredi_opremu.html";
     }
-    @PostMapping("/spremi_uredjenu_opremu")
+    @GetMapping("/spremi_uredjenu_opremu")
     public String spremiUredjenuOpremu(@RequestParam("id") Long id,
                                        @RequestParam("sifra") String sifra,
                                        @RequestParam("naziv") String naziv,
@@ -499,7 +496,7 @@ public class RegistarOpremeController {
                                        @RequestParam("vlasnikId") Long vlasnikId,
                                        @RequestParam("intervalServisiranjaUMjesecima") Integer intervalServisiranjaUMjesecima,
                                        @RequestParam("datumPlaniranogServisiranja") LocalDate datumPlaniranogServisiranja,
-                                       Model model, HttpSession session) {
+                                       HttpSession session) {
         Korisnik user = (Korisnik) session.getAttribute("currUser");
 
         Oprema oprema = opremaRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Ne postoji oprema s ID-om: " + id));
@@ -517,12 +514,11 @@ public class RegistarOpremeController {
         oprema.setVlasnik(vlasnikRepository.findById(vlasnikId).orElse(null));
         oprema.setIntervalServisiranjaUMjesecima(intervalServisiranjaUMjesecima);
         oprema.setDatumPlaniranogServisiranja(datumPlaniranogServisiranja);
-        // Ostatak atributa ne mijenjamo
+
 
         opremaRepository.save(oprema);
 
-        model.addAttribute("user", user);
-        return "redirect:/pocetna";
+        return "redirect:/z-pregled_pojedine_opreme?opremaId=" + oprema.getId();
     }
 }
 

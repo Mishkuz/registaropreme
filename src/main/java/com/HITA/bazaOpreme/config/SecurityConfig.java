@@ -53,6 +53,7 @@ public class SecurityConfig {
                                         "/static/**", "/static/css/**", "/static/js/**").permitAll()
                                 .requestMatchers("/templates", "/templates/**").hasAnyRole(Role.USER.name(), Role.ADMIN.name())
                                 .requestMatchers("/pocetna").hasAnyRole(Role.USER.name(), Role.ADMIN.name())
+                                .requestMatchers("/spremi_uredjenu_opremu").hasAnyRole(Role.USER.name(), Role.ADMIN.name())
                                 .anyRequest().authenticated()
                 )
                 .csrf(csrf -> csrf.ignoringRequestMatchers("/h2-console/**")
@@ -85,5 +86,6 @@ public class SecurityConfig {
         auth.userDetailsService(cuds);
 
     }
+
 
 }
