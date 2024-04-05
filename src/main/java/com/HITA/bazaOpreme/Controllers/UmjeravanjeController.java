@@ -61,10 +61,15 @@ public class UmjeravanjeController {
 
         LocalDate l = opremaRepository.findById(opremaId).get().getDatumPlaniranogServisiranja();
         int i = opremaRepository.findById(opremaId).get().getIntervalServisiranjaUMjesecima();
-        int iFinal = i * 30;
-        l = l.plusDays(iFinal);
+        if (i == 12) {
+            datumPovrata = datumPovrata.plusYears(1);
+            opremaRepository.updateDatumPlaniranogServisiranjaById(datumPovrata, opremaId);
+        } else {
+            long longI = (long) i;
+            datumPovrata = datumPovrata.plusMonths(longI);
+            opremaRepository.updateDatumPlaniranogServisiranjaById(datumPovrata, opremaId);
+        }
 
-        opremaRepository.updateDatumPlaniranogServisiranjaById(l, opremaId);
         odrzavanjeRepository.save(o);
         privOdRepository.delete(p);
         opremaRepository.updateNaUmjeravanjuById(false, opremaId);
@@ -76,7 +81,7 @@ public class UmjeravanjeController {
     public String sPNUs(Model model,
                         @RequestParam("tvrtkaId") Long tvrtkaId,
                         @RequestParam("opremaId") Long opremaId,
-                        @RequestParam("date") @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate datumOtpreme,
+                        @RequestParam(value = "date",required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate datumOtpreme,
                         HttpSession session) {
         Korisnik user = (Korisnik) session.getAttribute("currUser");
         Oprema o = opremaRepository.findById(opremaId).orElse(null);

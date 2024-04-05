@@ -84,7 +84,7 @@ public class ServisController {
     public String sPNs(Model model,
                        @RequestParam("tvrtkaId") Long tvrtkaId,
                        @RequestParam("opremaId") Long opremaId,
-                       @RequestParam("date") @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate datumOtpreme,
+                       @RequestParam(value = "date",required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate datumOtpreme,
                        HttpSession session) {
         Korisnik user = (Korisnik) session.getAttribute("currUser");
         Oprema o = opremaRepository.findById(opremaId).orElse(null);
@@ -131,10 +131,14 @@ public class ServisController {
         if (b = true) {
             int i = opremaRepository.findById(opremaId).get().getIntervalServisiranjaUMjesecima();
             Optional<Oprema> o = opremaRepository.findById(opremaId);
-            LocalDate l = o.get().getDatumPlaniranogServisiranja();
-            int iFinal = i * 30;
-            l = l.plusDays(iFinal);
-            opremaRepository.updateDatumPlaniranogServisiranjaById(l, opremaId);
+            if (i == 12) {
+                datumPovrata = datumPovrata.plusYears(1);
+                opremaRepository.updateDatumPlaniranogServisiranjaById(datumPovrata, opremaId);
+            } else {
+                long longI = (long) i;
+                datumPovrata = datumPovrata.plusMonths(longI);
+                opremaRepository.updateDatumPlaniranogServisiranjaById(datumPovrata, opremaId);
+            }
         }
         privOdRepository.delete(p);
         List<Oprema> opremaList1 = opremaRepository.findByRadilisteAndNaServisu(user.getRadiliste(), true);
