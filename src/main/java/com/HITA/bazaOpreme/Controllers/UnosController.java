@@ -30,12 +30,7 @@ public class UnosController {
     private final ProizvodjacRepository proizvodjacRepository;
 
 
-    @GetMapping("/unosProizvodjaca")
-    public String unosP(Model model, HttpSession session) {
-        Korisnik user = (Korisnik) session.getAttribute("currUser");
-        model.addAttribute("user", user);
-        return "z-unos_proizvodjaca";
-    }
+
     @GetMapping("/unosNovogServisera")
     public String unosNS(Model model, HttpSession session) {
         Korisnik user = (Korisnik) session.getAttribute("currUser");
@@ -51,7 +46,14 @@ public class UnosController {
         Serviser serviser = new Serviser(sifra, naziv, adresa, telefon, email, kOsoba,user.getRadiliste());
         serviserRepository.save(serviser);
         model.addAttribute("user", user);
-        return "redirect:/pocetna";
+        return "redirect:/popis_servisera";
+    }
+
+    @GetMapping("/unosProizvodjaca")
+    public String unosP(Model model, HttpSession session) {
+        Korisnik user = (Korisnik) session.getAttribute("currUser");
+        model.addAttribute("user", user);
+        return "z-unos_proizvodjaca";
     }
     @GetMapping("/spremiNovogProizvodjaca")
     public String spremiP(@RequestParam(name = "sifra") String sifra, @RequestParam(name = "naziv") String naziv,
@@ -61,7 +63,7 @@ public class UnosController {
         Proizvodjac proizvodjac = new Proizvodjac(sifra, naziv, adresa, telefon, email, kOsoba,user.getRadiliste());
         proizvodjacRepository.save(proizvodjac);
         model.addAttribute("user", user);
-        return "redirect:/pocetna";
+        return "redirect:/popis_proizvodjaca";
     }
 
     @GetMapping("/unosNovogVlasnika")
@@ -79,7 +81,7 @@ public class UnosController {
         Vlasnik vlasnik = new Vlasnik(sifra, naziv, adresa, telefon, email, kOsoba, user.getRadiliste());
         vlasnikRepository.save(vlasnik);
         model.addAttribute("user", user);
-        return "redirect:/pocetna";
+        return "redirect:/popis_vlasnika";
     }
 
     @GetMapping("/spremiNovuKategoriju")
@@ -99,7 +101,7 @@ public class UnosController {
 
         kategorijaRepository.save(novaKategorija);
         model.addAttribute("user", user);
-        return "redirect:/pocetna";
+        return "redirect:/popis_kategorija";
     }
 
     @GetMapping("/unosNoveKategorije")
@@ -134,7 +136,7 @@ public class UnosController {
         novaVrsta.setKategorija(kategorijaRepository.findById(kategorijaId).orElse(null));
         vrstaRepository.save(novaVrsta);
         model.addAttribute("user", user);
-        return "redirect:/pocetna";
+        return "redirect:/popis_vrsta";
     }
 
 }

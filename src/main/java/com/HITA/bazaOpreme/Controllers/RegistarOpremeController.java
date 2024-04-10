@@ -153,7 +153,7 @@ public class RegistarOpremeController {
         kvar.setOprema(opremaRepository.findById(opremaId).get());
         kvarRepository.save(kvar);
         model.addAttribute("user", user);
-        return "redirect:/z-pokaziKvarove";
+        return "redirect:/evidencija_opreme_u_kvaru";
     }
 
 
@@ -312,7 +312,7 @@ public class RegistarOpremeController {
             oprema.setOtpisano(true);
             oprema.setDatumOtpisa(LocalDate.now());
             opremaRepository.save(oprema);
-            return "redirect:/z-pregled_pojedine_opreme?opremaId=" + oprema.getId();
+            return "redirect:/pregled_otpisane_opreme";
         } else {
             return "redirect:/error";
         }
