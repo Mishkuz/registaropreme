@@ -154,7 +154,6 @@
                 var today = new Date();
                 today.setHours(0, 0, 0, 0);
                 var rows = document.querySelectorAll('.datum-planiranog-servisiranja');
-
                 rows.forEach(function(cell) {
                     var dateString = cell.getAttribute('data-datum');
                     console.log("Datum iz atributa:", dateString);
