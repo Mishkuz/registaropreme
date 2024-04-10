@@ -57,7 +57,7 @@ public class UmjeravanjeController {
         o.setDatumPovrata(datumPovrata);
         o.setOpisOdrzavanja(opisOdrzavanja);
         o.setDatumPlaniranogServisiranja(opremaRepository.findById(opremaId).get().getDatumPlaniranogServisiranja());
-
+        odrzavanjeRepository.save(o);
 
         LocalDate l = opremaRepository.findById(opremaId).get().getDatumPlaniranogServisiranja();
         int i = opremaRepository.findById(opremaId).get().getIntervalServisiranjaUMjesecima();
@@ -70,7 +70,7 @@ public class UmjeravanjeController {
             opremaRepository.updateDatumPlaniranogServisiranjaById(datumPovrata, opremaId);
         }
 
-        odrzavanjeRepository.save(o);
+
         privOdRepository.delete(p);
         opremaRepository.updateNaUmjeravanjuById(false, opremaId);
         model.addAttribute("user", user);

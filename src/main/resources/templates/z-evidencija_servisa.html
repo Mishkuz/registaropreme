@@ -92,7 +92,7 @@
                     <th>Šifra opreme</th>
                     <th>Naziv opreme</th>
                     <th>Opis</th>
-                    <th>Prijavio</th>
+                    <th>Servisirao</th>
                     <th>Serviser</th>
                     <th>Datum otpreme</th>
                     <th>Datum povrata</th>
@@ -102,7 +102,10 @@
                 <tbody>
                 <tr th:each="odrzavanje : ${odrzavanjeList}">
                     <td th:text="${odrzavanje.oprema?.sifra}"></td>
-                    <td th:text="${odrzavanje.oprema?.naziv}"></td>
+                    <td><a
+                            th:text="${odrzavanje.oprema.naziv}"
+                            th:href="@{'/z-pregled_pojedine_opreme?opremaId=' + ${odrzavanje.oprema.id}}"></a>
+                    </td>
                     <td th:text="${odrzavanje.opisOdrzavanja}"></td>
                     <td th:text="${odrzavanje.radnik}"></td>
                     <td th:attr="text=${odrzavanje.serviser?.naziv}, href=@{'/pregled_pojedinog_servisera?serviserId=' + ${odrzavanje.serviser?.id}}">

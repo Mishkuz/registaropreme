@@ -114,7 +114,9 @@
       <tbody>
       <tr th:each="oprema : ${opremaList}">
         <td th:text="${oprema.sifra}"></td>
-        <td th:text="${oprema.naziv}"></td>
+        <td><a
+                th:text="${oprema.naziv}"
+                th:href="@{'/z-pregled_pojedine_opreme?opremaId=' + ${oprema.id}}"></a></td>
         <td th:text="${oprema.kategorija?.kategorija}"></td>
         <td th:text="${oprema.vrsta?.vrsta}"></td>
         <td th:text="${oprema.proizvodjac?.naziv}"></td>

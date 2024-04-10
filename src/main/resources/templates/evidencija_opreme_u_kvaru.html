@@ -94,7 +94,9 @@
             <tbody>
             <tr th:each="oprema : ${opremaList}">
                 <td th:text="${oprema.sifra}"></td>
-                <td th:text="${oprema.naziv}"></td>
+                <td><a
+                        th:text="${oprema.naziv}"
+                        th:href="@{'/z-pregled_pojedine_opreme?opremaId=' + ${oprema.id}}"></a></td>
                 <td class="datum-planiranog-servisiranja"
                     th:attr="data-datum=${#temporals.format(oprema.datumPlaniranogServisiranja, 'yyyy-MM-dd')}"
                     th:text="${#temporals.format(oprema.datumPlaniranogServisiranja, 'dd.MM.yyyy')}"></td>
