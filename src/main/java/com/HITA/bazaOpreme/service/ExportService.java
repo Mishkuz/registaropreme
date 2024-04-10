@@ -28,10 +28,7 @@ import java.util.List;
 public class ExportService {
     private final OpremaRepository opremaRepository;
     private final KvarRepository kvarRepository;
-
     private final OdrzavanjeRepository odrzavanjeRepository;
-
-
     private final String servisS = "Servis";
     private final String servisIzvanredanS = "Izvanredan servis";
     private final String umjeravanjeS = "umjeravanje";
@@ -117,7 +114,6 @@ public class ExportService {
         ups.createCell(0).setCellValue("UPS: ");
         ups.createCell(1).setCellValue(oprema.getUps());
 
-
         HSSFRow dps = sheet.createRow(14);
         dps.createCell(0).setCellValue("Datum planiranog servisiranja: ");
         HSSFCell datumPlaniranogServisiranjaCell = dps.createCell(1);
@@ -146,7 +142,7 @@ public class ExportService {
         int dRI2 = 1;
 
         HSSFSheet sheet2 = workbook.createSheet("Umjeravanja");
-        HSSFRow hu = sheet.createRow(dRI2 + 1);
+        HSSFRow hu = sheet2.createRow(dRI2);
         hu.createCell(0).setCellValue("Umjeravanja ");
         dRI2++;
         dRI2++;
@@ -182,7 +178,7 @@ public class ExportService {
         HSSFSheet sheet3 = workbook.createSheet("Servisi");
         int dRI3 = 1;
         HSSFRow h = sheet3.createRow(dRI3 + 1);
-        h.createCell(0).setCellValue("Seervisi: ");
+        h.createCell(0).setCellValue("Servisi: ");
         dRI3++;
         dRI3++;
 
@@ -192,7 +188,7 @@ public class ExportService {
         hs.createCell(2).setCellValue("Datum planiranog servisa: ");
         hs.createCell(3).setCellValue("Tip servisa: ");
         hs.createCell(4).setCellValue("Serviser: ");
-        hs.createCell(5).setCellValue("Radnik: ");
+        hs.createCell(5).setCellValue("Servisirao:");
         hs.createCell(6).setCellValue("Opis: ");
         dRI3++;
 
