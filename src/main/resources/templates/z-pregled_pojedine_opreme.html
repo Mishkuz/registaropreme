@@ -106,7 +106,7 @@
                 <th>Šifra opreme</th>
                 <th>Naziv opreme</th>
                 <th>Opis</th>
-                <th>Prijavio</th>
+                <th>Umjerio</th>
                 <th>Serviser</th>
                 <th>Datum otpreme</th>
                 <th>Datum povrata/umjeravanja</th>
@@ -126,7 +126,7 @@
                     <a th:text="${odrzavanje.serviser?.naziv}"
                        th:href="@{'/pregled_pojedinog_servisera?serviserId=' + ${odrzavanje.serviser?.id}}"></a>
                 </td>
-                <td th:text="${#dates.format(#strings.replace(odrzavanje.datumOtpreme, '-', '/'), 'dd.MM.yyyy')}"></td>
+                <td th:text="${odrzavanje.datumOtpreme != null ? #dates.format(#strings.replace(odrzavanje.datumOtpreme, '-', '/'), 'dd.MM.yyyy') : null} ?: '-'"></td>
                 <td th:text="${#dates.format(#strings.replace(odrzavanje.datumPovrata, '-', '/'), 'dd.MM.yyyy')}"></td>
                 <td th:text="${#dates.format(#strings.replace(odrzavanje.datumPlaniranogServisiranja, '-', '/'), 'dd.MM.yyyy')}"></td>
             </tr>
@@ -142,7 +142,7 @@
                 <th>Šifra opreme</th>
                 <th>Naziv opreme</th>
                 <th>Opis</th>
-                <th>Prijavio</th>
+                <th>Servisirao</th>
                 <th>Serviser</th>
                 <th>Datum otpreme</th>
                 <th>Datum povrata/servisa</th>

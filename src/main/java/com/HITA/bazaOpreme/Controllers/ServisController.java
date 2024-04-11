@@ -103,7 +103,7 @@ public class ServisController {
     public String zspremiServis(
             @RequestParam("opremaId") Long opremaId,
             @RequestParam("opisOdrzavanja") String opisOdrzavanja,
-            @RequestParam("umjerioRadnik") String umjerioRadnik,
+            @RequestParam(name="umjerioRadnik", required = false) String umjerioRadnik,
             @RequestParam("dateP") @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate datumPovrata,
             Model model, HttpSession session) {
         Korisnik user = (Korisnik) session.getAttribute("currUser");
@@ -124,7 +124,7 @@ public class ServisController {
         }
 
         odrzavanjeRepository.save(odrzavanje);
-        model.addAttribute("user", user);
+
 
         opremaRepository.updateNaServisuById(false, opremaId);
         opremaRepository.updateIspravnoById(true, opremaId);

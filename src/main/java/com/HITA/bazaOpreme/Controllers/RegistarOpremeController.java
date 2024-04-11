@@ -194,9 +194,9 @@ public class RegistarOpremeController {
         List<Odrzavanje> odrzavanjeList = odrzavanjeRepository.findByOpremaAndTip(oprema, umjeravanjeS);
         List<Odrzavanje> odrzavanjeSList = odrzavanjeRepository.findByOpremaAndTipOrOpremaAndTip(oprema, servisS, oprema, servisIzvanredanS);
         List<Kvar> kvarList = kvarRepository.findByOprema(oprema);
-        odrzavanjeList.sort(Comparator.comparing(Odrzavanje::getDatumUmjeravanja));
-        odrzavanjeSList.sort(Comparator.comparing(Odrzavanje::getDatumOtpreme));
-        kvarList.sort(Comparator.comparing(Kvar::getDatumPrijave));
+        odrzavanjeList.sort(Comparator.comparing(Odrzavanje::getDatumPovrata).reversed());
+        odrzavanjeSList.sort(Comparator.comparing(Odrzavanje::getDatumPovrata).reversed());
+        kvarList.sort(Comparator.comparing(Kvar::getDatumPrijave).reversed());
 
         model.addAttribute("odrzavanjeSList", odrzavanjeSList);
         model.addAttribute("odrzavanjeList", odrzavanjeList);

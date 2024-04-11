@@ -101,13 +101,9 @@
       <tr>
         <th>Šifra</th>
         <th>Naziv</th>
-        <th>Kategorija</th>
-        <th>Vrsta</th>
         <th>Proizvođač</th>
         <th>Serijski br.</th>
-        <th>Inventarski br.</th>
         <th>Vlasnik</th>
-        <th>Ispravno</th>
         <th>Vrati sa umjeravanja</th>
       </tr>
       </thead>
@@ -117,13 +113,9 @@
         <td><a
                 th:text="${oprema.naziv}"
                 th:href="@{'/z-pregled_pojedine_opreme?opremaId=' + ${oprema.id}}"></a></td>
-        <td th:text="${oprema.kategorija?.kategorija}"></td>
-        <td th:text="${oprema.vrsta?.vrsta}"></td>
         <td th:text="${oprema.proizvodjac?.naziv}"></td>
         <td th:text="${oprema.serijskiBroj}"></td>
-        <td th:text="${oprema.InventarskiBroj}"></td>
         <td th:text="${oprema.vlasnik?.naziv}"></td>
-        <td th:text="${oprema.ispravno != null ? (oprema.ispravno ? 'Da' : 'Ne') : 'N/A'}"></td>
         <td class="text-center">
           <a th:href="@{'/z-unos_za_umjeravanje?opremaId=' + ${oprema.id}}">
             <img src="../static/servispocetna.png" class="img-fluid img-button" alt="servispocetna">

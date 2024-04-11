@@ -110,11 +110,6 @@
           <input type="hidden" name="certifikat" value="false">
         </div>
         <div class="input-group input-group-dynamic mb-4">
-          <span id="basic-addon-ispravno" style="margin-right: 15px;">Ispravno: </span>
-          <input type="checkbox" id="ispravnoCheckbox" name="ispravno" style="width:25px; height:25px;" th:checked="${oprema.ispravno}">
-          <input type="hidden" id="ispravnoHidden" name="ispravno" value="false">
-        </div>
-        <div class="input-group input-group-dynamic mb-4">
           <label for="vlasnikId">Vlasnik:</label>
           <select class="form-select" id="vlasnikId" name="vlasnikId">
             <option th:each="vlasnik : ${vlasnici}" th:value="${vlasnik.id}" th:text="${vlasnik.naziv}"></option>

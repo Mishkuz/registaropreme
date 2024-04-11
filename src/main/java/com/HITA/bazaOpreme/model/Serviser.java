@@ -23,17 +23,17 @@ public class Serviser {
     private String sifra;
 
     @NotBlank(message = "Naziv ne smije biti prazan")
-    @Size(max = 50, message = "Naziv ne smije biti duži od 50 znakova")
+    @Size(max = 100, message = "Naziv ne smije biti duži od 50 znakova")
     private String naziv;
 
-    @Size(max = 50, message = "Adresa ne smije biti duža od 50 znakova")
+    @Size(max = 100, message = "Adresa ne smije biti duža od 50 znakova")
     private String adresa;
 
     @Size(max = 20, message = "Telefon ne smije biti duži od 20 znakova")
     private String telefon;
 
     @Email(message = "Neispravan format e-maila")
-    @Size(max = 50, message = "Email ne smije biti duži od 50 znakova")
+    @Size(max = 100, message = "Email ne smije biti duži od 50 znakova")
     private String email;
 
     @Size(max = 50, message = "Kontakt osoba ne smije biti duža od 50 znakova")

@@ -106,8 +106,7 @@
                 <th>Inventarski br.</th>
                 <th>Serijski br.</th>
                 <th>Proizvođač</th>
-                <th>Vlasnik</th>
-                <th>Datum za servis/umjeravanje</th>
+                <th>Datum planiranog servisa/umjeravanja</th>
                 <th>Umjeravanje</th>
                 <th>Servis</th>
                 <th>Prijavi kvar</th>
@@ -126,10 +125,6 @@
                 <td th:attr="text=${oprema.proizvodjac?.naziv}, href=@{'/pregled_pojedinog_proizvodjaca?proizvodjacId=' + ${oprema.proizvodjac?.id}}">
                     <a th:text="${oprema.proizvodjac?.naziv}"
                        th:href="@{'/pregled_pojedinog_proizvodjaca?proizvodjacId=' + ${oprema.proizvodjac?.id}}"></a>
-                </td>
-                <td th:attr="text=${oprema.vlasnik?.naziv}, href=@{'/pregled_pojedinog_vlasnika?vlasnikId=' + ${oprema.vlasnik?.id}}">
-                    <a th:text="${oprema.vlasnik?.naziv}"
-                       th:href="@{'/pregled_pojedinog_vlasnika?vlasnikId=' + ${oprema.vlasnik?.id}}"></a>
                 </td>
                 <td class="datum-planiranog-servisiranja"
                     th:attr="data-datum=${#temporals.format(oprema.datumPlaniranogServisiranja, 'yyyy-MM-dd')}"
