@@ -64,6 +64,9 @@
                             <div class="card-body">
                                 <h4 class="font-weight-bolder">Prijavi se</h4>
                                 <form role="form" th:action="@{/login}" method="post">
+                                    <div th:if="${param.error}">
+                                        <p>Pogrešan email i/ili lozinka</p>
+                                    </div>
                                     <div class="input-group input-group-outline mb-3">
                                         <input type="email" class="form-control" placeholder="Email" id="email"  name="email" required>
                                     </div>
@@ -73,6 +76,39 @@
                                     <div class="form-check form-switch d-flex align-items-center mb-3">
                                         <input class="form-check-input" type="checkbox" id="rememberMe" checked>
                                         <label class="form-check-label mb-0 ms-3" for="rememberMe">Zapamti me</label>
+                                        <script>
+                                            document.addEventListener('DOMContentLoaded', function() {
+                                                var emailInput = document.getElementById('email');
+                                                var passwordInput = document.getElementById('password');
+                                                var rememberMeCheckbox = document.getElementById('rememberMe');
+
+                                                // Postavljanje početnih vrijednosti prema lokalnom spremištu
+                                                if (localStorage.getItem('rememberedEmail')) {
+                                                    emailInput.value = localStorage.getItem('rememberedEmail');
+                                                    rememberMeCheckbox.checked = true;
+                                                }
+
+                                                if (localStorage.getItem('rememberedPassword')) {
+                                                    passwordInput.value = localStorage.getItem('rememberedPassword');
+                                                }
+
+                                                // Sluša promjene na checkboxu i sprema ih u lokalno spremište
+                                                rememberMeCheckbox.addEventListener('change', function() {
+                                                    if (!this.checked) {
+                                                        localStorage.removeItem('rememberedEmail');
+                                                        localStorage.removeItem('rememberedPassword');
+                                                    }
+                                                });
+
+                                                // Spremanje korisničkih podataka prilikom slanja forme
+                                                document.querySelector('form').addEventListener('submit', function() {
+                                                    if (rememberMeCheckbox.checked) {
+                                                        localStorage.setItem('rememberedEmail', emailInput.value);
+                                                        localStorage.setItem('rememberedPassword', passwordInput.value);
+                                                    }
+                                                });
+                                            });
+                                        </script>
                                     </div>
                                     <div class="text-center">
                                         <button type="submit" class="btn btn-lg bg-gradient-primary btn-lg w-100 mt-4 mb-0">Prijavi se</button>
