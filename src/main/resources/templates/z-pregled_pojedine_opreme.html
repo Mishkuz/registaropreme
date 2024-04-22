@@ -73,10 +73,12 @@
             </form>
         </div>
         <br><br>
-        <p><strong>Šifra:</strong> <span th:text="${oprema.sifra}"></span></p>
+        <p><strong id="basic-addon-sifra" th:text="${user.radiliste.id == 1 ? 'Laboratorijski broj:' : 'Šifra:'}"></strong> <span th:text="${oprema.sifra}"></span></p>
         <p><strong>Naziv:</strong> <span th:text="${oprema.naziv}"></span></p>
         <p><strong>Serijski broj:</strong> <span th:text="${oprema.serijskiBroj}"></span></p>
-        <p><strong>Inventarski broj:</strong> <span th:text="${oprema.inventarskiBroj}"></span></p>
+        <p><strong>Inventarski broj:</strong>   <span th:if="${oprema.InventarskiBroj != null}" th:text="${oprema.InventarskiBroj}"></span>
+            <span th:if="${oprema.InventarskiBroj == null}">Nema</span></p>
+
         <p><strong>Kategorija:</strong> <span th:text="${oprema.kategorija?.kategorija}"></span></p>
         <p><strong>Vrsta:</strong> <span th:text="${oprema.vrsta?.vrsta}"></span></p>
         <p><strong>Proizvođač:</strong> <span th:text="${oprema.proizvodjac?.naziv}"></span></p>
@@ -103,8 +105,6 @@
         <table class="table align-items-center text-center mb-0 table-striped table-hover">
             <thead>
             <tr>
-                <th>Šifra opreme</th>
-                <th>Naziv opreme</th>
                 <th>Opis</th>
                 <th>Umjerio</th>
                 <th>Serviser</th>
@@ -115,11 +115,9 @@
             </thead>
             <tbody>
             <tr th:if="${odrzavanjeList == null or odrzavanjeList.size() == 0}">
-                <td colspan="8" class="text-center">Nema umjeravanja</td>
+                <td colspan="6" class="text-center">Nema umjeravanja</td>
             </tr>
             <tr th:each="odrzavanje : ${odrzavanjeList}" th:unless="${odrzavanjeList == null or odrzavanjeList.size() == 0}">
-                <td th:text="${odrzavanje.oprema?.sifra}"></td>
-                <td th:text="${odrzavanje.oprema?.naziv}"></td>
                 <td th:text="${odrzavanje.opisOdrzavanja}"></td>
                 <td th:text="${odrzavanje.radnik}"></td>
                 <td th:attr="text=${odrzavanje.serviser?.naziv}, href=@{'/pregled_pojedinog_servisera?serviserId=' + ${odrzavanje.serviser?.id}}">
@@ -139,8 +137,6 @@
         <table class="table align-items-center text-center mb-0 table-striped table-hover">
             <thead>
             <tr>
-                <th>Šifra opreme</th>
-                <th>Naziv opreme</th>
                 <th>Opis</th>
                 <th>Servisirao</th>
                 <th>Serviser</th>
@@ -151,11 +147,9 @@
             </thead>
             <tbody>
             <tr th:if="${odrzavanjeSList == null or odrzavanjeSList.size() == 0}">
-                <td colspan="8" class="text-center">Nema servisa</td>
+                <td colspan="6" class="text-center">Nema servisa</td>
             </tr>
             <tr th:each="odrzavanje : ${odrzavanjeSList}" th:unless="${odrzavanjeSList == null or odrzavanjeSList.size() == 0}">
-                <td th:text="${odrzavanje.oprema?.sifra}"></td>
-                <td th:text="${odrzavanje.oprema?.naziv}"></td>
                 <td th:text="${odrzavanje.opisOdrzavanja}"></td>
                 <td th:text="${odrzavanje.radnik}"></td>
                 <td th:attr="text=${odrzavanje.serviser?.naziv}, href=@{'/pregled_pojedinog_servisera?serviserId=' + ${odrzavanje.serviser?.id}}">
@@ -175,8 +169,6 @@
         <table class="table align-items-center text-center mb-0 table-striped table-hover">
             <thead>
             <tr>
-                <th>Šifra</th>
-                <th>Naziv opreme</th>
                 <th>Prijavio</th>
                 <th>Opis kvara</th>
                 <th>Datum prijave</th>
@@ -184,11 +176,9 @@
             </thead>
             <tbody>
             <tr th:if="${kvarList == null or kvarList.size() == 0}">
-                <td colspan="5" class="text-center">Nema kvarova</td>
+                <td colspan="3" class="text-center">Nema kvarova</td>
             </tr>
             <tr th:each="kvar : ${kvarList}" th:unless="${kvarList == null or kvarList.size() == 0}">
-                <td th:text="${kvar.oprema != null ? kvar.oprema.sifra : 'N/A'}"></td>
-                <td th:text="${kvar.oprema != null ? kvar.oprema.naziv : 'N/A'}"></td>
                 <td th:text="${kvar.prijavioRadnik}"></td>
                 <td th:text="${kvar.opisKvara}"></td>
                 <td th:text="${#temporals.format(kvar.datumPrijave, 'dd.MM.yyyy')}"></td>

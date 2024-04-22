@@ -38,9 +38,9 @@ public class UnosController {
         return "z-unos_novog_servisera";
     }
     @GetMapping("/spremiNovogServisera")
-    public String spremiS(@RequestParam(name = "sifra") String sifra, @RequestParam(name = "naziv") String naziv,
+    public String spremiS(@RequestParam(name = "sifra", required = false) String sifra, @RequestParam(name = "naziv") String naziv,
                           @RequestParam(name = "adresa") String adresa, @RequestParam(name = "telefon") String telefon,
-                          @RequestParam(name = "email") String email, @RequestParam(name = "kOsoba") String kOsoba, HttpSession session,
+                          @RequestParam(name = "email",required = false) String email, @RequestParam(name = "kOsoba", required = false) String kOsoba, HttpSession session,
                           @AuthenticationPrincipal UserDetails userDetails, Model model) {
         Korisnik user = (Korisnik) session.getAttribute("currUser");
         Serviser serviser = new Serviser(sifra, naziv, adresa, telefon, email, kOsoba,user.getRadiliste());
@@ -56,9 +56,9 @@ public class UnosController {
         return "z-unos_proizvodjaca";
     }
     @GetMapping("/spremiNovogProizvodjaca")
-    public String spremiP(@RequestParam(name = "sifra") String sifra, @RequestParam(name = "naziv") String naziv,
+    public String spremiP(@RequestParam(name = "sifra", required = false) String sifra, @RequestParam(name = "naziv") String naziv,
                           @RequestParam(name = "adresa") String adresa, @RequestParam(name = "telefon") String telefon,
-                          @RequestParam(name = "email") String email, @RequestParam(name = "kOsoba") String kOsoba, HttpSession session, @AuthenticationPrincipal UserDetails userDetails, Model model) {
+                          @RequestParam(name = "email", required = false) String email, @RequestParam(name = "kOsoba", required = false) String kOsoba, HttpSession session, @AuthenticationPrincipal UserDetails userDetails, Model model) {
         Korisnik user = (Korisnik) session.getAttribute("currUser");
         Proizvodjac proizvodjac = new Proizvodjac(sifra, naziv, adresa, telefon, email, kOsoba,user.getRadiliste());
         proizvodjacRepository.save(proizvodjac);
@@ -74,9 +74,9 @@ public class UnosController {
     }
 
     @GetMapping("/spremiNovogVlasnika")
-    public String spremiNV(@RequestParam(name = "sifra") String sifra, @RequestParam(name = "naziv") String naziv,
+    public String spremiNV(@RequestParam(name = "sifra" , required = false) String sifra, @RequestParam(name = "naziv") String naziv,
                            @RequestParam(name = "adresa") String adresa, @RequestParam(name = "telefon") String telefon,
-                           @RequestParam(name = "email") String email, @RequestParam(name = "kOsoba") String kOsoba, HttpSession session, Model model) {
+                           @RequestParam(name = "email", required = false) String email, @RequestParam(name = "kOsoba",required = false) String kOsoba, HttpSession session, Model model) {
         Korisnik user = (Korisnik) session.getAttribute("currUser");
         Vlasnik vlasnik = new Vlasnik(sifra, naziv, adresa, telefon, email, kOsoba, user.getRadiliste());
         vlasnikRepository.save(vlasnik);

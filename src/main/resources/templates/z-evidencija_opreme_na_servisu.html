@@ -88,14 +88,12 @@
             <table class="table align-items-center text-center mb-0 table-striped table-hover">
             <thead>
             <tr>
-                <th>Šifra</th>
+                <th id="basic-addon-sifra" th:text="${user.radiliste.id == 1 ? 'Laboratorijski broj:' : 'Šifra:'}"></th>
                 <th>Naziv</th>
                 <th>Kategorija</th>
                 <th>Vrsta</th>
                 <th>Proizvođač</th>
                 <th>Serijski br.</th>
-                <th>Inventarski br.</th>
-                <th>Vlasnik</th>
                 <th>Ispravno</th>
                 <th>Datum za servis</th>
                 <th>Vrati sa servisa</th>
@@ -111,8 +109,6 @@
                 <td th:text="${oprema.vrsta?.vrsta}"></td>
                 <td th:text="${oprema.proizvodjac?.naziv}"></td>
                 <td th:text="${oprema.serijskiBroj}"></td>
-                <td th:text="${oprema.InventarskiBroj}"></td>
-                <td th:text="${oprema.vlasnik?.naziv}"></td>
                 <td th:text="${oprema.ispravno != null ? (oprema.ispravno ? 'Da' : 'Ne') : 'N/A'}"></td>
                 <td class="datum-planiranog-servisiranja"
                     th:attr="data-datum=${#temporals.format(oprema.datumPlaniranogServisiranja, 'yyyy-MM-dd')}"

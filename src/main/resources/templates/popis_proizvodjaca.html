@@ -97,7 +97,7 @@
             <table class="table align-items-center text-center mb-0 table-striped table-hover">
                 <thead>
                 <tr>
-                    <th>Šifra</th>
+                    <th th:if="${user.radiliste.id != 1}">Šifra</th>
                     <th>Naziv</th>
                     <th>Adresa</th>
                     <th>Telefon</th>
@@ -107,8 +107,11 @@
                 </tr>
                 </thead>
                 <tbody>
+
                 <tr th:each="proizvodjac : ${proizvodjaci}">
-                    <td th:text="${proizvodjac.sifra}"></td>
+                    <td th:if="${user.radiliste.id != 1}">
+                        <span th:if="${proizvodjac.sifra != null}" th:text="${proizvodjac.sifra}">Nema</span>
+                    </td>
                     <td th:text="${proizvodjac.naziv}"></td>
                     <td th:text="${proizvodjac.adresa}"></td>
                     <td th:text="${proizvodjac.telefon}"></td>

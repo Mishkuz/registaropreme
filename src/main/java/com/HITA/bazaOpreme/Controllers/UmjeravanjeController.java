@@ -69,8 +69,7 @@ public class UmjeravanjeController {
             datumPovrata = datumPovrata.plusMonths(longI);
             opremaRepository.updateDatumPlaniranogServisiranjaById(datumPovrata, opremaId);
         }
-
-
+        opremaRepository.updateCertifikatById(true,opremaId);
         privOdRepository.delete(p);
         opremaRepository.updateNaUmjeravanjuById(false, opremaId);
         model.addAttribute("user", user);

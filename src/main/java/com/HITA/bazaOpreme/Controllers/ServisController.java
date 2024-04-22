@@ -141,6 +141,7 @@ public class ServisController {
             }
         }
         privOdRepository.delete(p);
+        opremaRepository.updateCertifikatById(true,opremaId);
         List<Oprema> opremaList1 = opremaRepository.findByRadilisteAndNaServisu(user.getRadiliste(), true);
         List<Oprema> opremaList = new ArrayList<>(opremaList1);
         opremaList.sort(Comparator.comparing(Oprema::getDatumPlaniranogServisiranja));

@@ -85,7 +85,7 @@
             <table class="table align-items-center text-center mb-0 table-striped table-hover">
                 <thead>
                 <tr>
-                    <th>Šifra</th>
+                    <th id="basic-addon-sifra" th:text="${user.radiliste.id == 1 ? 'Laboratorijski broj:' : 'Šifra:'}"></th>
                     <th>Naziv opreme</th>
                     <th>Prijavio</th>
                     <th>Opis kvara</th>

@@ -62,7 +62,7 @@
                 </div>
                 <br><br>
                 <div class="input-group input-group-dynamic mb-4">
-                                       <span id="basic-addon-sifra">Šifra: </span>
+                    <span id="basic-addon-sifra" th:text="${user.radiliste.id == 1 ? 'Laboratorijski broj:' : 'Šifra:'}"></span>
                     <input type="text"  name="sifra" id="unos-sifra" aria-label="Šifra" class="form-control" aria-describedby="basic-addon-sifra" maxlength="20" size="30" required>
                 </div>
                 <div class="input-group input-group-dynamic mb-4">
@@ -128,11 +128,11 @@
                     </select>
                 </div>
                 <div class="input-group input-group-dynamic mb-4">
-                    <span  id="basic-addon-intervalServisiranjaUMjesecima">Interval servisa (u mj.): </span>
+                    <span  id="basic-addon-intervalServisiranjaUMjesecima">Interval servisa/umjeravanja (u mj.): </span>
                     <input type="number" name="intervalServisiranjaUMjesecima" id="intervalServisiranjaUMjesecima" class="form-control" aria-label="intervalServisiranjaUMjesecima" aria-describedby="basic-addon-intervalServisiranjaUMjesecima">
                 </div>
                 <div class="input-group input-group-dynamic mb-4">
-                    <span  id="basic-addon-datumPlaniranogServisiranja">Sljedeći servis: </span>
+                    <span  id="basic-addon-datumPlaniranogServisiranja">Sljedeći servis/umjeravanje: </span>
                     <input type="date" name="datumPlaniranogServisiranja" id="datumPlaniranogServisiranja" class="form-control" aria-label="Username" aria-describedby="basic-addon-datumPlaniranogServisiranja">
                 </div>
                 <div class="text-left">

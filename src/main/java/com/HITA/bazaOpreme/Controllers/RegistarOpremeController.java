@@ -67,7 +67,7 @@ public class RegistarOpremeController {
     public String zspremiUredaj(@RequestParam("sifra") String sifra,
                                 @RequestParam("naziv") String naziv,
                                 @RequestParam("serijskiBroj") String serijskiBroj,
-                                @RequestParam("inventarskiBroj") String inventarskiBroj,
+                                @RequestParam( name ="inventarskiBroj",required = false) String inventarskiBroj,
                                 @RequestParam("kategorijaId") Long kategorijaId,
                                 @RequestParam("vrstaId") Long vrstaId,
                                 @RequestParam("proizvodjacId") Long proizvodjacId,

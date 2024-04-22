@@ -58,5 +58,10 @@ public interface OpremaRepository extends JpaRepository<Oprema, Long> {
             select o from Oprema o
             where o.radiliste = ?1 and o.ispravno = ?2 and o.naServisu = ?3 and o.naUmjeravanju = ?4 and o.otpisano = ?5""")
     List<Oprema> findByRadilisteAndIspravnoAndNaServisuAndNaUmjeravanjuAndOtpisano(Radiliste radiliste, Boolean ispravno, boolean naServisu, boolean naUmjeravanju, Boolean otpisano);
+
+    @Transactional
+    @Modifying
+    @Query("update Oprema o set o.certifikat = ?1 where o.id = ?2")
+    int updateCertifikatById(Boolean certifikat, Long id);
 }
 
