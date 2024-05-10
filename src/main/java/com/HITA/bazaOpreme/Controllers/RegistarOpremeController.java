@@ -211,7 +211,7 @@ public class RegistarOpremeController {
     public String prikaziPopisProizvodjaca(HttpSession session, Model model) {
         Korisnik user = (Korisnik) session.getAttribute("currUser");
 
-        List<Proizvodjac> proizvodjaci = proizvodjacRepository.findAll();
+        List<Proizvodjac> proizvodjaci = proizvodjacRepository.findByRadiliste(user.getRadiliste());
 
         model.addAttribute("proizvodjaci", proizvodjaci);
         model.addAttribute("user", user);
@@ -223,7 +223,7 @@ public class RegistarOpremeController {
     public String prikaziPopisServisera(HttpSession session, Model model) {
         Korisnik user = (Korisnik) session.getAttribute("currUser");
 
-        List<Serviser> serviseri = serviserRepository.findAll();
+        List<Serviser> serviseri = serviserRepository.findByRadiliste(user.getRadiliste());
 
         model.addAttribute("serviseri", serviseri);
         model.addAttribute("user", user);
@@ -235,7 +235,7 @@ public class RegistarOpremeController {
     public String prikaziPopisVlasnika(HttpSession session, Model model) {
         Korisnik user = (Korisnik) session.getAttribute("currUser");
 
-        List<Vlasnik> vlasnici = vlasnikRepository.findAll();
+        List<Vlasnik> vlasnici = vlasnikRepository.findByRadiliste(user.getRadiliste());
 
         model.addAttribute("vlasnici", vlasnici);
         model.addAttribute("user", user);
@@ -246,7 +246,7 @@ public class RegistarOpremeController {
     public String prikaziPopisVrsta(HttpSession session, Model model) {
         Korisnik user = (Korisnik) session.getAttribute("currUser");
 
-        List<Vrsta> vrste = vrstaRepository.findAll();
+        List<Vrsta> vrste = vrstaRepository.findByRadiliste(user.getRadiliste());
 
         model.addAttribute("vrste", vrste);
         model.addAttribute("user", user);
@@ -257,7 +257,7 @@ public class RegistarOpremeController {
     public String prikaziPopisKategorija(HttpSession session, Model model) {
         Korisnik user = (Korisnik) session.getAttribute("currUser");
 
-        List<Kategorija> kategorije = kategorijaRepository.findAll();
+        List<Kategorija> kategorije = kategorijaRepository.findByRadiliste(user.getRadiliste());
 
         model.addAttribute("kategorije", kategorije);
         model.addAttribute("user", user);
