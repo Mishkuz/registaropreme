@@ -86,6 +86,9 @@
         <p><strong>Datum proizvodnje:</strong>
             <span th:text="${#temporals.format(oprema.godinaProizvodnje, 'dd.MM.yyyy')}"></span>
         </p>
+        <p><strong>Datum nabave:</strong>
+            <span th:text="${#temporals.format(oprema.datumNabave, 'dd.MM.yyyy')}"></span>
+        </p>
         <p><strong>UPS:</strong> <span th:text="${oprema.ups}"></span></p>
         <p><strong>Certifikat:</strong> <span th:text="${oprema.certifikat} ? 'Da' : 'Ne'"></span></p>
         <p><strong>Interval servisiranja (u mj.):</strong> <span
