@@ -103,9 +103,7 @@
                 <th>Naziv</th>
                 <th>Kategorija</th>
                 <th>Vrsta</th>
-                <th>Inventarski br.</th>
                 <th>Serijski br.</th>
-                <th>Proizvođač</th>
                 <th>Certifikat</th>
                 <th>Datum planiranog servisa/umjeravanja</th>
                 <th>Umjeravanje</th>
@@ -121,15 +119,11 @@
                         th:href="@{'/z-pregled_pojedine_opreme?opremaId=' + ${oprema.id}}"></a></td>
                 <td th:text="${oprema.kategorija?.kategorija}"></td>
                 <td th:text="${oprema.vrsta?.vrsta}"></td>
-                <td>
-                    <span th:if="${oprema.InventarskiBroj != null}" th:text="${oprema.InventarskiBroj}"></span>
-                    <span th:if="${oprema.InventarskiBroj == null}">Nema</span>
-                </td>
                 <td th:text="${oprema.serijskiBroj}"></td>
-                <td th:attr="text=${oprema.proizvodjac?.naziv}, href=@{'/pregled_pojedinog_proizvodjaca?proizvodjacId=' + ${oprema.proizvodjac?.id}}">
+            <!--    <td th:attr="text=${oprema.proizvodjac?.naziv}, href=@{'/pregled_pojedinog_proizvodjaca?proizvodjacId=' + ${oprema.proizvodjac?.id}}">
                     <a th:text="${oprema.proizvodjac?.naziv}"
                        th:href="@{'/pregled_pojedinog_proizvodjaca?proizvodjacId=' + ${oprema.proizvodjac?.id}}"></a>
-                </td>
+                </td>-->
                 <td th:text="${oprema.certifikat} ? 'Ima' : 'Nema'"></td>
                 <td class="datum-planiranog-servisiranja"
                     th:attr="data-datum=${#temporals.format(oprema.datumPlaniranogServisiranja, 'yyyy-MM-dd')}"
