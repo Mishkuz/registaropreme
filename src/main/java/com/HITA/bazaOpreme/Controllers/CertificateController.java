@@ -17,7 +17,7 @@ import java.util.List;
 public class CertificateController {
     private OpremaRepository opremaRepository;
 
-    @Scheduled(cron = "0 0 6 * * *")
+    @Scheduled(cron = "0 0 2 * * *")
     private void certificateControler() {
         List<Oprema> or = opremaRepository.findAll();
         LocalDate l = LocalDate.now();
