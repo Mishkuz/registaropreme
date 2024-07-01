@@ -84,26 +84,57 @@ public class ServisController {
     public String sPNs(Model model,
                        @RequestParam("tvrtkaId") Long tvrtkaId,
                        @RequestParam("opremaId") Long opremaId,
-                       @RequestParam(value = "date",required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate datumOtpreme,
+                       @RequestParam(value = "date", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate datumOtpreme,
+                       @RequestParam(name = "toggleInput", required = false, defaultValue = "false") boolean toggleInput,
+                       @RequestParam(name = "umjerioRadnik", required = false) String umjerioRadnik,
+                       @RequestParam(name = "opisOdrzavanja", required = false) String opis,
                        HttpSession session) {
         Korisnik user = (Korisnik) session.getAttribute("currUser");
-        Oprema o = opremaRepository.findById(opremaId).orElse(null);
-        Serviser s = serviserRepository.findById(tvrtkaId).orElse(null);
-        PrivOd p = new PrivOd();
-        p.setOprema(o);
-        p.setServiser(s);
-        p.setDatumOtpreme(datumOtpreme);
-        privOdRepository.save(p);
-        opremaRepository.updateNaServisuById(true, opremaId);
+        if (toggleInput) {
+            Oprema o = opremaRepository.findById(opremaId).orElse(null);
+            Serviser s = serviserRepository.findById(tvrtkaId).orElse(null);
+            PrivOd p = new PrivOd();
+            p.setOprema(o);
+            p.setServiser(s);
+            p.setDatumOtpreme(datumOtpreme);
+            privOdRepository.save(p);
+            opremaRepository.updateNaServisuById(true, opremaId);
 
-        return "redirect:/evidencijaOpremeNaServisu";
+            return "redirect:/evidencijaOpremeNaServisu";
+        } else {
+            Oprema o = opremaRepository.findById(opremaId).orElse(null);
+            Serviser s = serviserRepository.findById(tvrtkaId).orElse(null);
+            Odrzavanje odrzavanje = new Odrzavanje();
+            odrzavanje.setDatumPovrata(datumOtpreme);
+            odrzavanje.setTip(o.getIspravno() ? servisS : servisIzvanredanS);
+            odrzavanje.setServiser(s);
+            odrzavanje.setOprema(o);
+            odrzavanje.setOpisOdrzavanja(opis);
+            odrzavanje.setRadnik(umjerioRadnik);
+            odrzavanje.setRadiliste(user.getRadiliste());
+            odrzavanje.setDatumPlaniranogServisiranja(o.getDatumPlaniranogServisiranja());
+            o.setNaUmjeravanju(false);
+            opremaRepository.save(o);
+            LocalDate l = opremaRepository.findById(opremaId).get().getDatumPlaniranogServisiranja();
+            int i = opremaRepository.findById(opremaId).get().getIntervalServisiranjaUMjesecima();
+            if (i == 12) {
+                datumOtpreme = datumOtpreme.plusYears(1);
+                opremaRepository.updateDatumPlaniranogServisiranjaById(datumOtpreme, opremaId);
+            } else {
+                long longI = (long) i;
+                datumOtpreme = datumOtpreme.plusMonths(longI);
+                opremaRepository.updateDatumPlaniranogServisiranjaById(datumOtpreme, opremaId);
+            }
+            odrzavanjeRepository.save(odrzavanje);
+            return "redirect:/pocetna";
+        }
     }
 
     @GetMapping("/z-spremiServis")
     public String zspremiServis(
             @RequestParam("opremaId") Long opremaId,
             @RequestParam("opisOdrzavanja") String opisOdrzavanja,
-            @RequestParam(name="umjerioRadnik", required = false) String umjerioRadnik,
+            @RequestParam(name = "umjerioRadnik", required = false) String umjerioRadnik,
             @RequestParam("dateP") @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate datumPovrata,
             Model model, HttpSession session) {
         Korisnik user = (Korisnik) session.getAttribute("currUser");
@@ -141,7 +172,7 @@ public class ServisController {
             }
         }
         privOdRepository.delete(p);
-        opremaRepository.updateCertifikatById(true,opremaId);
+        opremaRepository.updateCertifikatById(true, opremaId);
         List<Oprema> opremaList1 = opremaRepository.findByRadilisteAndNaServisu(user.getRadiliste(), true);
         List<Oprema> opremaList = new ArrayList<>(opremaList1);
         opremaList.sort(Comparator.comparing(Oprema::getDatumPlaniranogServisiranja));

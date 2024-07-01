@@ -37,6 +37,7 @@ public class UmjeravanjeController {
     @Autowired
     private KorisnikRepository korisnikRepository;
 
+
     @GetMapping("/z-spremiUmjeravanje")
     public String zspremiUmjeravanje(
             @RequestParam("opremaId") Long opremaId,
@@ -69,30 +70,63 @@ public class UmjeravanjeController {
             datumPovrata = datumPovrata.plusMonths(longI);
             opremaRepository.updateDatumPlaniranogServisiranjaById(datumPovrata, opremaId);
         }
-        opremaRepository.updateCertifikatById(true,opremaId);
+        opremaRepository.updateCertifikatById(true, opremaId);
         privOdRepository.delete(p);
         opremaRepository.updateNaUmjeravanjuById(false, opremaId);
         model.addAttribute("user", user);
         return "redirect:/opremaNaUmjeravanju";
     }
 
-    @GetMapping("/z-spremiPriUmjeracanje")
+
+    @GetMapping("/z-spremiPriUmjeravanje")
     public String sPNUs(Model model,
                         @RequestParam("tvrtkaId") Long tvrtkaId,
                         @RequestParam("opremaId") Long opremaId,
-                        @RequestParam(value = "date",required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate datumOtpreme,
+                        @RequestParam(value = "date", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate datumOtpreme,
+                        @RequestParam(name = "toggleInput", required = false,defaultValue = "false") boolean toggleInput,
+                        @RequestParam(name = "umjerioRadnik", required = false) String umjerioRadnik,
+                        @RequestParam(name = "opisOdrzavanja", required = false) String opis,
                         HttpSession session) {
-        Korisnik user = (Korisnik) session.getAttribute("currUser");
-        Oprema o = opremaRepository.findById(opremaId).orElse(null);
-        Serviser s = serviserRepository.findById(tvrtkaId).orElse(null);
-        PrivOd p = new PrivOd();
-        p.setOprema(o);
-        p.setServiser(s);
-        p.setDatumOtpreme(datumOtpreme);
-        privOdRepository.save(p);
-        opremaRepository.updateNaUmjeravanjuById(true, opremaId);
 
-        return "redirect:/opremaNaUmjeravanju";
+        Korisnik user = (Korisnik) session.getAttribute("currUser");
+        //kada je toggleInput checkan ond ato znači da je višednevno održavanje te se oprema zatim zapisuje u privOd(Privremeno održavanje)
+        if (toggleInput == true) {
+            Oprema o = opremaRepository.findById(opremaId).orElse(null);
+            Serviser s = serviserRepository.findById(tvrtkaId).orElse(null);
+            PrivOd p = new PrivOd();
+            p.setOprema(o);
+            p.setServiser(s);
+            p.setDatumOtpreme(datumOtpreme);
+            privOdRepository.save(p);
+            opremaRepository.updateNaUmjeravanjuById(true, opremaId);
+            return "redirect:/opremaNaUmjeravanju";
+        } else {
+            Oprema o = opremaRepository.findById(opremaId).orElse(null);
+            Serviser s = serviserRepository.findById(tvrtkaId).orElse(null);
+            Odrzavanje odrzavanje = new Odrzavanje();
+            odrzavanje.setDatumPovrata(datumOtpreme);
+            odrzavanje.setTip(umjeravanjeS);
+            odrzavanje.setServiser(s);
+            odrzavanje.setOprema(o);
+            odrzavanje.setOpisOdrzavanja(opis);
+            odrzavanje.setRadnik(umjerioRadnik);
+            odrzavanje.setRadiliste(user.getRadiliste());
+            odrzavanje.setDatumPlaniranogServisiranja(o.getDatumPlaniranogServisiranja());
+            o.setNaUmjeravanju(false);
+            opremaRepository.save(o);
+            LocalDate l = opremaRepository.findById(opremaId).get().getDatumPlaniranogServisiranja();
+            int i = opremaRepository.findById(opremaId).get().getIntervalServisiranjaUMjesecima();
+            if (i == 12) {
+                datumOtpreme = datumOtpreme.plusYears(1);
+                opremaRepository.updateDatumPlaniranogServisiranjaById(datumOtpreme, opremaId);
+            } else {
+                long longI = (long) i;
+                datumOtpreme = datumOtpreme.plusMonths(longI);
+                opremaRepository.updateDatumPlaniranogServisiranjaById(datumOtpreme, opremaId);
+            }
+            odrzavanjeRepository.save(odrzavanje);
+            return "redirect:/pocetna";
+        }
     }
 
 

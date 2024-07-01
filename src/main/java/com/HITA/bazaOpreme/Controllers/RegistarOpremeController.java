@@ -108,6 +108,8 @@ public class RegistarOpremeController {
         return "redirect:/pocetna";
     }
 
+
+
     @GetMapping("/z-unosnoveopreme")
     public String zunosnoveopreme(Model model, HttpSession session) {
         Korisnik user = (Korisnik) session.getAttribute("currUser");
