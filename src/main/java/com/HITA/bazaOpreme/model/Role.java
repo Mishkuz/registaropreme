@@ -1,6 +1,6 @@
 package com.HITA.bazaOpreme.model;
 
-public enum Role {
+public enum  Role {
     USER,
     ADMIN
 

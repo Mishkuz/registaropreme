@@ -90,7 +90,7 @@ public class UmjeravanjeController {
 
         Korisnik user = (Korisnik) session.getAttribute("currUser");
         //kada je toggleInput checkan ond ato znači da je višednevno održavanje te se oprema zatim zapisuje u privOd(Privremeno održavanje)
-        if (toggleInput == true) {
+        if (toggleInput) {
             Oprema o = opremaRepository.findById(opremaId).orElse(null);
             Serviser s = serviserRepository.findById(tvrtkaId).orElse(null);
             PrivOd p = new PrivOd();
@@ -100,7 +100,7 @@ public class UmjeravanjeController {
             privOdRepository.save(p);
             opremaRepository.updateNaUmjeravanjuById(true, opremaId);
             return "redirect:/opremaNaUmjeravanju";
-        } else {
+        } else if(!toggleInput){
             Oprema o = opremaRepository.findById(opremaId).orElse(null);
             Serviser s = serviserRepository.findById(tvrtkaId).orElse(null);
             Odrzavanje odrzavanje = new Odrzavanje();
@@ -126,6 +126,8 @@ public class UmjeravanjeController {
             }
             odrzavanjeRepository.save(odrzavanje);
             return "redirect:/pocetna";
+        } else {
+            return "redirect:/pocetna";
         }
     }
 
@@ -147,6 +149,8 @@ public class UmjeravanjeController {
         return "z-unos_za_umjeravanje.html";
     }
 
+
+
     @GetMapping("/staviNaUmjeravanje")
     public String sNU(Model model, Long opremaId, HttpSession session) {
         Korisnik user = (Korisnik) session.getAttribute("currUser");
@@ -159,6 +163,8 @@ public class UmjeravanjeController {
 
         return "z-unos_za_umjeravanje1.html";
     }
+
+
 
     @GetMapping("/opremaNaUmjeravanju")
     public String opnU(Model model, HttpSession session) {

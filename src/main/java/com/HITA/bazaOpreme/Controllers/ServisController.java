@@ -39,7 +39,7 @@ public class ServisController {
 
 
     @GetMapping("/z-evidencija_servisa")
-    public String zevidencijaodrzavanja(Model model, HttpSession session) {
+    public String listOfServices(Model model, HttpSession session) {
         Korisnik user = (Korisnik) session.getAttribute("currUser");
 
         List<Odrzavanje> odrzavanjeList1 = odrzavanjeRepository.findByRadilisteAndTipOrRadilisteAndTip(user.getRadiliste(), servisS, user.getRadiliste(), servisIzvanredanS);
@@ -51,7 +51,7 @@ public class ServisController {
 
 
     @GetMapping("/z-unos_za_servis")
-    public String zunos_za_servis(Model model, Long opremaId, HttpSession session) {
+    public String inputForService(Model model, Long opremaId, HttpSession session) {
         Korisnik user = (Korisnik) session.getAttribute("currUser");
 
 
@@ -69,7 +69,7 @@ public class ServisController {
 
 
     @GetMapping("/staviNaServis")
-    public String sNs(Model model, Long opremaId, HttpSession session) {
+    public String putOnService(Model model, Long opremaId, HttpSession session) {
         Korisnik user = (Korisnik) session.getAttribute("currUser");
         List<Serviser> serviseri = serviserRepository.findByRadiliste(user.getRadiliste());
         opremaRepository.updateNaServisuById(true, opremaId);
@@ -81,14 +81,14 @@ public class ServisController {
     }
 
     @GetMapping("/z-spremiPriServis")
-    public String sPNs(Model model,
-                       @RequestParam("tvrtkaId") Long tvrtkaId,
-                       @RequestParam("opremaId") Long opremaId,
-                       @RequestParam(value = "date", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate datumOtpreme,
-                       @RequestParam(name = "toggleInput", required = false, defaultValue = "false") boolean toggleInput,
-                       @RequestParam(name = "umjerioRadnik", required = false) String umjerioRadnik,
-                       @RequestParam(name = "opisOdrzavanja", required = false) String opis,
-                       HttpSession session) {
+    public String saveTemporaryService(Model model,
+                                       @RequestParam("tvrtkaId") Long tvrtkaId,
+                                       @RequestParam("opremaId") Long opremaId,
+                                       @RequestParam(value = "date", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate datumOtpreme,
+                                       @RequestParam(name = "toggleInput", required = false, defaultValue = "false") boolean toggleInput,
+                                       @RequestParam(name = "umjerioRadnik", required = false) String umjerioRadnik,
+                                       @RequestParam(name = "opisOdrzavanja", required = false) String opis,
+                                       HttpSession session) {
         Korisnik user = (Korisnik) session.getAttribute("currUser");
         if (toggleInput) {
             Oprema o = opremaRepository.findById(opremaId).orElse(null);
@@ -101,7 +101,7 @@ public class ServisController {
             opremaRepository.updateNaServisuById(true, opremaId);
 
             return "redirect:/evidencijaOpremeNaServisu";
-        } else {
+        } else if (!toggleInput) {
             Oprema o = opremaRepository.findById(opremaId).orElse(null);
             Serviser s = serviserRepository.findById(tvrtkaId).orElse(null);
             Odrzavanje odrzavanje = new Odrzavanje();
@@ -113,7 +113,7 @@ public class ServisController {
             odrzavanje.setRadnik(umjerioRadnik);
             odrzavanje.setRadiliste(user.getRadiliste());
             odrzavanje.setDatumPlaniranogServisiranja(o.getDatumPlaniranogServisiranja());
-            o.setNaUmjeravanju(false);
+            o.setNaServisu(false);
             opremaRepository.save(o);
             LocalDate l = opremaRepository.findById(opremaId).get().getDatumPlaniranogServisiranja();
             int i = opremaRepository.findById(opremaId).get().getIntervalServisiranjaUMjesecima();
@@ -127,11 +127,14 @@ public class ServisController {
             }
             odrzavanjeRepository.save(odrzavanje);
             return "redirect:/pocetna";
+        } else {
+            return "redirect:/pocetna";
         }
     }
 
+
     @GetMapping("/z-spremiServis")
-    public String zspremiServis(
+    public String saveService(
             @RequestParam("opremaId") Long opremaId,
             @RequestParam("opisOdrzavanja") String opisOdrzavanja,
             @RequestParam(name = "umjerioRadnik", required = false) String umjerioRadnik,
@@ -158,6 +161,7 @@ public class ServisController {
 
 
         opremaRepository.updateNaServisuById(false, opremaId);
+        opremaRepository.updateNaUmjeravanjuById(false, opremaId);
         opremaRepository.updateIspravnoById(true, opremaId);
         if (b = true) {
             int i = opremaRepository.findById(opremaId).get().getIntervalServisiranjaUMjesecima();
@@ -183,7 +187,7 @@ public class ServisController {
     }
 
     @GetMapping("/evidencijaOpremeNaServisu")
-    public String evidencijaOpremeNaServisu(Model model, HttpSession session) {
+    public String listEquipmentOnService(Model model, HttpSession session) {
         Korisnik user = (Korisnik) session.getAttribute("currUser");
 
         List<Oprema> opremaList1 = opremaRepository.findByRadilisteAndNaServisu(user.getRadiliste(), true);
