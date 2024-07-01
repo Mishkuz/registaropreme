@@ -23,9 +23,9 @@ public class CustomKorisnikDetails implements UserDetails {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         String roleName = korisnik.getRole().name();
-                String authority = "ROLE_" + roleName;
+
         List<GrantedAuthority> authorities = new ArrayList<>();
-        authorities.add(new SimpleGrantedAuthority(authority));
+        authorities.add(new SimpleGrantedAuthority(roleName));
         return authorities;
     }
 

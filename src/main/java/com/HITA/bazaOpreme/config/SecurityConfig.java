@@ -44,27 +44,29 @@ public class SecurityConfig {
         this.cuds = cuds;
 
     }
-
     @Bean
     protected SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
                 .authorizeHttpRequests(
                         req -> req.requestMatchers("/", "/login", "/h2-console/**",
                                         "/static/**", "/static/css/**", "/static/js/**").permitAll()
-                                .requestMatchers("/templates", "/templates/**").hasAnyRole(Role.USER.name(), Role.ADMIN.name())
-                                .requestMatchers("/pocetna").hasAnyRole(Role.USER.name(), Role.ADMIN.name())
-                                .requestMatchers("/spremi_uredjenu_opremu").hasAnyRole(Role.USER.name(), Role.ADMIN.name())
+                                .requestMatchers("/templates", "/templates/**").permitAll()
                                 .anyRequest().authenticated()
                 )
                 .csrf(csrf -> csrf.ignoringRequestMatchers("/h2-console/**")
                 )
-                 .headers(headers -> headers.disable())
-                .formLogin(form -> form.loginPage("/login").permitAll().usernameParameter("email").passwordParameter("password").loginProcessingUrl("/login").permitAll().defaultSuccessUrl("/pocetna") .successHandler((request, response, authentication) -> {
-                    if (request.isUserInRole(Role.ADMIN.name())) {
-                        response.sendRedirect("/admin/pocetna");
-                    } else {
-                        response.sendRedirect("/pocetna");
-                    }}).permitAll()
+                .headers(headers -> headers.disable())
+                .formLogin(form -> form.loginPage("/login").permitAll()
+                        .usernameParameter("email")
+                        .passwordParameter("password")
+                        .loginProcessingUrl("/login").permitAll()
+                        .defaultSuccessUrl("/pocetna").successHandler((request, response, authentication) -> {
+                            if (request.isUserInRole("USER")) {
+                                response.sendRedirect("/admin/pocetna");
+                            } else {
+                                response.sendRedirect("/pocetna");
+                            }
+                        }).permitAll()
                 )
                 .logout(httpSecurityLogoutConfigurer -> httpSecurityLogoutConfigurer
                         .clearAuthentication(true)
@@ -84,7 +86,6 @@ public class SecurityConfig {
 
     protected void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(cuds);
-
     }
 
 
