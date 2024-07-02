@@ -161,6 +161,7 @@ public class RegistarOpremeController {
 
 
     @GetMapping("/z-pokaziKvarove")
+    @PreAuthorize("hasRole('ROLE_USER')")
     public String zshowFailures(Model model, HttpSession session) {
         Korisnik user = (Korisnik) session.getAttribute("currUser");
 
@@ -174,6 +175,7 @@ public class RegistarOpremeController {
     }
 
     @GetMapping("/pocetna")
+    @PreAuthorize("hasRole('ROLE_USER')")
     public String nada(@AuthenticationPrincipal CustomKorisnikDetails customKorisnikDetails, Model model, HttpSession session) {
         Korisnik user = korisnikRepository.findByEmail(customKorisnikDetails.getUsername());
         session.setAttribute("currUser", user);
@@ -189,6 +191,7 @@ public class RegistarOpremeController {
 
 
     @GetMapping("/z-pregled_pojedine_opreme")
+    @PreAuthorize("hasRole('ROLE_USER')")
     public String prikaziDetaljeOpreme(Long opremaId, Model model, HttpSession session) {
         Korisnik user = (Korisnik) session.getAttribute("currUser");
 
@@ -210,6 +213,7 @@ public class RegistarOpremeController {
 
 
     @GetMapping("/popis_proizvodjaca")
+    @PreAuthorize("hasRole('ROLE_USER')")
     public String prikaziPopisProizvodjaca(HttpSession session, Model model) {
         Korisnik user = (Korisnik) session.getAttribute("currUser");
 
@@ -222,6 +226,7 @@ public class RegistarOpremeController {
 
 
     @GetMapping("/popis_servisera")
+    @PreAuthorize("hasRole('ROLE_USER')")
     public String prikaziPopisServisera(HttpSession session, Model model) {
         Korisnik user = (Korisnik) session.getAttribute("currUser");
 
@@ -234,6 +239,7 @@ public class RegistarOpremeController {
 
 
     @GetMapping("/popis_vlasnika")
+    @PreAuthorize("hasRole('ROLE_USER')")
     public String prikaziPopisVlasnika(HttpSession session, Model model) {
         Korisnik user = (Korisnik) session.getAttribute("currUser");
 
@@ -245,6 +251,7 @@ public class RegistarOpremeController {
     }
 
     @GetMapping("/popis_vrsta")
+    @PreAuthorize("hasRole('ROLE_USER')")
     public String prikaziPopisVrsta(HttpSession session, Model model) {
         Korisnik user = (Korisnik) session.getAttribute("currUser");
 
@@ -256,6 +263,7 @@ public class RegistarOpremeController {
     }
 
     @GetMapping("/popis_kategorija")
+    @PreAuthorize("hasRole('ROLE_USER')")
     public String prikaziPopisKategorija(HttpSession session, Model model) {
         Korisnik user = (Korisnik) session.getAttribute("currUser");
 
@@ -267,6 +275,7 @@ public class RegistarOpremeController {
     }
 
     @GetMapping("/pregled_pojedinog_proizvodjaca")
+    @PreAuthorize("hasRole('ROLE_USER')")
     public String prikaziDetaljeProizvodjaca(Long proizvodjacId, HttpSession session, Model model) {
         Korisnik user = (Korisnik) session.getAttribute("currUser");
 
@@ -280,6 +289,7 @@ public class RegistarOpremeController {
 
 
     @GetMapping("/pregled_pojedinog_vlasnika")
+    @PreAuthorize("hasRole('ROLE_USER')")
     public String prikaziDetaljeVlasnika(Long vlasnikId, HttpSession session, Model model) {
         Korisnik user = (Korisnik) session.getAttribute("currUser");
 
@@ -292,6 +302,7 @@ public class RegistarOpremeController {
 
 
     @GetMapping("/pregled_pojedinog_servisera")
+    @PreAuthorize("hasRole('ROLE_USER')")
     public String prikaziDetaljeServisera(Long serviserId, HttpSession session, Model model) {
         Korisnik user = (Korisnik) session.getAttribute("currUser");
 
@@ -303,6 +314,7 @@ public class RegistarOpremeController {
     }
 
     @GetMapping("/otpisi_opremu")
+    @PreAuthorize("hasRole('ROLE_USER')")
     public String otpisiOpremu(@RequestParam("opremaId") Long opremaId,HttpSession session, Model model) {
         Korisnik user = (Korisnik) session.getAttribute("currUser");
 
@@ -322,6 +334,7 @@ public class RegistarOpremeController {
 
 
     @GetMapping("/pregled_otpisane_opreme")
+    @PreAuthorize("hasRole('ROLE_USER')")
     public String pregledOtpisaneOpreme(HttpSession session, Model model) {
         Korisnik user = (Korisnik) session.getAttribute("currUser");
 
@@ -334,6 +347,7 @@ public class RegistarOpremeController {
 
 
     @GetMapping("/evidencija_opreme_u_kvaru")
+    @PreAuthorize("hasRole('ROLE_USER')")
     public String prikaziOpremuUKvaru(Model model, HttpSession session) {
         Korisnik user = (Korisnik) session.getAttribute("currUser");
 
@@ -346,6 +360,7 @@ public class RegistarOpremeController {
 
 
     @GetMapping("/uredi_servisera")
+    @PreAuthorize("hasRole('ROLE_USER')")
     public String prikaziFormuZaUredjivanjeServisera(@RequestParam("serviserId") Long serviserId, Model model, HttpSession session) {
         Korisnik user = (Korisnik) session.getAttribute("currUser");
 
@@ -358,6 +373,7 @@ public class RegistarOpremeController {
     }
 
     @PostMapping("/spremiUredjenePodatkeServisera")
+    @PreAuthorize("hasRole('ROLE_USER')")
     public String spremiUredjenePodatkeServisera(@RequestParam("id") Long id, @RequestParam("sifra") String sifra,
                                                  @RequestParam("naziv") String naziv, @RequestParam("adresa") String adresa,
                                                  @RequestParam("telefon") String telefon, @RequestParam("email") String email,
@@ -386,6 +402,7 @@ public class RegistarOpremeController {
     }
 
     @GetMapping("/uredi_vlasnika")
+    @PreAuthorize("hasRole('ROLE_USER')")
     public String prikaziFormuZaUredjivanjeVlasnika(@RequestParam("vlasnikId") Long vlasnikId, Model model, HttpSession session) {
         Korisnik user = (Korisnik) session.getAttribute("currUser");
 
@@ -398,6 +415,7 @@ public class RegistarOpremeController {
     }
 
     @PostMapping("/spremiUredjenePodatkeVlasnika")
+    @PreAuthorize("hasRole('ROLE_USER')")
     public String spremiUredjenePodatkeVlasnika(@RequestParam("id") Long id, @RequestParam("sifra") String sifra,
                                                  @RequestParam("naziv") String naziv, @RequestParam("adresa") String adresa,
                                                  @RequestParam("telefon") String telefon, @RequestParam("email") String email,
@@ -425,6 +443,7 @@ public class RegistarOpremeController {
         return "redirect:/popis_vlasnika";
     }
     @GetMapping("/uredi_proizvodjaca")
+    @PreAuthorize("hasRole('ROLE_USER')")
     public String prikaziFormuZaUredjivanjeProizvodjaca(@RequestParam("proizvodjacId") Long proizvodjacId, Model model, HttpSession session) {
         Korisnik user = (Korisnik) session.getAttribute("currUser");
 
@@ -437,6 +456,7 @@ public class RegistarOpremeController {
     }
 
     @PostMapping("/spremiUredjenogProizvodjaca")
+    @PreAuthorize("hasRole('ROLE_USER')")
     public String spremiUredjenogProizvodjaca(@RequestParam("id") Long id, @RequestParam("sifra") String sifra,
                                                 @RequestParam("naziv") String naziv, @RequestParam("adresa") String adresa,
                                                 @RequestParam("telefon") String telefon, @RequestParam("email") String email,
@@ -464,6 +484,7 @@ public class RegistarOpremeController {
         return "redirect:/popis_proizvodjaca";
     }
     @GetMapping("/uredi_opremu")
+    @PreAuthorize("hasRole('ROLE_USER')")
     public String urediOpremu(@RequestParam("opremaId") Long opremaId, Model model, HttpSession session) {
         Korisnik user = (Korisnik) session.getAttribute("currUser");
 
@@ -484,6 +505,7 @@ public class RegistarOpremeController {
             return "uredi_opremu.html";
     }
     @GetMapping("/spremi_uredjenu_opremu")
+    @PreAuthorize("hasRole('ROLE_USER')")
     public String spremiUredjenuOpremu(@RequestParam("id") Long id,
                                        @RequestParam("sifra") String sifra,
                                        @RequestParam("naziv") String naziv,

@@ -6,6 +6,7 @@ import jakarta.servlet.http.HttpSession;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -39,6 +40,7 @@ public class ServisController {
 
 
     @GetMapping("/z-evidencija_servisa")
+    @PreAuthorize("hasRole('ROLE_USER')")
     public String listOfServices(Model model, HttpSession session) {
         Korisnik user = (Korisnik) session.getAttribute("currUser");
 
@@ -51,6 +53,7 @@ public class ServisController {
 
 
     @GetMapping("/z-unos_za_servis")
+    @PreAuthorize("hasRole('ROLE_USER')")
     public String inputForService(Model model, Long opremaId, HttpSession session) {
         Korisnik user = (Korisnik) session.getAttribute("currUser");
 
@@ -69,6 +72,7 @@ public class ServisController {
 
 
     @GetMapping("/staviNaServis")
+    @PreAuthorize("hasRole('ROLE_USER')")
     public String putOnService(Model model, Long opremaId, HttpSession session) {
         Korisnik user = (Korisnik) session.getAttribute("currUser");
         List<Serviser> serviseri = serviserRepository.findByRadiliste(user.getRadiliste());
@@ -81,6 +85,7 @@ public class ServisController {
     }
 
     @GetMapping("/z-spremiPriServis")
+    @PreAuthorize("hasRole('ROLE_USER')")
     public String saveTemporaryService(Model model,
                                        @RequestParam("tvrtkaId") Long tvrtkaId,
                                        @RequestParam("opremaId") Long opremaId,
@@ -134,6 +139,7 @@ public class ServisController {
 
 
     @GetMapping("/z-spremiServis")
+    @PreAuthorize("hasRole('ROLE_USER')")
     public String saveService(
             @RequestParam("opremaId") Long opremaId,
             @RequestParam("opisOdrzavanja") String opisOdrzavanja,
@@ -187,6 +193,7 @@ public class ServisController {
     }
 
     @GetMapping("/evidencijaOpremeNaServisu")
+    @PreAuthorize("hasRole('ROLE_USER')")
     public String listEquipmentOnService(Model model, HttpSession session) {
         Korisnik user = (Korisnik) session.getAttribute("currUser");
 

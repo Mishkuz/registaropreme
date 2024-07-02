@@ -6,6 +6,7 @@ import com.HITA.bazaOpreme.repository.*;
 import jakarta.servlet.http.HttpSession;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -32,12 +33,14 @@ public class UnosController {
 
 
     @GetMapping("/unosNovogServisera")
+    @PreAuthorize("hasRole('ROLE_USER')")
     public String unosNS(Model model, HttpSession session) {
         Korisnik user = (Korisnik) session.getAttribute("currUser");
         model.addAttribute("user", user);
         return "z-unos_novog_servisera";
     }
     @GetMapping("/spremiNovogServisera")
+    @PreAuthorize("hasRole('ROLE_USER')")
     public String spremiS(@RequestParam(name = "sifra", required = false) String sifra, @RequestParam(name = "naziv") String naziv,
                           @RequestParam(name = "adresa") String adresa, @RequestParam(name = "telefon") String telefon,
                           @RequestParam(name = "email",required = false) String email, @RequestParam(name = "kOsoba", required = false) String kOsoba, HttpSession session,
@@ -50,12 +53,14 @@ public class UnosController {
     }
 
     @GetMapping("/unosProizvodjaca")
+    @PreAuthorize("hasRole('ROLE_USER')")
     public String unosP(Model model, HttpSession session) {
         Korisnik user = (Korisnik) session.getAttribute("currUser");
         model.addAttribute("user", user);
         return "z-unos_proizvodjaca";
     }
     @GetMapping("/spremiNovogProizvodjaca")
+    @PreAuthorize("hasRole('ROLE_USER')")
     public String spremiP(@RequestParam(name = "sifra", required = false) String sifra, @RequestParam(name = "naziv") String naziv,
                           @RequestParam(name = "adresa") String adresa, @RequestParam(name = "telefon") String telefon,
                           @RequestParam(name = "email", required = false) String email, @RequestParam(name = "kOsoba", required = false) String kOsoba, HttpSession session, @AuthenticationPrincipal UserDetails userDetails, Model model) {
@@ -67,6 +72,7 @@ public class UnosController {
     }
 
     @GetMapping("/unosNovogVlasnika")
+    @PreAuthorize("hasRole('ROLE_USER')")
     public String unosNV(Model model, HttpSession session) {
         Korisnik user = (Korisnik) session.getAttribute("currUser");
         model.addAttribute("user", user);
@@ -74,6 +80,7 @@ public class UnosController {
     }
 
     @GetMapping("/spremiNovogVlasnika")
+    @PreAuthorize("hasRole('ROLE_USER')")
     public String spremiNV(@RequestParam(name = "sifra" , required = false) String sifra, @RequestParam(name = "naziv") String naziv,
                            @RequestParam(name = "adresa") String adresa, @RequestParam(name = "telefon") String telefon,
                            @RequestParam(name = "email", required = false) String email, @RequestParam(name = "kOsoba",required = false) String kOsoba, HttpSession session, Model model) {
@@ -85,6 +92,7 @@ public class UnosController {
     }
 
     @GetMapping("/spremiNovuKategoriju")
+    @PreAuthorize("hasRole('ROLE_USER')")
     public String spremiNovuKategoriju(@RequestParam("sifra") String sifra,
                                        @RequestParam("naziv") String naziv,
                                        HttpSession session, Model model) {
@@ -105,6 +113,7 @@ public class UnosController {
     }
 
     @GetMapping("/unosNoveKategorije")
+    @PreAuthorize("hasRole('ROLE_USER')")
     public String unosKategorije(Model model, HttpSession session) {
         Korisnik user = (Korisnik) session.getAttribute("currUser");
         model.addAttribute("user", user);
@@ -112,6 +121,7 @@ public class UnosController {
     }
 
     @GetMapping("/unosNoveVrste")
+    @PreAuthorize("hasRole('ROLE_USER')")
     public String unosVrste(Model model, HttpSession session) {
         Korisnik user = (Korisnik) session.getAttribute("currUser");
         List<Kategorija> kategorije = kategorijaRepository.findByRadiliste(user.getRadiliste());
@@ -121,6 +131,7 @@ public class UnosController {
     }
 
     @GetMapping("/spremiNovuVrstu")
+    @PreAuthorize("hasRole('ROLE_USER')")
     public String unosNoveVrste(@RequestParam("sifra") String sifra,
                                 @RequestParam("naziv") String naziv,
                                 @RequestParam("kategorijaId") Long kategorijaId,

@@ -6,6 +6,7 @@ import jakarta.servlet.http.HttpSession;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -39,6 +40,7 @@ public class UmjeravanjeController {
 
 
     @GetMapping("/z-spremiUmjeravanje")
+    @PreAuthorize("hasRole('ROLE_USER')")
     public String zspremiUmjeravanje(
             @RequestParam("opremaId") Long opremaId,
             @RequestParam("opisOdrzavanja") String opisOdrzavanja,
@@ -79,6 +81,7 @@ public class UmjeravanjeController {
 
 
     @GetMapping("/z-spremiPriUmjeravanje")
+    @PreAuthorize("hasRole('ROLE_USER')")
     public String sPNUs(Model model,
                         @RequestParam("tvrtkaId") Long tvrtkaId,
                         @RequestParam("opremaId") Long opremaId,
@@ -133,6 +136,7 @@ public class UmjeravanjeController {
 
 
     @GetMapping("/z-unos_za_umjeravanje")
+    @PreAuthorize("hasRole('ROLE_USER')")
     public String zunos_za_umjeravanje(Model model, @RequestParam("opremaId") Long opremaId, HttpSession session) {
         Korisnik user = (Korisnik) session.getAttribute("currUser");
 
@@ -152,6 +156,7 @@ public class UmjeravanjeController {
 
 
     @GetMapping("/staviNaUmjeravanje")
+    @PreAuthorize("hasRole('ROLE_USER')")
     public String sNU(Model model, Long opremaId, HttpSession session) {
         Korisnik user = (Korisnik) session.getAttribute("currUser");
         List<Serviser> serviseri = serviserRepository.findByRadiliste(user.getRadiliste());
@@ -167,6 +172,7 @@ public class UmjeravanjeController {
 
 
     @GetMapping("/opremaNaUmjeravanju")
+    @PreAuthorize("hasRole('ROLE_USER')")
     public String opnU(Model model, HttpSession session) {
         Korisnik user = (Korisnik) session.getAttribute("currUser");
 
