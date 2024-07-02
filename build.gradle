@@ -13,6 +13,10 @@ java {
 
 repositories {
     mavenCentral()
+    maven { url 'https://repo.spring.io/milestone' }
+}
+ext {
+    set('springAiVersion', "1.0.0-M1")
 }
 
 dependencies {
@@ -42,7 +46,14 @@ dependencies {
     // https://mvnrepository.com/artifact/org.apache.poi/poi
     implementation group: 'org.apache.poi', name: 'poi', version: '5.2.5'
 
+//AI
+    implementation 'org.springframework.ai:spring-ai-ollama-spring-boot-starter'
 
+}
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.ai:spring-ai-bom:${springAiVersion}"
+    }
 }
 
 tasks.named('test') {
