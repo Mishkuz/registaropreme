@@ -104,11 +104,11 @@ public class ExportService {
 
         HSSFRow c = sheet.createRow(11);
         c.createCell(0).setCellValue("Certifikat: ");
-        c.createCell(1).setCellValue(oprema.getCertifikat());
+        c.createCell(1).setCellValue(oprema.getCertifikat() ? "Da" : "Ne");
 
         HSSFRow isp = sheet.createRow(12);
         isp.createCell(0).setCellValue("Ispravno: ");
-        isp.createCell(1).setCellValue(oprema.getIspravno());
+        isp.createCell(1).setCellValue(oprema.getIspravno() ? "Da" : "Ne");
 
         HSSFRow ups = sheet.createRow(13);
         ups.createCell(0).setCellValue("UPS: ");
@@ -155,9 +155,6 @@ public class ExportService {
         dRI2++;
 
 
-
-
-
         for (Odrzavanje odrzavanje : odrzavanjeList) {
             HSSFRow dataRow = sheet2.createRow(dRI2);
 
@@ -172,7 +169,6 @@ public class ExportService {
             dRI2++;
 
         }
-
 
 
         HSSFSheet sheet3 = workbook.createSheet("Servisi");
@@ -211,7 +207,7 @@ public class ExportService {
         }
 
         HSSFSheet sheet4 = workbook.createSheet("Kvarovi");
-        int dRi4=1;
+        int dRi4 = 1;
         HSSFRow hk = sheet4.createRow(dRi4 + 1);
         hk.createCell(0).setCellValue("Kvarovi: ");
         dRi4++;
@@ -238,7 +234,7 @@ public class ExportService {
         }
 
         int[] columnWidths = new int[30];
-        for (int i = 0; i <= 30 ; i++) {
+        for (int i = 0; i <= 30; i++) {
             HSSFRow r = sheet.getRow(i);
             if (r != null) {
                 for (int j = 0; j < row.getLastCellNum(); j++) {
@@ -266,7 +262,7 @@ public class ExportService {
         }
 
         int[] columnWidths2 = new int[dRI2];
-        for (int i = 0; i <= dRI2 ; i++) {
+        for (int i = 0; i <= dRI2; i++) {
             HSSFRow r = sheet2.getRow(i);
             if (r != null) {
                 for (int j = 0; j < row.getLastCellNum(); j++) {
@@ -320,7 +316,7 @@ public class ExportService {
             }
         }
         int[] columnWidths4 = new int[dRi4];
-        for (int i = 0; i <= dRi4 ; i++) {
+        for (int i = 0; i <= dRi4; i++) {
             HSSFRow r = sheet4.getRow(i);
             if (r != null) {
                 for (int j = 0; j < row.getLastCellNum(); j++) {
@@ -345,8 +341,6 @@ public class ExportService {
                 }
             }
         }
-
-
 
         ServletOutputStream ops = response.getOutputStream();
         workbook.write(ops);
