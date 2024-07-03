@@ -119,6 +119,7 @@ public class ServisController {
             odrzavanje.setRadiliste(user.getRadiliste());
             odrzavanje.setDatumPlaniranogServisiranja(o.getDatumPlaniranogServisiranja());
             o.setNaServisu(false);
+            o.setIspravno(true);
             opremaRepository.save(o);
             LocalDate l = opremaRepository.findById(opremaId).get().getDatumPlaniranogServisiranja();
             int i = opremaRepository.findById(opremaId).get().getIntervalServisiranjaUMjesecima();

@@ -34,98 +34,14 @@ public class RegistarOpremeController {
     private final ProizvodjacRepository proizvodjacRepository;
     private final VlasnikRepository vlasnikRepository;
     private final ServiserRepository serviserRepository;
+    private KorisnikRepository korisnikRepository;
 
 
     private final String servisS = "Servis";
     private final String servisIzvanredanS = "Izvanredan servis";
     private final String umjeravanjeS = "umjeravanje";
-    @Autowired
-    private KorisnikRepository korisnikRepository;
 
 
-    @GetMapping("/z-unos_novog_kvara")
-    public String zunos_novog_kvara(Model model, @RequestParam(name = "opremaId") Long opremaId, HttpSession session) {
-        Korisnik user = (Korisnik) session.getAttribute("currUser");
-
-        List<Oprema> opremaList = opremaRepository.findByRadiliste(user.getRadiliste());
-        List<Kvar> kvarList = kvarRepository.findByRadiliste(user.getRadiliste());
-        Optional<Oprema> oprema = opremaRepository.findById(opremaId);
-
-        if (oprema.isPresent()) {
-            model.addAttribute("oprema", oprema.get());
-        } else {
-            // Ovdje obradite slučaj kada oprema s traženim ID-em nije pronađena
-        }
-
-        model.addAttribute("kvarList", kvarList);
-        model.addAttribute("opremaList", opremaList);
-        model.addAttribute("user", user);
-        return "z-prijava_kvara.html";
-    }
-
-    @GetMapping("/z-spremiuredaj")
-    public String zspremiUredaj(@RequestParam("sifra") String sifra,
-                                @RequestParam("naziv") String naziv,
-                                @RequestParam("serijskiBroj") String serijskiBroj,
-                                @RequestParam( name ="inventarskiBroj",required = false) String inventarskiBroj,
-                                @RequestParam("kategorijaId") Long kategorijaId,
-                                @RequestParam("vrstaId") Long vrstaId,
-                                @RequestParam("proizvodjacId") Long proizvodjacId,
-                                @RequestParam(name = "godinaProizvodnje", required = false) LocalDate godinaProizvodnje,
-                                @RequestParam(name="datumNabave",required = false) LocalDate datumNabave,
-                                @RequestParam("certifikat") boolean certifikat,
-                                @RequestParam("vlasnikId") Long vlasnikId,
-                                @RequestParam("ups") String ups,
-                                @RequestParam("intervalServisiranjaUMjesecima") Integer intervalServisiranjaUMjesecima,
-                                @RequestParam("datumPlaniranogServisiranja") LocalDate datumPlaniranogServisiranja,
-                                @RequestParam("ispravno") boolean ispravno,
-                                Model model, HttpSession session) {
-        Korisnik user = (Korisnik) session.getAttribute("currUser");
-        // Stvaranje instance Oprema objekta
-        Oprema oprema = new Oprema();
-        oprema.setSifra(sifra);
-        oprema.setNaziv(naziv);
-        oprema.setSerijskiBroj(serijskiBroj);
-        oprema.setInventarskiBroj(inventarskiBroj);
-        oprema.setKategorija(kategorijaRepository.findById(kategorijaId).orElse(null));
-        oprema.setVrsta(vrstaRepository.findById(vrstaId).orElse(null));
-        oprema.setProizvodjac(proizvodjacRepository.findById(proizvodjacId).orElse(null));
-        oprema.setKategorija(kategorijaRepository.findById(kategorijaId).orElse(null));
-        oprema.setGodinaProizvodnje(godinaProizvodnje);
-        oprema.setDatumNabave(datumNabave);
-        oprema.setCertifikat(certifikat);
-        oprema.setIspravno(ispravno);
-        oprema.setNaUmjeravanju(false);
-        oprema.setVlasnik(vlasnikRepository.findById(vlasnikId).orElse(null));
-        oprema.setIntervalServisiranjaUMjesecima(intervalServisiranjaUMjesecima);
-        oprema.setDatumPlaniranogServisiranja(datumPlaniranogServisiranja);
-        oprema.setRadiliste(user.getRadiliste());
-        oprema.setNaServisu(false);
-        oprema.setUps(ups);
-        oprema.setOtpisano(false);
-        opremaRepository.save(oprema);
-        model.addAttribute("user", user);
-        return "redirect:/pocetna";
-    }
-
-
-
-    @GetMapping("/z-unosnoveopreme")
-    public String zunosnoveopreme(Model model, HttpSession session) {
-        Korisnik user = (Korisnik) session.getAttribute("currUser");
-
-        List<Kategorija> kategorije = kategorijaRepository.findByRadiliste(user.getRadiliste());
-        List<Vrsta> vrste = vrstaRepository.findByRadiliste(user.getRadiliste());
-        List<Proizvodjac> proizvodjaci = proizvodjacRepository.findByRadiliste(user.getRadiliste());
-        List<Vlasnik> vlasnici = vlasnikRepository.findByRadiliste(user.getRadiliste());
-
-        model.addAttribute("kategorije", kategorije);
-        model.addAttribute("vrste", vrste);
-        model.addAttribute("proizvodjaci", proizvodjaci);
-        model.addAttribute("vlasnici", vlasnici);
-        model.addAttribute("user", user);
-        return "z-unos_nove_opreme.html";
-    }
 
 
 
@@ -442,6 +358,8 @@ public class RegistarOpremeController {
         model.addAttribute("user", user);
         return "redirect:/popis_vlasnika";
     }
+
+
     @GetMapping("/uredi_proizvodjaca")
     @PreAuthorize("hasRole('ROLE_USER')")
     public String prikaziFormuZaUredjivanjeProizvodjaca(@RequestParam("proizvodjacId") Long proizvodjacId, Model model, HttpSession session) {
@@ -454,6 +372,7 @@ public class RegistarOpremeController {
         model.addAttribute("user", user);
         return "uredi_proizvodjaca";
     }
+
 
     @PostMapping("/spremiUredjenogProizvodjaca")
     @PreAuthorize("hasRole('ROLE_USER')")
