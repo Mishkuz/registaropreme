@@ -139,7 +139,7 @@ public class ExportService {
         datumOtpisaCell.setCellStyle(dateCellStyle);
 
 
-        int dRI2 = 1;
+        int dRI2 = 0;
 
         HSSFSheet sheet2 = workbook.createSheet("Umjeravanja");
         HSSFRow hu = sheet2.createRow(dRI2);
@@ -172,8 +172,8 @@ public class ExportService {
 
 
         HSSFSheet sheet3 = workbook.createSheet("Servisi");
-        int dRI3 = 1;
-        HSSFRow h = sheet3.createRow(dRI3 + 1);
+        int dRI3 = 0;
+        HSSFRow h = sheet3.createRow(dRI3);
         h.createCell(0).setCellValue("Servisi: ");
         dRI3++;
         dRI3++;
@@ -207,8 +207,8 @@ public class ExportService {
         }
 
         HSSFSheet sheet4 = workbook.createSheet("Kvarovi");
-        int dRi4 = 1;
-        HSSFRow hk = sheet4.createRow(dRi4 + 1);
+        int dRi4 = 0;
+        HSSFRow hk = sheet4.createRow(dRi4);
         hk.createCell(0).setCellValue("Kvarovi: ");
         dRi4++;
         dRi4++;
