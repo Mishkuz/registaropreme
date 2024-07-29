@@ -1,6 +1,8 @@
 package com.HITA.bazaOpreme.model;
 
-public enum  Role {
+import java.io.Serializable;
+
+public enum  Role implements Serializable {
     ROLE_USER,
     ROLE_ADMIN
 

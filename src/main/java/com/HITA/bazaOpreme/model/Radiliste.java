@@ -3,11 +3,13 @@ package com.HITA.bazaOpreme.model;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.io.Serializable;
+
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter @Setter
-public class Radiliste {
+public class Radiliste implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
