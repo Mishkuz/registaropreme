@@ -78,7 +78,7 @@
                 </div>
                 <div class="input-group input-group-dynamic mb-4">
                     <label for="date">Datum otpreme</label>
-                    <input  name="date" id="date" class="form-control" disabled="true"  th:value="${datumOtpreme}">
+                    <input  name="date" id="date" class="form-control" disabled="true"  th:value="${datumOtpreme}" required>
                 </div>
                 <div class="input-group input-group-dynamic mb-4">
                     <span>Umjeravao radnik: </span>
@@ -87,7 +87,7 @@
                            aria-describedby="basic-addon-serijskiBroj" maxlength="69" size="42">
                 </div>
                 <div class="input-group input-group-dynamic mb-4">
-                    <span id="basic-addon-opis">Opis: </span>
+                    <span id="basic-addon-opis">Opis: </span></br>
                     <textarea name="opisOdrzavanja" id="opisOdrzavanja" rows="3" cols="69" class="form-tarea"
                               maxlength="512" placeholder="Opcionalno"></textarea>
                 </div>

@@ -82,7 +82,7 @@
                 </div>
                 <div class="input-group input-group-dynamic mb-4">
                     <span>Datum otpreme/umjeravanja</span>
-                    <input type="text" class="form-control" name="date" id="date" placeholder="Odaberite datum">
+                    <input type="text" class="form-control" name="date" id="date" placeholder="Odaberite datum" required>
                 </div>
                 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
                 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
@@ -105,7 +105,7 @@
                            aria-describedby="basic-addon-serijskiBroj" maxLength="69" size="42"/>
                 </div>
                 <div class="input-group input-group-dynamic mb-4" id="opisOdrzavanjaDiv">
-                    <span id="basic-addon-opis">Opis:</span>
+                    <span id="basic-addon-opis">Opis:</span><br>
                     <textarea name="opisOdrzavanja" id="opisOdrzavanja" rows="3" cols="69" class="form-tarea"
                               maxlength="512" placeholder="Opcionalno"></textarea>
                 </div>
