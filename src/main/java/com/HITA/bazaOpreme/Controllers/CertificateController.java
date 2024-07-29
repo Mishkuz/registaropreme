@@ -3,7 +3,7 @@ package com.HITA.bazaOpreme.Controllers;
 import com.HITA.bazaOpreme.model.Oprema;
 import com.HITA.bazaOpreme.repository.OpremaRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
