@@ -3,17 +3,11 @@ package com.HITA.bazaOpreme.Controllers;
 import com.HITA.bazaOpreme.model.*;
 import com.HITA.bazaOpreme.repository.*;
 import com.HITA.bazaOpreme.service.CustomKorisnikDetails;
-import com.HITA.bazaOpreme.service.CustomKorisnikDetailsService;
-import jakarta.annotation.PostConstruct;
-import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.kafka.KafkaProperties;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -55,6 +49,8 @@ public class RegistarOpremeController {
         model.addAttribute("user", user);
         return "z-evidencija_umjeravanja.html";
     }
+
+
 
     @GetMapping("/z-spremiKvar")
     public String zspremiKvar(@RequestParam("opremaId") Long opremaId,
