@@ -41,9 +41,11 @@ public class ExportService {
         List<Odrzavanje> odrzavanjeList = odrzavanjeRepository.findByOpremaAndTip(oprema, umjeravanjeS);
         List<Odrzavanje> odrzavanjeSList = odrzavanjeRepository.findByOpremaAndTipOrOpremaAndTip(oprema, servisS, oprema, servisIzvanredanS);
         List<Kvar> kvarList = kvarRepository.findByOprema(oprema);
-        odrzavanjeList.sort(Comparator.comparing(Odrzavanje::getDatumUmjeravanja));
-        odrzavanjeSList.sort(Comparator.comparing(Odrzavanje::getDatumOtpreme));
-        kvarList.sort(Comparator.comparing(Kvar::getDatumPrijave));
+
+        // Sort lists with null-safe comparators
+        odrzavanjeList.sort(Comparator.comparing(Odrzavanje::getDatumUmjeravanja, Comparator.nullsLast(Comparator.naturalOrder())));
+        odrzavanjeSList.sort(Comparator.comparing(Odrzavanje::getDatumOtpreme, Comparator.nullsLast(Comparator.naturalOrder())));
+        kvarList.sort(Comparator.comparing(Kvar::getDatumPrijave, Comparator.nullsLast(Comparator.naturalOrder())));
 
         HSSFWorkbook workbook = new HSSFWorkbook();
 
